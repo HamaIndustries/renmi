@@ -144,7 +144,7 @@ All we really need is the here and now. I want to find a here and now to share w
     
     s: Long day ahead of us, bud. I'll see you around.
     
-*   Those are definitely bubbles.[] Is the hair not just for show?
+*   Those are definitely bubbles[]. Is the hair not just for show?
 *   [I'm from the ocean and this looks normal to me]
 -   //-
 
