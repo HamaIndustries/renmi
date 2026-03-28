@@ -58,11 +58,11 @@ VAR PLAYER_NAME = "PLAYER_NAME"
     
     It's hard not to.
     
-    l: \[-v-\] I don't know if you can tell, but my sensors are saying that it is actually a cold day out.
+    l: \[-v-\] I am unsure if you can tell, but my sensors are saying that it is actually a cold day out.
     
     She isn't wrong. A stiff breeze washes over you momentarily in agreement.
     
-    l: \[ovo\] If I stood in the way of the sun, everyone would be freezing their toes off. I'd be like a, a-
+    l: \[ovo\] If I stood in the way of the sun, everyone would be freezing their toes off. I would be like a, a-
     
 *   A Dyson sphere? 
             -> light_wrong
@@ -140,7 +140,7 @@ VAR PLAYER_NAME = "PLAYER_NAME"
     
 *   "What are friends for?"
 
-    l: \[-v-\] That's a wonderful question. Aristotle's interpretation-
+    l: \[-v-\] That is a wonderful question. Aristotle's interpretation-
     
         * *     "I meant rhetorically."
         
