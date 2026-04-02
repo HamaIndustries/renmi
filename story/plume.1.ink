@@ -138,7 +138,7 @@ immediately followed by crashing through an unfortunate booth left unattended wh
     * *     Maybe you were mistaken.
         -> mistaken
     
-    - -     (friend) p: There're acorns in your brain. I think I would remember something awesome like that.
+    - -     (friend) p: You have acorns in your brain. I think I would remember something awesome like that.
     
             After the carnival, they showed you around the city, all the hidden corners only the kids and valley spirits knew about.
             
@@ -189,7 +189,7 @@ immediately followed by crashing through an unfortunate booth left unattended wh
 
 -   p: Deliver 'em yourself. Dontcha see your public relations officer is preoccupied?
 
-    They do seem quite preoccupied peacocking atop their latest ruined booth. Out of Plume's line of sight, you see a very unhappy looking booth owner storming over from Shrimple's tent.
+    They do seem quite preoccupied peacocking atop their latest ruined booth. In the corner of your eye, there is a very unhappy booth owner storming over from Shrimple's tent.
     
     You should make this quick.
     
@@ -223,9 +223,9 @@ immediately followed by crashing through an unfortunate booth left unattended wh
 = plume_1_city
     Out of breath, you drop to the floor, back to the wall. That ass is getting {rock: another rock|an earful} after this.
     
-    An empathetic young district employee walks over to accept the reports. You hand them over with gratitude, despite the fact that you can't even focus your eyes properly.
+    An empathetic young district employee walks over to accept the reports. You surrender them with gratitude, despite the fact that you can't even focus your eyes properly.
     
-    Once you can stand on two legs again, you might be able to ask the employee to be a witness to Plume's delinquency. Ananas can take it from there.
+    Once you can stand on two legs again, you might be ask the employee to be a witness to Plume's delinquency. Ananas can take it from there.
     
     p: Heh. Pleasure doing business with you, buddy.
     
@@ -237,7 +237,7 @@ immediately followed by crashing through an unfortunate booth left unattended wh
 
 *   Why are they talking like that?[] For some reason, you observe that Plume switches to a different but coldly familiar dialect whenever they gloat.
 
-    This line of observation has also revealed a tell. They close their eyes for a second whenever the pridefulness peaks.
+    This line of observation has also revealed a tell. They close their eyes for a second whenever the hubris peaks.
     
     In that very second, you strike.
 
