@@ -126,7 +126,7 @@ immediately followed by crashing through an unfortunate booth left unattended wh
 -
     Before you can react, Plume footstools a stunned but otherwise unharmed visitor. They land gracefully on the roof of the ruined stall, before turning to inspect you.
     
-*   "Didn't we see each other at the[Carnival?"] Lemniscate Carnival?"
+*   "Didn't we see each other at the[ Carnival?"] Lemniscate Carnival?"
 
     -> gargoyle_remark ->
     
@@ -237,7 +237,7 @@ immediately followed by crashing through an unfortunate booth left unattended wh
 
 *   Why are they talking like that?[] For some reason, you observe that Plume switches to a different but coldly familiar dialect whenever they gloat.
 
-    This line of observation has also revealed a tell. They close their eyes for a second whenever the hubris peaks.
+    This line of observation has also revealed a tell. They close their eyes for a second whenever their hubris peaks.
     
     In that very second, you strike.
 
