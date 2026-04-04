@@ -271,7 +271,7 @@ immediately followed by crashing through an unfortunate booth left unattended wh
     
     - -     Who is this person?
 
-    Plume, getting self conscious, blushes. Were you making a face, just now? They struggle to turn away from you. {not shake:Finally, a response.}
+    Plume, becoming self conscious, blushes. Were you making a face, just now? They struggle to turn away from you. {not shake:Finally, a response.}
     
     -> inspection
 *   ->
@@ -290,17 +290,17 @@ immediately followed by crashing through an unfortunate booth left unattended wh
     
     Plume collapses to the ground in exactly the same position you were in upon coming here. 
     
-*   "Need help?"[] You are rewarded with a new gesture, an unfamiliar one. Either you are not as well acquainted with rude culture as you thought, or this is a local dialect.
+*   "Need help?"[] You are rewarded with a new gesture, an unfamiliar one. Either you are not as versed in rude culture as you thought, or this is a local dialect.
 *   "It's locked[?"] in the middle of the day?" Unlikely, especially as a student or two from other clubs were leaving on your way in.
 
 -   
-*   You try the doorknob[]. It turns without complaint.
+*   You try the doorknob[]. It yields without complaint.
     
 -   p: ...
     
     p: Just take it. You can tell Ananas whatever.
     
-    Plume shoves the paper into your arms, and is gone before your next blink.
+    Plume shoves the paper into your arms, and is gone before your next breath.
     
     For someone so small and curt, Plume might be the most mysterious of your new, strange crew. 
     
