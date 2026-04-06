@@ -37,7 +37,7 @@ Ready?
 -
 *   "What do you need?"
 
-    {silent: Barebones immediately launches into his next line, as if you hadn't  just been staring at eachother dumbly for half a minute.}
+    {silent: Barebones immediately launches into his next line, as if you hadn't just been staring at each other dumbly for half a minute.}
 
 -   b: Glad to answer. Spare a guy a dollar, by any chance?
 
