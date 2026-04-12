@@ -1,0 +1,43 @@
+{
+	"schemaVersion": 1,
+	"id": "renmi",
+	"version": "${version}",
+	"name": "${name}",
+	"description": "A Minecraft Visual Novel Engine",
+	"authors": [
+		"hama",
+		"Jaevy",
+		"Chai",
+		"CyborgPigeon",
+		"keyberries"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/HamaIndustries/renmi"
+	},
+	"license": "",
+	"icon": "assets/renmi/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"symbolics.division.renmi.Renmi"
+		],
+		"client": [
+			"symbolics.division.renmi.client.RenmiClient"
+		]
+	},
+	"mixins": [
+		"renmi.mixins.json",
+		{
+			"config": "renmi.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=${loader_version}",
+		"minecraft": "~${minecraft_version}",
+		"java": ">=25",
+		"fabric-api": "*",
+		"bento_gui": "*"
+	}
+}
