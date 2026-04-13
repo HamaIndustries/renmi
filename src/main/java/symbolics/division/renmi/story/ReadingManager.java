@@ -20,8 +20,14 @@ public class ReadingManager {
 	// manages state. receives commands from client. sends stage directions to client.
 
 	public static final Codec<ReadingManager> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			Codec.unboundedMap(UUIDUtil.CODEC, ActReading.CODEC).fieldOf("activeReadings").forGetter(mgr -> mgr.activeReadings),
-			Codec.unboundedMap(UUIDUtil.CODEC, Codec.unboundedMap(Identifier.CODEC, ActReading.CODEC)).fieldOf("allReadings").forGetter(mgr -> mgr.allReadings)
+		Codec.unboundedMap(
+			UUIDUtil.CODEC,
+			ActReading.CODEC
+		).fieldOf("activeReadings").forGetter(mgr -> mgr.activeReadings),
+		Codec.unboundedMap(
+			UUIDUtil.CODEC,
+			Codec.unboundedMap(Identifier.CODEC, ActReading.CODEC)
+		).fieldOf("allReadings").forGetter(mgr -> mgr.allReadings)
 	).apply(instance, ReadingManager::new));
 
 	public static ReadingManager getManager(MinecraftServer server) {
@@ -70,7 +76,7 @@ public class ReadingManager {
 
 	public void readingChoice(ServerPlayer player, int choice) {
 		ActReading reading = getActiveReading(player);
-		if (reading == null) return;
+		if (reading == null) { return; }
 		reading.choose(player, choice);
 		updateReadingState(player, reading);
 	}
@@ -78,6 +84,9 @@ public class ReadingManager {
 	public void updateReadingState(ServerPlayer player, ActReading reading) {
 		ActLine line = reading.currentLine();
 		List<ActChoice> choices = reading.currentChoices().stream().map(ActChoice::of).toList();
-		player.setAttached(RenmiAttachments.READING_STATE, new ReadingState(line == null ? ActLine.INACTIVE : line, choices));
+		player.setAttached(
+			RenmiAttachments.READING_STATE,
+			new ReadingState(line == null ? ActLine.INACTIVE : line, choices)
+		);
 	}
 }

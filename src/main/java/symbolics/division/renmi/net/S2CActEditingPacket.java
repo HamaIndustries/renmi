@@ -9,10 +9,10 @@ public record S2CActEditingPacket(Identifier series, Identifier act, String inkS
 	public static Type<S2CActEditingPacket> TYPE = RenmiNetworking.createType("act_editing");
 
 	public static final StreamCodec<FriendlyByteBuf, S2CActEditingPacket> STREAM_CODEC = CustomPacketPayload.codec(
-			(p, b) -> {
-				b.writeIdentifier(p.series).writeIdentifier(p.act).writeUtf(p.inkSource);
-			},
-			(b) -> new S2CActEditingPacket(b.readIdentifier(), b.readIdentifier(), b.readUtf())
+		(p, b) -> {
+			b.writeIdentifier(p.series).writeIdentifier(p.act).writeUtf(p.inkSource);
+		},
+		(b) -> new S2CActEditingPacket(b.readIdentifier(), b.readIdentifier(), b.readUtf())
 	);
 
 	@Override

@@ -22,39 +22,43 @@ public class RenmiCommands {
 		CommandRegistrationCallback.EVENT.register(RenmiCommands::register);
 	}
 
-	public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext context, Commands.CommandSelection var3) {
+	public static void register(
+		CommandDispatcher<CommandSourceStack> dispatcher,
+		CommandBuildContext context,
+		Commands.CommandSelection var3
+	) {
 		LiteralArgumentBuilder<CommandSourceStack> createCommand = Commands.literal("create")
-				.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
-				.then(
-						Commands.argument("series_id", IdentifierArgument.id())
-								.then(
-										Commands.argument("act_id", IdentifierArgument.id())
-												.then(
-														Commands.argument("script", StringArgumentType.string())
-																.executes(RenmiCommands::createAct)
-												)
-								)
-				);
+			.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
+			.then(
+				Commands.argument("series_id", IdentifierArgument.id())
+					.then(
+						Commands.argument("act_id", IdentifierArgument.id())
+							.then(
+								Commands.argument("script", StringArgumentType.string())
+									.executes(RenmiCommands::createAct)
+							)
+					)
+			);
 
 		LiteralArgumentBuilder<CommandSourceStack> storyCommand = Commands.literal("story")
-				.then(Commands.literal("read").then(
-								Commands.argument("series_id", IdentifierArgument.id())
-										.then(
-												Commands.argument("act_id", IdentifierArgument.id())
-														.executes(RenmiCommands::readAct)
-										)
+			.then(Commands.literal("read").then(
+					Commands.argument("series_id", IdentifierArgument.id())
+						.then(
+							Commands.argument("act_id", IdentifierArgument.id())
+								.executes(RenmiCommands::readAct)
 						)
-				).then(Commands.literal("proceed")
-						.executes(RenmiCommands::readingProceed)
-				).then(Commands.literal("choose")
-						.then(Commands.argument("index", IntegerArgumentType.integer())
-								.executes(RenmiCommands::readingChoice)
-						)
-				);
+				)
+			).then(Commands.literal("proceed")
+				.executes(RenmiCommands::readingProceed)
+			).then(Commands.literal("choose")
+				.then(Commands.argument("index", IntegerArgumentType.integer())
+					.executes(RenmiCommands::readingChoice)
+				)
+			);
 
 		LiteralArgumentBuilder<CommandSourceStack> base = Commands.literal("renmi")
-				.then(createCommand)
-				.then(storyCommand);
+			.then(createCommand)
+			.then(storyCommand);
 		dispatcher.register(base);
 	}
 
@@ -73,7 +77,11 @@ public class RenmiCommands {
 			library.createActFromSource(series(context), act(context), script);
 
 		} catch (RenmiLibrary.RenmiCompilationFailed e) {
-			Renmi.LOGGER.info("Failed to create act {}, series {}, from source script!", context.getArgument("series_id", Identifier.class), context.getArgument("act_id", Identifier.class));
+			Renmi.LOGGER.info(
+				"Failed to create act {}, series {}, from source script!",
+				context.getArgument("series_id", Identifier.class),
+				context.getArgument("act_id", Identifier.class)
+			);
 			e.printStackTrace();
 			return 0;
 		}
@@ -82,7 +90,7 @@ public class RenmiCommands {
 
 	private static int readAct(CommandContext<CommandSourceStack> context) {
 		ServerPlayer player = context.getSource().getPlayer();
-		if (player == null) return 0;
+		if (player == null) { return 0; }
 		var manager = context.getSource().getServer().globalAttachments().getAttachedOrCreate(RenmiAttachments.READING_MANAGER);
 		var library = context.getSource().getServer().globalAttachments().getAttachedOrCreate(RenmiAttachments.LIBRARY);
 		Series series = library.getSeries(series(context));
@@ -103,7 +111,7 @@ public class RenmiCommands {
 	private static int readingProceed(CommandContext<CommandSourceStack> context) {
 		var manager = context.getSource().getServer().globalAttachments().getAttachedOrCreate(RenmiAttachments.READING_MANAGER);
 		ServerPlayer player = context.getSource().getPlayer();
-		if (player == null) return 0;
+		if (player == null) { return 0; }
 		manager.readingProceed(player);
 		printState(context);
 		return 1;
@@ -112,7 +120,7 @@ public class RenmiCommands {
 	private static int readingChoice(CommandContext<CommandSourceStack> context) {
 		var manager = context.getSource().getServer().globalAttachments().getAttachedOrCreate(RenmiAttachments.READING_MANAGER);
 		ServerPlayer player = context.getSource().getPlayer();
-		if (player == null) return 0;
+		if (player == null) { return 0; }
 		int choice = context.getArgument("index", Integer.class);
 		manager.readingChoice(player, choice);
 		printState(context);
@@ -121,13 +129,13 @@ public class RenmiCommands {
 
 	private static void printState(CommandContext<CommandSourceStack> context) {
 		ServerPlayer player = context.getSource().getPlayer();
-		if (player == null) return;
+		if (player == null) { return; }
 		var state = player.getAttachedOrCreate(RenmiAttachments.READING_STATE);
 		context.getSource().sendSystemMessage(Component.literal("> " + state.line().text()));
 		String line = state.line().text() + " | ";
 		for (var choice : state.choices()) {
 			context.getSource().sendSystemMessage(Component.literal(
-					Integer.toString(choice.index()) + ": " + choice.text()
+				Integer.toString(choice.index()) + ": " + choice.text()
 			));
 		}
 	}

@@ -22,18 +22,17 @@ public class Renmi implements ModInitializer {
 	public static final String MOD_ID = "renmi";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-
 	public static final Block STORY_NODE = register(
-			"story_node",
-			Block::new,
-			BlockBehaviour.Properties.of()
-					.strength(-1f, 3600000.8f)
-					.mapColor(MapColor.NONE)
-					.noLootTable()
-					.noOcclusion()
-					.noTerrainParticles()
-					.pushReaction(PushReaction.BLOCK),
-			true
+		"story_node",
+		Block::new,
+		BlockBehaviour.Properties.of()
+			.strength(-1f, 3600000.8f)
+			.mapColor(MapColor.NONE)
+			.noLootTable()
+			.noOcclusion()
+			.noTerrainParticles()
+			.pushReaction(PushReaction.BLOCK),
+		true
 	);
 
 	public static Identifier id(String id) {
@@ -49,17 +48,20 @@ public class Renmi implements ModInitializer {
 	}
 
 	public static <T extends Block> T register(
-			String name,
-			Function<BlockBehaviour.Properties, Block> blockFactory,
-			BlockBehaviour.Properties settings,
-			boolean shouldRegisterItem
+		String name,
+		Function<BlockBehaviour.Properties, Block> blockFactory,
+		BlockBehaviour.Properties settings,
+		boolean shouldRegisterItem
 	) {
 		var blockKey = keyOfBlock(name);
 		Block block = blockFactory.apply(settings.setId(blockKey));
 
 		if (shouldRegisterItem) {
 			var itemKey = keyOfItem(name);
-			BlockItem blockItem = new BlockItem(block, new Item.Properties().setId(itemKey).useBlockDescriptionPrefix());
+			BlockItem blockItem = new BlockItem(
+				block,
+				new Item.Properties().setId(itemKey).useBlockDescriptionPrefix()
+			);
 			Registry.register(BuiltInRegistries.ITEM, itemKey, blockItem);
 		}
 
