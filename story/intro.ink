@@ -119,7 +119,7 @@ All we really need is the here and now. I want to find a here and now to share w
     
     s: Thanks, bud. I'm wearing an awful lot of hats today. Food safety's no joke!
     
-    The very distinctive shock of hair spilling out from under her hat begs to differ.
+    The distinctive shock of pink hair spilling out from under her hat begs to differ.
     
     s: Sorry for interrupting the festivities. You run along and have a good time now, yeah?
     

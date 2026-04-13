@@ -33,6 +33,7 @@ dependencies {
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 	implementation include("dev.chailotl:bento-gui:${project.bento_gui_version}")
+	implementation "com.bladecoder.ink:blade-ink:${blade_ink_version}"
 }
 
 processResources {
