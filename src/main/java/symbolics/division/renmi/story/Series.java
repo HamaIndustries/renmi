@@ -14,7 +14,7 @@ public class Series {
             i -> i.group(
                     Codec.compoundList(Identifier.CODEC, Act.CODEC)
                             .fieldOf("acts")
-                            .forGetter(p -> p.acts.entrySet().stream().map(e -> new Pair<Identifier, Act>(e.getKey(), e.getValue())).toList())
+                            .forGetter(p -> p.acts.entrySet().stream().map(e -> new Pair<>(e.getKey(), e.getValue())).toList())
             ).apply(i, Series::new)
     );
 

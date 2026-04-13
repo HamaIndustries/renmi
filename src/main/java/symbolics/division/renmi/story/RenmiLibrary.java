@@ -39,13 +39,20 @@ public class RenmiLibrary {
     }
 
     public void createActFromSource(Identifier seriesID, Identifier actID, String source) {
-        String json = new Compiler(source, null).compile(source);
-        createAct(seriesID, actID, new Act(actID, source, json));
+        try {
+            String json = new Compiler(source, null).compile(source);
+            createAct(seriesID, actID, new Act(actID, source, json));
+        } catch (RuntimeException e) {
+            throw new RenmiCompilationFailed();
+        }
     }
 
-    public void createAct(Identifier seriesID, Identifier actID, Act act) {
-        Series series = library.computeIfAbsent(seriesID, i -> new Series());
+    protected void createAct(Identifier seriesID, Identifier actID, Act act) {
+        Series series = library.computeIfAbsent(seriesID, _ -> new Series());
         series.createAct(actID, act);
+    }
+
+    public static final class RenmiCompilationFailed extends RuntimeException {
     }
 
 }

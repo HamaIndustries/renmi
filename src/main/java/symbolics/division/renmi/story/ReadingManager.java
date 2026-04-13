@@ -1,5 +1,8 @@
 package symbolics.division.renmi.story;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.UUIDUtil;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -15,13 +18,25 @@ import java.util.UUID;
 public class ReadingManager {
     // manages state. receives commands from client. sends stage directions to client.
 
+    public static final Codec<ReadingManager> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            Codec.unboundedMap(UUIDUtil.CODEC, ActReading.CODEC).fieldOf("activeReadings").forGetter(mgr -> mgr.activeReadings),
+            Codec.unboundedMap(UUIDUtil.CODEC, Codec.unboundedMap(Identifier.CODEC, ActReading.CODEC)).fieldOf("allReadings").forGetter(mgr -> mgr.allReadings)
+    ).apply(instance, ReadingManager::new));
+
     public static ReadingManager getManager(MinecraftServer server) {
-        // we can do a data attachment or something
-        throw new NotImplementedException();
+        return server.globalAttachments().getAttachedOrCreate(RenmiAttachments.READING_MANAGER);
     }
 
-    protected Map<UUID, ActReading> activeReadings = new HashMap<>();
-    protected Map<UUID, Map<Act, ActReading>> allReadings = new HashMap<>();
+    protected final Map<UUID, ActReading> activeReadings = new HashMap<>();
+    protected final Map<UUID, Map<Identifier, ActReading>> allReadings = new HashMap<>();
+
+    public ReadingManager() {
+    }
+
+    public ReadingManager(Map<UUID, ActReading> activeReadings, Map<UUID, Map<Identifier, ActReading>> allReadings) {
+        this.activeReadings.putAll(activeReadings);
+        allReadings.replaceAll((k, v) -> new HashMap<>(v));
+    }
 
     public ActReading createOrLoad(ServerPlayer player, Act act) {
         throw new NotImplementedException();
@@ -58,11 +73,7 @@ public class ReadingManager {
 
     public void updateReadingState(ServerPlayer player, ActReading reading) {
         ActLine line = reading.currentLine();
-        List<ActChoice> choices = reading.choices.stream().map(ActChoice::of).toList();
+        List<ActChoice> choices = reading.currentChoices().stream().map(ActChoice::of).toList();
         player.setAttached(RenmiAttachments.READING_STATE, new ReadingState(line == null ? ActLine.INACTIVE : line, choices));
-    }
-
-    public void createAct(Identifier series, Identifier act, String inkSource) {
-
     }
 }

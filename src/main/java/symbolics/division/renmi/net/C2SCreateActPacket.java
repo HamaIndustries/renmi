@@ -5,6 +5,9 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
+import symbolics.division.renmi.Renmi;
+import symbolics.division.renmi.RenmiAttachments;
+import symbolics.division.renmi.story.RenmiLibrary;
 
 public record C2SCreateActPacket(Identifier series, Identifier act, String inkSource) implements CustomPacketPayload {
     public static Type<C2SCreateActPacket> TYPE = RenmiNetworking.createType("create_act");
@@ -17,7 +20,16 @@ public record C2SCreateActPacket(Identifier series, Identifier act, String inkSo
     );
 
     public static void HANDLER(C2SCreateActPacket payload, ServerPlayNetworking.Context context) {
-
+        try {
+            context.server().globalAttachments().getAttachedOrCreate(RenmiAttachments.LIBRARY).createActFromSource(
+                    payload.series(),
+                    payload.act(),
+                    payload.inkSource()
+            );
+        } catch (RenmiLibrary.RenmiCompilationFailed e) {
+            Renmi.LOGGER.info("Failed to create act {}, series {}, from source json!", payload.act(), payload.series());
+            e.printStackTrace();
+        }
     }
 
     @Override

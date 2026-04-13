@@ -14,6 +14,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import symbolics.division.renmi.net.RenmiNetworking;
 
 import java.util.function.Function;
 
@@ -42,7 +43,8 @@ public class Renmi implements ModInitializer {
     @Override
     public void onInitialize() {
         LOGGER.info("Hello Sakura High Secondary Academy!");
-//        RenmiAttachments.init();
+        RenmiAttachments.init();
+        RenmiNetworking.init();
     }
 
     public static <T extends Block> T register(
