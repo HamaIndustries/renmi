@@ -9,14 +9,14 @@ import net.minecraft.network.codec.StreamCodec;
 
 public record ActChoice(int index, String text) {
 	public static final Codec<ActChoice> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-		Codec.INT.fieldOf("index").forGetter(ActChoice::index),
-		Codec.STRING.fieldOf("text").forGetter(ActChoice::text)
+			Codec.INT.fieldOf("index").forGetter(ActChoice::index),
+			Codec.STRING.fieldOf("text").forGetter(ActChoice::text)
 	).apply(instance, ActChoice::new));
 
 	public static final StreamCodec<ByteBuf, ActChoice> STREAM_CODEC = StreamCodec.composite(
-		ByteBufCodecs.INT, ActChoice::index,
-		ByteBufCodecs.STRING_UTF8, ActChoice::text,
-		ActChoice::new
+			ByteBufCodecs.INT, ActChoice::index,
+			ByteBufCodecs.STRING_UTF8, ActChoice::text,
+			ActChoice::new
 	);
 
 	public static ActChoice of(Choice choice) {

@@ -10,10 +10,10 @@ public record C2SPlayerInputPacket(int index) implements CustomPacketPayload {
 	public static CustomPacketPayload.Type<C2SPlayerInputPacket> TYPE = RenmiNetworking.createType("betraying");
 
 	public static final StreamCodec<FriendlyByteBuf, C2SPlayerInputPacket> STREAM_CODEC = CustomPacketPayload.codec(
-		(p, b) -> {
-			b.writeInt(p.index);
-		},
-		(b) -> new C2SPlayerInputPacket(b.readInt())
+			(p, b) -> {
+				b.writeInt(p.index);
+			},
+			(b) -> new C2SPlayerInputPacket(b.readInt())
 	);
 
 	public static void HANDLER(C2SPlayerInputPacket payload, ServerPlayNetworking.Context context) {

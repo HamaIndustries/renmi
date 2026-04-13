@@ -14,11 +14,11 @@ import java.util.Map;
 
 public class RenmiLibrary {
 	public static final Codec<RenmiLibrary> CODEC = RecordCodecBuilder.create(
-		i -> i.group(
-			Codec.compoundList(Identifier.CODEC, Series.CODEC)
-				.fieldOf("acts")
-				.forGetter(p -> p.library.entrySet().stream().map(e -> new Pair<>(e.getKey(), e.getValue())).toList())
-		).apply(i, RenmiLibrary::new)
+			i -> i.group(
+					Codec.compoundList(Identifier.CODEC, Series.CODEC)
+							.fieldOf("acts")
+							.forGetter(p -> p.library.entrySet().stream().map(e -> new Pair<>(e.getKey(), e.getValue())).toList())
+			).apply(i, RenmiLibrary::new)
 	);
 
 	public static RenmiLibrary get(MinecraftServer server) {
@@ -31,7 +31,7 @@ public class RenmiLibrary {
 	}
 
 	protected RenmiLibrary(List<Pair<Identifier, Series>> data) {
-		for (var p : data) { library.put(p.getFirst(), p.getSecond()); }
+		for (var p : data) library.put(p.getFirst(), p.getSecond());
 	}
 
 	public Series getSeries(Identifier id) {

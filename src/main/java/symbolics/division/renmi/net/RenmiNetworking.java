@@ -11,19 +11,11 @@ public class RenmiNetworking {
 	}
 
 	public static void init() {
-		PayloadTypeRegistry.serverboundPlay().registerLarge(
-			C2SCreateActPacket.TYPE,
-			C2SCreateActPacket.STREAM_CODEC,
-			9999999
-		);
+		PayloadTypeRegistry.serverboundPlay().registerLarge(C2SCreateActPacket.TYPE, C2SCreateActPacket.STREAM_CODEC, 9999999);
 		ServerPlayNetworking.registerGlobalReceiver(C2SCreateActPacket.TYPE, C2SCreateActPacket::HANDLER);
 		PayloadTypeRegistry.serverboundPlay().register(C2SPlayerInputPacket.TYPE, C2SPlayerInputPacket.STREAM_CODEC);
 		ServerPlayNetworking.registerGlobalReceiver(C2SPlayerInputPacket.TYPE, C2SPlayerInputPacket::HANDLER);
 
-		PayloadTypeRegistry.clientboundPlay().registerLarge(
-			S2CActEditingPacket.TYPE,
-			S2CActEditingPacket.STREAM_CODEC,
-			9999999
-		);
+		PayloadTypeRegistry.clientboundPlay().registerLarge(S2CActEditingPacket.TYPE, S2CActEditingPacket.STREAM_CODEC, 9999999);
 	}
 }

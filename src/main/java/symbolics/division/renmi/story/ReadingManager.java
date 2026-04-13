@@ -8,6 +8,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import org.apache.commons.lang3.NotImplementedException;
+import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiAttachments;
 
 import java.util.HashMap;
@@ -19,14 +20,8 @@ public class ReadingManager {
 	// manages state. receives commands from client. sends stage directions to client.
 
 	public static final Codec<ReadingManager> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-		Codec.unboundedMap(
-			UUIDUtil.CODEC,
-			ActReading.CODEC
-		).fieldOf("activeReadings").forGetter(mgr -> mgr.activeReadings),
-		Codec.unboundedMap(
-			UUIDUtil.CODEC,
-			Codec.unboundedMap(Identifier.CODEC, ActReading.CODEC)
-		).fieldOf("allReadings").forGetter(mgr -> mgr.allReadings)
+			Codec.unboundedMap(UUIDUtil.CODEC, ActReading.CODEC).fieldOf("activeReadings").forGetter(mgr -> mgr.activeReadings),
+			Codec.unboundedMap(UUIDUtil.CODEC, Codec.unboundedMap(Identifier.CODEC, ActReading.CODEC)).fieldOf("allReadings").forGetter(mgr -> mgr.allReadings)
 	).apply(instance, ReadingManager::new));
 
 	public static ReadingManager getManager(MinecraftServer server) {
@@ -45,7 +40,7 @@ public class ReadingManager {
 	}
 
 	public ActReading createOrLoad(ServerPlayer player, Act act) {
-		throw new NotImplementedException();
+		return act.createReading(player);
 	}
 
 	public void startReading(ServerPlayer player, Act act) {
@@ -65,14 +60,17 @@ public class ReadingManager {
 	// called by client packet
 	public void readingProceed(ServerPlayer player) {
 		ActReading reading = getActiveReading(player);
-		if (reading == null) { return; }
+		if (reading == null) {
+			Renmi.LOGGER.info("Player attempted to proceed with no act running.");
+			return;
+		}
 		reading.proceed(player);
 		updateReadingState(player, reading);
 	}
 
 	public void readingChoice(ServerPlayer player, int choice) {
 		ActReading reading = getActiveReading(player);
-		if (reading == null) { return; }
+		if (reading == null) return;
 		reading.choose(player, choice);
 		updateReadingState(player, reading);
 	}
@@ -80,9 +78,6 @@ public class ReadingManager {
 	public void updateReadingState(ServerPlayer player, ActReading reading) {
 		ActLine line = reading.currentLine();
 		List<ActChoice> choices = reading.currentChoices().stream().map(ActChoice::of).toList();
-		player.setAttached(
-			RenmiAttachments.READING_STATE,
-			new ReadingState(line == null ? ActLine.INACTIVE : line, choices)
-		);
+		player.setAttached(RenmiAttachments.READING_STATE, new ReadingState(line == null ? ActLine.INACTIVE : line, choices));
 	}
 }

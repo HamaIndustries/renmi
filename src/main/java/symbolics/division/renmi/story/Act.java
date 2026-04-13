@@ -9,11 +9,11 @@ import org.apache.commons.lang3.NotImplementedException;
 
 public class Act {
 	public static final Codec<Act> CODEC = RecordCodecBuilder.create(
-		instance -> instance.group(
-			Identifier.CODEC.fieldOf("id").forGetter(p -> p.id),
-			Codec.STRING.fieldOf("source").forGetter(p -> p.source),
-			Codec.STRING.fieldOf("json").forGetter(p -> p.json)
-		).apply(instance, Act::new)
+			instance -> instance.group(
+					Identifier.CODEC.fieldOf("id").forGetter(p -> p.id),
+					Codec.STRING.fieldOf("source").forGetter(p -> p.source),
+					Codec.STRING.fieldOf("json").forGetter(p -> p.json)
+			).apply(instance, Act::new)
 	);
 
 	protected final Identifier id;
@@ -23,6 +23,7 @@ public class Act {
 	public Act(Identifier id, String source, String json) {
 		this.id = id;
 		this.source = source;
+		this.json = json;
 	}
 
 	public ActReading createReading(ServerPlayer player) {
@@ -35,7 +36,7 @@ public class Act {
 
 	public Story getStory() {
 		try {
-			return new Story(source);
+			return new Story(json);
 		} catch (Exception e) {
 			throw new NotImplementedException();
 		}

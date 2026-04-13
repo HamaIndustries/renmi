@@ -11,11 +11,11 @@ import java.util.Map;
 
 public class Series {
 	public static final Codec<Series> CODEC = RecordCodecBuilder.create(
-		i -> i.group(
-			Codec.compoundList(Identifier.CODEC, Act.CODEC)
-				.fieldOf("acts")
-				.forGetter(p -> p.acts.entrySet().stream().map(e -> new Pair<>(e.getKey(), e.getValue())).toList())
-		).apply(i, Series::new)
+			i -> i.group(
+					Codec.compoundList(Identifier.CODEC, Act.CODEC)
+							.fieldOf("acts")
+							.forGetter(p -> p.acts.entrySet().stream().map(e -> new Pair<>(e.getKey(), e.getValue())).toList())
+			).apply(i, Series::new)
 	);
 
 	protected final Map<Identifier, Act> acts = new HashMap<>();
@@ -31,5 +31,9 @@ public class Series {
 
 	public void createAct(Identifier id, Act act) {
 		acts.put(id, act);
+	}
+
+	public Act getAct(Identifier act) {
+		return acts.get(act);
 	}
 }

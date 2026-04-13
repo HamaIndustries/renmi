@@ -14,10 +14,10 @@ import java.util.List;
 
 public class ActReading {
 	public static Codec<ActReading> CODEC = RecordCodecBuilder.create(instance ->
-		instance.group(
-			Codec.STRING.fieldOf("story").forGetter(ActReading::storyJson),
-			Codec.STRING.fieldOf("text").forGetter(ActReading::text)
-		).apply(instance, ActReading::new)
+			instance.group(
+					Codec.STRING.fieldOf("story").forGetter(ActReading::storyJson),
+					Codec.STRING.fieldOf("text").forGetter(ActReading::text)
+			).apply(instance, ActReading::new)
 	);
 
 	protected final Story story;
@@ -70,9 +70,10 @@ public class ActReading {
 			try {
 				currentLine = ActLine.of(story.Continue());
 			} catch (StoryException e) {
-				throw new NotImplementedException();
+				throw new RuntimeException(e);
 			} catch (Exception e) {
-				throw new NotImplementedException();
+				throw new RuntimeException(e);
+//                throw new NotImplementedException();
 			}
 		}
 	}
@@ -85,12 +86,7 @@ public class ActReading {
 				throw new NotImplementedException();
 			}
 		} else {
-			Renmi.LOGGER.info(
-				"player {} attempted to make invalid choice {} when the number of choices was {}",
-				player.nameAndId(),
-				choice,
-				story.getCurrentChoices().size()
-			);
+			Renmi.LOGGER.info("player {} attempted to make invalid choice {} when the number of choices was {}", player.nameAndId(), choice, story.getCurrentChoices().size());
 		}
 	}
 }
