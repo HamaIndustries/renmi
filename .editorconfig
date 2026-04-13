@@ -1,0 +1,19 @@
+[*]
+indent_size = 4
+indent_style = tab
+tab_width = 4
+insert_final_newline = true
+
+[*.java]
+ij_java_block_brace_style = end_of_line
+ij_java_lambda_brace_style = end_of_line
+ij_java_method_brace_style = end_of_line
+
+[{*.gant,*.groovy,*.gy,*.gradle}]
+ij_groovy_block_brace_style = end_of_line
+ij_groovy_class_brace_style = end_of_line
+ij_groovy_lambda_brace_style = end_of_line
+ij_groovy_method_brace_style = end_of_line
+
+[*.properties]
+ij_properties_keep_blank_lines = true

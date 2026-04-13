@@ -1,79 +1,79 @@
 plugins {
-    id "net.fabricmc.fabric-loom" version "${loom_version}"
-    id "maven-publish"
+	id "net.fabricmc.fabric-loom" version "${loom_version}"
+	id "maven-publish"
 }
 
 version = "${project.mod_version}+${project.minecraft_version}"
 group = project.maven_group
 
 repositories {
-    maven {
-        name "Chai's Maven"
-        url "https://codeberg.org/api/packages/chai/maven"
-    }
-    maven {
-        url "https://maven.nucleoid.xyz/"
-        name "Nucleoid"
-    }
+	maven {
+		name "Chai's Maven"
+		url "https://codeberg.org/api/packages/chai/maven"
+	}
+	maven {
+		url "https://maven.nucleoid.xyz/"
+		name "Nucleoid"
+	}
 }
 
 loom {
-    splitEnvironmentSourceSets()
+	splitEnvironmentSourceSets()
 
-    mods {
-        "renmi" {
-            sourceSet sourceSets.main
-            sourceSet sourceSets.client
-        }
-    }
+	mods {
+		"renmi" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
-    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-    implementation include("dev.chailotl:bento-gui:${project.bento_gui_version}")
-    implementation "com.bladecoder.ink:blade-ink:${blade_ink_version}"
-    implementation "com.bladecoder.ink:blade-ink-compiler:${blade_ink_version}"
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	implementation include("dev.chailotl:bento-gui:${project.bento_gui_version}")
+	implementation "com.bladecoder.ink:blade-ink:${blade_ink_version}"
+	implementation "com.bladecoder.ink:blade-ink-compiler:${blade_ink_version}"
 }
 
 processResources {
-    def map = [
-            "name"             : project.mod_name,
-            "version"          : project.mod_version,
-            "minecraft_version": project.minecraft_version,
-            "loader_version"   : project.loader_version
-    ]
+	def map = [
+		"name"             : project.mod_name,
+		"version"          : project.mod_version,
+		"minecraft_version": project.minecraft_version,
+		"loader_version"   : project.loader_version
+	]
 
-    inputs.properties(map)
-    filesMatching("fabric.mod.json") { expand(map) }
+	inputs.properties(map)
+	filesMatching("fabric.mod.json") { expand(map) }
 }
 
 tasks.withType(JavaCompile).configureEach {
-    it.options.release = 25
+	it.options.release = 25
 }
 
 java {
-    withSourcesJar()
+	withSourcesJar()
 
-    sourceCompatibility = JavaVersion.VERSION_25
-    targetCompatibility = JavaVersion.VERSION_25
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
 }
 
 jar {
-    inputs.property "projectName", project.name
+	inputs.property "projectName", project.name
 
-    from("LICENSE") {
-        rename { "${it}_${project.name}" }
-    }
+	from("LICENSE") {
+		rename { "${it}_${project.name}" }
+	}
 }
 
 publishing {
-    publications {
-        create("mavenJava", MavenPublication) {
-            from components.java
-        }
-    }
+	publications {
+		create("mavenJava", MavenPublication) {
+			from components.java
+		}
+	}
 
-    repositories {}
+	repositories {}
 }

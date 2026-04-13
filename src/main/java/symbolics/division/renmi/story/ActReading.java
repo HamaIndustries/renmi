@@ -13,79 +13,84 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActReading {
-    public static Codec<ActReading> CODEC = RecordCodecBuilder.create(instance ->
-            instance.group(
-                    Codec.STRING.fieldOf("story").forGetter(ActReading::storyJson),
-                    Codec.STRING.fieldOf("text").forGetter(ActReading::text)
-            ).apply(instance, ActReading::new)
-    );
+	public static Codec<ActReading> CODEC = RecordCodecBuilder.create(instance ->
+		instance.group(
+			Codec.STRING.fieldOf("story").forGetter(ActReading::storyJson),
+			Codec.STRING.fieldOf("text").forGetter(ActReading::text)
+		).apply(instance, ActReading::new)
+	);
 
-    protected final Story story;
-    protected ActLine currentLine;
-    protected String text = "";
-    protected final List<Choice> choices = new ArrayList<>();
+	protected final Story story;
+	protected ActLine currentLine;
+	protected String text = "";
+	protected final List<Choice> choices = new ArrayList<>();
 
-    public ActReading(Act act, ServerPlayer player) {
-        // brand new act
-        try {
-            this.story = act.getStory();
-            proceed(player);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+	public ActReading(Act act, ServerPlayer player) {
+		// brand new act
+		try {
+			this.story = act.getStory();
+			proceed(player);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 
-    public ActReading(String storyJson, String text) {
-        // loaded act
-        try {
-            this.story = new Story(storyJson);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        this.text = text;
-    }
+	public ActReading(String storyJson, String text) {
+		// loaded act
+		try {
+			this.story = new Story(storyJson);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		this.text = text;
+	}
 
-    protected String storyJson() {
-        try {
-            return story.toJson();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+	protected String storyJson() {
+		try {
+			return story.toJson();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 
-    protected String text() {
-        return text;
-    }
+	protected String text() {
+		return text;
+	}
 
-    public ActLine currentLine() {
-        return currentLine;
-    }
+	public ActLine currentLine() {
+		return currentLine;
+	}
 
-    public List<Choice> currentChoices() {
-        return choices;
-    }
+	public List<Choice> currentChoices() {
+		return choices;
+	}
 
-    public void proceed(ServerPlayer player) {
-        if (story.canContinue()) {
-            try {
-                currentLine = ActLine.of(story.Continue());
-            } catch (StoryException e) {
-                throw new NotImplementedException();
-            } catch (Exception e) {
-                throw new NotImplementedException();
-            }
-        }
-    }
+	public void proceed(ServerPlayer player) {
+		if (story.canContinue()) {
+			try {
+				currentLine = ActLine.of(story.Continue());
+			} catch (StoryException e) {
+				throw new NotImplementedException();
+			} catch (Exception e) {
+				throw new NotImplementedException();
+			}
+		}
+	}
 
-    public void choose(ServerPlayer player, int choice) {
-        if (choice < story.getCurrentChoices().size()) {
-            try {
-                story.chooseChoiceIndex(choice);
-            } catch (Exception e) {
-                throw new NotImplementedException();
-            }
-        } else {
-            Renmi.LOGGER.info("player {} attempted to make invalid choice {} when the number of choices was {}", player.nameAndId(), choice, story.getCurrentChoices().size());
-        }
-    }
+	public void choose(ServerPlayer player, int choice) {
+		if (choice < story.getCurrentChoices().size()) {
+			try {
+				story.chooseChoiceIndex(choice);
+			} catch (Exception e) {
+				throw new NotImplementedException();
+			}
+		} else {
+			Renmi.LOGGER.info(
+				"player {} attempted to make invalid choice {} when the number of choices was {}",
+				player.nameAndId(),
+				choice,
+				story.getCurrentChoices().size()
+			);
+		}
+	}
 }
