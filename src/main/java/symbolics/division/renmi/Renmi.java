@@ -41,7 +41,8 @@ public class Renmi implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        LOGGER.info("Hello hama!");
+        LOGGER.info("Hello Sakura High Secondary Academy!");
+//        RenmiAttachments.init();
     }
 
     public static <T extends Block> T register(

@@ -16,13 +16,15 @@ public class ActReading {
     protected final List<ActLine> lines = new ArrayList<>();
     protected final List<Choice> choices = new ArrayList<>();
 
-    public ActReading(Act act) {
+    public ActReading(Act act, ServerPlayer player) {
         try {
-            this.story = new Story(act.compiledJson());
+            this.story = act.getStory();
+            proceed(player);
         } catch (Exception e) {
             throw new NotImplementedException();
         }
 
+        this.story.toJson()
     }
 
     public ActLine currentLine() {

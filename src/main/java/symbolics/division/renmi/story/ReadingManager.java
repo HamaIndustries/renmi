@@ -1,10 +1,11 @@
 package symbolics.division.renmi.story;
 
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import org.apache.commons.lang3.NotImplementedException;
-import symbolics.division.renmi.net.RenmiNetworking;
+import symbolics.division.renmi.RenmiAttachments;
 
 import java.util.HashMap;
 import java.util.List;
@@ -58,6 +59,10 @@ public class ReadingManager {
     public void updateReadingState(ServerPlayer player, ActReading reading) {
         ActLine line = reading.currentLine();
         List<ActChoice> choices = reading.choices.stream().map(ActChoice::of).toList();
-        player.setAttached(RenmiNetworking.Attachments.READING_STATE, new ReadingState(line == null ? ActLine.INACTIVE : line, choices));
+        player.setAttached(RenmiAttachments.READING_STATE, new ReadingState(line == null ? ActLine.INACTIVE : line, choices));
+    }
+
+    public void createAct(Identifier series, Identifier act, String inkSource) {
+
     }
 }
