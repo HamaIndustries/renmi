@@ -25,5 +25,11 @@ public class RenmiNetworking {
 			S2CActEditingPacket.STREAM_CODEC,
 			9999999
 		);
+
+		PayloadTypeRegistry.serverboundPlay().register(
+			C2SEditStoryNodePacket.TYPE,
+			C2SEditStoryNodePacket.STREAM_CODEC
+		);
+		ServerPlayNetworking.registerGlobalReceiver(C2SEditStoryNodePacket.TYPE, C2SEditStoryNodePacket::HANDLER);
 	}
 }

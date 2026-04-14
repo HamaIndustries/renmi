@@ -1,5 +1,6 @@
 package symbolics.division.renmi;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -7,18 +8,22 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import symbolics.division.renmi.block.StoryNodeBlock;
+import symbolics.division.renmi.block.entity.StoryNodeBlockEntity;
 
 import java.util.function.Function;
 
 public class RenmiBlocks {
 	public static void init() { }
 
-	public static final Block STORY_NODE = register(
+	public static final StoryNodeBlock STORY_NODE = register(
 		"story_node",
-		Block::new,
+		StoryNodeBlock::new,
 		BlockBehaviour.Properties.of()
 			.strength(-1f, 3600000.8f)
 			.mapColor(MapColor.NONE)
@@ -29,7 +34,13 @@ public class RenmiBlocks {
 		true
 	);
 
-	public static <T extends Block> T register(
+	public static final BlockEntityType<StoryNodeBlockEntity> STORY_NODE_ENTITY = register(
+		"story_node",
+		StoryNodeBlockEntity::new,
+		STORY_NODE
+	);
+
+	private static <T extends Block> T register(
 		String name,
 		Function<BlockBehaviour.Properties, Block> blockFactory,
 		BlockBehaviour.Properties settings,
@@ -48,6 +59,18 @@ public class RenmiBlocks {
 		}
 
 		return (T) Registry.register(BuiltInRegistries.BLOCK, blockKey, block);
+	}
+
+	private static <T extends BlockEntity> BlockEntityType<T> register(
+		String name,
+		FabricBlockEntityTypeBuilder.Factory<? extends T> entityFactory,
+		Block... blocks
+	) {
+		return Registry.register(
+			BuiltInRegistries.BLOCK_ENTITY_TYPE,
+			Renmi.id(name),
+			FabricBlockEntityTypeBuilder.<T>create(entityFactory, blocks).build()
+		);
 	}
 
 	private static ResourceKey<Block> keyOfBlock(String name) {
