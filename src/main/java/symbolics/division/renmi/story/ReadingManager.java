@@ -16,9 +16,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * Manages states for all clients, receives commands from clients, and sends stage directions to clients.
+ */
 public class ReadingManager {
-	// manages state. receives commands from client. sends stage directions to client.
-
 	public static final Codec<ReadingManager> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 		Codec.unboundedMap(
 			UUIDUtil.CODEC,

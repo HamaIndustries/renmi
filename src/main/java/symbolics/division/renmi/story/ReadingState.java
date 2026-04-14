@@ -6,6 +6,12 @@ import net.minecraft.network.codec.StreamCodec;
 
 import java.util.List;
 
+/**
+ * A client's current reading state.
+ *
+ * @param line    an {@link ActLine}
+ * @param choices a list of {@link ActChoice}'s
+ */
 public record ReadingState(ActLine line, List<ActChoice> choices) {
 	public static final StreamCodec<FriendlyByteBuf, ReadingState> STREAM_CODEC = StreamCodec.composite(
 		ActLine.STREAM_CODEC, ReadingState::line,

@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A collection of all of our {@link Series}'s.
+ */
 public class RenmiLibrary {
 	public static final Codec<RenmiLibrary> CODEC = RecordCodecBuilder.create(
 		i -> i.group(

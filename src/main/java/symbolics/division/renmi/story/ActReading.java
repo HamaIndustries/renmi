@@ -12,6 +12,11 @@ import symbolics.division.renmi.Renmi;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A client's state for a particular {@link Act}
+ *
+ * <p>It keeps track of their current {@link ActLine}, and is managed by the {@link ReadingManager}.
+ */
 public class ActReading {
 	public static Codec<ActReading> CODEC = RecordCodecBuilder.create(instance ->
 		instance.group(
@@ -25,8 +30,10 @@ public class ActReading {
 	protected String text = "";
 	protected final List<Choice> choices = new ArrayList<>();
 
+	/**
+	 * A brand new act.
+	 */
 	public ActReading(Act act, ServerPlayer player) {
-		// brand new act
 		try {
 			this.story = act.getStory();
 			proceed(player);
@@ -35,8 +42,10 @@ public class ActReading {
 		}
 	}
 
+	/**
+	 * A loaded act.
+	 */
 	public ActReading(String storyJson, String text) {
-		// loaded act
 		try {
 			this.story = new Story(storyJson);
 		} catch (Exception e) {
@@ -73,7 +82,7 @@ public class ActReading {
 				throw new RuntimeException(e);
 			} catch (Exception e) {
 				throw new RuntimeException(e);
-//                throw new NotImplementedException();
+//				throw new NotImplementedException();
 			}
 		}
 	}

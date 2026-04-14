@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A collection of {@link Act}'s.
+ */
 public class Series {
 	public static final Codec<Series> CODEC = RecordCodecBuilder.create(
 		i -> i.group(

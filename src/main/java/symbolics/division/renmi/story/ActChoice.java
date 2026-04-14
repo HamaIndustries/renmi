@@ -7,6 +7,12 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
+/**
+ * A dialogue choice the client can make.
+ *
+ * @param index
+ * @param text
+ */
 public record ActChoice(int index, String text) {
 	public static final Codec<ActChoice> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 		Codec.INT.fieldOf("index").forGetter(ActChoice::index),

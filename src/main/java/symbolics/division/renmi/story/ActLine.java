@@ -1,10 +1,14 @@
 package symbolics.division.renmi.story;
 
-
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
+/**
+ * A line of text in an {@link Act}.
+ *
+ * @param text
+ */
 public record ActLine(String text) {
 	// lines have text and stage directions.
 	public static StreamCodec<FriendlyByteBuf, ActLine> STREAM_CODEC = StreamCodec.composite(
