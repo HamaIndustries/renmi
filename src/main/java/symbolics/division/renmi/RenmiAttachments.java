@@ -8,6 +8,8 @@ import symbolics.division.renmi.story.ReadingState;
 import symbolics.division.renmi.story.RenmiLibrary;
 
 public class RenmiAttachments {
+	public static void init() { }
+
 	public static final AttachmentType<ReadingState> READING_STATE = AttachmentRegistry.create(
 		Renmi.id("reading_state"),
 		builder -> builder.initializer(() -> ReadingState.INACTIVE)
@@ -28,7 +30,4 @@ public class RenmiAttachments {
 		builder -> builder.initializer(ReadingManager::new)
 			.persistent(ReadingManager.CODEC)
 	);
-
-	public static void init() {
-	}
 }
