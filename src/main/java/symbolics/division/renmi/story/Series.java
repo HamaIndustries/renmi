@@ -39,4 +39,8 @@ public class Series {
 	public Act getAct(Identifier act) {
 		return acts.get(act);
 	}
+
+	public Map<Identifier, Act> allActs() {
+		return Map.copyOf(acts);
+	}
 }

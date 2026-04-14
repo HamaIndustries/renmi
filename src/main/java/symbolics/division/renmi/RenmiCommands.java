@@ -45,7 +45,10 @@ public class RenmiCommands {
 					Commands.argument("series_id", IdentifierArgument.id())
 						.then(
 							Commands.argument("act_id", IdentifierArgument.id())
-								.executes(RenmiCommands::readAct)
+								.executes(ctx -> readAct(ctx, false))
+								.then(Commands.literal("reset")
+									.executes(ctx -> readAct(ctx, true))
+								)
 						)
 				)
 			).then(Commands.literal("proceed")
@@ -56,9 +59,14 @@ public class RenmiCommands {
 				)
 			);
 
+		LiteralArgumentBuilder<CommandSourceStack> listCommand = Commands.literal("list")
+			.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
+			.executes(RenmiCommands::listActs);
+
 		LiteralArgumentBuilder<CommandSourceStack> base = Commands.literal("renmi")
 			.then(createCommand)
-			.then(storyCommand);
+			.then(storyCommand)
+			.then(listCommand);
 		dispatcher.register(base);
 	}
 
@@ -85,12 +93,15 @@ public class RenmiCommands {
 			e.printStackTrace();
 			return 0;
 		}
+		context.getSource().sendSystemMessage(Component.literal("Created act " + act(context) + " for series " + series(context)));
 		return 1;
 	}
 
-	private static int readAct(CommandContext<CommandSourceStack> context) {
+	private static int readAct(CommandContext<CommandSourceStack> context, boolean reset) {
 		ServerPlayer player = context.getSource().getPlayer();
-		if (player == null) { return 0; }
+		if (player == null) {
+			return 0;
+		}
 		var manager = context.getSource().getServer().globalAttachments().getAttachedOrCreate(RenmiAttachments.READING_MANAGER);
 		var library = context.getSource().getServer().globalAttachments().getAttachedOrCreate(RenmiAttachments.LIBRARY);
 		Series series = library.getSeries(series(context));
@@ -103,6 +114,9 @@ public class RenmiCommands {
 			context.getSource().sendFailure(Component.literal("No such act exists."));
 			return 0;
 		}
+		if (reset) {
+			manager.resetReading(player, act);
+		}
 		manager.startReading(player, act);
 		printState(context);
 		return 1;
@@ -111,7 +125,9 @@ public class RenmiCommands {
 	private static int readingProceed(CommandContext<CommandSourceStack> context) {
 		var manager = context.getSource().getServer().globalAttachments().getAttachedOrCreate(RenmiAttachments.READING_MANAGER);
 		ServerPlayer player = context.getSource().getPlayer();
-		if (player == null) { return 0; }
+		if (player == null) {
+			return 0;
+		}
 		manager.readingProceed(player);
 		printState(context);
 		return 1;
@@ -120,7 +136,9 @@ public class RenmiCommands {
 	private static int readingChoice(CommandContext<CommandSourceStack> context) {
 		var manager = context.getSource().getServer().globalAttachments().getAttachedOrCreate(RenmiAttachments.READING_MANAGER);
 		ServerPlayer player = context.getSource().getPlayer();
-		if (player == null) { return 0; }
+		if (player == null) {
+			return 0;
+		}
 		int choice = context.getArgument("index", Integer.class);
 		manager.readingChoice(player, choice);
 		printState(context);
@@ -129,14 +147,35 @@ public class RenmiCommands {
 
 	private static void printState(CommandContext<CommandSourceStack> context) {
 		ServerPlayer player = context.getSource().getPlayer();
-		if (player == null) { return; }
+		if (player == null) {
+			return;
+		}
 		var state = player.getAttachedOrCreate(RenmiAttachments.READING_STATE);
 		context.getSource().sendSystemMessage(Component.literal("> " + state.line().text()));
+		Renmi.LOGGER.info("> " + state.line().text());
 		String line = state.line().text() + " | ";
 		for (var choice : state.choices()) {
+			Renmi.LOGGER.info(Integer.toString(choice.index()) + ": " + choice.text());
 			context.getSource().sendSystemMessage(Component.literal(
 				Integer.toString(choice.index()) + ": " + choice.text()
 			));
 		}
 	}
+
+	private static int listActs(CommandContext<CommandSourceStack> context) {
+		ServerPlayer player = context.getSource().getPlayer();
+		var library = context.getSource().getServer().globalAttachments().getAttachedOrCreate(RenmiAttachments.LIBRARY);
+		var series = library.allSeries();
+		if (series.isEmpty()) {
+			context.getSource().sendSystemMessage(Component.literal("no series exist!"));
+		}
+		for (var entry : series.entrySet()) {
+			context.getSource().sendSystemMessage(Component.literal("--- " + entry.getKey() + " ---"));
+			for (var actEntry : entry.getValue().allActs().entrySet()) {
+				context.getSource().sendSystemMessage(Component.literal("> " + actEntry.getKey()));
+			}
+		}
+		return 1;
+	}
+
 }

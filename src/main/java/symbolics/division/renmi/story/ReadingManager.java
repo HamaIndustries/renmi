@@ -7,7 +7,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import org.apache.commons.lang3.NotImplementedException;
 import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiAttachments;
 
@@ -22,11 +21,11 @@ import java.util.UUID;
 public class ReadingManager {
 	public static final Codec<ReadingManager> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 		Codec.unboundedMap(
-			UUIDUtil.CODEC,
+			UUIDUtil.STRING_CODEC,
 			ActReading.CODEC
 		).fieldOf("activeReadings").forGetter(mgr -> mgr.activeReadings),
 		Codec.unboundedMap(
-			UUIDUtil.CODEC,
+			UUIDUtil.STRING_CODEC,
 			Codec.unboundedMap(Identifier.CODEC, ActReading.CODEC)
 		).fieldOf("allReadings").forGetter(mgr -> mgr.allReadings)
 	).apply(instance, ReadingManager::new));
@@ -43,11 +42,13 @@ public class ReadingManager {
 
 	public ReadingManager(Map<UUID, ActReading> activeReadings, Map<UUID, Map<Identifier, ActReading>> allReadings) {
 		this.activeReadings.putAll(activeReadings);
-		allReadings.replaceAll((k, v) -> new HashMap<>(v));
+		this.allReadings.replaceAll((k, v) -> new HashMap<>(v));
 	}
 
 	public ActReading createOrLoad(ServerPlayer player, Act act) {
-		return act.createReading(player);
+		return allReadings
+			.computeIfAbsent(player.getUUID(), i -> new HashMap<>())
+			.computeIfAbsent(act.id, id -> act.createReading(player));
 	}
 
 	public void startReading(ServerPlayer player, Act act) {
@@ -56,12 +57,14 @@ public class ReadingManager {
 		updateReadingState(player, newReading);
 	}
 
-	protected ActReading getActiveReading(Player player) {
-		return activeReadings.get(player.getUUID());
+	public void resetReading(ServerPlayer player, Act act) {
+		activeReadings.remove(player.getUUID());
+		allReadings.remove(player.getUUID());
+		updateReadingState(player, null);
 	}
 
-	protected void save(ServerPlayer player, ActReading reading) {
-		throw new NotImplementedException();
+	protected ActReading getActiveReading(Player player) {
+		return activeReadings.get(player.getUUID());
 	}
 
 	// called by client packet
@@ -77,12 +80,19 @@ public class ReadingManager {
 
 	public void readingChoice(ServerPlayer player, int choice) {
 		ActReading reading = getActiveReading(player);
-		if (reading == null) { return; }
+		if (reading == null) {
+			return;
+		}
 		reading.choose(player, choice);
+		reading.proceed(player);
 		updateReadingState(player, reading);
 	}
 
 	public void updateReadingState(ServerPlayer player, ActReading reading) {
+		if (reading == null) {
+			player.removeAttached(RenmiAttachments.READING_STATE);
+			return;
+		}
 		ActLine line = reading.currentLine();
 		List<ActChoice> choices = reading.currentChoices().stream().map(ActChoice::of).toList();
 		player.setAttached(

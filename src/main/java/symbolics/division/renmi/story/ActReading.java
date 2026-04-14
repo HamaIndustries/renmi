@@ -9,7 +9,6 @@ import net.minecraft.server.level.ServerPlayer;
 import org.apache.commons.lang3.NotImplementedException;
 import symbolics.division.renmi.Renmi;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,14 +20,14 @@ public class ActReading {
 	public static Codec<ActReading> CODEC = RecordCodecBuilder.create(instance ->
 		instance.group(
 			Codec.STRING.fieldOf("story").forGetter(ActReading::storyJson),
-			Codec.STRING.fieldOf("text").forGetter(ActReading::text)
+			Codec.STRING.fieldOf("text").forGetter(ActReading::text),
+			Codec.STRING.fieldOf("state").forGetter(ActReading::stateJson)
 		).apply(instance, ActReading::new)
 	);
 
 	protected final Story story;
 	protected ActLine currentLine;
 	protected String text = "";
-	protected final List<Choice> choices = new ArrayList<>();
 
 	/**
 	 * A brand new act.
@@ -45,9 +44,10 @@ public class ActReading {
 	/**
 	 * A loaded act.
 	 */
-	public ActReading(String storyJson, String text) {
+	public ActReading(String storyJson, String text, String state) {
 		try {
 			this.story = new Story(storyJson);
+			this.story.getState().loadJson(state);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -62,6 +62,14 @@ public class ActReading {
 		}
 	}
 
+	protected String stateJson() {
+		try {
+			return story.getState().toJson();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	protected String text() {
 		return text;
 	}
@@ -71,7 +79,7 @@ public class ActReading {
 	}
 
 	public List<Choice> currentChoices() {
-		return choices;
+		return story.getCurrentChoices();
 	}
 
 	public void proceed(ServerPlayer player) {
@@ -82,7 +90,6 @@ public class ActReading {
 				throw new RuntimeException(e);
 			} catch (Exception e) {
 				throw new RuntimeException(e);
-//				throw new NotImplementedException();
 			}
 		}
 	}
@@ -101,6 +108,14 @@ public class ActReading {
 				choice,
 				story.getCurrentChoices().size()
 			);
+		}
+	}
+
+	public void reset() {
+		try {
+			this.story.resetState();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 	}
 }

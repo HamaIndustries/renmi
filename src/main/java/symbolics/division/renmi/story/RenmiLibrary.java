@@ -34,7 +34,9 @@ public class RenmiLibrary {
 	}
 
 	protected RenmiLibrary(List<Pair<Identifier, Series>> data) {
-		for (var p : data) { library.put(p.getFirst(), p.getSecond()); }
+		for (var p : data) {
+			library.put(p.getFirst(), p.getSecond());
+		}
 	}
 
 	public Series getSeries(Identifier id) {
@@ -56,6 +58,10 @@ public class RenmiLibrary {
 	}
 
 	public static final class RenmiCompilationFailed extends RuntimeException {
+	}
+
+	public Map<Identifier, Series> allSeries() {
+		return Map.copyOf(library);
 	}
 
 }
