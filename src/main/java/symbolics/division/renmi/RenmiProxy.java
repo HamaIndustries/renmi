@@ -1,9 +1,9 @@
 package symbolics.division.renmi;
 
-import symbolics.division.renmi.block.entity.StoryNodeBlockEntity;
+import symbolics.division.renmi.block.entity.StoryLocusBlockEntity;
 
 public class RenmiProxy {
-	public void openStoryNodeScreen(StoryNodeBlockEntity be) {
+	public void openStoryLocusScreen(StoryLocusBlockEntity be) {
 		// No-op
 	}
 }

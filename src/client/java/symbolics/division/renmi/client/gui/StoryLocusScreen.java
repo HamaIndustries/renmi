@@ -8,16 +8,16 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import symbolics.division.renmi.block.entity.StoryNodeBlockEntity;
-import symbolics.division.renmi.net.C2SEditStoryNodePacket;
+import symbolics.division.renmi.block.entity.StoryLocusBlockEntity;
+import symbolics.division.renmi.net.C2SEditStoryLocusPacket;
 
-public class StoryNodeScreen extends Screen {
-	private final StoryNodeBlockEntity be;
+public class StoryLocusScreen extends Screen {
+	private final StoryLocusBlockEntity be;
 
 	private TextField<Identifier> actField;
 	private TextField<Float> diameterField;
 
-	public StoryNodeScreen(StoryNodeBlockEntity be) {
+	public StoryLocusScreen(StoryLocusBlockEntity be) {
 		super(Component.empty());
 		this.be = be;
 	}
@@ -77,7 +77,7 @@ public class StoryNodeScreen extends Screen {
 		if (diameterField.isValidText()) {
 			be.diameter = diameterField.getValue();
 		}
-		ClientPlayNetworking.send(new C2SEditStoryNodePacket(be.getBlockPos(), be.act, be.diameter));
+		ClientPlayNetworking.send(new C2SEditStoryLocusPacket(be.getBlockPos(), be.act, be.diameter));
 		super.onClose();
 	}
 }

@@ -11,21 +11,21 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jspecify.annotations.Nullable;
 import symbolics.division.renmi.Renmi;
-import symbolics.division.renmi.block.entity.StoryNodeBlockEntity;
+import symbolics.division.renmi.block.entity.StoryLocusBlockEntity;
 
-public class StoryNodeBlock extends BaseEntityBlock {
-	public StoryNodeBlock(Properties properties) {
+public class StoryLocusBlock extends BaseEntityBlock {
+	public StoryLocusBlock(Properties properties) {
 		super(properties);
 	}
 
 	@Override
 	protected MapCodec<? extends BaseEntityBlock> codec() {
-		return simpleCodec(StoryNodeBlock::new);
+		return simpleCodec(StoryLocusBlock::new);
 	}
 
 	@Override
 	public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new StoryNodeBlockEntity(pos, state);
+		return new StoryLocusBlockEntity(pos, state);
 	}
 
 	protected InteractionResult useWithoutItem(
@@ -37,9 +37,9 @@ public class StoryNodeBlock extends BaseEntityBlock {
 	) {
 		BlockEntity blockEntity = level.getBlockEntity(pos);
 
-		if (blockEntity instanceof StoryNodeBlockEntity be && player.canUseGameMasterBlocks()) {
+		if (blockEntity instanceof StoryLocusBlockEntity be && player.canUseGameMasterBlocks()) {
 			if (level.isClientSide()) {
-				Renmi.PROXY.openStoryNodeScreen(be);
+				Renmi.PROXY.openStoryLocusScreen(be);
 			}
 			return InteractionResult.SUCCESS;
 		} else {

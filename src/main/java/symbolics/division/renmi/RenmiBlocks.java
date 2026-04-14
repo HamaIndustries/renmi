@@ -13,17 +13,17 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import symbolics.division.renmi.block.StoryNodeBlock;
-import symbolics.division.renmi.block.entity.StoryNodeBlockEntity;
+import symbolics.division.renmi.block.StoryLocusBlock;
+import symbolics.division.renmi.block.entity.StoryLocusBlockEntity;
 
 import java.util.function.Function;
 
 public class RenmiBlocks {
 	public static void init() { }
 
-	public static final StoryNodeBlock STORY_NODE = register(
-		"story_node",
-		StoryNodeBlock::new,
+	public static final StoryLocusBlock STORY_LOCUS = register(
+		"story_locus",
+		StoryLocusBlock::new,
 		BlockBehaviour.Properties.of()
 			.strength(-1f, 3600000.8f)
 			.mapColor(MapColor.NONE)
@@ -34,10 +34,10 @@ public class RenmiBlocks {
 		true
 	);
 
-	public static final BlockEntityType<StoryNodeBlockEntity> STORY_NODE_ENTITY = register(
-		"story_node",
-		StoryNodeBlockEntity::new,
-		STORY_NODE
+	public static final BlockEntityType<StoryLocusBlockEntity> STORY_LOCUS_ENTITY = register(
+		"story_locus",
+		StoryLocusBlockEntity::new,
+		STORY_LOCUS
 	);
 
 	private static <T extends Block> T register(

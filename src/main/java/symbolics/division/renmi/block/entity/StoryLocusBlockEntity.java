@@ -16,12 +16,12 @@ import org.jetbrains.annotations.Nullable;
 import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiBlocks;
 
-public class StoryNodeBlockEntity extends BlockEntity {
+public class StoryLocusBlockEntity extends BlockEntity {
 	public Identifier act = Renmi.id("null");
 	public float diameter = 3;
 
-	public StoryNodeBlockEntity(BlockPos pos, BlockState state) {
-		super(RenmiBlocks.STORY_NODE_ENTITY, pos, state);
+	public StoryLocusBlockEntity(BlockPos pos, BlockState state) {
+		super(RenmiBlocks.STORY_LOCUS_ENTITY, pos, state);
 	}
 
 	@Override
