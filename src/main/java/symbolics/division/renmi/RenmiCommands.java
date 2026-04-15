@@ -10,7 +10,9 @@ import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.IdentifierArgument;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import symbolics.division.renmi.story.Act;
@@ -153,17 +155,25 @@ public class RenmiCommands {
 		var state = player.getAttachedOrCreate(RenmiAttachments.READING_STATE);
 		context.getSource().sendSystemMessage(Component.literal("> " + state.line().text()));
 		Renmi.LOGGER.info("> " + state.line().text());
-		String line = state.line().text() + " | ";
-		for (var choice : state.choices()) {
-			Renmi.LOGGER.info(Integer.toString(choice.index()) + ": " + choice.text());
-			context.getSource().sendSystemMessage(Component.literal(
-				Integer.toString(choice.index()) + ": " + choice.text()
+		if (state.choices().size() > 0) {
+			for (var choice : state.choices()) {
+				Renmi.LOGGER.info(Integer.toString(choice.index()) + ": " + choice.text());
+				Component choiceText = Component.literal(
+					Integer.toString(choice.index()) + ": "
+				).append(Component.literal(choice.text()).withStyle(Style.EMPTY.withClickEvent(
+					new ClickEvent.RunCommand("/renmi story choose " + choice.index())
+				)));
+				context.getSource().sendSystemMessage(choiceText);
+			}
+		} else {
+			Component proceedText = Component.literal("[proceed]").withStyle(Style.EMPTY.withClickEvent(
+				new ClickEvent.RunCommand("/renmi story proceed")
 			));
+			context.getSource().sendSystemMessage(proceedText);
 		}
 	}
 
 	private static int listActs(CommandContext<CommandSourceStack> context) {
-		ServerPlayer player = context.getSource().getPlayer();
 		var library = context.getSource().getServer().globalAttachments().getAttachedOrCreate(RenmiAttachments.LIBRARY);
 		var series = library.allSeries();
 		if (series.isEmpty()) {
