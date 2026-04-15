@@ -10,7 +10,7 @@ Ready?
 
 //  As the modfest mascot, Ananas embodies the open encouragement of everyone and everything, even if sometimes there's some friction.
 
-//  At the same time, Ananas also experiences the nervousness people feel when getting to know eachother, the self doubt, the misunderstandings we often get into when trying to big things on short timelines. 
+//  At the same time, Ananas also experiences the nervousness people feel when beginning in modding and/or festing, the self doubt, the misunderstandings we often get into when trying to big things on short timelines. 
 
 //  Ananas needs a hand (literally) passing out the rest of this batch of info pamphlets to visitors. While you do, you get to bond a little bit. learn some info about ourselves and past events.
 
@@ -28,13 +28,13 @@ Ready?
     
     Never let a good investment opportunity go to waste.
 
-*   He's reading your fortune[]. Normally you'd tell someone to buy their own copy, but he was already kind enough to invite you on to the committee.
+*   (fortune) He's reading your [fortune]Fortune. Normally you'd tell someone to buy their own copy, but he was already kind enough to invite you on to the committee.
 
-    You hand over your magazine. You only read it for the jokes anyways. And also the comics.
+    You hand over your magazine. You only read it for the jokes anyway. And sometimes also for the comics.
     
 *   (nails) He's painting your nails[], obviously. You were due for a new coat. What a kind fellow.
 
-    But unfortunately, our friend here must have forgotten his polish at home.
+    But, unfortunately, our friend here must have forgotten his polish at home.
     
     No matter. You hand him yours. Remember: Phone, wallet, keys, nail polish.
 
@@ -68,45 +68,186 @@ Ready?
 
     The day's just starting, but you get the feeling you'll be getting to know them very well by the end of it.
 
-*   (no_people) Basically nobody[]. Everyone's caught up in their own business. Everyone's running around making references to their own in-jokes and past events.
+*   (no_people) Basically nobody[]. Everyone's caught up in their own business. Everyone's running around making references to their own in-jokes and past events, like you had worried.
 
     Even the committee, chaotic as they are, have something going on that you feel like you're missing out on.
 
 -   A larger group of visitors swarms you both for a moment.
 
-a: And how do you feel about that?
+    a: And how do you feel about that?
 
-*   You're used to it[].
-*   It's a new experience[].
+*   (experienced) You're used to it[], you tell him.
+
+    {many_people: You effortlessly slide through the horde, a mossless stone rolling upstream.}
     
-*   You're good with people
-*   You're not good with people
+    {few_people: You think you spot Barebones and Plume among the throng. They look like they're up to hijinks, but they're gone by the time the crowd clears.}
+    
+    {no_people: The horde may as well be faceless on the whole. More visitors, all having brought their friends and family. There isn't really anything here for you.}
 
+*   It's a new experience[], you tell him.
 
+    {many_people: Moments later, you're nearly swallowed by the crowd. Numerous vibrant, thriving bodies press in from all sides, like swimming in life itself.}
+    
+    {few_people: You spot Shrimple riding over the crowd on Ugg's shoulders. They both give a friendly wave, before disappearing into the sea of faces.}
+    
+    {no_people: You can't see anything as you're overwhelmed by the horde. Usually you can spot a friendly face, or at least make a friend, but you are afloat in a sea of raw anonymity.}
 
-= no_new
+-   He hands out the rest of his brochures, then swats the remaining visitors away. They can fend for themselves. He's done his duty.
 
+    a: Oh? {experienced: Is that how you normally roll?|How do you normally roll?}
+    
+*   You're good with people[].
+
+    {no_people: This day's just a one-off. You hope. It's not a sign of things to come. You hope.|Even still, its just one day. Most of the visitors here will be gone tomorrow, and you'll just be another transfer student from nowhere.}
+    
+    {no_people and experienced:You're used to being alone, but you know how to make friends and influence people. You know you'll be fine.}
+    
+    ...
+    
+    -> favor
+
+*   You're not good with people[].
+
+    {no_people and experienced:-> sad}
+    
+    But you've made friends {not experienced:before,|already today,{many_people: many friends,}} and you're sure there are more on the way.
+    
+    Probably.
+    
+    Maybe.
+    
+    ...
+    
+    -> favor
+    
+    
+-   (sad) Things have, to be honest, panned out exactly how you feared.
+    
+    There's too much light and noise. There are too many people and things, and all of them are occupied with themselves and each other.
+    
+    You don't get the context. 
+    
+    You're overwhelmed. 
+    
+    You want to go home. You want to go home.
+    
+    You want to go home.
+
+    The sound of a small object dropping is magnified by the emptiness of the hall.
+    
+    Someone dropped their flyers. Your flyers.
+    
+    You dropped your flyers, from your hand which you now find to be trembling.
+    
+    a: Hey, bud...
+    
+*   "I need a minute"
+*   "I'm okay."
+*   "So, how about that airline food?"
+
+-   You try to say something, but stop. You know that if you spoke right now, something less like words and more like pain would come out of your mouth. 
+
+    You can't cry in front of someone you just met.
+    
+-   (favor) a: Can you do me another favor? I need to get some fresh air. Let's go for a walk and find something fun to do.
+    
+*   You nod[], reluctantly, but you go along with him.
+*   You [tell him you're busy] start to tell him you're busy, but he won't take no for an answer. Out the door you go.
+
+-   Ananas drags you out to a quiet little path that follows the canal.
+
+    He balances precariously but with absolute confidence on the fence as you move along to destination unknown.
+    
+    Those shades aren't just for show. He really is that cool.
+    
+    a: Did anyone tell you why I ended up at SASH, yet?
+    
+*   Why?
+
+*   He got in a fight[].
+
+    a: I got in a-- haha, no, I couldn't win a fight if my life depended on it. I'm a master of the school of running away really fast.
+    
+    a: That's a big part of it, if I had to guess.
+    
+*   He was just too cool[], man. Anyone could tell from looking at him. Everyone was too dazzled to interact.
+
+    He blushes, ever so slightly. It's nearly imperceptible, but you have a good eye for these things.
+    
+    It is a talent that will serve you well today.
+    
+-   a: The truth is, I felt like coming here from the big island. There just wasn't really anything there for me. 
+    a: Everyone was always trying to make money off of tourists or preen themselves or whatever.
+    
+    a: How are you supposed to keep it real in that crowd? So I bounced.
+    
+    It looks like you've reached the end of your journey... exactly where you started.
+    
+    a: The real prize is the friends you made along the way, right?
+    
+*   He could be a little more creative than that.
+    
+-   a: Eh, the point is that we end up where we do because of gravity. We get pulled to wherever we need to be, and that means you need to be on the committee.
+    
+    a: If I'm here and you're here, then that means we met and that counts for something. We're friends for life, you and me.
+    
+    He laughs with exaggeration, but very real warmth.
+    
+    a: Look at that! First day of school and you already made a friend for life! You're great at this.
     
 
-= sad 
+-   (promise) a: Promise me you'll teach me how to do that?
+    
+*   You promise[].
+*   {sad} No pr[omises]-- Nope, I'm stopping you there.
 
-a
+    Ananas is showing you he's on your side. You can't keep running away from people and then feel bad about it.
+    
+    And even if you can't accept him, don't forget.
+    
+    I'm here with you, honey.
+    
+    I have your back no matter what happens or where you go.
+    
+    So, like it or not, there are people rooting for you. You're not alone, which means you're capable of meeting people and being friends with them.
+    
+    * *     Okay.
+            
+    * *     But it's scary.
+    
+            Living is scary. I'm scared too.
+            
+            But I know I can count on you being there like I know the sun will come up in the morning.
+            
+            And that's exactly why I know you'll make it.
+            
+    - -     (stopping) I'm cheering for you, honey. I'm with you every step of the way.
+    
+        Let's try this one more time.
+        
+        -> promise
 
+-   a: That's what I like to hear! Let's get out there and make a buttload of people make an assload of memories!
 
-// end: don't mean to pry, but how you end up here?
-// mysterious open ended story how and why
+    a: Race you back!
+    
+*   Hey! Wait!
+*   You're already there[] before he finishes that sentence.
 
+-    (backstory) a: Say, how'd you end up here, anyway?
 
+    It's a funny story, really.
+    
+*   Your family sent you here...
+*   You got into a fight...
+*   You ran away from home...
+*   You were visited by a supernatural being...
+*   You knew your fated one would be here...
 
-/* History:
+    He hears out your story. It was as funny as you said it would be.
 
-carnival? covered with plume
+    Ananas gets to know you a little better.
 
-1.21? can start here then continue with ugg
-
-
-
-*/
-
+-   {stopping: Have fun, honey. You got this.}
 
 -> END
