@@ -57,7 +57,7 @@ Ready?
 
 -   a: Here's the neat part: you don't.
 
-    a: The admin building's a solid hour away by bus, and we need it there by noon.
+    a: The admin building's a solid hour away by bus, and we need it there in half that.
     
     a: Can I ask you to get Plume on the delivery?
     
@@ -85,7 +85,7 @@ Ready?
     
 *   "They can go that fast with roller skates?"
 
-    a: You must not be in the loop, Spirit Vectors are the hottest thing in our age bracket. You can do wall runs and backflips and stuff.
+    a: You must not be in the loop, the Spirit Vector is the hottest thing in our age bracket. You can do wall runs and backflips and stuff.
     
     a: Plume's the captain of the SV club here, actually. Our school's been to nationals.
     
@@ -106,7 +106,7 @@ Ready?
     
     ...
     
-    Easier done than said, it turns out. All you had to do was listen for nearby crashing sounds and yelling about some stolen property or magic graffiti.
+    Easier done than said, it turns out. All you had to do was listen for crashing sounds and yelling about some stolen property or magic graffiti.
 
     Plume vaults off a bench and blinks past you at eye level. For a microsecond, your eyes make contact.
     
@@ -130,7 +130,7 @@ immediately followed by crashing through an unfortunate booth left unattended wh
 
     -> gargoyle_remark ->
     
-    * *     You ascended the mountain together.[] You were both dead tired by the end, but getting that last shard was a matter of life or death, for the two of you.
+    * *     You ascended the mountain together.[] You were both dead tired by the end, but getting that last shard was a matter of life or death for the two of you.
         -> friend
     * *     You snuck into the old trainyard together.[] They showed you how it's done, and even helped you steal your own Spirit Vector from an unattended guard station.
         -> friend
@@ -177,7 +177,7 @@ immediately followed by crashing through an unfortunate booth left unattended wh
             
             {mistaken: p: Yeah, you probably were mistaken. Whatever.|p: I'm... just gonna go now.}
             
-    * *     (rock) You throw a small rock at [them] Plume. Surprisingly, it hits them square in the chest, knocking them on their ass.
+    * *     (rock) You throw a [rock at them]small rock at Plume. Surprisingly, it hits them square in the chest, knocking them on their ass.
     
             p: The hell is wrong with you?
             
@@ -199,11 +199,11 @@ immediately followed by crashing through an unfortunate booth left unattended wh
     
     p: Then you'd better get a move on, don't you think?
 
-*   "This stays between us if you do it["]," you suggest, gesturing to the newest victim of Plume's public relations campaign.
+*   "This stays between us if you do it["]," you suggest, with a gesture to the newest victim of Plume's public relations campaign.
 
     p: Crap. Tell Ananas I'm resolving a participant dispute. He'll understand.
     
--   p: There's a bunch of booths around here with movement mods. Nothing as good as an SV, but I'm sure you can figure it out.
+-   p: There's a bunch of booths around here with movement mods. Nothing as good as an SV, but I'm sure you can make do.
 
     They gracefully duck {rock: another|a} rock from their happy customer.
     
@@ -221,7 +221,7 @@ immediately followed by crashing through an unfortunate booth left unattended wh
 // adventure happens
 
 = plume_1_city
-    Out of breath, you drop to the floor, back to the wall. That ass is getting {rock: another rock|an earful} after this.
+    Out of breath, you drop to the floor, back to the wall. That asshat is getting {rock: another rock|an earful} after this.
     
     An empathetic young district employee walks over to accept the reports. You surrender them with gratitude, despite the fact that you can't even focus your eyes properly.
     

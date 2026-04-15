@@ -40,7 +40,7 @@ VAR PLAYER_NAME = "PLAYER_NAME"
     
     You nearly jump high enough to be eye level with Lulu.
     
-    l: \[o_o\] I did not mean to startle you! I am sorry, I'll stay out of your way...
+    l: \[o_o\] I did not mean to startle you! I am sorry, I will stay out of your way...
     
 *   You lie to make her feel better[], telling her that you were just so happy that you couldn't help your physical reaction.
 
@@ -140,7 +140,7 @@ VAR PLAYER_NAME = "PLAYER_NAME"
     
 *   "What are friends for?"
 
-    l: \[-v-\] That is a wonderful question. Aristotle's interpretation-
+    l: \[-v-\] That is a wonderful question. The interpretation of Aristotle-
     
         * *     "I meant rhetorically."
         
@@ -154,7 +154,7 @@ VAR PLAYER_NAME = "PLAYER_NAME"
         
         - -     \[o.o\] You are quite philosophical, are you not? I have a lot to learn from you.
         
-                \[^-^\] Let's do our homework together some time!
+                \[^-^\] We should do our homework together some time!
         
         * *    You would love nothing more. 
 
