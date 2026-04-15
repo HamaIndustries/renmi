@@ -74,6 +74,11 @@ public class ReadingManager {
 			Renmi.LOGGER.info("Player attempted to proceed with no act running.");
 			return;
 		}
+		if (reading.isDone()) { // FIXME doesnt work
+			activeReadings.remove(player.getUUID());
+			updateReadingState(player, null);
+		}
+
 		reading.proceed(player);
 		updateReadingState(player, reading);
 	}

@@ -111,6 +111,11 @@ public class ActReading {
 		}
 	}
 
+	public boolean isDone() {
+		// doesnt work
+		return !story.canContinue() && story.getCurrentChoices().isEmpty();
+	}
+
 	public void reset() {
 		try {
 			this.story.resetState();

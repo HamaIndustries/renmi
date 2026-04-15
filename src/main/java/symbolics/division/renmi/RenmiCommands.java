@@ -153,8 +153,9 @@ public class RenmiCommands {
 			return;
 		}
 		var state = player.getAttachedOrCreate(RenmiAttachments.READING_STATE);
-		context.getSource().sendSystemMessage(Component.literal("> " + state.line().text()));
-		Renmi.LOGGER.info("> " + state.line().text());
+		context.getSource().sendSystemMessage(Component.literal("---------------"));
+		context.getSource().sendSystemMessage(Component.literal("> " + state.line().text().strip()));
+		Renmi.LOGGER.info("> " + state.line().text().strip());
 		if (state.choices().size() > 0) {
 			for (var choice : state.choices()) {
 				Renmi.LOGGER.info(Integer.toString(choice.index()) + ": " + choice.text());
@@ -162,13 +163,13 @@ public class RenmiCommands {
 					Integer.toString(choice.index()) + ": "
 				).append(Component.literal(choice.text()).withStyle(Style.EMPTY.withClickEvent(
 					new ClickEvent.RunCommand("/renmi story choose " + choice.index())
-				)));
+				).withColor(0xFFFF00).withUnderlined(true)));
 				context.getSource().sendSystemMessage(choiceText);
 			}
 		} else {
 			Component proceedText = Component.literal("[proceed]").withStyle(Style.EMPTY.withClickEvent(
 				new ClickEvent.RunCommand("/renmi story proceed")
-			));
+			).withColor(0x00ff00).withUnderlined(true));
 			context.getSource().sendSystemMessage(proceedText);
 		}
 	}
