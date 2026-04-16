@@ -70,7 +70,7 @@ Ready?
 
 *   (no_people) Basically nobody[]. Everyone's caught up in their own business. Everyone's running around making references to their own in-jokes and past events, like you had worried.
 
-    Even the committee, chaotic as they are, have something going on that you feel like you're missing out on.
+    Even the committee, chaotic as they are, have something going that you're missing out on.
 
 -   A larger group of visitors swarms you both for a moment.
 
@@ -82,7 +82,7 @@ Ready?
     
     {few_people: You think you spot Barebones and Plume among the throng. They look like they're up to hijinks, but they're gone by the time the crowd clears.}
     
-    {no_people: The horde may as well be faceless on the whole. More visitors, all having brought their friends and family. There isn't really anything here for you.}
+    {no_people: The horde may as well be wholly faceless. More visitors, all having brought their friends and family. There isn't really anything here for you.}
 
 *   It's a new experience[], you tell him.
 
@@ -123,7 +123,7 @@ Ready?
     
 -   (sad) Things have, to be honest, panned out exactly how you feared.
     
-    There's too much light and noise. There are too many people and things, and all of them are occupied with themselves and each other.
+    There's too much light and noise. There are too many people and things, and all of them are preoccupied with themselves and each other.
     
     You don't get the context. 
     
@@ -137,15 +137,15 @@ Ready?
     
     Someone dropped their flyers. Your flyers.
     
-    You dropped your flyers, from your hand which you now find to be trembling.
+    You dropped your flyers from your hand which you now find to be trembling.
     
     a: Hey, bud...
     
-*   "I need a minute"
-*   "I'm okay."
-*   "So, how about that airline food?"
+*   ["I need a minute"]
+*   ["I'm okay."]
+*   ["So, how about that airline food?"]
 
--   You try to say something, but stop. You know that if you spoke right now, something less like words and more like pain would come out of your mouth. 
+-   You try to say something, but stop. If you spoke right now, something less like words and more like pain would come out of your mouth. 
 
     You can't cry in front of someone you just met.
     
@@ -160,7 +160,7 @@ Ready?
     
     Those shades aren't just for show. He really is that cool.
     
-    a: Did anyone tell you why I ended up at SASH, yet?
+    a: Did anyone tell you why I ended up at SASH?
     
 *   Why?
 
@@ -203,17 +203,17 @@ Ready?
 
     Ananas is showing you he's on your side. You can't keep running away from people and then feel bad about it.
     
-    And even if you can't accept him, don't forget.
+    And even if you can't accept him, don't forget:
     
     I'm here with you, honey.
     
     I have your back no matter what happens or where you go.
     
-    So, like it or not, there are people rooting for you. You're not alone, which means you're capable of meeting people and being friends with them.
+    So, like it or not, there are people rooting for you. You're not alone, which proves you're capable of meeting people and being friends with them.
     
     * *     Okay.
             
-    * *     But it's scary.
+    * *     But it's scary[.], I know.
     
             Living is scary. I'm scared too.
             
@@ -238,13 +238,14 @@ Ready?
 
     It's a funny story, really.
     
-*   Your family sent you here...
+*   Your family sent you away...
 *   You got into a fight...
 *   You ran away from home...
+*   You were exiled...
 *   You were visited by a supernatural being...
 *   You knew your fated one would be here...
 
-    He hears out your story. It was as funny as you said it would be.
+-   He hears out your story. It was as funny as you said it would be.
 
     Ananas gets to know you a little better.
 
