@@ -23,9 +23,6 @@ Ready?
     
     p: It's not much of a check-in if only half the committee is here.
     
-// *   "I count"
-// *   "You have a point
-    
     l: \[^-^\] There is more than half the committee here, with < PLAYER_NAME >!
     
     p: Can it, dirt brain.
@@ -163,7 +160,7 @@ Ready?
 
     l: \[ovo\] You understand me.
     
--   l: \[u-u\] I know what it is like to be the problem student. I know how it feels when you mess up, and on top of feeling guilty they try publicly embarass you for it.
+-   l: \[u-u\] I know what it is like to be the problem student. I know how it feels when you mess up, and on top of feeling guilty they want to publicly embarrass you for it.
 
     Guilty and embarrassed are the last two emotions you'd expect of Plume, but the point stands.
     
