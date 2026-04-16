@@ -5,16 +5,55 @@
 
 *   Let's dance.
 
--> act_2
+-> barebones_shrimple_2
 
 VAR PLAYER_NAME = "PLAYER_NAME"
 
+=== barebones_shrimple_2 ===
 
-=== act_2 ===
-
-    You grip your crate after a nice long walk from the garden, berries and vegetables threatening to fall out. Why did the garden need to be so far from the kitchen, anyways? 
+    The walk back from the garden is far less grueling than your journey there, even with a heaping box of vegetables in tow.
     
-    You sigh. The agricultural club used to have a hand truck for this stuff, but after Professor Delta wrecked it trying to sled down the nearby hill, he's been saving for a new one out of pocket.
+    The mud from the brief sprinkling earlier this morning has at last dried, and the path is at a slight downward incline. 
+    
+    Why did the garden need to be so far from the kitchen tent, anyway? 
+    
+    You thought with Shrimple's almost obsessive attention to detail and extensive planning, she'd have accounted for this critical logistical error.
+
+*   It must be a Monday[], that's what is breaking Shrimple's flow.
+
+    You heard the shipment of noodle was delayed, and the tomatoes were just barely out of season. 
+    
+    The cheese came in late. Nonetheless, she persisted. And still, she failed to create it.
+    
+    From the oven, the failure of her perfect dish:
+    
+    Parmesan pasta.
+    
+    In the end, she sacrificed her moral code and resorted to microwave lasagna to fill in for one of the sides. You didn't hear that from her, or anyone else, though. 
+    
+    She would have your head if you said anything that could be remotely construed as a comparison to Olive Garden.
+
+*   She's trying to punish you[]. She's always had it out for vertebrates.
+
+    It's the gleam in her eye when she bonds with bipeds, in contrast with her conversations with crustaceans.
+    
+    It's something that lingers in the shadows of her pots, the pots with land meat far above in representation over seafood.
+    
+    ...is what you would say if you were suspicious of her. You're sure she has her reasons.
+    
+    ...
+    
+    Let's stop entertaining this joke scenario for now.
+    
+-   You set down the box to stretch and take a breather.
+
+    Shrimple told you there would be a handtruck waiting for you at the greenhouse.
+    
+    Most likely, it was that same handtruck you saw that menace of a gardening professor Delta sledding down the hill right past as you hiked up.
+    
+    The loud crash and accompanied comedic howl loudly pronnounced the device's sudden (yet honorable) discharge from service.
+    
+ TODO
     
     As you approach the kitchen, you can't help but notice that something's different. 
     
