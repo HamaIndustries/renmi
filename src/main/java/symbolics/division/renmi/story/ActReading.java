@@ -29,6 +29,8 @@ public class ActReading {
 	protected ActLine currentLine;
 	protected String text = "";
 
+	private KnotListener knotListener = null;
+
 	/**
 	 * A brand new act.
 	 */
@@ -48,6 +50,13 @@ public class ActReading {
 		try {
 			this.story = new Story(storyJson);
 			this.story.getState().loadJson(state);
+			this.story.bindExternalFunction("on_knot_visited ", new Story.ExternalFunction1<String, Object>() {
+				@Override
+				protected Object call(String knotName) throws Exception {
+					onKnotVisited(knotName);
+					return null;
+				}
+			}, false);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -121,6 +130,12 @@ public class ActReading {
 			this.story.resetState();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		}
+	}
+
+	public void onKnotVisited(String knot){
+		if(knotListener != null){
+			onKnotVisited(knot);
 		}
 	}
 }
