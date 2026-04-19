@@ -18,6 +18,7 @@ import symbolics.division.renmi.RenmiBlocks;
 
 public class StoryLocusBlockEntity extends BlockEntity {
 	public Identifier act = Renmi.id("null");
+	public Identifier series = Renmi.id("null");
 	public float diameter = 3;
 
 	public StoryLocusBlockEntity(BlockPos pos, BlockState state) {
@@ -29,6 +30,7 @@ public class StoryLocusBlockEntity extends BlockEntity {
 		super.saveAdditional(output);
 
 		output.putString("act", act.toString());
+		output.putString("series", series.toString());
 		output.putFloat("diameter", diameter);
 	}
 
@@ -36,9 +38,13 @@ public class StoryLocusBlockEntity extends BlockEntity {
 	protected void loadAdditional(ValueInput input) {
 		super.loadAdditional(input);
 
-		String str = input.getStringOr("act", "renmi:null");
-		if (Identifier.tryParse(str) instanceof Identifier id) {
+		String actStr = input.getStringOr("act", "renmi:null");
+		if (Identifier.tryParse(actStr) instanceof Identifier id) {
 			act = id;
+		}
+		String seriesStr = input.getStringOr("series", "renmi:null");
+		if (Identifier.tryParse(seriesStr) instanceof Identifier id) {
+			series = id;
 		}
 		diameter = input.getFloatOr("diameter", 3);
 	}
@@ -46,7 +52,9 @@ public class StoryLocusBlockEntity extends BlockEntity {
 	@Override
 	public void setChanged() {
 		super.setChanged();
-		if (level instanceof ServerLevel sw) { sw.getChunkSource().blockChanged(worldPosition); }
+		if (level instanceof ServerLevel sw) {
+			sw.getChunkSource().blockChanged(worldPosition);
+		}
 	}
 
 	@Override

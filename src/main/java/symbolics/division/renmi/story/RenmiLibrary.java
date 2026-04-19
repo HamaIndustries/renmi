@@ -48,7 +48,7 @@ public class RenmiLibrary {
 			String json = new Compiler(source, null).compile(source);
 			createAct(seriesID, actID, new Act(actID, source, json));
 		} catch (RuntimeException e) {
-			throw new RenmiCompilationFailed();
+			throw new RenmiCompilationFailed(e);
 		}
 	}
 
@@ -58,6 +58,9 @@ public class RenmiLibrary {
 	}
 
 	public static final class RenmiCompilationFailed extends RuntimeException {
+		public RenmiCompilationFailed(Throwable e) {
+			super(e);
+		}
 	}
 
 	public Map<Identifier, Series> allSeries() {

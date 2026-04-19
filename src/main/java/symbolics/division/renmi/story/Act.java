@@ -40,22 +40,23 @@ public class Act {
 
 		try {
 			Story tempStory = new Story(json);
-			for (var tag : tempStory.getGlobalTags()) {
-				Matcher m = REQUIRE_REGEX.matcher(tag);
-				m.matches();
-				if (m.matches() && m.group(1).equals("act")) {
-					DataResult<Identifier> prevAct = Identifier.read(m.group(2));
-					if (prevAct.isError()) {
-						Renmi.LOGGER.info("Failed to create act with id \"{}\"", m.group(2));
-					} else {
-						Identifier prevActId = prevAct.getOrThrow();
-						conditions.add((player, series) -> series.isActFinished(prevActId));
+			if (tempStory.getGlobalTags() != null) {
+				for (var tag : tempStory.getGlobalTags()) {
+					Matcher m = REQUIRE_REGEX.matcher(tag);
+					m.matches();
+					if (m.matches() && m.group(1).equals("act")) {
+						DataResult<Identifier> prevAct = Identifier.read(m.group(2));
+						if (prevAct.isError()) {
+							Renmi.LOGGER.info("Failed to create act with id \"{}\"", m.group(2));
+						} else {
+							Identifier prevActId = prevAct.getOrThrow();
+							conditions.add((player, series) -> series.isActFinished(prevActId));
+						}
 					}
 				}
 			}
-			tempStory.getState().forceEnd();
 		} catch (Exception e) {
-			throw new RuntimeException();
+			throw new RuntimeException(e);
 		}
 	}
 
