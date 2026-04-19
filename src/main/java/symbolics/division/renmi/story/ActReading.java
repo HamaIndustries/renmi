@@ -134,12 +134,12 @@ public class ActReading {
 	}
 
 	public void setKnotListener(KnotListener knotListener) {
-		this.setKnotListener(knotListener);
+		this.knotListener = knotListener;
 	}
 
 	public void onKnotVisited(String knot){
 		if(knotListener != null){
-			onKnotVisited(knot);
+			knotListener.onKnotVisited(knot);
 		}
 	}
 }
