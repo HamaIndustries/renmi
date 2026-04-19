@@ -53,7 +53,7 @@ public class RenmiLibrary {
 	}
 
 	protected void createAct(Identifier seriesID, Identifier actID, Act act) {
-		Series series = library.computeIfAbsent(seriesID, _ -> new Series());
+		Series series = library.computeIfAbsent(seriesID, Series::new);
 		series.createAct(actID, act);
 	}
 

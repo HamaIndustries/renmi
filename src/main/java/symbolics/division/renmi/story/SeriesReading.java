@@ -1,9 +1,7 @@
 package symbolics.division.renmi.story;
 
-import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.UUIDUtil;
 import net.minecraft.resources.Identifier;
 
 import java.util.HashMap;
@@ -20,21 +18,18 @@ public class SeriesReading implements KnotListener {
 		).apply(i, SeriesReading::new)
 	);
 
-	protected final Map<Identifier, ActReading> actReadings;
-	protected final Map<String, Boolean> knotsVisited;
+	protected final Map<Identifier, ActReading> actReadings = new HashMap<>();
+	protected final Map<String, Boolean> knotsVisited = new HashMap<>();
 	protected ActReading currentActReading;
 
 
 	public SeriesReading(){
-		this.actReadings = new HashMap<>();
-		this.knotsVisited = new HashMap<>();
-		this.currentActReading = null;
 	}
 
 
 	public SeriesReading(Map<Identifier, ActReading> actReadings, Map<String, Boolean> knotsVisited, ActReading currentActReading){
-		this.actReadings = actReadings;
-		this.knotsVisited = knotsVisited;
+		this.actReadings.putAll(actReadings);
+		this.knotsVisited.putAll(knotsVisited);
 		this.currentActReading = currentActReading;
 	}
 
