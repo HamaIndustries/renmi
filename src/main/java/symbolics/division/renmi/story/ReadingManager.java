@@ -9,6 +9,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiAttachments;
+import symbolics.division.renmi.util.RenmiExceptions;
 
 import java.util.HashMap;
 import java.util.List;
@@ -53,10 +54,12 @@ public class ReadingManager {
 		this.allSeriesReadings.replaceAll((k, v) -> new HashMap<>(v));
 	}
 
-	public ActReading createOrLoad(ServerPlayer player, Act act) {
-		return allReadings
+	public ActReading createOrLoad(ServerPlayer player, SeriesReading seriesReading, Act act) {
+		ActReading reading = allReadings
 			.computeIfAbsent(player.getUUID(), i -> new HashMap<>())
 			.computeIfAbsent(act.id, id -> act.createReading(player));
+		seriesReading.addReading(act.id, reading); // FIXME bad bad bad we principle of single ownership
+		return reading;
 	}
 
 	public SeriesReading createOrLoad(ServerPlayer player, Series series) {
@@ -65,9 +68,12 @@ public class ReadingManager {
 			.computeIfAbsent(series.id, id -> series.createReading());
 	}
 
-	public void startReading(ServerPlayer player, Act act, Series series) {
-		ActReading newReading = createOrLoad(player, act);
+	public void startReading(ServerPlayer player, Act act, Series series, boolean force) throws RenmiExceptions.ReadingConditionsUnmet {
 		SeriesReading seriesReading = createOrLoad(player, series);
+		ActReading newReading = createOrLoad(player, seriesReading, act);
+		if (!force && !act.startConditionsMet(player, seriesReading)) {
+			throw new RenmiExceptions.ReadingConditionsUnmet();
+		}
 		activeReadings.put(player.getUUID(), newReading);
 		seriesReading.setCurrentActReading(newReading);
 		newReading.setKnotListener(seriesReading);
@@ -91,13 +97,14 @@ public class ReadingManager {
 			Renmi.LOGGER.info("Player attempted to proceed with no act running.");
 			return;
 		}
-		if (reading.isDone()) { // FIXME doesnt work
+
+		if (reading.isDone()) {
 			activeReadings.remove(player.getUUID());
 			updateReadingState(player, null);
+		} else {
+			reading.proceed(player);
+			updateReadingState(player, reading);
 		}
-
-		reading.proceed(player);
-		updateReadingState(player, reading);
 	}
 
 	public void readingChoice(ServerPlayer player, int choice) {

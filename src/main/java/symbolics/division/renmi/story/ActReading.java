@@ -121,7 +121,6 @@ public class ActReading {
 	}
 
 	public boolean isDone() {
-		// doesnt work
 		return !story.canContinue() && story.getCurrentChoices().isEmpty();
 	}
 
@@ -137,8 +136,8 @@ public class ActReading {
 		this.knotListener = knotListener;
 	}
 
-	public void onKnotVisited(String knot){
-		if(knotListener != null){
+	public void onKnotVisited(String knot) {
+		if (knotListener != null) {
 			knotListener.onKnotVisited(knot);
 		}
 	}

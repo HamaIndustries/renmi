@@ -5,7 +5,6 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
-import eu.pb4.placeholders.api.node.TextNode;
 import eu.pb4.placeholders.api.parsers.NodeParser;
 import eu.pb4.placeholders.api.parsers.TagParser;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -22,6 +21,7 @@ import symbolics.division.renmi.story.Act;
 import symbolics.division.renmi.story.RenmiLibrary;
 import symbolics.division.renmi.story.Series;
 import symbolics.division.renmi.util.ParseUtil;
+import symbolics.division.renmi.util.RenmiExceptions;
 
 public class RenmiCommands {
 	public static final NodeParser PARSER = TagParser.DEFAULT;
@@ -125,7 +125,13 @@ public class RenmiCommands {
 		if (reset) {
 			manager.resetReading(player, act);
 		}
-		manager.startReading(player, act, series);
+
+		try {
+			manager.startReading(player, act, series, false);
+		} catch (RenmiExceptions.ReadingConditionsUnmet e) {
+			context.getSource().sendFailure(Component.literal("player did not meet conditions to begin reading"));
+			return 0;
+		}
 		printState(context);
 		return 1;
 	}
