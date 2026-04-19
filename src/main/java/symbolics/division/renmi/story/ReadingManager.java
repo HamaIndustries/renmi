@@ -59,9 +59,18 @@ public class ReadingManager {
 			.computeIfAbsent(act.id, id -> act.createReading(player));
 	}
 
-	public void startReading(ServerPlayer player, Act act) {
+	public SeriesReading createOrLoad(ServerPlayer player, Series series) {
+		return allSeriesReadings
+			.computeIfAbsent(player.getUUID(), i -> new HashMap<>())
+			.computeIfAbsent(series.id, id -> series.createReading());
+	}
+
+	public void startReading(ServerPlayer player, Act act, Series series) {
 		ActReading newReading = createOrLoad(player, act);
+		SeriesReading seriesReading = createOrLoad(player, series);
 		activeReadings.put(player.getUUID(), newReading);
+		seriesReading.setCurrentActReading(newReading);
+		newReading.setKnotListener(seriesReading);
 		updateReadingState(player, newReading);
 	}
 
