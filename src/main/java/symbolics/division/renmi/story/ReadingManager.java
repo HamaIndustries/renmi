@@ -22,6 +22,10 @@ public class ReadingManager {
 	public static final Codec<ReadingManager> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 		Codec.unboundedMap(
 			UUIDUtil.STRING_CODEC,
+			Codec.unboundedMap(Identifier.CODEC, SeriesReading.CODEC)
+		).fieldOf("allSeriesReadings").forGetter(mgr -> mgr.allSeriesReadings),
+		Codec.unboundedMap(
+			UUIDUtil.STRING_CODEC,
 			ActReading.CODEC
 		).fieldOf("activeReadings").forGetter(mgr -> mgr.activeReadings),
 		Codec.unboundedMap(
@@ -30,6 +34,7 @@ public class ReadingManager {
 		).fieldOf("allReadings").forGetter(mgr -> mgr.allReadings)
 	).apply(instance, ReadingManager::new));
 
+
 	public static ReadingManager getManager(MinecraftServer server) {
 		return server.globalAttachments().getAttachedOrCreate(RenmiAttachments.READING_MANAGER);
 	}
@@ -37,12 +42,15 @@ public class ReadingManager {
 	protected final Map<UUID, ActReading> activeReadings = new HashMap<>();
 	protected final Map<UUID, Map<Identifier, ActReading>> allReadings = new HashMap<>();
 
+	protected final Map<UUID, Map<Identifier, SeriesReading>> allSeriesReadings = new HashMap<>();
+
 	public ReadingManager() {
 	}
 
-	public ReadingManager(Map<UUID, ActReading> activeReadings, Map<UUID, Map<Identifier, ActReading>> allReadings) {
+	public ReadingManager(Map<UUID, Map<Identifier, SeriesReading>> allSeriesReadings, Map<UUID, ActReading> activeReadings, Map<UUID, Map<Identifier, ActReading>> allReadings) {
 		this.activeReadings.putAll(activeReadings);
 		this.allReadings.replaceAll((k, v) -> new HashMap<>(v));
+		this.allSeriesReadings.replaceAll((k, v) -> new HashMap<>(v));
 	}
 
 	public ActReading createOrLoad(ServerPlayer player, Act act) {
