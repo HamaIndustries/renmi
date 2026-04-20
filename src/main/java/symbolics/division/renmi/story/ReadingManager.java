@@ -48,7 +48,8 @@ public class ReadingManager {
 		this.allSeriesReadings.replaceAll((k, v) -> new HashMap<>(v));
 	}
 
-	public ActReading createOrLoad(ServerPlayer player, SeriesReading seriesReading, Act act) {
+	public ActReading createOrLoad(ServerPlayer player, Series series, Act act) {
+		SeriesReading seriesReading = createOrLoad(player, series);
 		ActReading reading = seriesReading.getActReadings().computeIfAbsent(act.id, id -> act.createReading(player));
 		return reading;
 	}
@@ -60,8 +61,8 @@ public class ReadingManager {
 	}
 
 	public void startReading(ServerPlayer player, Act act, Series series, boolean force) throws RenmiExceptions.ReadingConditionsUnmet {
+		ActReading newReading = createOrLoad(player, series, act);
 		SeriesReading seriesReading = createOrLoad(player, series);
-		ActReading newReading = createOrLoad(player, seriesReading, act);
 		if (!force && !act.startConditionsMet(player, seriesReading)) {
 			throw new RenmiExceptions.ReadingConditionsUnmet();
 		}
