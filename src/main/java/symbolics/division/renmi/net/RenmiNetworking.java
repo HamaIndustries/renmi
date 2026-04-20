@@ -31,5 +31,9 @@ public class RenmiNetworking {
 			C2SEditStoryLocusPacket.STREAM_CODEC
 		);
 		ServerPlayNetworking.registerGlobalReceiver(C2SEditStoryLocusPacket.TYPE, C2SEditStoryLocusPacket::HANDLER);
+
+		PayloadTypeRegistry.clientboundPlay().register(
+			S2CDisplayStoryScreenPacket.TYPE, S2CDisplayStoryScreenPacket.STREAM_CODEC
+		);
 	}
 }

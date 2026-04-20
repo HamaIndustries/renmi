@@ -6,4 +6,8 @@ public class RenmiProxy {
 	public void openStoryLocusScreen(StoryLocusBlockEntity be) {
 		// No-op
 	}
+
+	public void openStoryScreen() {
+		// No-op
+	}
 }

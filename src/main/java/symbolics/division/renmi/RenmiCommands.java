@@ -8,6 +8,7 @@ import com.mojang.brigadier.context.CommandContext;
 import eu.pb4.placeholders.api.parsers.NodeParser;
 import eu.pb4.placeholders.api.parsers.TagParser;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -17,6 +18,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
+import symbolics.division.renmi.net.S2CDisplayStoryScreenPacket;
 import symbolics.division.renmi.story.Act;
 import symbolics.division.renmi.story.RenmiLibrary;
 import symbolics.division.renmi.story.Series;
@@ -65,7 +67,8 @@ public class RenmiCommands {
 				.then(Commands.argument("index", IntegerArgumentType.integer())
 					.executes(RenmiCommands::readingChoice)
 				)
-			);
+			).then(Commands.literal("show")
+				.executes(RenmiCommands::showScreen));
 
 		LiteralArgumentBuilder<CommandSourceStack> listCommand = Commands.literal("list")
 			.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
@@ -156,6 +159,15 @@ public class RenmiCommands {
 		int choice = context.getArgument("index", Integer.class);
 		manager.readingChoice(player, choice);
 		printState(context);
+		return 1;
+	}
+
+	private static int showScreen(CommandContext<CommandSourceStack> context) {
+		ServerPlayer player = context.getSource().getPlayer();
+		if (player == null) {
+			return 0;
+		}
+		ServerPlayNetworking.send(player, new S2CDisplayStoryScreenPacket());
 		return 1;
 	}
 
