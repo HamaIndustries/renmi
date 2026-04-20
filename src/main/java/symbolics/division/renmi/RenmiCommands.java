@@ -126,7 +126,7 @@ public class RenmiCommands {
 			return 0;
 		}
 		if (reset) {
-			manager.resetReading(player, act);
+			manager.resetReading(player, series, act);
 		}
 
 		try {

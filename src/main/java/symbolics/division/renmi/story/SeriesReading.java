@@ -58,4 +58,8 @@ public class SeriesReading implements KnotListener {
 	public void addReading(Identifier actId, ActReading reading) {
 		actReadings.put(actId, reading);
 	}
+
+	public Map<Identifier, ActReading> getActReadings(){
+		return this.actReadings;
+	}
 }

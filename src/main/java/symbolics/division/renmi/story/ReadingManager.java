@@ -28,11 +28,7 @@ public class ReadingManager {
 		Codec.unboundedMap(
 			UUIDUtil.STRING_CODEC,
 			ActReading.CODEC
-		).fieldOf("activeReadings").forGetter(mgr -> mgr.activeReadings),
-		Codec.unboundedMap(
-			UUIDUtil.STRING_CODEC,
-			Codec.unboundedMap(Identifier.CODEC, ActReading.CODEC)
-		).fieldOf("allReadings").forGetter(mgr -> mgr.allReadings)
+		).fieldOf("activeReadings").forGetter(mgr -> mgr.activeReadings)
 	).apply(instance, ReadingManager::new));
 
 
@@ -41,24 +37,20 @@ public class ReadingManager {
 	}
 
 	protected final Map<UUID, ActReading> activeReadings = new HashMap<>();
-	protected final Map<UUID, Map<Identifier, ActReading>> allReadings = new HashMap<>();
 
 	protected final Map<UUID, Map<Identifier, SeriesReading>> allSeriesReadings = new HashMap<>();
 
 	public ReadingManager() {
 	}
 
-	public ReadingManager(Map<UUID, Map<Identifier, SeriesReading>> allSeriesReadings, Map<UUID, ActReading> activeReadings, Map<UUID, Map<Identifier, ActReading>> allReadings) {
+	public ReadingManager(Map<UUID, Map<Identifier, SeriesReading>> allSeriesReadings, Map<UUID, ActReading> activeReadings) {
 		this.activeReadings.putAll(activeReadings);
-		this.allReadings.replaceAll((k, v) -> new HashMap<>(v));
 		this.allSeriesReadings.replaceAll((k, v) -> new HashMap<>(v));
 	}
 
-	public ActReading createOrLoad(ServerPlayer player, SeriesReading seriesReading, Act act) {
-		ActReading reading = allReadings
-			.computeIfAbsent(player.getUUID(), i -> new HashMap<>())
-			.computeIfAbsent(act.id, id -> act.createReading(player));
-		seriesReading.addReading(act.id, reading); // FIXME bad bad bad we principle of single ownership
+	public ActReading createOrLoad(ServerPlayer player, Series series, Act act) {
+		SeriesReading seriesReading = createOrLoad(player, series);
+		ActReading reading = seriesReading.getActReadings().computeIfAbsent(act.id, id -> act.createReading(player));
 		return reading;
 	}
 
@@ -69,8 +61,8 @@ public class ReadingManager {
 	}
 
 	public void startReading(ServerPlayer player, Act act, Series series, boolean force) throws RenmiExceptions.ReadingConditionsUnmet {
+		ActReading newReading = createOrLoad(player, series, act);
 		SeriesReading seriesReading = createOrLoad(player, series);
-		ActReading newReading = createOrLoad(player, seriesReading, act);
 		if (!force && !act.startConditionsMet(player, seriesReading)) {
 			throw new RenmiExceptions.ReadingConditionsUnmet();
 		}
@@ -80,9 +72,15 @@ public class ReadingManager {
 		updateReadingState(player, newReading);
 	}
 
-	public void resetReading(ServerPlayer player, Act act) {
+	public void resetReading(ServerPlayer player, Series series, Act act) {
 		activeReadings.remove(player.getUUID());
-		allReadings.remove(player.getUUID());
+
+		Map<Identifier, SeriesReading> playerSeries = allSeriesReadings.get(player.getUUID());
+
+		if(playerSeries != null && playerSeries.containsKey(series.id)){
+			SeriesReading seriesReading = playerSeries.get(series.id);
+			seriesReading.getActReadings().remove(act.id);
+		}
 		updateReadingState(player, null);
 	}
 
