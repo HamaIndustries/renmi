@@ -29,7 +29,7 @@ public class ActReading {
 	protected ActLine currentLine;
 	protected String text = "";
 
-	private KnotListener knotListener = null;
+	private StoryListener storyListener = null;
 
 	/**
 	 * A brand new act.
@@ -50,13 +50,28 @@ public class ActReading {
 		try {
 			this.story = new Story(storyJson);
 			this.story.getState().loadJson(state);
-			this.story.bindExternalFunction("on_knot_visited ", new Story.ExternalFunction1<String, Object>() {
+			this.story.bindExternalFunction("on_knot_visited ", new Story.ExternalFunction1<String, String>() {
 				@Override
-				protected Object call(String knotName) throws Exception {
+				protected String call(String knotName) throws Exception {
 					onKnotVisited(knotName);
-					return null;
+					return knotName;
 				}
 			}, false);
+			this.story.bindExternalFunction("write_global", new Story.ExternalFunction2<String,Integer,Integer>() {
+				@Override
+				protected Integer call(String key, Integer value) throws Exception {
+					storyListener.onWriteGlobal(key,value);
+					return value;
+				}
+
+			}, false);
+			this.story.bindExternalFunction("read_global ", new Story.ExternalFunction1<String, Integer>() {
+				@Override
+				protected Integer call(String key) throws Exception {
+					return storyListener.onReadGlobal(key);
+				}
+			}, false);
+
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -132,13 +147,13 @@ public class ActReading {
 		}
 	}
 
-	public void setKnotListener(KnotListener knotListener) {
-		this.knotListener = knotListener;
+	public void setStoryListener(StoryListener storyListener) {
+		this.storyListener = storyListener;
 	}
 
 	public void onKnotVisited(String knot) {
-		if (knotListener != null) {
-			knotListener.onKnotVisited(knot);
+		if (storyListener != null) {
+			storyListener.onKnotVisited(knot);
 		}
 	}
 }
