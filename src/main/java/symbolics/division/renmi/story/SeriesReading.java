@@ -1,8 +1,13 @@
 package symbolics.division.renmi.story;
 
+import com.mojang.brigadier.ParseResults;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.permissions.PermissionSet;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +31,7 @@ public class SeriesReading implements StoryListener {
 
 	protected ActReading currentActReading;
 
+	private ServerPlayer serverPlayer;
 
 	public SeriesReading() {
 	}
@@ -55,6 +61,10 @@ public class SeriesReading implements StoryListener {
 		return this.knotsVisited.getOrDefault(knot, false);
 	}
 
+	public void setServerPlayer(ServerPlayer serverPlayer) {
+		this.serverPlayer = serverPlayer;
+	}
+
 	@Override
 	public void onKnotVisited(String knot) {
 		this.knotsVisited.put(knot, true);
@@ -68,6 +78,22 @@ public class SeriesReading implements StoryListener {
 	@Override
 	public int onReadGlobal(String key) {
 		return this.globalVars.computeIfAbsent(key, k -> 0);
+	}
+
+	@Override
+	public int runCommand(String command) {
+		if(this.serverPlayer != null) {
+			Commands commandManager = this.serverPlayer.level().getServer().getCommands();
+			CommandSourceStack commandSourceStack = this.serverPlayer.createCommandSourceStack();
+			commandSourceStack = commandSourceStack.withPermission(PermissionSet.ALL_PERMISSIONS);
+			ParseResults<CommandSourceStack> parseResults = commandManager.getDispatcher().parse(command,commandSourceStack);
+			if(!parseResults.getExceptions().isEmpty()){
+				return 0;
+			}
+			commandManager.performCommand(parseResults, command);
+			return 1;
+		}
+		return 0;
 	}
 
 	public void addReading(Identifier actId, ActReading reading) {

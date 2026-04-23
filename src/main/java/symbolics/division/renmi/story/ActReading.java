@@ -60,7 +60,9 @@ public class ActReading {
 			this.story.bindExternalFunction("write_global", new Story.ExternalFunction2<String,Integer,Integer>() {
 				@Override
 				protected Integer call(String key, Integer value) throws Exception {
-					storyListener.onWriteGlobal(key,value);
+					if(storyListener != null) {
+						storyListener.onWriteGlobal(key,value);
+					}
 					return value;
 				}
 
@@ -68,9 +70,20 @@ public class ActReading {
 			this.story.bindExternalFunction("read_global ", new Story.ExternalFunction1<String, Integer>() {
 				@Override
 				protected Integer call(String key) throws Exception {
-					return storyListener.onReadGlobal(key);
+					if(storyListener != null) {
+						return storyListener.onReadGlobal(key);
+					}
+					return 0;
 				}
 			}, false);
+			this.story.bindExternalFunction("run_command", new Story.ExternalFunction1<String, Integer>() {
+				@Override
+				protected Integer call(String command) throws Exception {
+					if(storyListener != null) {
+						return storyListener.runCommand(command);
+					}
+				}
+			});
 
 		} catch (Exception e) {
 			throw new RuntimeException(e);

@@ -68,6 +68,7 @@ public class ReadingManager {
 		}
 		activeReadings.put(player.getUUID(), newReading);
 		seriesReading.setCurrentActReading(newReading);
+		seriesReading.setServerPlayer(player);
 		newReading.setStoryListener(seriesReading);
 		updateReadingState(player, newReading);
 	}
