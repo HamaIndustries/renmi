@@ -82,6 +82,7 @@ public class ActReading {
 					if(storyListener != null) {
 						return storyListener.runCommand(command);
 					}
+					return 0;
 				}
 			});
 
