@@ -17,7 +17,7 @@ public class StoryLocusScreen extends Screen {
 	private TextField<Identifier> actField;
 	private TextField<Identifier> seriesField;
 	private TextField<Float> diameterField;
-	private TextField<String> scriptField;
+	private TextArea scriptField;
 
 	public StoryLocusScreen(StoryLocusBlockEntity be) {
 		super(Component.empty());
@@ -26,9 +26,7 @@ public class StoryLocusScreen extends Screen {
 
 	@Override
 	public void init() {
-		if (minecraft == null) {
-			return;
-		}
+		if (minecraft == null) { return; }
 
 		Window window = minecraft.getWindow();
 		Panel root = Panel.builder()
@@ -38,29 +36,24 @@ public class StoryLocusScreen extends Screen {
 			.flowAxis(FlowAxis.HORIZONTAL)
 			.padding(20)
 			.build();
-
 		Panel editorPanel = Panel.builder()
 			.dimensions((int) (root.getWidth() * 0.45), true)
 			.build();
-
 		Panel sidePanel = Panel.builder()
 			.dimensions(true, true)
 			.alignLeft()
 			.build();
 
-		// FIXME also populate script with current act text
-		scriptField = TextField.ofString()
+		// TODO: populate script with current act text
+		scriptField = TextArea.builder()
 			.dimensions(true, true)
 			.build();
-
 		seriesField = TextField.ofIdentifier()
 			.text(String.valueOf(be.act))
 			.build();
-
 		actField = TextField.ofIdentifier()
 			.text(String.valueOf(be.act))
 			.build();
-
 		diameterField = TextField.ofFloat()
 			.validationPredicate(s -> Floats.tryParse(s) instanceof Float n && n >= 1)
 			.text(String.valueOf(Math.max(1f, be.diameter)))
@@ -110,7 +103,13 @@ public class StoryLocusScreen extends Screen {
 		if (diameterField.isValidText()) {
 			be.diameter = diameterField.getValue();
 		}
-		ClientPlayNetworking.send(new C2SEditStoryLocusPacket(be.getBlockPos(), be.series, be.act, be.diameter, scriptField.getText()));
+		ClientPlayNetworking.send(new C2SEditStoryLocusPacket(
+			be.getBlockPos(),
+			be.series,
+			be.act,
+			be.diameter,
+			scriptField.getText()
+		));
 		super.onClose();
 	}
 }
