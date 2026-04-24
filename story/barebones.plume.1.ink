@@ -191,7 +191,7 @@ Ready?
         
         - - -   p: Sorry?
         
-        * * *   "It would be more tasteful["]."
+        * * *   "It would be more tasteful["]?"
         
         ...
     
@@ -217,7 +217,7 @@ Ready?
     
     b: I see yous sticking your tongue out at me right now ya rat bastard!
     
-    b: Now hand over the wallet before I call the gang over.
+    b: Now hand over the wallet before I call my boys.
     
     * *   "Your wallet[?"]? Not mine?"
     
