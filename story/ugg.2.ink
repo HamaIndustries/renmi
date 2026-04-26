@@ -111,7 +111,7 @@ Ready?
     
     b: Eh, where?
     
-    he says, bits of poison spraying about. A fewhit the floor, then dissolve straight through it. 
+    he says, bits of poison spraying about. A few hit the floor, then dissolve straight through it. 
     
     a: Don't worry about it. You think you could stand over there while you eat, though?
     
