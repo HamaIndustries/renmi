@@ -3,9 +3,11 @@ package symbolics.division.renmi.client.gui;
 import com.mojang.blaze3d.platform.Window;
 import dev.chailotl.bento_gui.client.FlowAxis;
 import dev.chailotl.bento_gui.client.elements.*;
+import dev.chailotl.bento_gui.client.util.DrawUtils;
 import dev.chailotl.bento_gui.client.util.RenderOperations;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -47,7 +49,6 @@ public class StoryScreen extends Screen {
 		.build();
 	private Button proceedButton = Button.builder()
 		.dimensions(20, 20)
-//		.text(Component.translatable("gui.renmi.proceed"))
 		.text(Component.literal(">"))
 		.onPress(_ -> proceed())
 		.build();
@@ -55,11 +56,16 @@ public class StoryScreen extends Screen {
 	private Button.Builder<?, ?> choiceButton = Button.builder()
 		.renderOperations(
 			(self, render) -> render.context().blitSprite(
-				RenderPipelines.GUI_TEXTURED, Renmi.id("choice_button"),
+				RenderPipelines.GUI_TEXTURED, BUTTONS.get(self.isEnabled(), self.isSelected()),
 				self.getX(), self.getY(), self.getWidth(), self.getHeight()
 			),
 			RenderOperations.TEXT_RENDER
 		);
+
+	public static final WidgetSprites BUTTONS = new WidgetSprites(
+		Renmi.id("choice_button"),
+		Renmi.id("choice_button_highlighted")
+	);
 
 	public StoryScreen() {
 		super(Component.empty());
@@ -102,8 +108,6 @@ public class StoryScreen extends Screen {
 				RenderOperations.CHILD_RENDER
 			)
 			.build();
-
-		choiceButton.width(Math.min((width - 36) / 16 * 16 + 16, 256));
 
 		root.addChild(actTitle);
 		root.addChild(choices);
@@ -160,24 +164,40 @@ public class StoryScreen extends Screen {
 	public void update() {
 		LocalPlayer player = Minecraft.getInstance().player;
 		var state = player.getAttached(RenmiAttachments.READING_STATE);
+
 		if (state != null && state != ReadingState.INACTIVE) {
 			// FIXME scrolling text display with sounds, tickable display.
 			// currently only shows everything instantly.
 			this.setDirections(StageDirection.parse(state.line()));
 
-			var oldChoices = choices.getChildren();
-			for (var c : oldChoices) {
-				choices.removeChild(c);
-			}
+			// Clear choices
+			choices.getChildren().forEach(child -> choices.removeChild(child));
+
 			if (state.choices().isEmpty()) {
 				proceedButton.setVisible(true);
+
 				if (state.end()) {
 					proceedButton.setText(Component.translatable("gui.renmi.end"));
-					proceedButton.setOnPress(b -> this.onClose());
+					proceedButton.setOnPress(_ -> this.onClose());
 					proceedButton.setAutoWidth(true);
 				}
 			} else {
+				// Show choices
 				proceedButton.setVisible(false);
+
+				// Find longest text width
+				int width = 0;
+				for (var choice : state.choices()) {
+					int w = DrawUtils.textRenderer.width(choice.text());
+					if (w > width) {
+						width = w;
+					}
+				}
+
+				width = (int) Math.ceil(width / 16.0) * 16 + 16;
+				choiceButton.width(width);
+
+				// Add choices
 				for (var choice : state.choices()) {
 					choices.addChild(choiceButton
 						.text(Component.literal(choice.text())) // FIXME buttons might have component visiblity? placeholder api?
