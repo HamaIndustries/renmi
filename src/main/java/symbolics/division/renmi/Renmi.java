@@ -12,7 +12,6 @@ import symbolics.division.renmi.story.ActorManager;
 public class Renmi implements ModInitializer {
 	public static final String MOD_ID = "renmi";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-	public static RenmiProxy PROXY = new RenmiProxy(); // Overridden in RenmiClient
 
 	public static Identifier id(String id) {
 		return Identifier.fromNamespaceAndPath(MOD_ID, id);
@@ -21,7 +20,7 @@ public class Renmi implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Hello Sakura High Secondary Academy!");
-		
+
 		RenmiAttachments.init();
 		RenmiNetworking.init();
 		RenmiCommands.init();
