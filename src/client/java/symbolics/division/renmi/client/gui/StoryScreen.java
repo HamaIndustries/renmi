@@ -27,16 +27,16 @@ import symbolics.division.renmi.story.ReadingState;
 import java.util.List;
 
 public class StoryScreen extends Screen {
+	public static final WidgetSprites BUTTONS = new WidgetSprites(
+		Renmi.id("choice_button"),
+		Renmi.id("choice_button_highlighted")
+	);
+
 	private static Runnable updateCallback; // the hama special
 
+	// Elements
 	private Image portraitLeft = Image.builder().build();
 	private Image portraitRight = Image.builder().build();
-	private int lastPortraitUsed = 0;
-	private final Image[] portraits = {
-		portraitLeft, portraitRight
-	};
-	private DisplayState state;
-
 	private Panel choices = Panel.builder()
 		.dimensions(true, true)
 		.alignCenter()
@@ -52,7 +52,6 @@ public class StoryScreen extends Screen {
 		.text(Component.literal(">"))
 		.onPress(_ -> proceed())
 		.build();
-
 	private Button.Builder<?, ?> choiceButton = Button.builder()
 		.renderOperations(
 			(self, render) -> render.context().blitSprite(
@@ -62,10 +61,12 @@ public class StoryScreen extends Screen {
 			RenderOperations.TEXT_RENDER
 		);
 
-	public static final WidgetSprites BUTTONS = new WidgetSprites(
-		Renmi.id("choice_button"),
-		Renmi.id("choice_button_highlighted")
-	);
+	// State
+	private int lastPortraitUsed = 0;
+	private final Image[] portraits = {
+		portraitLeft, portraitRight
+	};
+	private DisplayState state;
 
 	public StoryScreen() {
 		super(Component.empty());
