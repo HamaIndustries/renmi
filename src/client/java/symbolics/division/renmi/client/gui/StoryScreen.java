@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.SubStringSource;
 import net.minecraft.resources.Identifier;
 import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiAttachments;
@@ -22,6 +23,7 @@ import java.util.List;
 
 public class StoryScreen extends Screen {
 	private static Runnable updateCallback; // the hama special
+	private static Runnable tickCallback;
 
 	private Image portraitLeft = Image.builder().build();
 	private Image portraitRight = Image.builder().build();
@@ -29,6 +31,7 @@ public class StoryScreen extends Screen {
 	private final Image[] portraits = {
 		portraitLeft, portraitRight
 	};
+	private DisplayState state;
 
 	private Paragraph currentText = Paragraph.builder()
 		.dimensions(400, 100)
@@ -45,6 +48,7 @@ public class StoryScreen extends Screen {
 	public StoryScreen() {
 		super(Component.empty());
 		updateCallback = this::update;
+		tickCallback = this::tick;
 		update();
 	}
 
@@ -125,6 +129,10 @@ public class StoryScreen extends Screen {
 		);
 	}
 
+	public void tick() {
+		if (state != null) state.tick();
+	}
+
 	public void update() {
 		LocalPlayer player = Minecraft.getInstance().player;
 		var state = player.getAttached(RenmiAttachments.READING_STATE);
@@ -163,8 +171,13 @@ public class StoryScreen extends Screen {
 		if (updateCallback != null) updateCallback.run();
 	}
 
+	public static void runTickCallback() {
+		if (tickCallback != null) tickCallback.run();
+	}
+
 	public void setDirections(List<StageDirection> directions) {
-		currentText.setText(Component.empty());
+
+		var displayedText = Component.empty().copy();
 		for (var dir : directions) {
 			switch (dir) {
 				case ActorDirection actor -> {
@@ -176,11 +189,40 @@ public class StoryScreen extends Screen {
 					setPortrait(portrait, actor.id(), actor.expression());
 				}
 				case TextDirection text -> {
-					currentText.setText(currentText.getText().copy().append(text.text()));
+					displayedText.append(text.text());
 				}
 				default -> {
 				}
 			}
+		}
+		this.state = new DisplayState(displayedText, 1);
+
+	}
+
+	private class DisplayState {
+		private final Component text;
+		private SubStringSource splitText;
+		private int textLength;
+		private int textRate;
+		private int textProgress = 0;
+		private String tempStr;
+
+		// textRate: characters per tick
+		public DisplayState(Component text, int textRate) {
+			this.text = text;
+			this.tempStr = text.getString();
+			this.splitText = SubStringSource.create(text);
+			this.textLength = tempStr.length();
+			this.textRate = textRate;
+
+			StoryScreen.this.currentText.setText(Component.empty());
+		}
+
+		public void tick() {
+			//FIXME need to scroll text with styling! this only show characters
+			textProgress = Math.min(textProgress + textRate, textLength);
+//			var substr = FormattedCharSequence.composite(splitText.substring(0, textProgress, false));
+			StoryScreen.this.currentText.setText(Component.literal(tempStr.substring(0, textProgress)));
 		}
 	}
 }
