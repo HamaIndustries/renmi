@@ -3,5 +3,6 @@
 	"gui.renmi.series_id": "Series ID",
 	"gui.renmi.act_id": "Act ID",
 	"gui.renmi.diameter": "Diameter",
-	"gui.renmi.proceed": "Proceed"
+	"gui.renmi.proceed": "Proceed",
+	"gui.renmi.end": "END"
 }

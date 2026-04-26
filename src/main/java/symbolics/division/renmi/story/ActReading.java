@@ -57,11 +57,11 @@ public class ActReading {
 					return knotName;
 				}
 			}, false);
-			this.story.bindExternalFunction("write_global", new Story.ExternalFunction2<String,Integer,Integer>() {
+			this.story.bindExternalFunction("write_global", new Story.ExternalFunction2<String, Integer, Integer>() {
 				@Override
 				protected Integer call(String key, Integer value) throws Exception {
-					if(storyListener != null) {
-						storyListener.onWriteGlobal(key,value);
+					if (storyListener != null) {
+						storyListener.onWriteGlobal(key, value);
 					}
 					return value;
 				}
@@ -70,7 +70,7 @@ public class ActReading {
 			this.story.bindExternalFunction("read_global ", new Story.ExternalFunction1<String, Integer>() {
 				@Override
 				protected Integer call(String key) throws Exception {
-					if(storyListener != null) {
+					if (storyListener != null) {
 						return storyListener.onReadGlobal(key);
 					}
 					return 0;
@@ -79,7 +79,7 @@ public class ActReading {
 			this.story.bindExternalFunction("run_command", new Story.ExternalFunction1<String, Integer>() {
 				@Override
 				protected Integer call(String command) throws Exception {
-					if(storyListener != null) {
+					if (storyListener != null) {
 						return storyListener.runCommand(command);
 					}
 					return 0;
@@ -123,7 +123,7 @@ public class ActReading {
 	public void proceed(ServerPlayer player) {
 		if (story.canContinue()) {
 			try {
-				currentLine = ActLine.of(story.Continue());
+				currentLine = ActLine.of(story.Continue(), isDone());
 			} catch (StoryException e) {
 				throw new RuntimeException(e);
 			} catch (Exception e) {

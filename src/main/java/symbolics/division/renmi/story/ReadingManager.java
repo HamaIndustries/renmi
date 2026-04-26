@@ -78,7 +78,7 @@ public class ReadingManager {
 
 		Map<Identifier, SeriesReading> playerSeries = allSeriesReadings.get(player.getUUID());
 
-		if(playerSeries != null && playerSeries.containsKey(series.id)){
+		if (playerSeries != null && playerSeries.containsKey(series.id)) {
 			SeriesReading seriesReading = playerSeries.get(series.id);
 			seriesReading.getActReadings().remove(act.id);
 		}
@@ -125,7 +125,7 @@ public class ReadingManager {
 		List<ActChoice> choices = reading.currentChoices().stream().map(ActChoice::of).toList();
 		player.setAttached(
 			RenmiAttachments.READING_STATE,
-			new ReadingState(line == null ? ActLine.INACTIVE : line, choices)
+			new ReadingState(line == null ? ActLine.INACTIVE : line, choices, line == null ? true : line.end())
 		);
 	}
 }

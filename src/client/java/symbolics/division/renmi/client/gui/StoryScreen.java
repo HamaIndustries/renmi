@@ -26,7 +26,6 @@ import java.util.List;
 
 public class StoryScreen extends Screen {
 	private static Runnable updateCallback; // the hama special
-	private static Runnable tickCallback;
 
 	private Image portraitLeft = Image.builder().build();
 	private Image portraitRight = Image.builder().build();
@@ -49,6 +48,7 @@ public class StoryScreen extends Screen {
 	private Button proceedButton = Button.builder()
 		.dimensions(20, 20)
 //		.text(Component.translatable("gui.renmi.proceed"))
+		.text(Component.literal(">"))
 		.onPress(_ -> proceed())
 		.build();
 
@@ -64,13 +64,14 @@ public class StoryScreen extends Screen {
 	public StoryScreen() {
 		super(Component.empty());
 		updateCallback = this::update;
-		tickCallback = this::tick;
 		update();
 	}
 
 	@Override
 	public void init() {
-		if (minecraft == null) { return; }
+		if (minecraft == null) {
+			return;
+		}
 
 		Window window = minecraft.getWindow();
 		int width = window.getGuiScaledWidth();
@@ -149,8 +150,11 @@ public class StoryScreen extends Screen {
 		);
 	}
 
+	@Override
 	public void tick() {
-		if (state != null) { state.tick(); }
+		if (state != null) {
+			state.tick();
+		}
 	}
 
 	public void update() {
@@ -162,9 +166,16 @@ public class StoryScreen extends Screen {
 			this.setDirections(StageDirection.parse(state.line()));
 
 			var oldChoices = choices.getChildren();
-			for (var c : oldChoices) { choices.removeChild(c); }
+			for (var c : oldChoices) {
+				choices.removeChild(c);
+			}
 			if (state.choices().isEmpty()) {
 				proceedButton.setVisible(true);
+				if (state.end()) {
+					proceedButton.setText(Component.translatable("gui.renmi.end"));
+					proceedButton.setOnPress(b -> this.onClose());
+					proceedButton.setAutoWidth(true);
+				}
 			} else {
 				proceedButton.setVisible(false);
 				for (var choice : state.choices()) {
@@ -187,11 +198,9 @@ public class StoryScreen extends Screen {
 	}
 
 	public static void runUpdateCallback() {
-		if (updateCallback != null) { updateCallback.run(); }
-	}
-
-	public static void runTickCallback() {
-		if (tickCallback != null) { tickCallback.run(); }
+		if (updateCallback != null) {
+			updateCallback.run();
+		}
 	}
 
 	public void setDirections(List<StageDirection> directions) {

@@ -9,16 +9,17 @@ import net.minecraft.network.codec.StreamCodec;
  *
  * @param text
  */
-public record ActLine(String text) {
+public record ActLine(String text, boolean end) {
 	// lines have text and stage directions.
 	public static StreamCodec<FriendlyByteBuf, ActLine> STREAM_CODEC = StreamCodec.composite(
 		ByteBufCodecs.STRING_UTF8, ActLine::text,
+		ByteBufCodecs.BOOL, ActLine::end,
 		ActLine::new
 	);
 
-	public static ActLine INACTIVE = new ActLine(null);
+	public static ActLine INACTIVE = new ActLine(null, true);
 
-	public static ActLine of(String line) {
-		return new ActLine(line);
+	public static ActLine of(String line, boolean end) {
+		return new ActLine(line, end);
 	}
 }

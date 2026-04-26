@@ -12,12 +12,13 @@ import java.util.List;
  * @param line    an {@link ActLine}
  * @param choices a list of {@link ActChoice}'s
  */
-public record ReadingState(ActLine line, List<ActChoice> choices) {
+public record ReadingState(ActLine line, List<ActChoice> choices, boolean end) {
 	public static final StreamCodec<FriendlyByteBuf, ReadingState> STREAM_CODEC = StreamCodec.composite(
 		ActLine.STREAM_CODEC, ReadingState::line,
 		ActChoice.STREAM_CODEC.apply(ByteBufCodecs.list()), ReadingState::choices,
+		ByteBufCodecs.BOOL, ReadingState::end,
 		ReadingState::new
 	);
 
-	public static final ReadingState INACTIVE = new ReadingState(ActLine.INACTIVE, List.of());
+	public static final ReadingState INACTIVE = new ReadingState(ActLine.INACTIVE, List.of(), true);
 }
