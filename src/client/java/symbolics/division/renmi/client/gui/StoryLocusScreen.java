@@ -20,7 +20,7 @@ public class StoryLocusScreen extends Screen {
 	private TextField<Identifier> actField;
 	private TextField<Identifier> seriesField;
 	private TextField<Float> diameterField;
-	private TextArea scriptField;
+	private TextAreaWithTabs scriptField;
 
 	private Identifier seriesId;
 	private Identifier actId;
@@ -60,7 +60,7 @@ public class StoryLocusScreen extends Screen {
 			.build();
 
 		// TODO: populate script with current act text
-		scriptField = TextArea.builder()
+		scriptField = TextAreaWithTabs.builder()
 			.dimensions(true, true)
 			.text(inkSource)
 			.build();
