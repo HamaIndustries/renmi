@@ -24,7 +24,14 @@ public sealed interface StageDirection permits ActorDirection, TextDirection {
 			String pos = matcher.group("pos");
 
 			if (name != null) {
-				directions.add(new ActorDirection(Renmi.id(name), expression == null ? "neutral" : expression, pos == null ? -1 : Integer.parseInt(pos)));
+				directions.add(new ActorDirection(
+					Renmi.id(name),
+					expression == null ? "neutral" : expression,
+					0,
+					0,
+					pos == null ? -1 : Integer.parseInt(pos),
+					true
+				));
 			}
 			directions.add(new TextDirection(ParseUtil.parseLine(matcher.group("text"))));
 		} else {

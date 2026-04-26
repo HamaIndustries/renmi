@@ -24,6 +24,8 @@ import symbolics.division.renmi.story.Actor;
 import symbolics.division.renmi.story.ActorManager;
 import symbolics.division.renmi.story.ReadingState;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StoryScreen extends Screen {
@@ -34,9 +36,15 @@ public class StoryScreen extends Screen {
 
 	private static Runnable updateCallback; // the hama special
 
-	// Elements
-	private Image portraitLeft = Image.builder().build();
-	private Image portraitRight = Image.builder().build();
+	// allow portrait slots 1-6, but also allow absolute positioning.
+	// FIXME: no absolute positioning yet
+	private Portrait[] slots = new Portrait[6];
+	private ArrayDeque<Integer> lastUsedSlots = new ArrayDeque<>();
+	private int[] slotOrder = {2, 3, 1, 4, 0, 5};
+	private ArrayList<Portrait> allPortraits = new ArrayList<>();
+
+	private DisplayState state;
+
 	private Panel choices = Panel.builder()
 		.dimensions(true, true)
 		.alignCenter()
@@ -52,6 +60,7 @@ public class StoryScreen extends Screen {
 		.text(Component.literal(">"))
 		.onPress(_ -> proceed())
 		.build();
+
 	private Button.Builder<?, ?> choiceButton = Button.builder()
 		.renderOperations(
 			(self, render) -> render.context().blitSprite(
@@ -61,19 +70,10 @@ public class StoryScreen extends Screen {
 			RenderOperations.TEXT_RENDER
 		);
 
-	// State
-	private int lastPortraitUsed = 0;
-	private final Image[] portraits = {
-		portraitLeft, portraitRight
-	};
-	private DisplayState state;
-
 	public StoryScreen() {
 		super(Component.empty());
 		updateCallback = this::update;
 		update();
-		portraitLeft.setVisible(false);
-		portraitRight.setVisible(false);
 	}
 
 	@Override
@@ -119,40 +119,113 @@ public class StoryScreen extends Screen {
 		textBox.addChild(textBoxText);
 		textBox.addChild(proceedButton);
 
-		addRenderableOnly(portraitLeft);
-		addRenderableOnly(portraitRight);
 		addRenderableWidget(root);
 	}
 
-	private void setPortrait(Image portrait, Identifier id, String expression) {
-		if (ActorManager.get(id) instanceof Actor actor) {
+	private void setPortrait(ActorDirection dir) {
+		if (ActorManager.get(dir.id()) instanceof Actor actor) {
 			Window window = minecraft.getWindow();
 
-			portrait.setVisible(true);
-			portrait.setImage(getPortrait(id, expression));
+			Portrait portrait = getPortrait(dir.id());
+			if (portrait == null) {
+				portrait = Portrait.of(dir.id());
+			}
+
+			portrait.image.setImage(getPortraitTexture(dir.id(), dir.expression()));
 
 			int guiScale = window.getGuiScale();
 			float heightRatio = actor.heightCm() / 222f;
 			float scale = (float) 125 * guiScale / actor.heightPx() * heightRatio;
 
-			portrait.setWidth((int) (portrait.getTextureWidth() * scale));
+			portrait.image.setWidth((int) (portrait.image.getTextureWidth() * scale));
 
-			float x = window.getGuiScaledWidth() / 2f
-				+ 40f * guiScale * (portrait == portraitRight ? 1 : -1)
-				- actor.origin().x * scale;
-			float y = window.getGuiScaledHeight()
-				+ 25f * guiScale * heightRatio
-				- actor.origin().y * scale;
+			int slot = setPortraitSlot(portrait, dir.slotPos());
 
-			portrait.setPosition((int) x, (int) y);
+			// change slot
+			if (slot != -1) {
+				float x = window.getGuiScaledWidth() / 2f
+					+ 30f * guiScale * (slot - 3)
+					- actor.origin().x * scale;
+				float y = window.getGuiScaledHeight()
+					+ 25f * guiScale * heightRatio
+					- actor.origin().y * scale;
+
+				portrait.image.setPosition((int) x, (int) y);
+			}
 		}
 	}
 
-	private void hidePortrait(Image portrait) {
-		portrait.setVisible(false);
+	private Portrait getPortrait(Identifier id) {
+		for (Portrait slot : slots) {
+			if (slot != null && slot.actorId().equals(id)) {
+				return slot;
+			}
+		}
+		return null;
 	}
 
-	private Identifier getPortrait(Identifier id, String expression) {
+	/*
+	slot logic:
+
+	-1 means any slot. 0-5 means specific slot.
+	slot order is 2,3,1,4,0,5.
+
+	skip if same slot as before
+	if slot is -1, attempt auto-place:
+		start with next free slot.
+		if no free slots, use queue to replace. update queue.
+	if slot is valid, replace last that. update queue.
+	*/
+	private int setPortraitSlot(Portrait portrait, int slot) {
+		int oldSlot = -1;
+		int nextFreeSlot = -1;
+		for (int i : slotOrder) {
+			if (portrait.equals(slots[i])) {
+				oldSlot = i;
+			} else if (nextFreeSlot == -1 && slots[i] == null) {
+				nextFreeSlot = i;
+			}
+		}
+
+		if (oldSlot != -1) { // sprite exists
+			// either we don't care about placement or its in correct place
+			if (slot == -1 || slot == oldSlot) return oldSlot;
+			slots[oldSlot] = null;
+			lastUsedSlots.removeFirstOccurrence(oldSlot);
+		}
+
+		if (slot == -1) {                            // set auto
+			if (nextFreeSlot != -1) {                        // fill an empty slot
+				lastUsedSlots.removeFirstOccurrence(nextFreeSlot);
+				lastUsedSlots.add(nextFreeSlot);
+				slots[nextFreeSlot] = portrait;
+				return nextFreeSlot;
+			} else if (!lastUsedSlots.isEmpty()) {            // full, use next
+				int newSlot = lastUsedSlots.pop();
+				slots[newSlot] = portrait;
+				lastUsedSlots.add(newSlot);
+				return newSlot;
+			} else {                                          // last used is unpopulated
+				lastUsedSlots.add(slotOrder[0]);
+				slots[slotOrder[0]] = portrait;
+				return 0;
+			}
+		} else {                                      // set specific slot
+			slots[slot] = portrait;
+			lastUsedSlots.removeFirstOccurrence(slot);
+			lastUsedSlots.add(slot);
+			return slot;
+		}
+	}
+
+
+	private record Portrait(Image image, Identifier actorId) {
+		public static Portrait of(Identifier actorId) {
+			return new Portrait(Image.builder().build(), actorId);
+		}
+	}
+
+	private Identifier getPortraitTexture(Identifier id, String expression) {
 		return Identifier.fromNamespaceAndPath(
 			id.getNamespace(),
 			"textures/portrait/" + id.getPath() + "/" + expression + ".png"
@@ -230,16 +303,19 @@ public class StoryScreen extends Screen {
 
 	public void setDirections(List<StageDirection> directions) {
 		var displayedText = Component.empty().copy();
-
 		for (var dir : directions) {
 			switch (dir) {
 				case ActorDirection actor -> {
-					Image portrait = switch (actor.pos()) {
-						case 0 -> portraitLeft;
-						case 1 -> portraitRight;
-						default -> portraits[(lastPortraitUsed++) % 2];
-					};
-					setPortrait(portrait, actor.id(), actor.expression());
+					setPortrait(actor);
+
+					for (Portrait p : allPortraits) {
+						removeWidget(p.image());
+					}
+					for (Portrait p : slots) {
+						if (p == null) continue;
+						allPortraits.add(p);
+						addRenderableOnly(p.image);
+					}
 				}
 				case TextDirection text -> displayedText.append(text.text());
 			}
