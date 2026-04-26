@@ -131,7 +131,7 @@ public class StoryScreen extends Screen {
 				portrait = Portrait.of(dir.id());
 			}
 
-			portrait.image.setImage(getPortraitTexture(dir.id(), dir.expression()));
+			portrait.image.setImage(dir.getTexture());
 
 			int guiScale = window.getGuiScale();
 			float heightRatio = actor.heightCm() / 222f;
@@ -189,7 +189,7 @@ public class StoryScreen extends Screen {
 
 		if (oldSlot != -1) { // sprite exists
 			// either we don't care about placement or its in correct place
-			if (slot == -1 || slot == oldSlot) return oldSlot;
+			if (slot == -1 || slot == oldSlot) { return oldSlot; }
 			slots[oldSlot] = null;
 			lastUsedSlots.removeFirstOccurrence(oldSlot);
 		}
@@ -223,13 +223,6 @@ public class StoryScreen extends Screen {
 		public static Portrait of(Identifier actorId) {
 			return new Portrait(Image.builder().build(), actorId);
 		}
-	}
-
-	private Identifier getPortraitTexture(Identifier id, String expression) {
-		return Identifier.fromNamespaceAndPath(
-			id.getNamespace(),
-			"textures/portrait/" + id.getPath() + "/" + expression + ".png"
-		);
 	}
 
 	@Override
@@ -312,7 +305,7 @@ public class StoryScreen extends Screen {
 						removeWidget(p.image());
 					}
 					for (Portrait p : slots) {
-						if (p == null) continue;
+						if (p == null) { continue; }
 						allPortraits.add(p);
 						addRenderableOnly(p.image);
 					}
