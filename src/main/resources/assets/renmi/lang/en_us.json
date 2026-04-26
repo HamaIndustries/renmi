@@ -2,5 +2,6 @@
 	"block.renmi.story_locus": "Story Locus",
 	"gui.renmi.series_id": "Series ID",
 	"gui.renmi.act_id": "Act ID",
-	"gui.renmi.diameter": "Diameter"
+	"gui.renmi.diameter": "Diameter",
+	"gui.renmi.proceed": "Proceed"
 }

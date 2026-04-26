@@ -1,11 +1,14 @@
 package symbolics.division.renmi.client.gui;
 
 import com.mojang.blaze3d.platform.Window;
+import dev.chailotl.bento_gui.client.FlowAxis;
 import dev.chailotl.bento_gui.client.elements.*;
+import dev.chailotl.bento_gui.client.util.RenderOperations;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.SubStringSource;
 import net.minecraft.resources.Identifier;
@@ -33,17 +36,30 @@ public class StoryScreen extends Screen {
 	};
 	private DisplayState state;
 
-	private Paragraph currentText = Paragraph.builder()
-		.dimensions(400, 100)
+	private Panel choices = Panel.builder()
+		.dimensions(true, true)
+		.alignCenter()
+		.verticalAlignment(0.75f)
+		.build();
+	private Paragraph textBoxText = Paragraph.builder()
+		.dimensions(true, true)
 		.alignCenter()
 		.alignMiddle()
 		.build();
 	private Button proceedButton = Button.builder()
-		.dimensions(40, 30)
-		.text(Component.translatable("gui.renmi.story.proceed"))
-		.onPress(b -> proceed())
+		.dimensions(20, 20)
+//		.text(Component.translatable("gui.renmi.proceed"))
+		.onPress(_ -> proceed())
 		.build();
-	private Panel choicesBox = Panel.builder().dimensions(300, 200).build();
+
+	private Button.Builder<?, ?> choiceButton = Button.builder()
+		.renderOperations(
+			(self, render) -> render.context().blitSprite(
+				RenderPipelines.GUI_TEXTURED, Renmi.id("choice_button"),
+				self.getX(), self.getY(), self.getWidth(), self.getHeight()
+			),
+			RenderOperations.TEXT_RENDER
+		);
 
 	public StoryScreen() {
 		super(Component.empty());
@@ -54,9 +70,7 @@ public class StoryScreen extends Screen {
 
 	@Override
 	public void init() {
-		if (minecraft == null) {
-			return;
-		}
+		if (minecraft == null) { return; }
 
 		Window window = minecraft.getWindow();
 		int width = window.getGuiScaledWidth();
@@ -64,39 +78,45 @@ public class StoryScreen extends Screen {
 
 		Panel root = Panel.builder()
 			.dimensions(width, height)
-			.margins(50, 50, 50, 50)
-			.build();
-
-		Panel top = Panel.builder()
-			.dimensions(true, 400)
+			.padding(10)
 			.alignCenter()
-			.alignMiddle()
 			.build();
-		top.addChild(choicesBox);
 
-		Panel bottom = Panel.builder()
-			.dimensions(100, 60)
-			.alignMiddle()
+		Label actTitle = Label.builder()
+			.dimensions(true, 10)
+			.alignLeft()
+			.text(Component.literal("Event No.63 | Learn the demon king make-up |"))
 			.build();
-		bottom.addChild(Label.builder().text(Component.literal("hi hi hi hi")).build());
-		bottom.addChild(proceedButton);
-		bottom.addChild(currentText);
-		bottom.addChild(Label.builder().text(Component.literal("byebyebye")).build());
+		Panel textBox = Panel.builder()
+			.dimensions(true, 62)
+			.maxWidth(Math.min((width - 34) / 16 * 16 + 14, 318))
+			.padding(10)
+			.alignBottom()
+			.flowAxis(FlowAxis.HORIZONTAL)
+			.renderOperations(
+				(self, render) -> render.context().blitSprite(
+					RenderPipelines.GUI_TEXTURED, Renmi.id("text_box"),
+					self.getX(), self.getY(), self.getWidth(), self.getHeight()
+				),
+				RenderOperations.CHILD_RENDER
+			)
+			.build();
 
+		choiceButton.width(Math.min((width - 36) / 16 * 16 + 16, 256));
 
-		//FIXME
-//		root.addChild(top);
-//		root.addChild(bottom);
-		root.addChild(currentText);
-		root.addChild(proceedButton);
-		root.addChild(choicesBox);
+		root.addChild(actTitle);
+		root.addChild(choices);
+		root.addChild(textBox);
+
+		textBox.addChild(textBoxText);
+		textBox.addChild(proceedButton);
 
 		setPortrait(portraitRight, Renmi.id("ugg"), "neutral");
 		setPortrait(portraitLeft, Renmi.id("plume"), "pout");
 
+		addRenderableOnly(portraitLeft);
+		addRenderableOnly(portraitRight);
 		addRenderableWidget(root);
-		addRenderableWidget(portraitLeft);
-		addRenderableWidget(portraitRight);
 	}
 
 	private void setPortrait(Image portrait, Identifier id, String expression) {
@@ -130,7 +150,7 @@ public class StoryScreen extends Screen {
 	}
 
 	public void tick() {
-		if (state != null) state.tick();
+		if (state != null) { state.tick(); }
 	}
 
 	public void update() {
@@ -141,17 +161,16 @@ public class StoryScreen extends Screen {
 			// currently only shows everything instantly.
 			this.setDirections(StageDirection.parse(state.line()));
 
-			var oldChoices = choicesBox.getChildren();
-			for (var c : oldChoices) choicesBox.removeChild(c);
+			var oldChoices = choices.getChildren();
+			for (var c : oldChoices) { choices.removeChild(c); }
 			if (state.choices().isEmpty()) {
 				proceedButton.setVisible(true);
 			} else {
 				proceedButton.setVisible(false);
 				for (var choice : state.choices()) {
-					choicesBox.addChild(Button.builder().dimensions(true, 10)
+					choices.addChild(choiceButton
 						.text(Component.literal(choice.text())) // FIXME buttons might have component visiblity? placeholder api?
-						.margins(0, 0, 0, 10)
-						.onPress(b -> makeChoice(choice.index()))
+						.onPress(_ -> makeChoice(choice.index()))
 						.build()
 					);
 				}
@@ -168,16 +187,16 @@ public class StoryScreen extends Screen {
 	}
 
 	public static void runUpdateCallback() {
-		if (updateCallback != null) updateCallback.run();
+		if (updateCallback != null) { updateCallback.run(); }
 	}
 
 	public static void runTickCallback() {
-		if (tickCallback != null) tickCallback.run();
+		if (tickCallback != null) { tickCallback.run(); }
 	}
 
 	public void setDirections(List<StageDirection> directions) {
-
 		var displayedText = Component.empty().copy();
+
 		for (var dir : directions) {
 			switch (dir) {
 				case ActorDirection actor -> {
@@ -188,15 +207,11 @@ public class StoryScreen extends Screen {
 					};
 					setPortrait(portrait, actor.id(), actor.expression());
 				}
-				case TextDirection text -> {
-					displayedText.append(text.text());
-				}
-				default -> {
-				}
+				case TextDirection text -> displayedText.append(text.text());
 			}
 		}
-		this.state = new DisplayState(displayedText, 1);
 
+		this.state = new DisplayState(displayedText, 1);
 	}
 
 	private class DisplayState {
@@ -215,14 +230,14 @@ public class StoryScreen extends Screen {
 			this.textLength = tempStr.length();
 			this.textRate = textRate;
 
-			StoryScreen.this.currentText.setText(Component.empty());
+			StoryScreen.this.textBoxText.setText(Component.empty());
 		}
 
 		public void tick() {
 			//FIXME need to scroll text with styling! this only show characters
 			textProgress = Math.min(textProgress + textRate, textLength);
 //			var substr = FormattedCharSequence.composite(splitText.substring(0, textProgress, false));
-			StoryScreen.this.currentText.setText(Component.literal(tempStr.substring(0, textProgress)));
+			StoryScreen.this.textBoxText.setText(Component.literal(tempStr.substring(0, textProgress)));
 		}
 	}
 }
