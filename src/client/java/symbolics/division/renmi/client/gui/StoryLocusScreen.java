@@ -6,27 +6,42 @@ import dev.chailotl.bento_gui.client.FlowAxis;
 import dev.chailotl.bento_gui.client.elements.*;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import org.jetbrains.annotations.Nullable;
 import symbolics.division.renmi.block.entity.StoryLocusBlockEntity;
+import symbolics.division.renmi.net.C2SActEditingPacket;
 import symbolics.division.renmi.net.C2SEditStoryLocusPacket;
 
 public class StoryLocusScreen extends Screen {
-	private final StoryLocusBlockEntity be;
+//	private final StoryLocusBlockEntity be;
 
 	private TextField<Identifier> actField;
 	private TextField<Identifier> seriesField;
 	private TextField<Float> diameterField;
 	private TextArea scriptField;
 
-	public StoryLocusScreen(StoryLocusBlockEntity be) {
+	private Identifier seriesId;
+	private Identifier actId;
+	private String inkSource;
+	@Nullable
+	private BlockPos locusPos;
+	@Nullable float diameter;
+
+	public StoryLocusScreen(Identifier series, Identifier act, String inkSource, @Nullable BlockPos locusPos) {
 		super(Component.empty());
-		this.be = be;
+		this.seriesId = series;
+		this.actId = act;
+		this.inkSource = inkSource;
+		this.locusPos = locusPos;
 	}
 
 	@Override
 	public void init() {
-		if (minecraft == null) { return; }
+		if (minecraft == null) {
+			return;
+		}
 
 		Window window = minecraft.getWindow();
 		Panel root = Panel.builder()
@@ -47,16 +62,20 @@ public class StoryLocusScreen extends Screen {
 		// TODO: populate script with current act text
 		scriptField = TextArea.builder()
 			.dimensions(true, true)
+			.text(inkSource)
 			.build();
 		seriesField = TextField.ofIdentifier()
-			.text(String.valueOf(be.act))
+			.text(String.valueOf(seriesId))
 			.build();
 		actField = TextField.ofIdentifier()
-			.text(String.valueOf(be.act))
+			.text(String.valueOf(actId))
 			.build();
+
+		//FIXME just hide the field if no BE is involved
+		this.diameter = locusPos != null && minecraft.level.getBlockEntity(locusPos) instanceof StoryLocusBlockEntity be ? be.diameter : 1;
 		diameterField = TextField.ofFloat()
 			.validationPredicate(s -> Floats.tryParse(s) instanceof Float n && n >= 1)
-			.text(String.valueOf(Math.max(1f, be.diameter)))
+			.text(String.valueOf(Math.max(1f, diameter)))
 			.build();
 
 		Button doneButton = Button.builder()
@@ -94,22 +113,27 @@ public class StoryLocusScreen extends Screen {
 
 	@Override
 	public void onClose() {
-		if (actField.isValidText() && !actField.getText().isEmpty()) {
-			be.series = seriesField.getValue();
+		if (seriesField.isValidText() && !seriesField.getText().isEmpty()) {
+			seriesId = seriesField.getValue();
 		}
 		if (actField.isValidText() && !actField.getText().isEmpty()) {
-			be.act = actField.getValue();
+			actId = actField.getValue();
 		}
 		if (diameterField.isValidText()) {
-			be.diameter = diameterField.getValue();
+			diameter = diameterField.getValue();
 		}
-		ClientPlayNetworking.send(new C2SEditStoryLocusPacket(
-			be.getBlockPos(),
-			be.series,
-			be.act,
-			be.diameter,
-			scriptField.getText()
-		));
+		if (scriptField.isValidText()) {
+			inkSource = scriptField.getValue();
+		}
+		ClientPlayNetworking.send(
+			new C2SActEditingPacket(seriesId, actId, inkSource)
+		);
+
+		if (locusPos != null) {
+			ClientPlayNetworking.send(new C2SEditStoryLocusPacket(
+				locusPos, seriesId, actId, diameter
+			));
+		}
 		super.onClose();
 	}
 }

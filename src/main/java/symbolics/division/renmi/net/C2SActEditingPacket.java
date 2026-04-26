@@ -9,17 +9,17 @@ import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiAttachments;
 import symbolics.division.renmi.story.RenmiLibrary;
 
-public record C2SCreateActPacket(Identifier series, Identifier act, String inkSource) implements CustomPacketPayload {
-	public static Type<C2SCreateActPacket> TYPE = RenmiNetworking.createType("create_act");
+public record C2SActEditingPacket(Identifier series, Identifier act, String inkSource) implements CustomPacketPayload {
+	public static Type<C2SActEditingPacket> TYPE = RenmiNetworking.createType("c2s_edit_act");
 
-	public static final StreamCodec<FriendlyByteBuf, C2SCreateActPacket> STREAM_CODEC = CustomPacketPayload.codec(
+	public static final StreamCodec<FriendlyByteBuf, C2SActEditingPacket> STREAM_CODEC = CustomPacketPayload.codec(
 		(p, b) -> {
 			b.writeIdentifier(p.series).writeIdentifier(p.act).writeUtf(p.inkSource);
 		},
-		(b) -> new C2SCreateActPacket(b.readIdentifier(), b.readIdentifier(), b.readUtf())
+		(b) -> new C2SActEditingPacket(b.readIdentifier(), b.readIdentifier(), b.readUtf())
 	);
 
-	public static void HANDLER(C2SCreateActPacket payload, ServerPlayNetworking.Context context) {
+	public static void HANDLER(C2SActEditingPacket payload, ServerPlayNetworking.Context context) {
 		try {
 			context.server().globalAttachments().getAttachedOrCreate(RenmiAttachments.LIBRARY).createActFromSource(
 				payload.series(),
@@ -37,7 +37,7 @@ public record C2SCreateActPacket(Identifier series, Identifier act, String inkSo
 	}
 
 	@Override
-	public Type<C2SCreateActPacket> type() {
+	public Type<C2SActEditingPacket> type() {
 		return TYPE;
 	}
 }

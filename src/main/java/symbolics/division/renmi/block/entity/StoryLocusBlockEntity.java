@@ -67,4 +67,11 @@ public class StoryLocusBlockEntity extends BlockEntity {
 	public Packet<ClientGamePacketListener> getUpdatePacket() {
 		return ClientboundBlockEntityDataPacket.create(this);
 	}
+
+	public void setValues(Identifier series, Identifier act, float diameter) {
+		this.series = series;
+		this.act = act;
+		this.diameter = diameter;
+		this.setChanged();
+	}
 }
