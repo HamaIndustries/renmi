@@ -71,6 +71,8 @@ public class StoryScreen extends Screen {
 		super(Component.empty());
 		updateCallback = this::update;
 		update();
+		portraitLeft.setVisible(false);
+		portraitRight.setVisible(false);
 	}
 
 	@Override
@@ -116,9 +118,6 @@ public class StoryScreen extends Screen {
 		textBox.addChild(textBoxText);
 		textBox.addChild(proceedButton);
 
-		setPortrait(portraitRight, Renmi.id("ugg"), "neutral");
-		setPortrait(portraitLeft, Renmi.id("plume"), "pout");
-
 		addRenderableOnly(portraitLeft);
 		addRenderableOnly(portraitRight);
 		addRenderableWidget(root);
@@ -128,6 +127,7 @@ public class StoryScreen extends Screen {
 		if (ActorManager.get(id) instanceof Actor actor) {
 			Window window = minecraft.getWindow();
 
+			portrait.setVisible(true);
 			portrait.setImage(getPortrait(id, expression));
 
 			int guiScale = window.getGuiScale();
@@ -145,6 +145,10 @@ public class StoryScreen extends Screen {
 
 			portrait.setPosition((int) x, (int) y);
 		}
+	}
+
+	private void hidePortrait(Image portrait) {
+		portrait.setVisible(false);
 	}
 
 	private Identifier getPortrait(Identifier id, String expression) {
