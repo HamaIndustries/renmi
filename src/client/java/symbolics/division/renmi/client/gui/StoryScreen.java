@@ -36,15 +36,6 @@ public class StoryScreen extends Screen {
 
 	private static Runnable updateCallback; // the hama special
 
-	// allow portrait slots 1-6, but also allow absolute positioning.
-	// FIXME: no absolute positioning yet
-	private Portrait[] slots = new Portrait[6];
-	private ArrayDeque<Integer> lastUsedSlots = new ArrayDeque<>();
-	private int[] slotOrder = {2, 3, 1, 4, 0, 5};
-	private ArrayList<Portrait> allPortraits = new ArrayList<>();
-
-	private DisplayState state;
-
 	private Panel choices = Panel.builder()
 		.dimensions(true, true)
 		.alignCenter()
@@ -60,7 +51,6 @@ public class StoryScreen extends Screen {
 		.text(Component.literal(">"))
 		.onPress(_ -> proceed())
 		.build();
-
 	private Button.Builder<?, ?> choiceButton = Button.builder()
 		.renderOperations(
 			(self, render) -> render.context().blitSprite(
@@ -69,6 +59,15 @@ public class StoryScreen extends Screen {
 			),
 			RenderOperations.TEXT_RENDER
 		);
+
+	// allow portrait slots 1-6, but also allow absolute positioning.
+	// FIXME: no absolute positioning yet
+	private Portrait[] slots = new Portrait[6];
+	private ArrayDeque<Integer> lastUsedSlots = new ArrayDeque<>();
+	private int[] slotOrder = {2, 3, 1, 4, 0, 5};
+	private ArrayList<Portrait> allPortraits = new ArrayList<>();
+
+	private DisplayState state;
 
 	public StoryScreen() {
 		super(Component.empty());
