@@ -10,20 +10,30 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiAttachments;
+import symbolics.division.renmi.client.gui.stage.ActorDirection;
+import symbolics.division.renmi.client.gui.stage.StageDirection;
+import symbolics.division.renmi.client.gui.stage.TextDirection;
 import symbolics.division.renmi.net.C2SPlayerInputPacket;
 import symbolics.division.renmi.story.Actor;
 import symbolics.division.renmi.story.ActorManager;
 import symbolics.division.renmi.story.ReadingState;
+
+import java.util.List;
 
 public class StoryScreen extends Screen {
 	private static Runnable updateCallback; // the hama special
 
 	private Image portraitLeft = Image.builder().build();
 	private Image portraitRight = Image.builder().build();
+	private int lastPortraitUsed = 0;
+	private final Image[] portraits = {
+		portraitLeft, portraitRight
+	};
 
 	private Paragraph currentText = Paragraph.builder()
 		.dimensions(400, 100)
-		.alignBottom()
+		.alignCenter()
+		.alignMiddle()
 		.build();
 	private Button proceedButton = Button.builder()
 		.dimensions(40, 30)
@@ -70,8 +80,12 @@ public class StoryScreen extends Screen {
 		bottom.addChild(Label.builder().text(Component.literal("byebyebye")).build());
 
 
-		root.addChild(top);
-		root.addChild(bottom);
+		//FIXME
+//		root.addChild(top);
+//		root.addChild(bottom);
+		root.addChild(currentText);
+		root.addChild(proceedButton);
+		root.addChild(choicesBox);
 
 		setPortrait(portraitRight, Renmi.id("ugg"), "neutral");
 		setPortrait(portraitLeft, Renmi.id("plume"), "pout");
@@ -115,8 +129,10 @@ public class StoryScreen extends Screen {
 		LocalPlayer player = Minecraft.getInstance().player;
 		var state = player.getAttached(RenmiAttachments.READING_STATE);
 		if (state != null && state != ReadingState.INACTIVE) {
-			// FIXME read through and display stage directions, not raw text
-			currentText.setText(Component.literal(state.line().text()));
+			// FIXME scrolling text display with sounds, tickable display.
+			// currently only shows everything instantly.
+			this.setDirections(StageDirection.parse(state.line()));
+
 			var oldChoices = choicesBox.getChildren();
 			for (var c : oldChoices) choicesBox.removeChild(c);
 			if (state.choices().isEmpty()) {
@@ -145,5 +161,26 @@ public class StoryScreen extends Screen {
 
 	public static void runUpdateCallback() {
 		if (updateCallback != null) updateCallback.run();
+	}
+
+	public void setDirections(List<StageDirection> directions) {
+		currentText.setText(Component.empty());
+		for (var dir : directions) {
+			switch (dir) {
+				case ActorDirection actor -> {
+					Image portrait = switch (actor.pos()) {
+						case 0 -> portraitLeft;
+						case 1 -> portraitRight;
+						default -> portraits[(lastPortraitUsed++) % 2];
+					};
+					setPortrait(portrait, actor.id(), actor.expression());
+				}
+				case TextDirection text -> {
+					currentText.setText(currentText.getText().copy().append(text.text()));
+				}
+				default -> {
+				}
+			}
+		}
 	}
 }
