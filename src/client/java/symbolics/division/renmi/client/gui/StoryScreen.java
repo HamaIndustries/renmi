@@ -21,6 +21,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.SubStringSource;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Util;
 import org.lwjgl.glfw.GLFW;
 import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiAttachments;
@@ -59,6 +60,7 @@ public class StoryScreen extends Screen {
 
 	private DisplayState state;
 	private boolean isFinishedScrolling = false;
+	private long choicesAnimTimer;
 
 	public StoryScreen() {
 		super(Component.empty());
@@ -85,11 +87,30 @@ public class StoryScreen extends Screen {
 			.build();
 		choiceButton = Button.builder()
 			.renderOperations(
-				(self, render) -> render.context().blitSprite(
-					RenderPipelines.GUI_TEXTURED, BUTTONS.get(self.isEnabled(), self.isSelected()),
-					self.getX(), self.getY(), self.getWidth(), self.getHeight()
-				),
-				RenderOperations.TEXT_RENDER
+				(self, render) -> {
+					var matrices = render.context().pose();
+					matrices.pushMatrix();
+
+					long timer = Util.getMillis() - choicesAnimTimer;
+
+					if (timer < 100) {
+						matrices.translate(self.getX() + self.getWidth() / 2f, self.getY() + self.getHeight() / 2f);
+						if (timer < 50) {
+							matrices.scale(1.5f, 0.5f);
+						} else {
+							matrices.scale(0.9f, 1.1f);
+						}
+						matrices.translate(-self.getX() - self.getWidth() / 2f, -self.getY() - self.getHeight() / 2f);
+					}
+
+					render.context().blitSprite(
+						RenderPipelines.GUI_TEXTURED, BUTTONS.get(self.isEnabled(), self.isSelected()),
+						self.getX(), self.getY(), self.getWidth(), self.getHeight()
+					);
+					RenderOperations.TEXT_RENDER.render(self, render);
+
+					matrices.popMatrix();
+				}
 			);
 
 		for (int i = 0; i < slots.length; ++i) {
@@ -135,7 +156,7 @@ public class StoryScreen extends Screen {
 				RenderOperations.CHILD_RENDER,
 				(self, render) -> {
 					// Both tests needed to ensure it doesn't flicker on frames between ticks
-					if (!state.isScrolling() && isFinishedScrolling && choices.getChildren().isEmpty()) {
+					if (state != null && !state.isScrolling() && isFinishedScrolling && choices.getChildren().isEmpty()) {
 						render.context().blitSprite(
 							RenderPipelines.GUI_TEXTURED, NEXT_ARROW,
 							self.getRight() - 16, self.getBottom() - 16, 8, 8
@@ -293,6 +314,7 @@ public class StoryScreen extends Screen {
 	private void showChoices() {
 		LocalPlayer player = Minecraft.getInstance().player;
 		var state = player.getAttached(RenmiAttachments.READING_STATE);
+		choicesAnimTimer = Util.getMillis();
 
 		if (!state.choices().isEmpty()) {
 			// Find longest text width
