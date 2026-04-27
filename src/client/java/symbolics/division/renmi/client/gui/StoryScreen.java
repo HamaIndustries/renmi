@@ -2,7 +2,10 @@ package symbolics.division.renmi.client.gui;
 
 import com.mojang.blaze3d.platform.Window;
 import dev.chailotl.bento_gui.client.FlowAxis;
-import dev.chailotl.bento_gui.client.elements.*;
+import dev.chailotl.bento_gui.client.elements.Button;
+import dev.chailotl.bento_gui.client.elements.Label;
+import dev.chailotl.bento_gui.client.elements.Panel;
+import dev.chailotl.bento_gui.client.elements.Paragraph;
 import dev.chailotl.bento_gui.client.util.DrawUtils;
 import dev.chailotl.bento_gui.client.util.RenderOperations;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -14,6 +17,7 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.SubStringSource;
 import net.minecraft.resources.Identifier;
+import org.jspecify.annotations.Nullable;
 import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiAttachments;
 import symbolics.division.renmi.client.gui.stage.ActorDirection;
@@ -71,6 +75,11 @@ public class StoryScreen extends Screen {
 
 	public StoryScreen() {
 		super(Component.empty());
+
+		for (int i = 0; i < slots.length; ++i) {
+			slots[i] = new Portrait();
+		}
+
 		updateCallback = this::update;
 		update();
 	}
@@ -118,6 +127,9 @@ public class StoryScreen extends Screen {
 		textBox.addChild(textBoxText);
 		textBox.addChild(proceedButton);
 
+		for (Portrait slot : slots) {
+			addRenderableOnly(slot.getImage());
+		}
 		addRenderableWidget(root);
 	}
 
@@ -125,18 +137,19 @@ public class StoryScreen extends Screen {
 		if (ActorManager.get(dir.id()) instanceof Actor actor) {
 			Window window = minecraft.getWindow();
 
-			Portrait portrait = getPortrait(dir.id());
-			if (portrait == null) {
-				portrait = Portrait.of(dir.id());
+			// Hide existing actor
+			if (getPortrait(dir.id()) instanceof Portrait slot) {
+				slot.hide();
 			}
 
-			portrait.image.setImage(dir.getTexture());
+			Portrait portrait = slots[dir.slotPos()];
+			portrait.show(dir);
 
 			int guiScale = window.getGuiScale();
 			float heightRatio = actor.heightCm() / 222f;
 			float scale = (float) 125 * guiScale / actor.heightPx() * heightRatio;
 
-			portrait.image.setWidth((int) (portrait.image.getTextureWidth() * scale));
+			portrait.getImage().setWidth((int) (portrait.getImage().getTextureWidth() * scale));
 
 			int slot = setPortraitSlot(portrait, dir.slotPos());
 
@@ -149,14 +162,15 @@ public class StoryScreen extends Screen {
 					+ 25f * guiScale * heightRatio
 					- actor.origin().y * scale;
 
-				portrait.image.setPosition((int) x, (int) y);
+				portrait.getImage().setPosition((int) x, (int) y);
 			}
 		}
 	}
 
-	private Portrait getPortrait(Identifier id) {
+	@Nullable
+	private Portrait getPortrait(Identifier actorId) {
 		for (Portrait slot : slots) {
-			if (slot != null && slot.actorId().equals(id)) {
+			if (slot.getActorId() != null && slot.getActorId().equals(actorId)) {
 				return slot;
 			}
 		}
@@ -214,13 +228,6 @@ public class StoryScreen extends Screen {
 			lastUsedSlots.removeFirstOccurrence(slot);
 			lastUsedSlots.add(slot);
 			return slot;
-		}
-	}
-
-
-	private record Portrait(Image image, Identifier actorId) {
-		public static Portrait of(Identifier actorId) {
-			return new Portrait(Image.builder().build(), actorId);
 		}
 	}
 
@@ -300,13 +307,9 @@ public class StoryScreen extends Screen {
 				case ActorDirection actor -> {
 					setPortrait(actor);
 
-					for (Portrait p : allPortraits) {
-						removeWidget(p.image());
-					}
 					for (Portrait p : slots) {
 						if (p == null) { continue; }
 						allPortraits.add(p);
-						addRenderableOnly(p.image);
 					}
 				}
 				case TextDirection text -> displayedText.append(text.text());
