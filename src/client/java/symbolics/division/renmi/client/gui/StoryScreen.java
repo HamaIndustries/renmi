@@ -134,7 +134,8 @@ public class StoryScreen extends Screen {
 				),
 				RenderOperations.CHILD_RENDER,
 				(self, render) -> {
-					if (!state.isScrolling()) {
+					// Both tests needed to ensure it doesn't flicker on frames between ticks
+					if (!state.isScrolling() && isFinishedScrolling && choices.getChildren().isEmpty()) {
 						render.context().blitSprite(
 							RenderPipelines.GUI_TEXTURED, NEXT_ARROW,
 							self.getRight() - 16, self.getBottom() - 16, 8, 8
