@@ -3,6 +3,9 @@
 	"gui.renmi.series_id": "Series ID",
 	"gui.renmi.act_id": "Act ID",
 	"gui.renmi.diameter": "Diameter",
-	"gui.renmi.proceed": "Proceed",
-	"gui.renmi.end": "END"
+	"actor.renmi.barebones": "Barebones",
+	"actor.renmi.lulu": "Lulu",
+	"actor.renmi.plume": "Plume",
+	"actor.renmi.shrimple": "Shrimple",
+	"actor.renmi.ugg": "Ugg"
 }

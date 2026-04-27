@@ -37,6 +37,7 @@ import java.util.List;
 
 public class StoryScreen extends Screen {
 	public static final Identifier NEXT_ARROW = Renmi.id("next_arrow");
+	public static final Identifier NAME_PLATE = Renmi.id("name_plate");
 	public static final WidgetSprites BUTTONS = new WidgetSprites(
 		Renmi.id("choice_button"),
 		Renmi.id("choice_button_highlighted")
@@ -45,6 +46,7 @@ public class StoryScreen extends Screen {
 	private static Runnable updateCallback; // the hama special
 
 	private Panel choices;
+	private Label namePlate;
 	private Paragraph textBoxText;
 	private Button.Builder<?, ?> choiceButton;
 
@@ -66,6 +68,16 @@ public class StoryScreen extends Screen {
 			.alignCenter()
 			.verticalAlignment(0.75f)
 			.spacing(10)
+			.build();
+		namePlate = Label.builder()
+			.height(16)
+			.renderOperations(
+				(self, render) -> render.context().blitSprite(
+					RenderPipelines.GUI_TEXTURED, NAME_PLATE,
+					self.getX(), self.getY(), self.getWidth(), self.getHeight()
+				),
+				RenderOperations.TEXT_RENDER
+			)
 			.build();
 		textBoxText = Paragraph.builder()
 			.dimensions(true, 42)
@@ -135,13 +147,22 @@ public class StoryScreen extends Screen {
 		root.addChild(actTitle);
 		root.addChild(choices);
 		root.addChild(textBox);
-
 		textBox.addChild(textBoxText);
+
+		root.reflowNow();
+
+		namePlate.setPosition(textBox.getX() + 20, textBox.getY() - 8);
 
 		for (Portrait slot : slots) {
 			addRenderableOnly(slot.getImage());
 		}
 		addRenderableWidget(root);
+		addRenderableOnly(namePlate);
+	}
+
+	private void setNameplate(Component name) {
+		namePlate.setText(name);
+		namePlate.setWidth(DrawUtils.textRenderer.width(name) + 16);
 	}
 
 	private void setPortrait(ActorDirection dir) {
@@ -164,6 +185,9 @@ public class StoryScreen extends Screen {
 			}
 			lastUsedSlots.remove((Integer) slot);
 			lastUsedSlots.add(slot);
+
+			// Set up nameplate
+			setNameplate(Component.translatable("actor." + dir.id().getNamespace() + "." + dir.id().getPath()));
 
 			// Set up portrait
 			Portrait portrait = slots[slot];
