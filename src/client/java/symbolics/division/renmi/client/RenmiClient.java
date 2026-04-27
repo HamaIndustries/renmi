@@ -3,11 +3,14 @@ package symbolics.division.renmi.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientEntityEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleProviderRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import symbolics.division.renmi.RenmiAttachments;
+import symbolics.division.renmi.RenmiParticles;
 import symbolics.division.renmi.client.gui.StoryLocusScreen;
 import symbolics.division.renmi.client.gui.StoryScreen;
+import symbolics.division.renmi.client.particle.StoryNodeParticle;
 import symbolics.division.renmi.net.S2CActEditingPacket;
 import symbolics.division.renmi.net.S2CDisplayStoryScreenPacket;
 
@@ -32,11 +35,12 @@ public class RenmiClient implements ClientModInitializer {
 					payload.series(),
 					payload.act(),
 					payload.inkSource(),
-					payload.locus().orElse(null)
+					payload.locus().orElse(null),
+					payload.rgb()
 				));
 			}
 		);
 
-
+		ParticleProviderRegistry.getInstance().register(RenmiParticles.STORY_NODE, StoryNodeParticle.Provider::new);
 	}
 }

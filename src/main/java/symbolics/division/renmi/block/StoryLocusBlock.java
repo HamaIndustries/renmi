@@ -9,9 +9,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jspecify.annotations.Nullable;
+import symbolics.division.renmi.RenmiBlocks;
+import symbolics.division.renmi.RenmiParticles;
 import symbolics.division.renmi.block.entity.StoryLocusBlockEntity;
 import symbolics.division.renmi.net.S2CActEditingPacket;
 import symbolics.division.renmi.story.Act;
@@ -54,11 +58,25 @@ public class StoryLocusBlock extends BaseEntityBlock {
 						source = act.source();
 					}
 				}
-				ServerPlayNetworking.send((ServerPlayer) player, new S2CActEditingPacket(be.series, be.act, source, Optional.of(be.getBlockPos())));
+				ServerPlayNetworking.send((ServerPlayer) player, new S2CActEditingPacket(be.series, be.act, source, be.color, Optional.of(be.getBlockPos())));
 			}
 			return InteractionResult.SUCCESS;
 		} else {
 			return InteractionResult.PASS;
+		}
+	}
+
+	@Override
+	public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> type) {
+		return createTickerHelper(type, RenmiBlocks.STORY_LOCUS_ENTITY, StoryLocusBlock::BETick);
+	}
+
+	public static void BETick(Level level, BlockPos blockPos, BlockState blockState, StoryLocusBlockEntity be) {
+		var opts = new RenmiParticles.StoryNodeParticleOptions(be.diameter, be.color);
+		int n = level.getRandom().nextInt(5);
+		var c = blockPos.getCenter();
+		for (int i = 0; i < n; i++) {
+			level.addParticle(opts, c.x, c.y, c.z, 0, 0, 0);
 		}
 	}
 }

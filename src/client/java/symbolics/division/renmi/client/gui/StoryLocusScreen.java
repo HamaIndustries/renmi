@@ -4,6 +4,7 @@ import com.google.common.primitives.Floats;
 import com.mojang.blaze3d.platform.Window;
 import dev.chailotl.bento_gui.client.FlowAxis;
 import dev.chailotl.bento_gui.client.elements.*;
+import dev.chailotl.bento_util.Color;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
@@ -21,20 +22,24 @@ public class StoryLocusScreen extends Screen {
 	private TextField<Identifier> seriesField;
 	private TextField<Float> diameterField;
 	private TextAreaWithTabs scriptField;
+	private TextField<Color> colorField;
 
 	private Identifier seriesId;
 	private Identifier actId;
 	private String inkSource;
 	@Nullable
 	private BlockPos locusPos;
-	@Nullable float diameter;
+	@Nullable
+	private float diameter;
+	private Color color;
 
-	public StoryLocusScreen(Identifier series, Identifier act, String inkSource, @Nullable BlockPos locusPos) {
+	public StoryLocusScreen(Identifier series, Identifier act, String inkSource, @Nullable BlockPos locusPos, int rgb) {
 		super(Component.empty());
 		this.seriesId = series;
 		this.actId = act;
 		this.inkSource = inkSource;
 		this.locusPos = locusPos;
+		this.color = Color.ofRgb(rgb);
 	}
 
 	@Override
@@ -70,6 +75,9 @@ public class StoryLocusScreen extends Screen {
 		actField = TextField.ofIdentifier()
 			.text(String.valueOf(actId))
 			.build();
+		colorField = TextField.ofColor()
+			.value(color)
+			.build();
 
 		//FIXME just hide the field if no BE is involved
 		this.diameter = locusPos != null && minecraft.level.getBlockEntity(locusPos) instanceof StoryLocusBlockEntity be ? be.diameter : 1;
@@ -89,6 +97,7 @@ public class StoryLocusScreen extends Screen {
 		sidePanel.addChild(addLabel(seriesField, "gui.renmi.series_id"));
 		sidePanel.addChild(addLabel(actField, "gui.renmi.act_id"));
 		sidePanel.addChild(addLabel(diameterField, "gui.renmi.diameter"));
+		sidePanel.addChild(addLabel(colorField, "gui.renmi.color"));
 		sidePanel.addChild(doneButton);
 		root.addChild(sidePanel);
 
@@ -125,13 +134,17 @@ public class StoryLocusScreen extends Screen {
 		if (scriptField.isValidText()) {
 			inkSource = scriptField.getValue();
 		}
+		if (colorField.isValidText()) {
+			color = colorField.getValue();
+		}
+
 		ClientPlayNetworking.send(
 			new C2SActEditingPacket(seriesId, actId, inkSource)
 		);
 
 		if (locusPos != null) {
 			ClientPlayNetworking.send(new C2SEditStoryLocusPacket(
-				locusPos, seriesId, actId, diameter
+				locusPos, seriesId, actId, diameter, color.rgb()
 			));
 		}
 		super.onClose();
