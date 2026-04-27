@@ -54,6 +54,7 @@ public class StoryScreen extends Screen {
 	private ArrayList<Portrait> allPortraits = new ArrayList<>();
 
 	private DisplayState state;
+	private boolean isFinishedScrolling = false;
 
 	public StoryScreen() {
 		super(Component.empty());
@@ -190,6 +191,15 @@ public class StoryScreen extends Screen {
 	public void tick() {
 		if (state != null) {
 			state.tick();
+
+			if (!state.isScrolling()) {
+				if (!isFinishedScrolling) {
+					showChoices();
+				}
+				isFinishedScrolling = true;
+			} else {
+				isFinishedScrolling = false;
+			}
 		}
 	}
 
@@ -243,28 +253,33 @@ public class StoryScreen extends Screen {
 
 			// Clear choices
 			choices.getChildren().forEach(child -> choices.removeChild(child));
+		}
+	}
 
-			if (!state.choices().isEmpty()) {
-				// Find longest text width
-				int width = 0;
-				for (var choice : state.choices()) {
-					int w = DrawUtils.textRenderer.width(choice.text());
-					if (w > width) {
-						width = w;
-					}
+	private void showChoices() {
+		LocalPlayer player = Minecraft.getInstance().player;
+		var state = player.getAttached(RenmiAttachments.READING_STATE);
+
+		if (!state.choices().isEmpty()) {
+			// Find longest text width
+			int width = 0;
+			for (var choice : state.choices()) {
+				int w = DrawUtils.textRenderer.width(choice.text());
+				if (w > width) {
+					width = w;
 				}
+			}
 
-				width = (int) Math.ceil(width / 16.0) * 16 + 16;
-				choiceButton.width(width);
+			width = (int) Math.ceil(width / 16.0) * 16 + 16;
+			choiceButton.width(width);
 
-				// Add choices
-				for (var choice : state.choices()) {
-					choices.addChild(choiceButton
-						.text(Component.literal(choice.text())) // FIXME buttons might have component visiblity? placeholder api?
-						.onPress(_ -> makeChoice(choice.index()))
-						.build()
-					);
-				}
+			// Add choices
+			for (var choice : state.choices()) {
+				choices.addChild(choiceButton
+					.text(Component.literal(choice.text())) // FIXME buttons might have component visiblity? placeholder api?
+					.onPress(_ -> makeChoice(choice.index()))
+					.build()
+				);
 			}
 		}
 	}
