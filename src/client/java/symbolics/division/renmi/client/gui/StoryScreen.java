@@ -12,12 +12,17 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.SubStringSource;
 import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvents;
 import org.jspecify.annotations.Nullable;
+import org.lwjgl.glfw.GLFW;
 import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiAttachments;
 import symbolics.division.renmi.client.gui.stage.ActorDirection;
@@ -50,11 +55,6 @@ public class StoryScreen extends Screen {
 		.dimensions(true, true)
 		.alignCenter()
 		.alignMiddle()
-		.build();
-	private Button proceedButton = Button.builder()
-		.dimensions(20, 20)
-		.text(Component.literal(">"))
-		.onPress(_ -> proceed())
 		.build();
 	private Button.Builder<?, ?> choiceButton = Button.builder()
 		.renderOperations(
@@ -126,7 +126,6 @@ public class StoryScreen extends Screen {
 		root.addChild(textBox);
 
 		textBox.addChild(textBoxText);
-		textBox.addChild(proceedButton);
 
 		for (Portrait slot : slots) {
 			addRenderableOnly(slot.getImage());
@@ -239,6 +238,45 @@ public class StoryScreen extends Screen {
 		}
 	}
 
+	@Override
+	public boolean keyPressed(KeyEvent event) {
+		return (event.key() == GLFW.GLFW_KEY_SPACE && proceed()) || super.keyPressed(event);
+	}
+
+	@Override
+	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+		return (event.button() == GLFW.GLFW_MOUSE_BUTTON_1 && proceed()) || super.mouseClicked(event, doubleClick);
+	}
+
+	private boolean proceed() {
+		LocalPlayer player = Minecraft.getInstance().player;
+		var state = player.getAttached(RenmiAttachments.READING_STATE);
+
+		if (state != null && state != ReadingState.INACTIVE) {
+			if (this.state.isScrolling()) {
+				this.state.skipScrolling();
+				playDownSound();
+				clearFocus();
+				return true;
+			} else if (state.choices().isEmpty()) {
+				if (state.end()) {
+					onClose();
+				} else {
+					ClientPlayNetworking.send(new C2SPlayerInputPacket(0));
+				}
+				playDownSound();
+				clearFocus();
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public void playDownSound() {
+		Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1f));
+	}
+
 	public void update() {
 		LocalPlayer player = Minecraft.getInstance().player;
 		var state = player.getAttached(RenmiAttachments.READING_STATE);
@@ -251,18 +289,7 @@ public class StoryScreen extends Screen {
 			// Clear choices
 			choices.getChildren().forEach(child -> choices.removeChild(child));
 
-			if (state.choices().isEmpty()) {
-				proceedButton.setVisible(true);
-
-				if (state.end()) {
-					proceedButton.setText(Component.translatable("gui.renmi.end"));
-					proceedButton.setOnPress(_ -> this.onClose());
-					proceedButton.setAutoWidth(true);
-				}
-			} else {
-				// Show choices
-				proceedButton.setVisible(false);
-
+			if (!state.choices().isEmpty()) {
 				// Find longest text width
 				int width = 0;
 				for (var choice : state.choices()) {
@@ -289,10 +316,6 @@ public class StoryScreen extends Screen {
 
 	private void makeChoice(int index) {
 		ClientPlayNetworking.send(new C2SPlayerInputPacket(index));
-	}
-
-	private void proceed() {
-		ClientPlayNetworking.send(new C2SPlayerInputPacket(0));
 	}
 
 	public static void runUpdateCallback() {
@@ -344,6 +367,14 @@ public class StoryScreen extends Screen {
 			textProgress = Math.min(textProgress + textRate, textLength);
 //			var substr = FormattedCharSequence.composite(splitText.substring(0, textProgress, false));
 			StoryScreen.this.textBoxText.setText(Component.literal(tempStr.substring(0, textProgress)));
+		}
+
+		public boolean isScrolling() {
+			return textProgress < textLength;
+		}
+
+		public void skipScrolling() {
+			textProgress = textLength;
 		}
 	}
 }
