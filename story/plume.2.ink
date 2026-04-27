@@ -96,7 +96,7 @@ They can't get a read on you. it's like you always have someone looking just ove
 *   {not smoke} You could go for that cig[arette] now. On the far side of the alley, naturally.
     -> smoke
     
-*   You [sit down nearby] settle on a stack of reasonably clean pallets. The alley smells like damp and passivity.
+*   You [sit down nearby] settle on a stack of reasonably clean pallets. The alley smells like damp wood and passivity.
 -
     Plume tries to light another, but there's only sparks.
     
@@ -108,7 +108,7 @@ They can't get a read on you. it's like you always have someone looking just ove
 
     You're a little antsy that they might see the inscription, but the payoff is worth the potential embarassment.
     
-    p: Thanks{thinking: again, I guess|.}
+    p: Thanks{thinking: again, I guess}.
     
     Their hand slams to the ground like you dropped a brick in it, narrowly missing a few scattered shards of glass.
     
@@ -166,7 +166,7 @@ They can't get a read on you. it's like you always have someone looking just ove
     p: If I wanted input from the peanut gallery, you'd know. Mind your business.
     
     p: ...
-    
+    //different expression here?
     p: ...
     
     p: You're not wrong, though.
@@ -278,7 +278,7 @@ They can't get a read on you. it's like you always have someone looking just ove
     
     p: Don't say it straight, if you do. Make it a riddle so I feel like I solved it myself.
 
-*   [That's for them to figure out] That's for Plume to figure out
+*   [That's for them to figure out] That's for Plume to figure out.
 
     p: Fair enough. It wouldn't count if you found it for me.
 -   
