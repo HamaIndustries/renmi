@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public sealed interface StageDirection permits ActorDirection, TextDirection {
 	Pattern LINE = Pattern.compile(
-		"(?<instr>(?<name>\\S+)\\s?(?<expr>\\S+)\\s?(?<pos>[0-9]+):)?\\s*(?<text>.+)\\s*"
+		"(?<instr>(?<name>\\S+)\\s?(?<expr>\\S+)?\\s?(?<pos>[0-9]+):)?\\s*(?<text>.+)?\\s*"
 	);
 
 	static List<StageDirection> parse(ActLine line) {
