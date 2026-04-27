@@ -19,9 +19,7 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.SubStringSource;
-import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
-import org.jspecify.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiAttachments;
@@ -33,7 +31,6 @@ import symbolics.division.renmi.story.Actor;
 import symbolics.division.renmi.story.ActorManager;
 import symbolics.division.renmi.story.ReadingState;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,37 +42,41 @@ public class StoryScreen extends Screen {
 
 	private static Runnable updateCallback; // the hama special
 
-	private Panel choices = Panel.builder()
-		.dimensions(true, true)
-		.alignCenter()
-		.verticalAlignment(0.75f)
-		.spacing(10)
-		.build();
-	private Paragraph textBoxText = Paragraph.builder()
-		.dimensions(true, true)
-		.alignCenter()
-		.alignMiddle()
-		.build();
-	private Button.Builder<?, ?> choiceButton = Button.builder()
-		.renderOperations(
-			(self, render) -> render.context().blitSprite(
-				RenderPipelines.GUI_TEXTURED, BUTTONS.get(self.isEnabled(), self.isSelected()),
-				self.getX(), self.getY(), self.getWidth(), self.getHeight()
-			),
-			RenderOperations.TEXT_RENDER
-		);
+	private Panel choices;
+	private Paragraph textBoxText;
+	private Button.Builder<?, ?> choiceButton;
 
 	// allow portrait slots 1-6, but also allow absolute positioning.
 	// FIXME: no absolute positioning yet
 	private Portrait[] slots = new Portrait[6];
-	private ArrayDeque<Integer> lastUsedSlots = new ArrayDeque<>();
-	private int[] slotOrder = {2, 3, 1, 4, 0, 5};
+	private ArrayList<Integer> lastUsedSlots = new ArrayList<>();
+	private final int[] slotOrder = {2, 3, 1, 4, 0, 5};
 	private ArrayList<Portrait> allPortraits = new ArrayList<>();
 
 	private DisplayState state;
 
 	public StoryScreen() {
 		super(Component.empty());
+
+		choices = Panel.builder()
+			.dimensions(true, true)
+			.alignCenter()
+			.verticalAlignment(0.75f)
+			.spacing(10)
+			.build();
+		textBoxText = Paragraph.builder()
+			.dimensions(true, true)
+			.alignCenter()
+			.alignMiddle()
+			.build();
+		choiceButton = Button.builder()
+			.renderOperations(
+				(self, render) -> render.context().blitSprite(
+					RenderPipelines.GUI_TEXTURED, BUTTONS.get(self.isEnabled(), self.isSelected()),
+					self.getX(), self.getY(), self.getWidth(), self.getHeight()
+				),
+				RenderOperations.TEXT_RENDER
+			);
 
 		for (int i = 0; i < slots.length; ++i) {
 			slots[i] = new Portrait();
@@ -138,11 +139,24 @@ public class StoryScreen extends Screen {
 			Window window = minecraft.getWindow();
 
 			// Hide existing actor
-			if (getPortrait(dir.id()) instanceof Portrait slot) {
-				slot.hide();
+			for (int i = 0; i < slots.length; ++i) {
+				if (dir.id().equals(slots[i].getActorId())) {
+					slots[i].hide();
+					lastUsedSlots.remove((Integer) i);
+					break;
+				}
 			}
 
-			Portrait portrait = slots[dir.slotPos()];
+			// Pick a slot
+			int slot = dir.slotPos();
+			if (slot == -1) {
+				slot = getNextFreeSlot();
+			}
+			lastUsedSlots.remove((Integer) slot);
+			lastUsedSlots.add(slot);
+
+			// Set up portrait
+			Portrait portrait = slots[slot];
 			portrait.show(dir);
 
 			int guiScale = window.getGuiScale();
@@ -151,84 +165,25 @@ public class StoryScreen extends Screen {
 
 			portrait.getImage().setWidth((int) (portrait.getImage().getTextureWidth() * scale));
 
-			int slot = setPortraitSlot(portrait, dir.slotPos());
+			float x = window.getGuiScaledWidth() / 2f
+				+ 30f * guiScale * (slot - 3)
+				- actor.origin().x * scale;
+			float y = window.getGuiScaledHeight()
+				+ 25f * guiScale * heightRatio
+				- actor.origin().y * scale;
 
-			// change slot
-			if (slot != -1) {
-				float x = window.getGuiScaledWidth() / 2f
-					+ 30f * guiScale * (slot - 3)
-					- actor.origin().x * scale;
-				float y = window.getGuiScaledHeight()
-					+ 25f * guiScale * heightRatio
-					- actor.origin().y * scale;
-
-				portrait.getImage().setPosition((int) x, (int) y);
-			}
+			portrait.getImage().setPosition((int) x, (int) y);
 		}
 	}
 
-	@Nullable
-	private Portrait getPortrait(Identifier actorId) {
-		for (Portrait slot : slots) {
-			if (slot.getActorId() != null && slot.getActorId().equals(actorId)) {
-				return slot;
-			}
-		}
-		return null;
-	}
-
-	/*
-	slot logic:
-
-	-1 means any slot. 0-5 means specific slot.
-	slot order is 2,3,1,4,0,5.
-
-	skip if same slot as before
-	if slot is -1, attempt auto-place:
-		start with next free slot.
-		if no free slots, use queue to replace. update queue.
-	if slot is valid, replace last that. update queue.
-	*/
-	private int setPortraitSlot(Portrait portrait, int slot) {
-		int oldSlot = -1;
-		int nextFreeSlot = -1;
+	private int getNextFreeSlot() {
 		for (int i : slotOrder) {
-			if (portrait.equals(slots[i])) {
-				oldSlot = i;
-			} else if (nextFreeSlot == -1 && slots[i] == null) {
-				nextFreeSlot = i;
+			if (!slots[i].isActive()) {
+				return i;
 			}
 		}
 
-		if (oldSlot != -1) { // sprite exists
-			// either we don't care about placement or its in correct place
-			if (slot == -1 || slot == oldSlot) { return oldSlot; }
-			slots[oldSlot] = null;
-			lastUsedSlots.removeFirstOccurrence(oldSlot);
-		}
-
-		if (slot == -1) {                            // set auto
-			if (nextFreeSlot != -1) {                        // fill an empty slot
-				lastUsedSlots.removeFirstOccurrence(nextFreeSlot);
-				lastUsedSlots.add(nextFreeSlot);
-				slots[nextFreeSlot] = portrait;
-				return nextFreeSlot;
-			} else if (!lastUsedSlots.isEmpty()) {            // full, use next
-				int newSlot = lastUsedSlots.pop();
-				slots[newSlot] = portrait;
-				lastUsedSlots.add(newSlot);
-				return newSlot;
-			} else {                                          // last used is unpopulated
-				lastUsedSlots.add(slotOrder[0]);
-				slots[slotOrder[0]] = portrait;
-				return 0;
-			}
-		} else {                                      // set specific slot
-			slots[slot] = portrait;
-			lastUsedSlots.removeFirstOccurrence(slot);
-			lastUsedSlots.add(slot);
-			return slot;
-		}
+		return lastUsedSlots.getFirst();
 	}
 
 	@Override
