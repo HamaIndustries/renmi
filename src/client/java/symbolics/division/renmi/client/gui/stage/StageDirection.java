@@ -1,5 +1,6 @@
 package symbolics.division.renmi.client.gui.stage;
 
+import net.minecraft.network.chat.Component;
 import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.story.ActLine;
 import symbolics.division.renmi.util.ParseUtil;
@@ -33,7 +34,11 @@ public sealed interface StageDirection permits ActorDirection, TextDirection {
 					true
 				));
 			}
-			directions.add(new TextDirection(ParseUtil.parseLine(matcher.group("text"))));
+			if (matcher.group("text") != null) {
+				directions.add(new TextDirection(ParseUtil.parseLine(matcher.group("text"))));
+			} else {
+				directions.add(new TextDirection(Component.empty()));
+			}
 		} else {
 			Renmi.LOGGER.info("FAILED TO MATCH!!!!");
 			Renmi.LOGGER.info(text);
