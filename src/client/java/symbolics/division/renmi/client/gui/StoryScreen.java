@@ -44,6 +44,7 @@ public class StoryScreen extends Screen {
 		.dimensions(true, true)
 		.alignCenter()
 		.verticalAlignment(0.75f)
+		.spacing(10)
 		.build();
 	private Paragraph textBoxText = Paragraph.builder()
 		.dimensions(true, true)
