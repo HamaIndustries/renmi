@@ -19,6 +19,7 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.SubStringSource;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import org.lwjgl.glfw.GLFW;
 import symbolics.division.renmi.Renmi;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StoryScreen extends Screen {
+	public static final Identifier NEXT_ARROW = Renmi.id("next_arrow");
 	public static final WidgetSprites BUTTONS = new WidgetSprites(
 		Renmi.id("choice_button"),
 		Renmi.id("choice_button_highlighted")
@@ -66,9 +68,8 @@ public class StoryScreen extends Screen {
 			.spacing(10)
 			.build();
 		textBoxText = Paragraph.builder()
-			.dimensions(true, true)
-			.alignCenter()
-			.alignMiddle()
+			.dimensions(true, 42)
+			.padding(0, 0, 2, 0)
 			.build();
 		choiceButton = Button.builder()
 			.renderOperations(
@@ -112,14 +113,22 @@ public class StoryScreen extends Screen {
 			.dimensions(true, 62)
 			.maxWidth(Math.min((width - 34) / 16 * 16 + 14, 318))
 			.padding(10)
-			.alignBottom()
+			.alignMiddle()
 			.flowAxis(FlowAxis.HORIZONTAL)
 			.renderOperations(
 				(self, render) -> render.context().blitSprite(
 					RenderPipelines.GUI_TEXTURED, Renmi.id("text_box"),
 					self.getX(), self.getY(), self.getWidth(), self.getHeight()
 				),
-				RenderOperations.CHILD_RENDER
+				RenderOperations.CHILD_RENDER,
+				(self, render) -> {
+					if (!state.isScrolling()) {
+						render.context().blitSprite(
+							RenderPipelines.GUI_TEXTURED, NEXT_ARROW,
+							self.getRight() - 16, self.getBottom() - 16, 8, 8
+						);
+					}
+				}
 			)
 			.build();
 
