@@ -8,7 +8,9 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.server.level.ServerPlayer;
 import org.apache.commons.lang3.NotImplementedException;
 import symbolics.division.renmi.Renmi;
+import symbolics.division.renmi.util.ParseUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,12 +33,14 @@ public class ActReading {
 
 	private StoryListener storyListener = null;
 
+	private List<String> globalTags = new ArrayList<>();
 	/**
 	 * A brand new act.
 	 */
 	public ActReading(Act act, ServerPlayer player) {
 		try {
 			this.story = act.getStory();
+			this.globalTags = this.story.getGlobalTags();
 			proceed(player);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -85,7 +89,7 @@ public class ActReading {
 					return 0;
 				}
 			});
-
+			this.globalTags = this.story.getGlobalTags();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -123,7 +127,9 @@ public class ActReading {
 	public void proceed(ServerPlayer player) {
 		if (story.canContinue()) {
 			try {
-				currentLine = ActLine.of(story.Continue(), isDone());
+				String text = story.Continue();
+				text = ParseUtil.parseAlias(text,this.globalTags);
+				currentLine = ActLine.of(text, isDone());
 			} catch (StoryException e) {
 				throw new RuntimeException(e);
 			} catch (Exception e) {
