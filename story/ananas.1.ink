@@ -80,7 +80,7 @@ Ready?
 
     {many_people: You effortlessly slide through the horde, a mossless stone rolling upstream.}
     
-    {few_people: You think you spot Barebones and Plume among the throng. They look like they're up to hijinks, but they're gone by the time the crowd clears.}
+    {few_people: You think you spot Barebones and Plume among the throng. They look like they're up to something nefarious, but they're gone by the time the crowd clears.}
     
     {no_people: The horde may as well be wholly faceless. More visitors, all having brought their friends and family. There isn't really anything here for you.}
 
@@ -98,9 +98,9 @@ Ready?
     
 *   You're good with people[].
 
-    {no_people: This day's just a one-off. You hope. It's not a sign of things to come. You hope.|Even still, its just one day. Most of the visitors here will be gone tomorrow, and you'll just be another transfer student from nowhere.}
+    {no_people: This day's just a one-off, you hope. It's not a sign of things to come. You hope.|Even still, its just one day. Most of the visitors here will be gone tomorrow, and you'll just be another transfer student from nowhere.}
     
-    {no_people and experienced:You're used to being alone, but you know how to make friends and influence people. You know you'll be fine.}
+    {no_people and experienced:You're used to being alone, but you know how to make friends and influence people when it counts. You know you'll be fine.}
     
     ...
     
@@ -203,7 +203,7 @@ Ready?
 
     Ananas is showing you he's on your side. You can't keep running away from people and then feel bad about it.
     
-    And even if you can't accept him, don't forget:
+    And even if you can't yet accept him, don't forget:
     
     I'm here with you, honey.
     
@@ -213,7 +213,7 @@ Ready?
     
     * *     Okay.
             
-    * *     But it's scary[.], I know.
+    * *     [But it's scary.] You're right, it is scary.
     
             Living is scary. I'm scared too.
             
