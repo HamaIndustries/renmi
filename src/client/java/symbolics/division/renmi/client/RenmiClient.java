@@ -13,6 +13,7 @@ import symbolics.division.renmi.client.gui.StoryScreen;
 import symbolics.division.renmi.client.particle.StoryNodeParticle;
 import symbolics.division.renmi.net.S2CActEditingPacket;
 import symbolics.division.renmi.net.S2CDisplayStoryScreenPacket;
+import symbolics.division.renmi.net.S2CStoryCompileErrorPacket;
 
 public class RenmiClient implements ClientModInitializer {
 	@Override
@@ -40,6 +41,13 @@ public class RenmiClient implements ClientModInitializer {
 				));
 			}
 		);
+
+		ClientPlayNetworking.registerGlobalReceiver(S2CStoryCompileErrorPacket.TYPE, (s2CStoryCompileErrorPacket, context) -> {
+			var mc = Minecraft.getInstance();
+			if(mc.screen instanceof StoryLocusScreen screen) {
+				screen.setErrorMessage(s2CStoryCompileErrorPacket.errorMessage());
+			}
+		});
 
 		ParticleProviderRegistry.getInstance().register(RenmiParticles.STORY_NODE, StoryNodeParticle.Provider::new);
 	}
