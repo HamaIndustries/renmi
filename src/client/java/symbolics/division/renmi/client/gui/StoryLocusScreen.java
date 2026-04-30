@@ -23,6 +23,7 @@ public class StoryLocusScreen extends Screen {
 	private TextField<Float> diameterField;
 	private TextAreaWithTabs scriptField;
 	private TextField<Color> colorField;
+	private Paragraph errorMessage;
 
 	private Identifier seriesId;
 	private Identifier actId;
@@ -78,6 +79,9 @@ public class StoryLocusScreen extends Screen {
 		colorField = TextField.ofColor()
 			.value(color)
 			.build();
+		errorMessage = Paragraph.builder().build();
+		errorMessage.setFitToContentHeight(true);
+		errorMessage.setAutoWidth(true);
 
 		//FIXME just hide the field if no BE is involved
 		this.diameter = locusPos != null && minecraft.level.getBlockEntity(locusPos) instanceof StoryLocusBlockEntity be ? be.diameter : 1;
@@ -86,9 +90,14 @@ public class StoryLocusScreen extends Screen {
 			.text(String.valueOf(Math.max(1f, diameter)))
 			.build();
 
+		Button saveButton = Button.builder()
+			.text(Component.translatable("gui.renmi.save"))
+			.onPress(button -> onSave())
+			.build();
+
 		Button doneButton = Button.builder()
 			.text(Component.translatable("gui.done"))
-			.onPress(_ -> onClose())
+			.onPress(button -> onClose())
 			.build();
 
 		editorPanel.addChild(scriptField);
@@ -98,7 +107,9 @@ public class StoryLocusScreen extends Screen {
 		sidePanel.addChild(addLabel(actField, "gui.renmi.act_id"));
 		sidePanel.addChild(addLabel(diameterField, "gui.renmi.diameter"));
 		sidePanel.addChild(addLabel(colorField, "gui.renmi.color"));
+		sidePanel.addChild(saveButton);
 		sidePanel.addChild(doneButton);
+		sidePanel.addChild(errorMessage);
 		root.addChild(sidePanel);
 
 		addRenderableWidget(root);
@@ -120,8 +131,13 @@ public class StoryLocusScreen extends Screen {
 		return panel;
 	}
 
-	@Override
-	public void onClose() {
+	public void setErrorMessage(String message){
+		if(errorMessage != null) {
+			errorMessage.setText(Component.literal(message));
+		}
+	}
+
+	public void onSave() {
 		if (seriesField.isValidText() && !seriesField.getText().isEmpty()) {
 			seriesId = seriesField.getValue();
 		}
@@ -138,6 +154,10 @@ public class StoryLocusScreen extends Screen {
 			color = colorField.getValue();
 		}
 
+		if(errorMessage != null) {
+			errorMessage.setText(Component.empty());
+		}
+
 		ClientPlayNetworking.send(
 			new C2SActEditingPacket(seriesId, actId, inkSource)
 		);
@@ -147,6 +167,11 @@ public class StoryLocusScreen extends Screen {
 				locusPos, seriesId, actId, diameter, color.rgb()
 			));
 		}
+	}
+
+	@Override
+	public void onClose() {
+		onSave();
 		super.onClose();
 	}
 }

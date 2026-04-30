@@ -1,5 +1,7 @@
 package symbolics.division.renmi.net;
 
+import com.mojang.authlib.minecraft.client.MinecraftClient;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -37,6 +39,10 @@ public class RenmiNetworking {
 
 		PayloadTypeRegistry.clientboundPlay().register(
 			S2CDisplayStoryScreenPacket.TYPE, S2CDisplayStoryScreenPacket.STREAM_CODEC
+		);
+
+		PayloadTypeRegistry.clientboundPlay().register(
+			S2CStoryCompileErrorPacket.TYPE, S2CStoryCompileErrorPacket.STREAM_CODEC
 		);
 	}
 }

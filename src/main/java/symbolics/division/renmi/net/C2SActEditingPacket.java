@@ -33,6 +33,10 @@ public record C2SActEditingPacket(Identifier series, Identifier act, String inkS
 				payload.series()
 			);
 			e.printStackTrace();
+			ServerPlayNetworking.send(
+				context.player(),
+				new S2CStoryCompileErrorPacket(e.getMessage())
+			);
 		}
 	}
 
