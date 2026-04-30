@@ -7,6 +7,7 @@ import symbolics.division.renmi.util.ParseUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,12 +20,14 @@ public sealed interface StageDirection permits ActorDirection, TextDirection {
 		String text = line.text();
 		Matcher matcher = LINE.matcher(text);
 		var directions = new ArrayList<StageDirection>();
+		Map<String, String> aliases = ParseUtil.getAliases(line.tags());
 		if (matcher.matches()) {
 			String name = matcher.group("name");
 			String expression = matcher.group("expr");
 			String pos = matcher.group("pos");
 
 			if (name != null) {
+				name = aliases.getOrDefault(name, name);
 				directions.add(new ActorDirection(
 					Renmi.id(name),
 					expression == null ? "neutral" : expression,

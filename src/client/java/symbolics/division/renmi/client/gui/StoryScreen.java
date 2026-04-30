@@ -358,7 +358,9 @@ public class StoryScreen extends Screen {
 					setPortrait(actor);
 
 					for (Portrait p : slots) {
-						if (p == null) { continue; }
+						if (p == null) {
+							continue;
+						}
 						allPortraits.add(p);
 					}
 				}
@@ -367,6 +369,7 @@ public class StoryScreen extends Screen {
 		}
 
 		this.state = new DisplayState(displayedText, 1);
+		this.isFinishedScrolling = false;
 	}
 
 	private class DisplayState {
