@@ -32,6 +32,7 @@ import symbolics.division.renmi.client.gui.stage.ActorDirection;
 import symbolics.division.renmi.client.gui.stage.StageDirection;
 import symbolics.division.renmi.client.gui.stage.TextDirection;
 import symbolics.division.renmi.net.C2SPlayerInputPacket;
+import symbolics.division.renmi.net.C2SRequestStoryLogPacket;
 import symbolics.division.renmi.story.Actor;
 import symbolics.division.renmi.story.ActorManager;
 import symbolics.division.renmi.story.ReadingState;
@@ -170,7 +171,15 @@ public class StoryScreen extends Screen {
 			)
 			.build();
 
+		Button logButton = Button.builder()
+			.onPress(_ -> ClientPlayNetworking.send(new C2SRequestStoryLogPacket()))
+			.text(Component.literal("log"))
+			.alignLeft()
+			.alignTop()
+			.build();
+
 		root.addChild(actTitle);
+		root.addChild(logButton);
 		root.addChild(choices);
 		root.addChild(textBox);
 		textBox.addChild(textBoxText);

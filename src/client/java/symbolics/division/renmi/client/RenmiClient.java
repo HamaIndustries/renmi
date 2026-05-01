@@ -9,9 +9,11 @@ import net.minecraft.client.player.LocalPlayer;
 import symbolics.division.renmi.RenmiAttachments;
 import symbolics.division.renmi.RenmiParticles;
 import symbolics.division.renmi.client.gui.StoryLocusScreen;
+import symbolics.division.renmi.client.gui.StoryLogScreen;
 import symbolics.division.renmi.client.gui.StoryScreen;
 import symbolics.division.renmi.client.particle.StoryNodeParticle;
 import symbolics.division.renmi.net.S2CActEditingPacket;
+import symbolics.division.renmi.net.S2CDisplayStoryLogPacket;
 import symbolics.division.renmi.net.S2CDisplayStoryScreenPacket;
 import symbolics.division.renmi.net.S2CStoryCompileErrorPacket;
 
@@ -42,9 +44,13 @@ public class RenmiClient implements ClientModInitializer {
 			}
 		);
 
+		ClientPlayNetworking.registerGlobalReceiver(
+			S2CDisplayStoryLogPacket.TYPE, (payload, context) -> Minecraft.getInstance().setScreen(new StoryLogScreen(payload.text()))
+		);
+
 		ClientPlayNetworking.registerGlobalReceiver(S2CStoryCompileErrorPacket.TYPE, (s2CStoryCompileErrorPacket, context) -> {
 			var mc = Minecraft.getInstance();
-			if(mc.screen instanceof StoryLocusScreen screen) {
+			if (mc.screen instanceof StoryLocusScreen screen) {
 				screen.setErrorMessage(s2CStoryCompileErrorPacket.errorMessage());
 			}
 		});

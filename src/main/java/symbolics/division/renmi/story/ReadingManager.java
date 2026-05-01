@@ -85,7 +85,7 @@ public class ReadingManager {
 		updateReadingState(player, null);
 	}
 
-	protected ActReading getActiveReading(Player player) {
+	public ActReading getActiveReading(Player player) {
 		return activeReadings.get(player.getUUID());
 	}
 

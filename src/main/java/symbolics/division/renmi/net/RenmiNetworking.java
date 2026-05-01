@@ -42,5 +42,16 @@ public class RenmiNetworking {
 		PayloadTypeRegistry.clientboundPlay().register(
 			S2CStoryCompileErrorPacket.TYPE, S2CStoryCompileErrorPacket.STREAM_CODEC
 		);
+
+		PayloadTypeRegistry.serverboundPlay().register(
+			C2SRequestStoryLogPacket.TYPE,
+			C2SRequestStoryLogPacket.STREAM_CODEC
+		);
+		ServerPlayNetworking.registerGlobalReceiver(C2SRequestStoryLogPacket.TYPE, C2SRequestStoryLogPacket::HANDLER);
+
+		PayloadTypeRegistry.clientboundPlay().register(
+			S2CDisplayStoryLogPacket.TYPE,
+			S2CDisplayStoryLogPacket.STREAM_CODEC
+		);
 	}
 }

@@ -113,7 +113,7 @@ public class ActReading {
 		}
 	}
 
-	protected String text() {
+	public String text() {
 		return text;
 	}
 
@@ -138,6 +138,7 @@ public class ActReading {
 					proceed(player, depth + 1);
 				} else {
 					currentLine = ActLine.of(text, isDone(), this.globalTags);
+					this.text += text;
 				}
 			} catch (StoryException e) {
 				throw new RuntimeException(e);
