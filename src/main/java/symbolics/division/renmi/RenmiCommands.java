@@ -178,7 +178,7 @@ public class RenmiCommands {
 		}
 		var state = player.getAttachedOrCreate(RenmiAttachments.READING_STATE);
 		context.getSource().sendSystemMessage(Component.literal("---------------"));
-		context.getSource().sendSystemMessage(ParseUtil.parseLine(state.line().text()));
+		context.getSource().sendSystemMessage(ParseUtil.parseLine(state.line().text(), player));
 		Renmi.LOGGER.info("> " + state.line().text().strip());
 		if (state.choices().size() > 0) {
 			for (var choice : state.choices()) {

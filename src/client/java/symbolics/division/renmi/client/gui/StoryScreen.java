@@ -18,9 +18,12 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.SubStringSource;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Util;
 import org.lwjgl.glfw.GLFW;
 import symbolics.division.renmi.Renmi;
@@ -35,6 +38,7 @@ import symbolics.division.renmi.story.ReadingState;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class StoryScreen extends Screen {
 	public static final Identifier NEXT_ARROW = Renmi.id("next_arrow");
@@ -395,7 +399,26 @@ public class StoryScreen extends Screen {
 			//FIXME need to scroll text with styling! this only show characters
 			textProgress = Math.min(textProgress + textRate, textLength);
 //			var substr = FormattedCharSequence.composite(splitText.substring(0, textProgress, false));
-			StoryScreen.this.textBoxText.setText(Component.literal(tempStr.substring(0, textProgress)));
+			List<FormattedCharSequence> formattedCharSequenceList = splitText.substring(0, textProgress, false);
+
+			MutableComponent result = Component.empty();
+			for (FormattedCharSequence sequence : formattedCharSequenceList) {
+				MutableComponent component = Component.empty();
+				AtomicReference<Style> style = new AtomicReference<>(Style.EMPTY);
+
+				sequence.accept((index, seqStyle, codePoint) -> {
+					String character = new String(Character.toChars(codePoint));
+					component.append(Component.literal(character));
+					style.set(seqStyle);
+					return true;
+				});
+
+				component.withStyle(style.get());
+				result.append(component);
+			}
+
+			StoryScreen.this.textBoxText.setText(result);
+//			StoryScreen.this.textBoxText.setText(Component.literal(tempStr.substring(0, textProgress)));
 		}
 
 		public boolean isScrolling() {

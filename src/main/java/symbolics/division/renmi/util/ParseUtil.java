@@ -4,6 +4,8 @@ import eu.pb4.placeholders.api.node.TextNode;
 import eu.pb4.placeholders.api.parsers.NodeParser;
 import eu.pb4.placeholders.api.parsers.TagParser;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.List;
@@ -48,9 +50,13 @@ public class ParseUtil {
 		return aliases;
 	}
 
-	public static Component parseLine(String lineText) {
-		TextNode textNode = PARSER.parseNode("> " + lineText.strip());
+	public static String parsePlayerName(String lineText, Player player) {
+		return lineText.replaceAll("<PLAYER_NAME>", player.getPlainTextName());
+	}
 
+	public static Component parseLine(String lineText, @Nullable Player player) {
+		lineText = parsePlayerName(lineText,player);
+		TextNode textNode = PARSER.parseNode("> " + lineText.strip());
 		return textNode.toComponent();
 	}
 }

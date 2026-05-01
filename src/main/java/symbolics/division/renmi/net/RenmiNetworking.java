@@ -1,7 +1,5 @@
 package symbolics.division.renmi.net;
 
-import com.mojang.authlib.minecraft.client.MinecraftClient;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
