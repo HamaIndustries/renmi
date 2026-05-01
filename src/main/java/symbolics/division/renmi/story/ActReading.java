@@ -133,8 +133,7 @@ public class ActReading {
 		if (story.canContinue()) {
 			try {
 				String text = story.Continue();
-				boolean c = story.canContinue();
-				var choices = story.getCurrentChoices();
+				// not 100% sure this is needed
 				if (text.isEmpty() && story.canContinue() && depth < 10) {
 					proceed(player, depth + 1);
 				} else {

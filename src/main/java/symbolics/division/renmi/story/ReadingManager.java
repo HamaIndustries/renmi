@@ -57,7 +57,7 @@ public class ReadingManager {
 	public SeriesReading createOrLoad(ServerPlayer player, Series series) {
 		return allSeriesReadings
 			.computeIfAbsent(player.getUUID(), i -> new HashMap<>())
-			.computeIfAbsent(series.id, id -> series.createReading());
+			.computeIfAbsent(series.id, id -> series.createReading(player));
 	}
 
 	public void startReading(ServerPlayer player, Act act, Series series, boolean force) throws RenmiExceptions.ReadingConditionsUnmet {

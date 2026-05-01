@@ -8,9 +8,11 @@ import net.minecraft.commands.Commands;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.permissions.PermissionSet;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class SeriesReading implements StoryListener {
 
@@ -19,8 +21,8 @@ public class SeriesReading implements StoryListener {
 			Codec.unboundedMap(Codec.STRING, Codec.BOOL).fieldOf("knotsVisited").forGetter(ser -> ser.knotsVisited),
 			Codec.unboundedMap(Codec.STRING, Codec.INT).fieldOf("globalVars").forGetter(ser -> ser.globalVars),
 			ActReading.CODEC
-				.fieldOf("currentActReading")
-				.forGetter(SeriesReading::getCurrentActReading)
+				.optionalFieldOf("currentActReading")
+				.forGetter(reading -> Optional.ofNullable(reading.currentActReading))
 		).apply(i, SeriesReading::new)
 	);
 
@@ -29,26 +31,27 @@ public class SeriesReading implements StoryListener {
 
 	protected Map<String, Integer> globalVars = new HashMap<>();
 
+	@Nullable
 	protected ActReading currentActReading;
 
 	private ServerPlayer serverPlayer;
 
-	public SeriesReading() {
+	public SeriesReading(ServerPlayer player) {
+		this.serverPlayer = player;
 	}
 
-
-	public SeriesReading(Map<Identifier, ActReading> actReadings, Map<String, Boolean> knotsVisited, Map<String,Integer> globalVars, ActReading currentActReading) {
+	public SeriesReading(Map<Identifier, ActReading> actReadings, Map<String, Boolean> knotsVisited, Map<String, Integer> globalVars, Optional<ActReading> currentActReading) {
 		this.actReadings.putAll(actReadings);
 		this.knotsVisited.putAll(knotsVisited);
 		this.globalVars.putAll(globalVars);
-		this.currentActReading = currentActReading;
+		this.currentActReading = currentActReading.orElse(null);
 	}
 
 	public void setCurrentActReading(ActReading actReading) {
 		this.currentActReading = actReading;
 	}
 
-
+	@Nullable
 	public ActReading getCurrentActReading() {
 		return currentActReading;
 	}
@@ -72,7 +75,7 @@ public class SeriesReading implements StoryListener {
 
 	@Override
 	public void onWriteGlobal(String key, int value) {
-		this.globalVars.put(key,value);
+		this.globalVars.put(key, value);
 	}
 
 	@Override
@@ -82,12 +85,12 @@ public class SeriesReading implements StoryListener {
 
 	@Override
 	public int runCommand(String command) {
-		if(this.serverPlayer != null) {
+		if (this.serverPlayer != null) {
 			Commands commandManager = this.serverPlayer.level().getServer().getCommands();
 			CommandSourceStack commandSourceStack = this.serverPlayer.createCommandSourceStack();
 			commandSourceStack = commandSourceStack.withPermission(PermissionSet.ALL_PERMISSIONS);
-			ParseResults<CommandSourceStack> parseResults = commandManager.getDispatcher().parse(command,commandSourceStack);
-			if(!parseResults.getExceptions().isEmpty()){
+			ParseResults<CommandSourceStack> parseResults = commandManager.getDispatcher().parse(command, commandSourceStack);
+			if (!parseResults.getExceptions().isEmpty()) {
 				return 0;
 			}
 			commandManager.performCommand(parseResults, command);
@@ -100,7 +103,7 @@ public class SeriesReading implements StoryListener {
 		actReadings.put(actId, reading);
 	}
 
-	public Map<Identifier, ActReading> getActReadings(){
+	public Map<Identifier, ActReading> getActReadings() {
 		return this.actReadings;
 	}
 }

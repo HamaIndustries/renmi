@@ -3,6 +3,7 @@ package symbolics.division.renmi.block;
 import com.mojang.serialization.MapCodec;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -13,12 +14,14 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 import symbolics.division.renmi.RenmiBlocks;
 import symbolics.division.renmi.RenmiParticles;
 import symbolics.division.renmi.block.entity.StoryLocusBlockEntity;
 import symbolics.division.renmi.net.S2CActEditingPacket;
 import symbolics.division.renmi.story.Act;
+import symbolics.division.renmi.story.ReadingManager;
 import symbolics.division.renmi.story.RenmiLibrary;
 import symbolics.division.renmi.story.Series;
 
@@ -72,11 +75,24 @@ public class StoryLocusBlock extends BaseEntityBlock {
 	}
 
 	public static void BETick(Level level, BlockPos blockPos, BlockState blockState, StoryLocusBlockEntity be) {
-		var opts = new RenmiParticles.StoryNodeParticleOptions(be.diameter, be.color);
-		int n = level.getRandom().nextInt(5);
-		var c = blockPos.getCenter();
-		for (int i = 0; i < n; i++) {
-			level.addParticle(opts, c.x, c.y, c.z, 0, 0, 0);
+		if (level instanceof ServerLevel sv && level.getGameTime() % 2 == 0 && be instanceof StoryLocusBlockEntity locus) {
+			ReadingManager manager = ReadingManager.getManager(level.getServer());
+			RenmiLibrary library = RenmiLibrary.get(level.getServer());
+			Series series = library.getSeries(locus.series);
+			if (series == null) return;
+			Act act = series.getAct(locus.act);
+			if (act == null) return;
+
+			Vec3 c = blockPos.getCenter();
+			var opts = new RenmiParticles.StoryNodeParticleOptions(be.diameter, be.color);
+			int n = level.getRandom().nextInt(5);
+			for (ServerPlayer player : ((ServerLevel) level).getPlayers(
+				player -> player.distanceToSqr(c) < 250 && act.startConditionsMet(player, manager.createOrLoad(player, series)))
+			) {
+				for (int i = 0; i < n; i++) {
+					sv.sendParticles(player, opts, true, true, c.x, c.y, c.z, n, 0.1, 0.1, 0.1, 0);
+				}
+			}
 		}
 	}
 }

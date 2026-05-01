@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerPlayer;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,8 +39,8 @@ public class Series {
 		}
 	}
 
-	public SeriesReading createReading() {
-		return new SeriesReading();
+	public SeriesReading createReading(ServerPlayer player) {
+		return new SeriesReading(player);
 	}
 
 	public void createAct(Identifier id, Act act) {
