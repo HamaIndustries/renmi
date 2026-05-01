@@ -19,7 +19,8 @@ import symbolics.division.renmi.block.entity.StoryLocusBlockEntity;
 import java.util.function.Function;
 
 public class RenmiBlocks {
-	public static void init() { }
+	public static void init() {
+	}
 
 	public static final StoryLocusBlock STORY_LOCUS = register(
 		"story_locus",
@@ -30,7 +31,8 @@ public class RenmiBlocks {
 			.noLootTable()
 			.noOcclusion()
 			.noTerrainParticles()
-			.pushReaction(PushReaction.BLOCK),
+			.pushReaction(PushReaction.BLOCK)
+			.noCollision(),
 		true
 	);
 

@@ -1,0 +1,32 @@
+{
+	"lulu.ambient": {
+		"subtitle": "sound.renmi_springfest.lulu.ambient",
+		"sounds": [
+			"renmi_springfest:lulu/ambient"
+		]
+	},
+	"lulu.boot": {
+		"subtitle": "sound.renmi_springfest.lulu.boot",
+		"sounds": [
+			"renmi_springfest:lulu/boot"
+		]
+	},
+	"lulu.cockpit": {
+		"subtitle": "sound.renmi_springfest.lulu.cockpit",
+		"sounds": [
+			"renmi_springfest:lulu/cockpit"
+		]
+	},
+	"lulu.steam": {
+		"subtitle": "sound.renmi_springfest.lulu.steam",
+		"sounds": [
+			"renmi_springfest:lulu/steam"
+		]
+	},
+	"lulu.step": {
+		"subtitle": "sound.renmi_springfest.lulu.step",
+		"sounds": [
+			"renmi_springfest:lulu/step"
+		]
+	}
+}

@@ -20,7 +20,6 @@ public class Renmi implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Hello Sakura High Secondary Academy!");
-
 		RenmiAttachments.init();
 		RenmiNetworking.init();
 		RenmiCommands.init();

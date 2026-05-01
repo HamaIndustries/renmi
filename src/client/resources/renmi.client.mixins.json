@@ -3,7 +3,7 @@
 	"package": "symbolics.division.renmi.client.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
-		"ExampleClientMixin"
+		"ClientLevelMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
