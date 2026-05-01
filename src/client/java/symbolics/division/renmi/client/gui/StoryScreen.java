@@ -372,7 +372,7 @@ public class StoryScreen extends Screen {
 			}
 		}
 
-		this.state = new DisplayState(displayedText, 1);
+		this.state = new DisplayState(displayedText, 2);
 		this.isFinishedScrolling = false;
 	}
 

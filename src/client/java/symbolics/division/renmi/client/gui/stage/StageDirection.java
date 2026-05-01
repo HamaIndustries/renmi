@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 public sealed interface StageDirection permits ActorDirection, TextDirection {
 	Pattern LINE = Pattern.compile(
-		"(?<instr>(?<name>\\S+)\\s?(?<expr>\\S+)?\\s?(?<pos>[0-9]+)?:)?\\s*(?<text>.+)?\\s*"
+		"(?<instr>(?<name>\\S+)\\s?(?<expr>\\S+)?\\s?(?<pos>[-0-9]+)?:)?\\s*(?<text>.+)?\\s*"
 	);
 
 	static List<StageDirection> parse(ActLine line) {
@@ -39,7 +39,7 @@ public sealed interface StageDirection permits ActorDirection, TextDirection {
 				));
 			}
 			if (matcher.group("text") != null) {
-				directions.add(new TextDirection(ParseUtil.parseLine(matcher.group("text"),Minecraft.getInstance().player)));
+				directions.add(new TextDirection(ParseUtil.parseLine(matcher.group("text"), Minecraft.getInstance().player)));
 			} else {
 				directions.add(new TextDirection(Component.empty()));
 			}

@@ -51,11 +51,11 @@ public class ParseUtil {
 	}
 
 	public static String parsePlayerName(String lineText, Player player) {
-		return lineText.replaceAll("<PLAYER_NAME>", player.getPlainTextName());
+		return lineText.replaceAll("<\\s*PLAYER_NAME\\s*>", player.getPlainTextName());
 	}
 
 	public static Component parseLine(String lineText, @Nullable Player player) {
-		lineText = parsePlayerName(lineText,player);
+		lineText = parsePlayerName(lineText, player);
 		TextNode textNode = PARSER.parseNode("> " + lineText.strip());
 		return textNode.toComponent();
 	}
