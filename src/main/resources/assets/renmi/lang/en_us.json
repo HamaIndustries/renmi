@@ -9,5 +9,6 @@
 	"actor.renmi.lulu": "Lulu",
 	"actor.renmi.plume": "Plume",
 	"actor.renmi.shrimple": "Shrimple",
-	"actor.renmi.ugg": "Ugg"
+	"actor.renmi.ugg": "Ugg",
+	"error.renmi.conditions_unmet": "Conditions unmet to read story."
 }

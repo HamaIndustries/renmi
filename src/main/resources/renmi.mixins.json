@@ -3,7 +3,8 @@
 	"package": "symbolics.division.renmi.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"mixins": [
-		"ExampleMixin"
+		"ExampleMixin",
+		"ItemMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

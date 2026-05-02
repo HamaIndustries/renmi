@@ -67,4 +67,12 @@ public class RenmiLibrary {
 		return Map.copyOf(library);
 	}
 
+	public Act getAct(Identifier seriesId, Identifier actId) {
+		Series series = getSeries(seriesId);
+		if (series != null) {
+			return series.getAct(actId);
+		}
+		return null;
+	}
+
 }

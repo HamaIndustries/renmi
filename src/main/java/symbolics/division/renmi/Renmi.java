@@ -25,6 +25,7 @@ public class Renmi implements ModInitializer {
 		RenmiCommands.init();
 		RenmiBlocks.init();
 		RenmiParticles.init();
+		RenmiDataComponents.init();
 
 		ResourceLoader.get(PackType.CLIENT_RESOURCES).registerReloadListener(id("actors"), new ActorManager());
 	}
