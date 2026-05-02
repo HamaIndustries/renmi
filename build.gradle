@@ -41,6 +41,8 @@ dependencies {
 	implementation include("dev.chailotl:bento-gui:${project.bento_gui_version}")
 	implementation "com.bladecoder.ink:blade-ink:${blade_ink_version}"
 	implementation "com.bladecoder.ink:blade-ink-compiler:${blade_ink_version}"
+	include "com.bladecoder.ink:blade-ink:${blade_ink_version}"
+	include "com.bladecoder.ink:blade-ink-compiler:${blade_ink_version}"
 }
 
 processResources {
