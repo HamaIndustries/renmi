@@ -29,6 +29,7 @@ import org.lwjgl.glfw.GLFW;
 import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiAttachments;
 import symbolics.division.renmi.client.gui.stage.ActorDirection;
+import symbolics.division.renmi.client.gui.stage.SoundDirection;
 import symbolics.division.renmi.client.gui.stage.StageDirection;
 import symbolics.division.renmi.client.gui.stage.TextDirection;
 import symbolics.division.renmi.net.C2SPlayerInputPacket;
@@ -377,6 +378,9 @@ public class StoryScreen extends Screen {
 						allPortraits.add(p);
 					}
 				}
+				case SoundDirection soundDirection -> {
+					soundDirection.playSound();
+				}
 				case TextDirection text -> displayedText.append(text.text());
 			}
 		}
@@ -405,7 +409,6 @@ public class StoryScreen extends Screen {
 		}
 
 		public void tick() {
-			//FIXME need to scroll text with styling! this only show characters
 			textProgress = Math.min(textProgress + textRate, textLength);
 //			var substr = FormattedCharSequence.composite(splitText.substring(0, textProgress, false));
 			List<FormattedCharSequence> formattedCharSequenceList = splitText.substring(0, textProgress, false);
@@ -437,5 +440,10 @@ public class StoryScreen extends Screen {
 		public void skipScrolling() {
 			textProgress = textLength;
 		}
+
+
+	}
+	public boolean isPauseScreen() {
+		return false;
 	}
 }

@@ -14,7 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ParseUtil {
-	//FIXME: placeholder api tags for:
+	//FIXME: placeholder api globalTags for:
 	//	text speed
 	//	text pitch
 	//	sound effects

@@ -137,7 +137,7 @@ public class ActReading {
 				if (text.isEmpty() && story.canContinue() && depth < 10) {
 					proceed(player, depth + 1);
 				} else {
-					currentLine = ActLine.of(text, isDone(), this.globalTags);
+					currentLine = ActLine.of(text, isDone(), this.globalTags, this.story.getCurrentTags());
 					this.text += text;
 				}
 			} catch (StoryException e) {
