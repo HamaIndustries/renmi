@@ -193,9 +193,14 @@ public class StoryScreen extends Screen {
 		addRenderableOnly(namePlate);
 	}
 
+	private void hideNameplate() {
+		namePlate.setVisible(false);
+	}
+
 	private void setNameplate(Component name) {
 		namePlate.setText(name);
 		namePlate.setWidth(DrawUtils.textRenderer.width(name) + 16);
+		namePlate.setVisible(true);
 	}
 
 	private void hideActor(Identifier id) {
@@ -371,10 +376,12 @@ public class StoryScreen extends Screen {
 
 	public void setDirections(List<StageDirection> directions) {
 		var displayedText = Component.empty().copy();
+		boolean hasActor = false;
 		for (var dir : directions) {
 			switch (dir) {
 				case ActorDirection actor -> {
 					setPortrait(actor);
+					hasActor = true;
 
 					for (Portrait p : slots) {
 						if (p == null) {
@@ -391,6 +398,7 @@ public class StoryScreen extends Screen {
 			}
 		}
 
+		if (!hasActor) hideNameplate();
 		this.state = new DisplayState(displayedText, 2);
 		this.isFinishedScrolling = false;
 	}
