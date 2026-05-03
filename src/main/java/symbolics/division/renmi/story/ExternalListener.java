@@ -6,6 +6,8 @@ import symbolics.division.renmi.util.RenmiExceptions;
 public interface ExternalListener {
 	//FIXME turns out this is redundant, series should control it.
 	// we fix in post.
+	// or maybe not /shrug. theres merit in giving an actreading a slice of the pie.
+	// we'd just rename to something like ActListener in that case.
 	static void bindExternals(Story story, ExternalListener listener) throws RenmiExceptions.ExternalBindFailure {
 		try {
 			story.bindExternalFunction("write_global", new Story.ExternalFunction2<String, Integer, Integer>() {
@@ -19,15 +21,13 @@ public interface ExternalListener {
 			story.bindExternalFunction("read_global ", new Story.ExternalFunction1<String, Integer>() {
 				@Override
 				protected Integer call(String key) {
-					listener.onReadGlobal(key);
-					return 0;
+					return listener.onReadGlobal(key);
 				}
 			}, false);
 			story.bindExternalFunction("run_command", new Story.ExternalFunction1<String, Integer>() {
 				@Override
 				protected Integer call(String command) {
-					listener.onRunCommand(command);
-					return 0;
+					return listener.onRunCommand(command);
 				}
 			}, false);
 		} catch (Exception e) {

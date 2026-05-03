@@ -11,9 +11,8 @@ Headers:
 The following external functions are implicitly applied to each story:
 ```
 EXTERNAL run_command(commandText)   // runs a minecraft command with the reader as the source
-EXTERNAL on_knot_visited(knotName)  // runs
-EXTERNAL read_global(keyString)
-EXTERNAL write_global(keyString)
+EXTERNAL read_global(keyString)     // stores a value to the series global register
+EXTERNAL write_global(keyString)    // reads a value from the series global register, or zero if not present.
 ```
 
 ## Formatting
@@ -31,4 +30,28 @@ You can add tags to lines like
 `#hide actorid`
 `#sound soundid volume pitch`
 
+## Hints
 
+Testing if a player has an item:
+```~ temp hasItem = run_command("/clear @s minecraft:cookie[minecraft:custom_name='Rare Cookie'] 0")```
+The above will only test without clearing. Changing the value will let you remove items.
+For more complicated tests, you could try something like
+```~ temp hasItemInSlot = run_command("/execute if items entity @s hotbar.* minecraft:cookie[minecraft:custom_name="hama_onion"]")```
+
+Here's an example scenario:
+```
+    lulu: come back with a cookie please!
+-   (no_cookie)
+    ~temp hasCookie = run_command("clear @s cookie 0")
+    {no_cookie > 1: lulu: Did you find any? ;)}
+
++   [I'll be back later.]
+    You have {hasCookie} cookies. {hasCookie > 0: Why are you not sharing?}
+    -> no_cookie
+
+*   {hasCookie> 0} Here you go!
+    ~ run_command("clear @s cookie 1")
+    lulu thank you so much! #sound minecraft:entity.arrow.hit_player
+    goodbye! #hide lulu
+    -> END
+```
