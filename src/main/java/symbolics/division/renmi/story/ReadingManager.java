@@ -9,6 +9,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiAttachments;
+import symbolics.division.renmi.ReadingPlayer;
 import symbolics.division.renmi.util.RenmiExceptions;
 
 import java.util.HashMap;
@@ -71,6 +72,8 @@ public class ReadingManager {
 		seriesReading.setServerPlayer(player);
 		newReading.setStoryListener(seriesReading);
 		updateReadingState(player, newReading);
+		ReadingPlayer readingPlayer = (ReadingPlayer)(player);
+		readingPlayer.setReading(true);
 	}
 
 	public void resetReading(ServerPlayer player, Series series, Act act) {
@@ -94,12 +97,14 @@ public class ReadingManager {
 		ActReading reading = getActiveReading(player);
 		if (reading == null) {
 			Renmi.LOGGER.info("Player attempted to proceed with no act running.");
+			((ReadingPlayer)(player)).setReading(false);
 			return;
 		}
 
 		if (reading.isDone()) {
 			activeReadings.remove(player.getUUID());
 			updateReadingState(player, null);
+			((ReadingPlayer)(player)).setReading(false);
 		} else {
 			reading.proceed(player);
 			updateReadingState(player, reading);

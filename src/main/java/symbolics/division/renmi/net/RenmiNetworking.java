@@ -43,6 +43,10 @@ public class RenmiNetworking {
 			S2CStoryCompileErrorPacket.TYPE, S2CStoryCompileErrorPacket.STREAM_CODEC
 		);
 
+		PayloadTypeRegistry.clientboundPlay().register(
+			S2CStoryReadingPacket.TYPE, S2CStoryReadingPacket.STREAM_CODEC
+		);
+
 		PayloadTypeRegistry.serverboundPlay().register(
 			C2SRequestStoryLogPacket.TYPE,
 			C2SRequestStoryLogPacket.STREAM_CODEC
