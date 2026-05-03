@@ -237,7 +237,12 @@ public class StoryScreen extends Screen {
 
 			// Set up portrait
 			Portrait portrait = slots[slot];
-			portrait.show(dir);
+			boolean faceRight = switch (dir.facing()) {
+				case RIGHT -> true;
+				case LEFT -> false;
+				case ANY -> false; //slot < slots.length / 2;
+			};
+			portrait.show(dir, faceRight);
 
 			int guiScale = window.getGuiScale();
 			float heightRatio = actor.heightCm() / 222f;

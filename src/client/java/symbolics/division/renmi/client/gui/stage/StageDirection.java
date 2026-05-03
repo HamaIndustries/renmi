@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 
 public sealed interface StageDirection permits ActorDirection, HideDirection, SoundDirection, TextDirection {
 	Pattern LINE = Pattern.compile(
-		"(?<instr>(?<name>\\S+)\\s?(?<expr>\\S+)?\\s?(?<pos>[-0-9]+)?:)?\\s*(?<text>.+)?\\s*"
+		"(?<instr>(?<name>\\S+)\\s*(?<expr>\\S+)?\\s*(?<pos>[-0-9]+)?\\s*(?<dir>\\S+)?\\s*:)?\\s*(?<text>.+)?\\s*"
 	);
 
 	static List<StageDirection> parse(ActLine line) {
@@ -29,6 +29,7 @@ public sealed interface StageDirection permits ActorDirection, HideDirection, So
 			String name = matcher.group("name");
 			String expression = matcher.group("expr");
 			String pos = matcher.group("pos");
+			String dir = matcher.group("dir");
 
 			if (name != null) {
 				name = aliases.getOrDefault(name, name);
@@ -38,7 +39,7 @@ public sealed interface StageDirection permits ActorDirection, HideDirection, So
 					0,
 					0,
 					pos == null ? -1 : Integer.parseInt(pos),
-					true
+					ActorDirection.getFacing(dir)
 				));
 			}
 			if (matcher.group("text") != null) {

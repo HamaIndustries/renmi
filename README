@@ -3,10 +3,14 @@
 ## Metadata
 
 
-Headers:
+**Headers:**
 
 `#alias actor shortname longname`
+
+Prevents accessing an act unless the previous act has been completed.
 `#require act actid`
+
+** External Functions**
 
 The following external functions are implicitly applied to each story:
 ```
@@ -16,7 +20,7 @@ EXTERNAL write_global(keyString)    // reads a value from the series global regi
 ```
 
 ## Formatting
-- All Placeholder tags
+- All Placeholder tags are available.
 - <PLAYER_NAME>
 
 ## Lines
