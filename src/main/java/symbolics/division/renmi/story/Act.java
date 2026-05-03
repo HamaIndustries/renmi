@@ -72,7 +72,7 @@ public class Act {
 	}
 
 	public ActReading createReading(ServerPlayer player) {
-		return new ActReading(this, player);
+		return ActReading.ofNew(this, player);
 	}
 
 	public String source() {

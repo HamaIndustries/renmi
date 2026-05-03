@@ -27,12 +27,14 @@ public record C2SActEditingPacket(Identifier series, Identifier act, String inkS
 				payload.inkSource()
 			);
 		} catch (RenmiLibrary.RenmiCompilationFailed e) {
-			Renmi.LOGGER.info(
+			Renmi.LOGGER.debug(
 				"Failed to create act {}, series {}, from source script!",
 				payload.act(),
 				payload.series()
 			);
-			e.printStackTrace();
+			if (Renmi.LOGGER.isDebugEnabled()) {
+				e.printStackTrace();
+			}
 			ServerPlayNetworking.send(
 				context.player(),
 				new S2CStoryCompileErrorPacket(e.getMessage())

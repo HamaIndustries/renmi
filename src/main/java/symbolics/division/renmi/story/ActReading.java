@@ -17,13 +17,13 @@ import java.util.List;
  *
  * <p>It keeps track of their current {@link ActLine}, and is managed by the {@link ReadingManager}.
  */
-public class ActReading {
+public class ActReading implements ExternalListener {
 	public static Codec<ActReading> CODEC = RecordCodecBuilder.create(instance ->
 		instance.group(
 			Codec.STRING.fieldOf("story").forGetter(ActReading::storyJson),
 			Codec.STRING.fieldOf("text").forGetter(ActReading::text),
 			Codec.STRING.fieldOf("state").forGetter(ActReading::stateJson)
-		).apply(instance, ActReading::new)
+		).apply(instance, ActReading::ofLoaded)
 	);
 
 	protected final Story story;
@@ -34,67 +34,36 @@ public class ActReading {
 
 	private List<String> globalTags = new ArrayList<>();
 
-	/**
-	 * A brand new act.
-	 */
-	public ActReading(Act act, ServerPlayer player) {
+	private ActReading(Story story, String text) {
 		try {
-			this.story = act.getStory();
+			this.story = story;
 			this.globalTags = this.story.getGlobalTags();
 			if (this.globalTags == null) this.globalTags = List.of();
-			proceed(player);
+			this.text = text;
+			ExternalListener.bindExternals(this.story, this);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	/**
-	 * A loaded act.
-	 */
-	public ActReading(String storyJson, String text, String state) {
+	public static ActReading ofNew(Act act, ServerPlayer player) {
 		try {
-			this.story = new Story(storyJson);
-			this.story.getState().loadJson(state);
-			this.story.bindExternalFunction("on_knot_visited ", new Story.ExternalFunction1<String, String>() {
-				@Override
-				protected String call(String knotName) throws Exception {
-					onKnotVisited(knotName);
-					return knotName;
-				}
-			}, false);
-			this.story.bindExternalFunction("write_global", new Story.ExternalFunction2<String, Integer, Integer>() {
-				@Override
-				protected Integer call(String key, Integer value) throws Exception {
-					if (storyListener != null) {
-						storyListener.onWriteGlobal(key, value);
-					}
-					return value;
-				}
-
-			}, false);
-			this.story.bindExternalFunction("read_global ", new Story.ExternalFunction1<String, Integer>() {
-				@Override
-				protected Integer call(String key) throws Exception {
-					if (storyListener != null) {
-						return storyListener.onReadGlobal(key);
-					}
-					return 0;
-				}
-			}, false);
-			this.story.bindExternalFunction("run_command", new Story.ExternalFunction1<String, Integer>() {
-				@Override
-				protected Integer call(String command) throws Exception {
-					if (storyListener != null) {
-						return storyListener.runCommand(command);
-					}
-					return 0;
-				}
-			});
-			this.globalTags = this.story.getGlobalTags();
+			ActReading reading = new ActReading(act.getStory(), "");
+			reading.proceed(player); // needs to see first line
+			return reading;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		this.text = text;
+	}
+
+	public static ActReading ofLoaded(String storyJson, String prevText, String state) {
+		try {
+			Story story = new Story(storyJson);
+			story.getState().loadJson(state);
+			return new ActReading(story, prevText);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	protected String storyJson() {
@@ -181,9 +150,33 @@ public class ActReading {
 		this.storyListener = storyListener;
 	}
 
-	public void onKnotVisited(String knot) {
+	@Override
+	public String onKnotVisited(String knot) {
 		if (storyListener != null) {
 			storyListener.onKnotVisited(knot);
 		}
+		return knot;
+	}
+
+	@Override
+	public Integer onWriteGlobal(String key, int value) {
+		storyListener.onWriteGlobal(key, value);
+		return value;
+	}
+
+	@Override
+	public Integer onReadGlobal(String key) {
+		if (storyListener != null) {
+			return storyListener.onReadGlobal(key);
+		}
+		return 0;
+	}
+
+	@Override
+	public Integer onRunCommand(String command) {
+		if (storyListener != null) {
+			return storyListener.runCommand(command);
+		}
+		return 0;
 	}
 }

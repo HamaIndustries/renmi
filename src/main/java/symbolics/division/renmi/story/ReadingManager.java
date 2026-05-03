@@ -7,9 +7,9 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import symbolics.division.renmi.ReadingPlayer;
 import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiAttachments;
-import symbolics.division.renmi.ReadingPlayer;
 import symbolics.division.renmi.util.RenmiExceptions;
 
 import java.util.HashMap;
@@ -70,9 +70,12 @@ public class ReadingManager {
 		activeReadings.put(player.getUUID(), newReading);
 		seriesReading.setCurrentActReading(newReading);
 		seriesReading.setServerPlayer(player);
+
+		//FIXME: the initial proceed in a new story will likely crash if a command is run without a listener.
+		// we need a good way to avoid calling proceed in the ActReading#ofNew constructor
 		newReading.setStoryListener(seriesReading);
 		updateReadingState(player, newReading);
-		ReadingPlayer readingPlayer = (ReadingPlayer)(player);
+		ReadingPlayer readingPlayer = (ReadingPlayer) (player);
 		readingPlayer.setReading(true);
 	}
 
@@ -97,14 +100,14 @@ public class ReadingManager {
 		ActReading reading = getActiveReading(player);
 		if (reading == null) {
 			Renmi.LOGGER.info("Player attempted to proceed with no act running.");
-			((ReadingPlayer)(player)).setReading(false);
+			((ReadingPlayer) (player)).setReading(false);
 			return;
 		}
 
 		if (reading.isDone()) {
 			activeReadings.remove(player.getUUID());
 			updateReadingState(player, null);
-			((ReadingPlayer)(player)).setReading(false);
+			((ReadingPlayer) (player)).setReading(false);
 		} else {
 			reading.proceed(player);
 			updateReadingState(player, reading);

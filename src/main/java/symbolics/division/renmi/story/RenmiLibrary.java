@@ -45,7 +45,13 @@ public class RenmiLibrary {
 
 	public void createActFromSource(Identifier seriesID, Identifier actID, String source) {
 		try {
-			String json = new Compiler(source, null).compile(source);
+			String injectedSource = """
+				EXTERNAL run_command(commandText)
+				EXTERNAL on_knot_visited(knotName)
+				EXTERNAL read_global(keyString)
+				EXTERNAL write_global(keyString)
+				""" + source;
+			String json = new Compiler(source, null).compile(injectedSource);
 			createAct(seriesID, actID, new Act(actID, source, json));
 		} catch (RuntimeException e) {
 			throw new RenmiCompilationFailed(e);
@@ -75,4 +81,25 @@ public class RenmiLibrary {
 		return null;
 	}
 
+	private static final ExternalListener FAKE_LISTENER = new ExternalListener() {
+		@Override
+		public String onKnotVisited(String knotName) {
+			return "";
+		}
+
+		@Override
+		public Integer onWriteGlobal(String key, int value) {
+			return 0;
+		}
+
+		@Override
+		public Integer onReadGlobal(String key) {
+			return 0;
+		}
+
+		@Override
+		public Integer onRunCommand(String command) {
+			return 0;
+		}
+	};
 }

@@ -3,6 +3,7 @@ package symbolics.division.renmi.story;
 import com.mojang.brigadier.ParseResults;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.commands.CommandResultCallback;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.resources.Identifier;
@@ -30,6 +31,8 @@ public class SeriesReading implements StoryListener {
 	protected final Map<String, Boolean> knotsVisited = new HashMap<>();
 
 	protected Map<String, Integer> globalVars = new HashMap<>();
+	private int lastCommandResult = 0;
+	private boolean lastCommandSuccess = false;
 
 	@Nullable
 	protected ActReading currentActReading;
@@ -88,13 +91,25 @@ public class SeriesReading implements StoryListener {
 		if (this.serverPlayer != null) {
 			Commands commandManager = this.serverPlayer.level().getServer().getCommands();
 			CommandSourceStack commandSourceStack = this.serverPlayer.createCommandSourceStack();
-			commandSourceStack = commandSourceStack.withPermission(PermissionSet.ALL_PERMISSIONS);
+			commandSourceStack = commandSourceStack.withPermission(PermissionSet.ALL_PERMISSIONS).withCallback(
+				new CommandResultCallback() {
+					@Override
+					public void onResult(boolean success, int result) {
+						lastCommandResult = result;
+						lastCommandSuccess = success;
+					}
+				}
+			);
 			ParseResults<CommandSourceStack> parseResults = commandManager.getDispatcher().parse(command, commandSourceStack);
 			if (!parseResults.getExceptions().isEmpty()) {
 				return 0;
 			}
 			commandManager.performCommand(parseResults, command);
-			return 1;
+			if (lastCommandSuccess) {
+				// brigadier will emit in debug mode if there's an error,
+				// so we can just pass the result along
+				return lastCommandResult;
+			}
 		}
 		return 0;
 	}
