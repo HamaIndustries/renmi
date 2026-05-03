@@ -1,0 +1,21 @@
+
+
+## Metadata
+
+`#alias actor shortname longname`
+`#require act actid`
+
+## Formatting
+- All Placeholder tags
+- <PLAYER_NAME>
+
+## Lines
+Default expression is "neutral" if not provided. Actor is placed
+in the first available slot, from the middle outward. There are
+6 slots numbered 0-5.
+
+`name expression slot: texthere`
+
+You can add tags to lines like
+`#hide actorid`
+`#sound soundid volume pitch`

@@ -20,20 +20,6 @@ public class ParseUtil {
 	//	sound effects
 	//	delay
 
-//	private TagRegistry TAG_REGISTRY = TagRegistry.copyDefault();
-//	{
-//		TAG_REGISTRY.register(
-//			TextTag.self(
-//				"expression",
-//				"special",
-//				false,
-//				(nodes, arg, parser) -> {
-//
-//				}
-//			)
-//		);
-//	}
-
 
 	public static final NodeParser PARSER = TagParser.DEFAULT;
 

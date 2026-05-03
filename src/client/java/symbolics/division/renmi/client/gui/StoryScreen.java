@@ -28,10 +28,7 @@ import net.minecraft.util.Util;
 import org.lwjgl.glfw.GLFW;
 import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiAttachments;
-import symbolics.division.renmi.client.gui.stage.ActorDirection;
-import symbolics.division.renmi.client.gui.stage.SoundDirection;
-import symbolics.division.renmi.client.gui.stage.StageDirection;
-import symbolics.division.renmi.client.gui.stage.TextDirection;
+import symbolics.division.renmi.client.gui.stage.*;
 import symbolics.division.renmi.net.C2SPlayerInputPacket;
 import symbolics.division.renmi.net.C2SRequestStoryLogPacket;
 import symbolics.division.renmi.story.Actor;
@@ -199,6 +196,14 @@ public class StoryScreen extends Screen {
 	private void setNameplate(Component name) {
 		namePlate.setText(name);
 		namePlate.setWidth(DrawUtils.textRenderer.width(name) + 16);
+	}
+
+	private void hideActor(Identifier id) {
+		for (Portrait slot : slots) {
+			if (id.equals(slot.getActorId())) {
+				slot.hide();
+			}
+		}
 	}
 
 	private void setPortrait(ActorDirection dir) {
@@ -382,6 +387,7 @@ public class StoryScreen extends Screen {
 					soundDirection.playSound();
 				}
 				case TextDirection text -> displayedText.append(text.text());
+				case HideDirection hideDirection -> hideActor(hideDirection.id());
 			}
 		}
 
@@ -443,6 +449,7 @@ public class StoryScreen extends Screen {
 
 
 	}
+
 	public boolean isPauseScreen() {
 		return false;
 	}

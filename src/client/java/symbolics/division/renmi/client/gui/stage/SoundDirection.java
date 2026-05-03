@@ -14,11 +14,11 @@ public record SoundDirection(
 	Optional<Float> volume,
 	Optional<Float> pitch
 ) implements StageDirection {
-	public void playSound(){
+	public void playSound() {
 		LocalPlayer player = Minecraft.getInstance().player;
 		ClientLevel clientLevel = (ClientLevel) player.level();
 		float volume = volume().orElse(1F);
 		float pitch = volume().orElse(1F);
-		clientLevel.playSound(player, player.blockPosition(),  SoundEvent.createVariableRangeEvent(id()), SoundSource.VOICE, volume,pitch);
+		clientLevel.playSound(player, player.blockPosition(), SoundEvent.createVariableRangeEvent(id()), SoundSource.VOICE, volume, pitch);
 	}
 }
