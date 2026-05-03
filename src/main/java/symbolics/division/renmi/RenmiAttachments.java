@@ -3,12 +3,22 @@ package symbolics.division.renmi;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentSyncPredicate;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
+import symbolics.division.renmi.story.LoadingState;
 import symbolics.division.renmi.story.ReadingManager;
 import symbolics.division.renmi.story.ReadingState;
 import symbolics.division.renmi.story.RenmiLibrary;
 
 public class RenmiAttachments {
 	public static void init() { }
+
+	public static final AttachmentType<LoadingState> LOADING_STATE = AttachmentRegistry.create(
+		Renmi.id("loading_state"),
+		builder -> builder.initializer(() -> LoadingState.ZERO)
+			.syncWith(
+				LoadingState.STREAM_CODEC,
+				AttachmentSyncPredicate.targetOnly()
+			)
+	);
 
 	public static final AttachmentType<ReadingState> READING_STATE = AttachmentRegistry.create(
 		Renmi.id("reading_state"),

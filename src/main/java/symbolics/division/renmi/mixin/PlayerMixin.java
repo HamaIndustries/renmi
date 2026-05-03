@@ -12,7 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import symbolics.division.renmi.ReadingPlayer;
-import symbolics.division.renmi.net.S2CStoryReadingPacket;
+import symbolics.division.renmi.net.S2CPlayerReadingPacket;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin extends Avatar implements ReadingPlayer {
@@ -26,7 +26,7 @@ public abstract class PlayerMixin extends Avatar implements ReadingPlayer {
 	public void setReading(boolean reading) {
 		this.reading = reading;
 		if(!this.level().isClientSide()) {
-			S2CStoryReadingPacket storyReadingPacket = new S2CStoryReadingPacket(getId(),reading);
+			S2CPlayerReadingPacket storyReadingPacket = new S2CPlayerReadingPacket(getId(),reading);
 			for (ServerPlayer player : PlayerLookup.level((ServerLevel) this.level())) {
 				ServerPlayNetworking.send(player, storyReadingPacket);
 			}

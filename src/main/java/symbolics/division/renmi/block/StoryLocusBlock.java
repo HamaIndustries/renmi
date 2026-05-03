@@ -1,6 +1,7 @@
 package symbolics.division.renmi.block;
 
 import com.mojang.serialization.MapCodec;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerChunkEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -21,14 +22,12 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jspecify.annotations.Nullable;
-import symbolics.division.renmi.RenmiBlocks;
-import symbolics.division.renmi.RenmiParticles;
+import symbolics.division.renmi.*;
 import symbolics.division.renmi.block.entity.StoryLocusBlockEntity;
 import symbolics.division.renmi.net.S2CActEditingPacket;
-import symbolics.division.renmi.story.Act;
-import symbolics.division.renmi.story.ReadingManager;
-import symbolics.division.renmi.story.RenmiLibrary;
-import symbolics.division.renmi.story.Series;
+import symbolics.division.renmi.net.S2CDisplayStoryScreenPacket;
+import symbolics.division.renmi.story.*;
+import symbolics.division.renmi.util.RenmiExceptions;
 
 import java.util.Optional;
 
@@ -79,8 +78,27 @@ public class StoryLocusBlock extends BaseEntityBlock {
 		return createTickerHelper(type, RenmiBlocks.STORY_LOCUS_ENTITY, StoryLocusBlock::BETick);
 	}
 
+	public static void setLoadingStateBlockEntityId(ServerPlayer player, LoadingState state, int id){
+		player.setAttached(RenmiAttachments.LOADING_STATE, state.loadingStateWithBlockEntityId(id));
+	}
+
+	public static void incrementLoadingStateTicks(ServerPlayer player, LoadingState state){
+		player.setAttached(RenmiAttachments.LOADING_STATE, state.increment());
+	}
+
+	public static void clearLoadingStateTicks(ServerPlayer player){
+		player.setAttached(RenmiAttachments.LOADING_STATE, LoadingState.ZERO);
+	}
+
+	private static void startReading(ReadingManager manager, ServerPlayer player, Act act, Series series) throws RenmiExceptions.ReadingConditionsUnmet {
+		manager.startReading(player,act,series,false);
+		ServerPlayNetworking.send(player, new S2CDisplayStoryScreenPacket());
+	}
+
+
 	public static void BETick(Level level, BlockPos blockPos, BlockState blockState, StoryLocusBlockEntity be) {
 		if (level instanceof ServerLevel sv && level.getGameTime() % 2 == 0 && be instanceof StoryLocusBlockEntity locus) {
+			int id = getId(blockState);
 			ReadingManager manager = ReadingManager.getManager(level.getServer());
 			RenmiLibrary library = RenmiLibrary.get(level.getServer());
 			Series series = library.getSeries(locus.series);
@@ -94,6 +112,33 @@ public class StoryLocusBlock extends BaseEntityBlock {
 			for (ServerPlayer player : ((ServerLevel) level).getPlayers(
 				player -> player.distanceToSqr(c) < 250 && act.startConditionsMet(player, manager.createOrLoad(player, series)))
 			) {
+				if (player.distanceToSqr(c) < 4 && !player.isCrouching() && !player.isHolding(RenmiBlocks.STORY_LOCUS.asItem())) {
+					var loadingState = player.getAttachedOrCreate(RenmiAttachments.LOADING_STATE);
+					if (loadingState.blockEntityId() == 0) {
+						setLoadingStateBlockEntityId(player, loadingState, id);
+						loadingState = player.getAttachedOrCreate(RenmiAttachments.LOADING_STATE);
+					}
+					var readingPlayer = (ReadingPlayer)(player);
+					if (!readingPlayer.isReading()) {
+						if (loadingState.ticks() > 100 && !readingPlayer.isReading()) {
+							try {
+								startReading(manager, player, act, series);
+							} catch (Exception e) {
+								Renmi.LOGGER.error("StoryLocusBlock failed to start act at " + blockPos + "with exception: " + e);
+							}
+						} else if (loadingState.blockEntityId() == id) {
+							incrementLoadingStateTicks(player, loadingState);
+						} else {
+							clearLoadingStateTicks(player);
+						}
+					}
+				} else if (player.hasAttached(RenmiAttachments.LOADING_STATE)) {
+					var state = player.getAttachedOrCreate(RenmiAttachments.LOADING_STATE);
+					if (state.ticks() > 0) {
+						clearLoadingStateTicks(player);
+					}
+				}
+
 				for (int i = 0; i < n; i++) {
 					sv.sendParticles(player, opts, true, true, c.x, c.y, c.z, n, 0.1, 0.1, 0.1, 0);
 				}

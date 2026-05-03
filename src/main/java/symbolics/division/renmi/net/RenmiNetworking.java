@@ -44,7 +44,7 @@ public class RenmiNetworking {
 		);
 
 		PayloadTypeRegistry.clientboundPlay().register(
-			S2CStoryReadingPacket.TYPE, S2CStoryReadingPacket.STREAM_CODEC
+			S2CPlayerReadingPacket.TYPE, S2CPlayerReadingPacket.STREAM_CODEC
 		);
 
 		PayloadTypeRegistry.serverboundPlay().register(
