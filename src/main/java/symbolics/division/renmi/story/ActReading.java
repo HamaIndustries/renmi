@@ -151,14 +151,6 @@ public class ActReading implements ExternalListener {
 	}
 
 	@Override
-	public String onKnotVisited(String knot) {
-		if (storyListener != null) {
-			storyListener.onKnotVisited(knot);
-		}
-		return knot;
-	}
-
-	@Override
 	public Integer onWriteGlobal(String key, int value) {
 		storyListener.onWriteGlobal(key, value);
 		return value;

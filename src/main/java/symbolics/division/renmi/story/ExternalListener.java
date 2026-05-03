@@ -4,15 +4,10 @@ import com.bladecoder.ink.runtime.Story;
 import symbolics.division.renmi.util.RenmiExceptions;
 
 public interface ExternalListener {
+	//FIXME turns out this is redundant, series should control it.
+	// we fix in post.
 	static void bindExternals(Story story, ExternalListener listener) throws RenmiExceptions.ExternalBindFailure {
 		try {
-			story.bindExternalFunction("on_knot_visited ", new Story.ExternalFunction1<String, String>() {
-				@Override
-				protected String call(String knotName) {
-					listener.onKnotVisited(knotName);
-					return knotName;
-				}
-			}, false);
 			story.bindExternalFunction("write_global", new Story.ExternalFunction2<String, Integer, Integer>() {
 				@Override
 				protected Integer call(String key, Integer value) {
@@ -39,8 +34,6 @@ public interface ExternalListener {
 			throw new RenmiExceptions.ExternalBindFailure(e);
 		}
 	}
-
-	String onKnotVisited(String knotName);
 
 	Integer onWriteGlobal(String key, int value);
 

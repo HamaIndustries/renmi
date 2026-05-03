@@ -2,8 +2,19 @@
 
 ## Metadata
 
+
+Headers:
+
 `#alias actor shortname longname`
 `#require act actid`
+
+The following external functions are implicitly applied to each story:
+```
+EXTERNAL run_command(commandText)   // runs a minecraft command with the reader as the source
+EXTERNAL on_knot_visited(knotName)  // runs
+EXTERNAL read_global(keyString)
+EXTERNAL write_global(keyString)
+```
 
 ## Formatting
 - All Placeholder tags
@@ -19,3 +30,5 @@ in the first available slot, from the middle outward. There are
 You can add tags to lines like
 `#hide actorid`
 `#sound soundid volume pitch`
+
+

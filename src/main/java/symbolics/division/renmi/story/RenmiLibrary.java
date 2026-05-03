@@ -80,26 +80,4 @@ public class RenmiLibrary {
 		}
 		return null;
 	}
-
-	private static final ExternalListener FAKE_LISTENER = new ExternalListener() {
-		@Override
-		public String onKnotVisited(String knotName) {
-			return "";
-		}
-
-		@Override
-		public Integer onWriteGlobal(String key, int value) {
-			return 0;
-		}
-
-		@Override
-		public Integer onReadGlobal(String key) {
-			return 0;
-		}
-
-		@Override
-		public Integer onRunCommand(String command) {
-			return 0;
-		}
-	};
 }
