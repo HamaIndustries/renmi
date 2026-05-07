@@ -112,7 +112,7 @@ public class StoryLocusBlock extends BaseEntityBlock {
 			for (ServerPlayer player : ((ServerLevel) level).getPlayers(
 				player -> player.distanceToSqr(c) < 250 && act.startConditionsMet(player, manager.createOrLoad(player, series)))
 			) {
-				if (player.distanceToSqr(c) < 4 && !player.isCrouching() && !player.isHolding(RenmiBlocks.STORY_LOCUS.asItem())) {
+				if (player.distanceToSqr(c) <= be.diameter && !player.isCrouching() && !player.isHolding(RenmiBlocks.STORY_LOCUS.asItem())) {
 					var loadingState = player.getAttachedOrCreate(RenmiAttachments.LOADING_STATE);
 					if (loadingState.blockEntityId() == 0) {
 						setLoadingStateBlockEntityId(player, loadingState, id);
