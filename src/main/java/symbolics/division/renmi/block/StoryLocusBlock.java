@@ -92,6 +92,7 @@ public class StoryLocusBlock extends BaseEntityBlock {
 
 	private static void startReading(ReadingManager manager, ServerPlayer player, Act act, Series series) throws RenmiExceptions.ReadingConditionsUnmet {
 		manager.startReading(player,act,series,false);
+		((ReadingPlayer)player).setReading(true);
 		ServerPlayNetworking.send(player, new S2CDisplayStoryScreenPacket());
 	}
 
@@ -120,7 +121,7 @@ public class StoryLocusBlock extends BaseEntityBlock {
 					}
 					var readingPlayer = (ReadingPlayer)(player);
 					if (!readingPlayer.isReading()) {
-						if (loadingState.ticks() > 100 && !readingPlayer.isReading()) {
+						if (loadingState.ticks() > 100) {
 							try {
 								startReading(manager, player, act, series);
 							} catch (Exception e) {
