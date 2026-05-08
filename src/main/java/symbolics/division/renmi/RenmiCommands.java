@@ -167,7 +167,6 @@ public class RenmiCommands {
 		if (player == null) {
 			return 0;
 		}
-		((ReadingPlayer)(player)).setReading(true);
 		ServerPlayNetworking.send(player, new S2CDisplayStoryScreenPacket());
 		return 1;
 	}

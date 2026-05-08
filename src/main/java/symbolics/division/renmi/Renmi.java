@@ -1,11 +1,14 @@
 package symbolics.division.renmi;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.PackType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import symbolics.division.renmi.block.StoryLocusBlock;
 import symbolics.division.renmi.net.RenmiNetworking;
 import symbolics.division.renmi.story.ActorManager;
 
@@ -28,5 +31,12 @@ public class Renmi implements ModInitializer {
 		RenmiDataComponents.init();
 
 		ResourceLoader.get(PackType.CLIENT_RESOURCES).registerReloadListener(id("actors"), new ActorManager());
+
+		ServerTickEvents.START_LEVEL_TICK.register(level -> {
+			for (ServerPlayer player : level.players()) {
+				if (player == null) continue; // trust me it can happen its bitten me in the ass before
+				StoryLocusBlock.tickPlayer(player);
+			}
+		});
 	}
 }

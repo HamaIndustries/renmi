@@ -9,7 +9,8 @@ import symbolics.division.renmi.story.ReadingState;
 import symbolics.division.renmi.story.RenmiLibrary;
 
 public class RenmiAttachments {
-	public static void init() { }
+	public static void init() {
+	}
 
 	public static final AttachmentType<LoadingState> LOADING_STATE = AttachmentRegistry.create(
 		Renmi.id("loading_state"),
@@ -17,7 +18,7 @@ public class RenmiAttachments {
 			.syncWith(
 				LoadingState.STREAM_CODEC,
 				AttachmentSyncPredicate.targetOnly()
-			)
+			).initializer(() -> LoadingState.ZERO)
 	);
 
 	public static final AttachmentType<ReadingState> READING_STATE = AttachmentRegistry.create(

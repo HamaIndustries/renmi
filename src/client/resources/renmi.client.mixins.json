@@ -3,9 +3,8 @@
 	"package": "symbolics.division.renmi.client.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
-		"ClientLevelMixin",
-		"AvatarRendererMixin",
-		"AvatarRenderStateMixin"
+		"AvatarRenderStateMixin",
+		"ClientLevelMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
