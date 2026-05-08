@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 
 public sealed interface StageDirection permits ActorDirection, HideDirection, SoundDirection, TextDirection {
 	Pattern LINE = Pattern.compile(
-		"(?<instr>(?<name>\\S+)\\s*(?<expr>\\S+)?\\s*(?<pos>[-0-9]+)?\\s*(?<dir>\\S+)?\\s*:)?\\s*(?<text>.+)?\\s*"
+		"(?<instr>(?<name>[a-z0-9/._-]+)\\s*(?<expr>[^\\s:]+)?\\s*(?<pos>[-0-9]+)?\\s*(?<dir>[a-z]+)?\\s*:)?\\s*(?<text>.+)?\\s*"
 	);
 
 	static List<StageDirection> parse(ActLine line) {
@@ -33,8 +33,18 @@ public sealed interface StageDirection permits ActorDirection, HideDirection, So
 
 			if (name != null) {
 				name = aliases.getOrDefault(name, name);
+
+				Identifier id;
+				try {
+					id = Renmi.id(name);
+				} catch (IdentifierException e) {
+					id = Renmi.id("ERROR_ID");
+					Renmi.LOGGER.debug("Invalid identifier to parse: {}", id);
+				}
+
+
 				directions.add(new ActorDirection(
-					Renmi.id(name),
+					id,
 					expression == null ? "neutral" : expression,
 					0,
 					0,

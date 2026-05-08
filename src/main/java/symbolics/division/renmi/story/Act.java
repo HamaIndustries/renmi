@@ -27,11 +27,14 @@ public class Act {
 	);
 
 	Pattern REQUIRE_REGEX = Pattern.compile("require (\\S+) (.*)");
+	Pattern TITLE_REGEX = Pattern.compile("title (.*)");
+	Pattern REPEATABLE_REGEX = Pattern.compile("repeatable");
 
 	protected final Identifier id;
 	protected String source;
 	protected String json;
 	protected List<BiPredicate<ServerPlayer, SeriesReading>> conditions = new ArrayList<>();
+	protected String title = "";
 
 	public Act(Identifier id, String source, String json) {
 		this.id = id;
@@ -40,20 +43,32 @@ public class Act {
 
 		try {
 			Story tempStory = new Story(json);
+			boolean runOnce = true;
 			if (tempStory.getGlobalTags() != null) {
 				for (var tag : tempStory.getGlobalTags()) {
-					Matcher m = REQUIRE_REGEX.matcher(tag);
-					m.matches();
-					if (m.matches() && m.group(1).equals("act")) {
-						DataResult<Identifier> prevAct = Identifier.read(m.group(2));
+					Matcher regMatch = REQUIRE_REGEX.matcher(tag);
+					if (regMatch.matches() && regMatch.group(1).equals("act")) {
+						DataResult<Identifier> prevAct = Identifier.read(regMatch.group(2));
 						if (prevAct.isError()) {
-							Renmi.LOGGER.info("Failed to create act with id \"{}\"", m.group(2));
+							Renmi.LOGGER.info("Failed to create act with id \"{}\"", regMatch.group(2));
 						} else {
 							Identifier prevActId = prevAct.getOrThrow();
 							conditions.add((player, series) -> series.isActFinished(prevActId));
 						}
 					}
+
+					Matcher titleMatch = TITLE_REGEX.matcher(tag);
+					if (titleMatch.matches()) {
+						this.title = titleMatch.group(1);
+					}
+
+					if (REPEATABLE_REGEX.matcher(tag).matches()) {
+						runOnce = false;
+					}
 				}
+			}
+			if (runOnce) {
+				conditions.add((player, seriesReading) -> !seriesReading.isActFinished(this.id));
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);

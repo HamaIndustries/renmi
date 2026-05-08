@@ -5,7 +5,8 @@ import net.minecraft.client.input.KeyEvent;
 import org.lwjgl.glfw.GLFW;
 
 public class TextAreaWithTabs extends TextArea {
-	protected TextAreaWithTabs() { }
+	protected TextAreaWithTabs() {
+	}
 
 	/* ----- Builder ----- */
 
@@ -17,7 +18,7 @@ public class TextAreaWithTabs extends TextArea {
 	}
 
 	public static class Builder<S extends TextAreaWithTabs.Builder<S>> extends TextArea.Builder<S> {
-		Builder() {
+		protected Builder() {
 			super();
 		}
 

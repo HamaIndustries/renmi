@@ -144,7 +144,6 @@ public class StoryScreen extends Screen {
 		Label actTitle = Label.builder()
 			.dimensions(true, 10)
 			.alignLeft()
-			.text(Component.literal("Event No.63 | Learn the demon king make-up |"))
 			.build();
 		Panel textBox = Panel.builder()
 			.dimensions(true, 62)
