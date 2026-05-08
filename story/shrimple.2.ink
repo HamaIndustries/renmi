@@ -181,7 +181,7 @@ Ready?
     Which can be fine, it's a hobby, but if she insists on putting all these responsibilities on herself, people are counting on her to follow through. Bus factor.
 -
 *   (yourself) [But you keep it to yourself] But that would be better for her to learn on her own, rather than you preaching at her.
-*   [And you tell her so].
+*   [And you tell her so]
 - 
     s: ...
             

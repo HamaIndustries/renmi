@@ -96,7 +96,7 @@ They can't get a read on you. it's like you always have someone looking just ove
 *   {not smoke} You could go for that cig[arette] now. On the far side of the alley, naturally.
     -> smoke
     
-*   You [sit down nearby] settle on a stack of reasonably clean pallets. The alley smells like damp wood and passivity.
+*   You [sit down nearby] settle on a stack of reasonably clean pallets. The alley smells like damp and passivity.
 -
     Plume tries to light another, but there's only sparks.
     
