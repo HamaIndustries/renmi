@@ -12,7 +12,7 @@ Ready?
     
     Purple is the most venomous color. Barebones is playing a dangerous game.
     
-    b: Thank yous! Come again! <gray>sucker</gray>
+    b: Thank yous! Come again! <gray>sucker.</gray>
     
     You don't fully have a handle on the value of the local currency, but a lemonade at a school festival couldn't possibly warrant 15 of it.
     
@@ -26,9 +26,9 @@ Ready?
     
     He hollers over his shoulder.
     
-    b: HEYA KID! WE GOT A LIVE ONE! EXTRA SUGAR 
+    b: HEYA KID! WE GOT A LIVE ONE! EXTRA SUGAR!
     
-    b: for our dear guest, sorry, I didn't catch the name--
+    b: ...for our dear guest, sorry, I didn't catch the name--
 
 *   "What's [this?"] the latest scam?" You don't pull your punches, do you?
 -
@@ -115,7 +115,7 @@ Ready?
     
     p: WASH 'EM YOURSELF, DIPSHIT!
     
-    b: 'atta way. Takes after their old man, y'see.
+    b: 'Atta way. Takes after their old man, y'see.
     
     chai: Hello, Barebones. Where's the license?
     
@@ -125,7 +125,7 @@ Ready?
     
     b: You knows what? We was just discussing that, <PLAYER_NAME> and I. The kid's gonna go fetch it from home base. One sec.
     
-    b: HEY KID! GO STEA I MEAN FIND OUR LICENSE!
+    b: HEY KID! GO STEA-- I MEAN FIND OUR LICENSE!
     
     p: A real one, or a--
     
@@ -152,7 +152,7 @@ Ready?
     chai: < PLAYER_NAME >, did he rope you into this?
     
     
-*   {overlook} No (lying)
+*   {overlook} [No (lying)]"No." (lying)
 
     chai: Mhm? And what's that in your hand there?
     
@@ -161,9 +161,9 @@ Ready?
     chai: Do you have any idea how many times I've heard that one today?
     -> today
 
-*   {overlook} Yes
-*   {not overlook} No
-*   (lying) {not overlook} Yes (lying)
+*   {overlook} [Yes]"Yes."
+*   {not overlook} [No]"No."
+*   (lying) {not overlook} [Yes (lying)]"Yes." (lying)
 -
     chai: I honestly don't know how I expected you to answer. {overlook or lying: Let's have a chat about this later.}
     
@@ -181,13 +181,13 @@ Ready?
     
 *   They're always hanging out[], though.
 
-    We gots no affiliation, we just happen to be on the committee at the same time in the same place.
+    b: We gots no affiliation, we just happen to be on the committee at the same time in the same place.
 
     b: ...Making similar amounts of money at the same time. Also being in detention at the same time.
     
     b: It's not impossible! You know, like that slogan here? "Anything can hadpen?"
     
-    chai: Barebones, <i>you</i> made that up to sell tickets to makeout peak. 
+    chai: Barebones, <i>you</i> made that up to sell tickets to Makeout Peak. 
     
     chai: It's a national park! Everyone can go there for free at any time!
     
@@ -271,13 +271,13 @@ Ready?
     
     b: ...
 
-*   Barebones is right[]
+*   Barebones is right[].
 
     b: Exactly. Yous get it.
 -
-    b: Ima go find the kid, usually they don't take that long to ste--I mean find-- what the hell, sure, steal. Stuff for me.
+    b: Ima go find the kid, usually they don't take that long to ste-- I mean find-- what the hell, sure, steal. Stuff for me.
     
-    b: If yous see Prof. C, put in a good for for me, yeah?
+    b: If yous see Prof. C, put in a good word for me, yeah?
     
 *   You won't[].
     --  (wont)
