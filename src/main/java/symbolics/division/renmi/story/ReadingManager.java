@@ -7,7 +7,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import symbolics.division.renmi.ReadingPlayer;
 import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiAttachments;
 import symbolics.division.renmi.util.RenmiExceptions;
@@ -135,5 +134,9 @@ public class ReadingManager {
 			RenmiAttachments.READING_STATE,
 			new ReadingState(line == null ? ActLine.INACTIVE : line, choices, line == null ? true : line.end())
 		);
+	}
+
+	public void stopReading(ServerPlayer player) {
+		player.removeAttached(RenmiAttachments.READING_STATE);
 	}
 }

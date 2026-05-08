@@ -19,8 +19,10 @@ import symbolics.division.renmi.client.gui.StoryLocusScreen;
 import symbolics.division.renmi.client.gui.StoryLogScreen;
 import symbolics.division.renmi.client.gui.StoryScreen;
 import symbolics.division.renmi.client.particle.StoryNodeParticle;
-import symbolics.division.renmi.ReadingPlayer;
-import symbolics.division.renmi.net.*;
+import symbolics.division.renmi.net.S2CActEditingPacket;
+import symbolics.division.renmi.net.S2CDisplayStoryLogPacket;
+import symbolics.division.renmi.net.S2CDisplayStoryScreenPacket;
+import symbolics.division.renmi.net.S2CStoryCompileErrorPacket;
 import symbolics.division.renmi.story.LoadingState;
 
 public class RenmiClient implements ClientModInitializer {
@@ -60,14 +62,6 @@ public class RenmiClient implements ClientModInitializer {
 				screen.setErrorMessage(s2CStoryCompileErrorPacket.errorMessage());
 			}
 		});
-
-		ClientPlayNetworking.registerGlobalReceiver(S2CPlayerReadingPacket.TYPE, (s2CPlayerReadingPacket, context) -> {
-            var readingPlayer = context.player().level().getEntity(s2CPlayerReadingPacket.playerId());
-			if(readingPlayer != null) {
-				((ReadingPlayer)readingPlayer).setReading(s2CPlayerReadingPacket.reading());
-			}
-		});
-
 
 		ParticleProviderRegistry.getInstance().register(RenmiParticles.STORY_NODE, StoryNodeParticle.Provider::new);
 
