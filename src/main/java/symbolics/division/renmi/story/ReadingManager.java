@@ -75,8 +75,8 @@ public class ReadingManager {
 		// we need a good way to avoid calling proceed in the ActReading#ofNew constructor
 		newReading.setStoryListener(seriesReading);
 		updateReadingState(player, newReading);
-		ReadingPlayer readingPlayer = (ReadingPlayer) (player);
-		readingPlayer.setReading(true);
+//		ReadingPlayer readingPlayer = (ReadingPlayer) (player);
+//		readingPlayer.setReading(true);
 	}
 
 	public void resetReading(ServerPlayer player, Series series, Act act) {
@@ -100,14 +100,14 @@ public class ReadingManager {
 		ActReading reading = getActiveReading(player);
 		if (reading == null) {
 			Renmi.LOGGER.info("Player attempted to proceed with no act running.");
-			((ReadingPlayer) (player)).setReading(false);
+//			((ReadingPlayer) (player)).setReading(false);
 			return;
 		}
 
 		if (reading.isDone()) {
 			activeReadings.remove(player.getUUID());
 			updateReadingState(player, null);
-			((ReadingPlayer) (player)).setReading(false);
+//			((ReadingPlayer) (player)).setReading(false);
 		} else {
 			reading.proceed(player);
 			updateReadingState(player, reading);

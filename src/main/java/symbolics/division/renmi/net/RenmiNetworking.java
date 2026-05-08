@@ -57,5 +57,8 @@ public class RenmiNetworking {
 			S2CDisplayStoryLogPacket.TYPE,
 			S2CDisplayStoryLogPacket.STREAM_CODEC
 		);
+
+		PayloadTypeRegistry.serverboundPlay().register(C2SPlayerReadingPacket.TYPE, C2SPlayerReadingPacket.STREAM_CODEC);
+		ServerPlayNetworking.registerGlobalReceiver(C2SPlayerReadingPacket.TYPE, C2SPlayerReadingPacket::HANDLER);
 	}
 }

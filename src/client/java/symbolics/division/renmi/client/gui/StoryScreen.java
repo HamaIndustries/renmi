@@ -26,10 +26,12 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Util;
 import org.lwjgl.glfw.GLFW;
+import symbolics.division.renmi.ReadingPlayer;
 import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiAttachments;
 import symbolics.division.renmi.client.gui.stage.*;
 import symbolics.division.renmi.net.C2SPlayerInputPacket;
+import symbolics.division.renmi.net.C2SPlayerReadingPacket;
 import symbolics.division.renmi.net.C2SRequestStoryLogPacket;
 import symbolics.division.renmi.story.Actor;
 import symbolics.division.renmi.story.ActorManager;
@@ -320,6 +322,13 @@ public class StoryScreen extends Screen {
 		}
 
 		return false;
+	}
+
+	public void onClose(){
+		super.onClose();
+		LocalPlayer player = Minecraft.getInstance().player;
+		ReadingPlayer readingPlayer = (ReadingPlayer) player;
+		readingPlayer.setReading(false);
 	}
 
 	public void playDownSound() {
