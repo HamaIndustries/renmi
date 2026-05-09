@@ -18,7 +18,7 @@ public class RenmiAttachments {
 			.syncWith(
 				LoadingState.STREAM_CODEC,
 				AttachmentSyncPredicate.targetOnly()
-			).initializer(() -> LoadingState.ZERO)
+			)
 	);
 
 	public static final AttachmentType<ReadingState> READING_STATE = AttachmentRegistry.create(

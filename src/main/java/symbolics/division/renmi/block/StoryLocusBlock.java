@@ -67,7 +67,10 @@ public class StoryLocusBlock extends BaseEntityBlock {
 						source = act.source();
 					}
 				}
-				ServerPlayNetworking.send((ServerPlayer) player, new S2CActEditingPacket(be.series, be.act, source, be.color, Optional.of(be.getBlockPos())));
+				ServerPlayNetworking.send(
+					(ServerPlayer) player,
+					new S2CActEditingPacket(be.series, be.act, source, be.color, Optional.of(be.getBlockPos()))
+				);
 			}
 			return InteractionResult.SUCCESS;
 		} else {
@@ -76,7 +79,11 @@ public class StoryLocusBlock extends BaseEntityBlock {
 	}
 
 	@Override
-	public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> type) {
+	public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+		Level level,
+		BlockState blockState,
+		BlockEntityType<T> type
+	) {
 		return createTickerHelper(type, RenmiBlocks.STORY_LOCUS_ENTITY, StoryLocusBlock::BETick);
 	}
 
@@ -85,9 +92,9 @@ public class StoryLocusBlock extends BaseEntityBlock {
 			ReadingManager manager = ReadingManager.getManager(level.getServer());
 			RenmiLibrary library = RenmiLibrary.get(level.getServer());
 			Series series = library.getSeries(locus.series);
-			if (series == null) return;
+			if (series == null) { return; }
 			Act act = series.getAct(locus.act);
-			if (act == null) return;
+			if (act == null) { return; }
 
 			Vec3 c = blockPos.getCenter();
 			var opts = new RenmiParticles.StoryNodeParticleOptions(be.diameter, be.color);
@@ -152,20 +159,22 @@ public class StoryLocusBlock extends BaseEntityBlock {
 	}
 
 	private static void declareThisBlockNear(ServerPlayer player, BlockPos pos) {
-		player.modifyAttached(RenmiAttachments.LOADING_STATE, state ->
-			new LoadingState(state == null ? 0 : state.ticks(), pos)
+		player.modifyAttached(
+			RenmiAttachments.LOADING_STATE, state ->
+				new LoadingState(state == null ? 0 : state.ticks(), pos)
 		);
 	}
 
 	public static void cancel(ServerPlayer player) {
-		player.modifyAttached(RenmiAttachments.LOADING_STATE, state ->
-			new LoadingState(-1, state == null ? BlockPos.ZERO : state.target())
+		player.modifyAttached(
+			RenmiAttachments.LOADING_STATE, state ->
+				new LoadingState(-1, state == null ? BlockPos.ZERO : state.target())
 		);
 	}
 
 	public static void tickPlayer(ServerPlayer player) {
 		// if currently reading, don't update
-		if (player.hasAttached(RenmiAttachments.READING_STATE) || player.level().getGameTime() % 2 != 0) return;
+		if (player.hasAttached(RenmiAttachments.READING_STATE) || player.level().getGameTime() % 2 != 0) { return; }
 
 		LoadingState state = player.getAttachedOrCreate(RenmiAttachments.LOADING_STATE);
 		if (player.isCrouching()) {
@@ -187,9 +196,9 @@ public class StoryLocusBlock extends BaseEntityBlock {
 						ReadingManager manager = ReadingManager.getManager(level.getServer());
 						RenmiLibrary library = RenmiLibrary.get(level.getServer());
 						Series series = library.getSeries(locus.series);
-						if (series == null) return;
+						if (series == null) { return; }
 						Act act = series.getAct(locus.act);
-						if (act == null) return;
+						if (act == null) { return; }
 						try {
 							manager.startReading(player, act, series, false);
 							ServerPlayNetworking.send(player, new S2CDisplayStoryScreenPacket());
@@ -197,7 +206,10 @@ public class StoryLocusBlock extends BaseEntityBlock {
 							Renmi.LOGGER.debug("locus attempted to start reading with unmet conditions");
 						}
 					} else if (player.distanceToSqr(state.target().getCenter()) <= locus.diameter * locus.diameter) {
-						player.setAttached(RenmiAttachments.LOADING_STATE, new LoadingState(state.ticks() + 3, state.target()));
+						player.setAttached(
+							RenmiAttachments.LOADING_STATE,
+							new LoadingState(state.ticks() + 3, state.target())
+						);
 					} else {
 						player.setAttached(RenmiAttachments.LOADING_STATE, new LoadingState(0, BlockPos.ZERO));
 					}

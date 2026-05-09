@@ -53,20 +53,27 @@ public class RenmiClient implements ClientModInitializer {
 		);
 
 		ClientPlayNetworking.registerGlobalReceiver(
-			S2CDisplayStoryLogPacket.TYPE, (payload, context) -> Minecraft.getInstance().setScreen(new StoryLogScreen(payload.text()))
+			S2CDisplayStoryLogPacket.TYPE,
+			(payload, context) -> Minecraft.getInstance().setScreen(new StoryLogScreen(payload.text()))
 		);
 
-		ClientPlayNetworking.registerGlobalReceiver(S2CStoryCompileErrorPacket.TYPE, (s2CStoryCompileErrorPacket, context) -> {
-			var mc = Minecraft.getInstance();
-			if (mc.screen instanceof StoryLocusScreen screen) {
-				screen.setErrorMessage(s2CStoryCompileErrorPacket.errorMessage());
+		ClientPlayNetworking.registerGlobalReceiver(
+			S2CStoryCompileErrorPacket.TYPE, (s2CStoryCompileErrorPacket, context) -> {
+				var mc = Minecraft.getInstance();
+				if (mc.screen instanceof StoryLocusScreen screen) {
+					screen.setErrorMessage(s2CStoryCompileErrorPacket.errorMessage());
+				}
 			}
-		});
+		);
 
 		ParticleProviderRegistry.getInstance().register(RenmiParticles.STORY_NODE, StoryNodeParticle.Provider::new);
 
 		//Progress Bar Rendering
-		HudElementRegistry.attachElementBefore(VanillaHudElements.BOSS_BAR, Identifier.fromNamespaceAndPath(Renmi.MOD_ID, "progress_bar"), RenmiClient::renderProgressBar);
+		HudElementRegistry.attachElementBefore(
+			VanillaHudElements.BOSS_BAR,
+			Identifier.fromNamespaceAndPath(Renmi.MOD_ID, "progress_bar"),
+			RenmiClient::renderProgressBar
+		);
 	}
 
 	private static void renderProgressBar(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker) {
@@ -77,10 +84,10 @@ public class RenmiClient implements ClientModInitializer {
 
 		Minecraft mc = Minecraft.getInstance();
 		LocalPlayer player = mc.player;
-		if (player == null) return;
+		if (player == null) { return; }
 
 		LoadingState state = player.getAttached(RenmiAttachments.LOADING_STATE);
-		if (state == null || state.ticks() <= 0 || state.ticks() > MAX_TICKS) return;
+		if (state == null || state.ticks() <= 0 || state.ticks() > MAX_TICKS) { return; }
 
 		int screenWidth = mc.getWindow().getGuiScaledWidth();
 		int screenHeight = mc.getWindow().getGuiScaledHeight();
