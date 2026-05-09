@@ -77,7 +77,6 @@ public class RenmiClient implements ClientModInitializer {
 	}
 
 	private static void renderProgressBar(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker) {
-		final int MAX_TICKS = 100; // probably replace with a config value later?
 		final int BAR_WIDTH = 100;
 		final int BAR_HEIGHT = 8;
 		final String CANCEL_TEXT = "Press [Crouch] to Cancel";
@@ -87,7 +86,7 @@ public class RenmiClient implements ClientModInitializer {
 		if (player == null) { return; }
 
 		LoadingState state = player.getAttached(RenmiAttachments.LOADING_STATE);
-		if (state == null || state.ticks() <= 0 || state.ticks() > MAX_TICKS) { return; }
+		if (state == null || state.cancelled()) { return; }
 
 		int screenWidth = mc.getWindow().getGuiScaledWidth();
 		int screenHeight = mc.getWindow().getGuiScaledHeight();
@@ -95,7 +94,8 @@ public class RenmiClient implements ClientModInitializer {
 		int x = (screenWidth - BAR_WIDTH) / 2;
 		int y = (screenHeight - BAR_HEIGHT) / 2;
 
-		float progress = Math.min((float) state.ticks() / MAX_TICKS, 1.0f);
+		float ticks = state.getElapsed(mc.level.getGameTime()) + deltaTracker.getGameTimeDeltaPartialTick(false);
+		float progress = Math.min(ticks / LoadingState.MAX_TICKS, 1.0f);
 		int filledWidth = (int) (BAR_WIDTH * progress);
 
 		graphics.fill(x, y, x + BAR_WIDTH, y + BAR_HEIGHT, 0xFFFFFFFF);

@@ -159,65 +159,50 @@ public class StoryLocusBlock extends BaseEntityBlock {
 	}
 
 	private static void declareThisBlockNear(ServerPlayer player, BlockPos pos) {
-		player.modifyAttached(
-			RenmiAttachments.LOADING_STATE, state ->
-				new LoadingState(state == null ? 0 : state.ticks(), pos)
-		);
-	}
-
-	public static void cancel(ServerPlayer player) {
-		player.modifyAttached(
-			RenmiAttachments.LOADING_STATE, state ->
-				new LoadingState(-1, state == null ? BlockPos.ZERO : state.target())
-		);
+		if (!player.hasAttached(RenmiAttachments.LOADING_STATE)) {
+			player.setAttached(RenmiAttachments.LOADING_STATE, new LoadingState(player.level().getGameTime(), pos));
+		}
 	}
 
 	public static void tickPlayer(ServerPlayer player) {
+		long ticks = player.level().getGameTime();
+
 		// if currently reading, don't update
-		if (player.hasAttached(RenmiAttachments.READING_STATE) || player.level().getGameTime() % 2 != 0) { return; }
+		if (player.hasAttached(RenmiAttachments.READING_STATE) || ticks % 2 != 0) { return; }
 
-		LoadingState state = player.getAttachedOrCreate(RenmiAttachments.LOADING_STATE);
-		if (player.isCrouching()) {
-			player.setAttached(RenmiAttachments.LOADING_STATE, LoadingState.NEG);
-			return;
-		}
+		// Get loading state, if any
+		if (player.getAttached(RenmiAttachments.LOADING_STATE) instanceof LoadingState state) {
+			// Cancel if player crouches
+			if (player.isCrouching()) {
+				player.setAttached(RenmiAttachments.LOADING_STATE, state.cancel());
+				return;
+			}
 
-		// if ticks is -1, we're waiting to be out of range of any BE.
-		// since BEs update the pos whenever they can, the target pos
-		// will only be zero if no BEs update this tick.
-		if (state.ticks() == -1 && !state.target().equals(BlockPos.ZERO)) {
-			// lets try again
-			player.setAttached(RenmiAttachments.LOADING_STATE, LoadingState.NEG);
-		} else {
-			player.level().getBlockEntity(state.target(), RenmiBlocks.STORY_LOCUS_ENTITY).ifPresentOrElse(
-				locus -> {
-					if (state.ticks() > 100) {
-						ServerLevel level = (ServerLevel) locus.getLevel();
-						ReadingManager manager = ReadingManager.getManager(level.getServer());
-						RenmiLibrary library = RenmiLibrary.get(level.getServer());
-						Series series = library.getSeries(locus.series);
-						if (series == null) { return; }
-						Act act = series.getAct(locus.act);
-						if (act == null) { return; }
-						try {
-							manager.startReading(player, act, series, false);
-							ServerPlayNetworking.send(player, new S2CDisplayStoryScreenPacket());
-						} catch (RenmiExceptions.ReadingConditionsUnmet unmet) {
-							Renmi.LOGGER.debug("locus attempted to start reading with unmet conditions");
-						}
-					} else if (player.distanceToSqr(state.target().getCenter()) <= locus.diameter * locus.diameter) {
-						player.setAttached(
-							RenmiAttachments.LOADING_STATE,
-							new LoadingState(state.ticks() + 3, state.target())
-						);
-					} else {
-						player.setAttached(RenmiAttachments.LOADING_STATE, LoadingState.ZERO);
+			// If there is no block entity or player leaves the radius, remove attachement
+			if (player.level().getBlockEntity(state.target()) instanceof StoryLocusBlockEntity locus
+				&& player.distanceToSqr(state.target().getCenter()) <= locus.diameter * locus.diameter
+			) {
+				// Activate act if loaded and not cancelled
+				if (!state.cancelled() && state.isLoaded(ticks)) {
+					player.setAttached(RenmiAttachments.LOADING_STATE, state.cancel());
+
+					ServerLevel level = (ServerLevel) locus.getLevel();
+					ReadingManager manager = ReadingManager.getManager(level.getServer());
+					RenmiLibrary library = RenmiLibrary.get(level.getServer());
+					Series series = library.getSeries(locus.series);
+					if (series == null) { return; }
+					Act act = series.getAct(locus.act);
+					if (act == null) { return; }
+					try {
+						manager.startReading(player, act, series, false);
+						ServerPlayNetworking.send(player, new S2CDisplayStoryScreenPacket());
+					} catch (RenmiExceptions.ReadingConditionsUnmet unmet) {
+						Renmi.LOGGER.debug("locus attempted to start reading with unmet conditions");
 					}
-				},
-				() -> {
-					player.setAttached(RenmiAttachments.LOADING_STATE, LoadingState.ZERO);
 				}
-			);
+			} else {
+				player.removeAttached(RenmiAttachments.LOADING_STATE);
+			}
 		}
 	}
 }

@@ -4,7 +4,6 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import symbolics.division.renmi.block.StoryLocusBlock;
 import symbolics.division.renmi.story.ReadingManager;
 
 public record C2SPlayerReadingPacket(boolean reading) implements CustomPacketPayload {
@@ -22,7 +21,6 @@ public record C2SPlayerReadingPacket(boolean reading) implements CustomPacketPay
 		assert !payload.reading;
 		ReadingManager mgr = ReadingManager.getManager(context.server());
 		mgr.stopReading(context.player());
-		StoryLocusBlock.cancel(context.player());
 	}
 
 	@Override

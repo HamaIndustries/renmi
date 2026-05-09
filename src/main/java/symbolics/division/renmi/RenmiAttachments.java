@@ -14,11 +14,10 @@ public class RenmiAttachments {
 
 	public static final AttachmentType<LoadingState> LOADING_STATE = AttachmentRegistry.create(
 		Renmi.id("loading_state"),
-		builder -> builder.initializer(() -> LoadingState.ZERO)
-			.syncWith(
-				LoadingState.STREAM_CODEC,
-				AttachmentSyncPredicate.targetOnly()
-			)
+		builder -> builder.syncWith(
+			LoadingState.STREAM_CODEC,
+			AttachmentSyncPredicate.targetOnly()
+		)
 	);
 
 	public static final AttachmentType<ReadingState> READING_STATE = AttachmentRegistry.create(
