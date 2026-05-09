@@ -13,8 +13,5 @@ public record LoadingState(int ticks, BlockPos target) {
 	);
 
 	public static final LoadingState ZERO = new LoadingState(0, BlockPos.ZERO);
-
-	public LoadingState increment() {
-		return new LoadingState(this.ticks + 1, this.target);
-	}
+	public static final LoadingState NEG = new LoadingState(-1, BlockPos.ZERO);
 }

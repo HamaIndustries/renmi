@@ -178,7 +178,7 @@ public class StoryLocusBlock extends BaseEntityBlock {
 
 		LoadingState state = player.getAttachedOrCreate(RenmiAttachments.LOADING_STATE);
 		if (player.isCrouching()) {
-			player.setAttached(RenmiAttachments.LOADING_STATE, new LoadingState(-1, BlockPos.ZERO));
+			player.setAttached(RenmiAttachments.LOADING_STATE, LoadingState.NEG);
 			return;
 		}
 
@@ -187,7 +187,7 @@ public class StoryLocusBlock extends BaseEntityBlock {
 		// will only be zero if no BEs update this tick.
 		if (state.ticks() == -1 && !state.target().equals(BlockPos.ZERO)) {
 			// lets try again
-			player.setAttached(RenmiAttachments.LOADING_STATE, new LoadingState(-1, BlockPos.ZERO));
+			player.setAttached(RenmiAttachments.LOADING_STATE, LoadingState.NEG);
 		} else {
 			player.level().getBlockEntity(state.target(), RenmiBlocks.STORY_LOCUS_ENTITY).ifPresentOrElse(
 				locus -> {
@@ -211,11 +211,11 @@ public class StoryLocusBlock extends BaseEntityBlock {
 							new LoadingState(state.ticks() + 3, state.target())
 						);
 					} else {
-						player.setAttached(RenmiAttachments.LOADING_STATE, new LoadingState(0, BlockPos.ZERO));
+						player.setAttached(RenmiAttachments.LOADING_STATE, LoadingState.ZERO);
 					}
 				},
 				() -> {
-					player.setAttached(RenmiAttachments.LOADING_STATE, new LoadingState(0, BlockPos.ZERO));
+					player.setAttached(RenmiAttachments.LOADING_STATE, LoadingState.ZERO);
 				}
 			);
 		}
