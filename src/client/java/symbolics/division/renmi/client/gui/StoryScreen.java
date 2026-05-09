@@ -99,9 +99,9 @@ public class StoryScreen extends Screen {
 					if (timer < 100) {
 						matrices.translate(self.getX() + self.getWidth() / 2f, self.getY() + self.getHeight() / 2f);
 						if (timer < 50) {
-							matrices.scale(1.5f, 0.5f);
+							matrices.scale(1.2f, 0.8f);
 						} else {
-							matrices.scale(0.9f, 1.1f);
+							matrices.scale(0.95f, 1.05f);
 						}
 						matrices.translate(-self.getX() - self.getWidth() / 2f, -self.getY() - self.getHeight() / 2f);
 					}
