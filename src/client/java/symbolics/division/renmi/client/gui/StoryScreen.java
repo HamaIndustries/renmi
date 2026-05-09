@@ -63,7 +63,6 @@ public class StoryScreen extends Screen {
 	private ArrayList<Portrait> allPortraits = new ArrayList<>();
 
 	private DisplayState state;
-	private boolean isFinishedScrolling = false;
 	private long choicesAnimTimer;
 
 	public StoryScreen() {
@@ -159,7 +158,7 @@ public class StoryScreen extends Screen {
 				RenderOperations.CHILD_RENDER,
 				(self, render) -> {
 					// Both tests needed to ensure it doesn't flicker on frames between ticks
-					if (state != null && !state.isScrolling() && isFinishedScrolling && choices.getChildren().isEmpty()) {
+					if (state != null && !state.isScrolling() && choices.getChildren().isEmpty()) {
 						render.context().blitSprite(
 							RenderPipelines.GUI_TEXTURED, NEXT_ARROW,
 							self.getRight() - 16, self.getBottom() - 16, 8, 8
@@ -275,15 +274,6 @@ public class StoryScreen extends Screen {
 	public void tick() {
 		if (state != null) {
 			state.tick();
-
-			if (!state.isScrolling()) {
-				if (!isFinishedScrolling) {
-					showChoices();
-				}
-				isFinishedScrolling = true;
-			} else {
-				isFinishedScrolling = false;
-			}
 		}
 	}
 
@@ -307,7 +297,12 @@ public class StoryScreen extends Screen {
 				playDownSound();
 				clearFocus();
 				return true;
-			} else if (state.choices().isEmpty()) {
+			} else if (!state.choices().isEmpty()) {
+				if (choices.children().isEmpty()) {
+					showChoices();
+					return true;
+				}
+			} else {
 				if (state.end()) {
 					onClose();
 				} else {
@@ -408,9 +403,8 @@ public class StoryScreen extends Screen {
 			}
 		}
 
-		if (!hasActor) hideNameplate();
+		if (!hasActor) { hideNameplate(); }
 		this.state = new DisplayState(displayedText, 2);
-		this.isFinishedScrolling = false;
 	}
 
 	private class DisplayState {
