@@ -178,7 +178,7 @@ public class StoryLocusBlock extends BaseEntityBlock {
 				return;
 			}
 
-			// If there is no block entity or player leaves the radius, remove attachement
+			// If there is no block entity or player leaves the radius, remove attachment
 			if (player.level().getBlockEntity(state.target()) instanceof StoryLocusBlockEntity locus
 				&& player.distanceToSqr(state.target().getCenter()) <= locus.diameter * locus.diameter
 			) {
