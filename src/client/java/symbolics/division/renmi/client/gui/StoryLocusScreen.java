@@ -1,6 +1,7 @@
 package symbolics.division.renmi.client.gui;
 
 import com.google.common.primitives.Floats;
+import com.google.common.primitives.Ints;
 import com.mojang.blaze3d.platform.Window;
 import dev.chailotl.bento_gui.client.FlowAxis;
 import dev.chailotl.bento_gui.client.elements.*;
@@ -16,13 +17,15 @@ import symbolics.division.renmi.net.C2SActEditingPacket;
 import symbolics.division.renmi.net.C2SEditStoryLocusPacket;
 
 public class StoryLocusScreen extends Screen {
-//	private final StoryLocusBlockEntity be;
+	//	private final StoryLocusBlockEntity be;
+	public static final int MAX_INTENSITY = 5;
 
 	private TextField<Identifier> actField;
 	private TextField<Identifier> seriesField;
 	private TextField<Float> diameterField;
 	private TextAreaWithTabs scriptField;
 	private TextField<Color> colorField;
+	private TextField<Integer> intensityField;
 	private Paragraph errorMessage;
 
 	private Identifier seriesId;
@@ -33,14 +36,16 @@ public class StoryLocusScreen extends Screen {
 	@Nullable
 	private float diameter;
 	private Color color;
+	private int intensity;
 
-	public StoryLocusScreen(Identifier series, Identifier act, String inkSource, @Nullable BlockPos locusPos, int rgb) {
+	public StoryLocusScreen(Identifier series, Identifier act, String inkSource, @Nullable BlockPos locusPos, int rgb, int intensity) {
 		super(Component.empty());
 		this.seriesId = series;
 		this.actId = act;
 		this.inkSource = inkSource;
 		this.locusPos = locusPos;
 		this.color = Color.ofRgb(rgb);
+		this.intensity = intensity;
 	}
 
 	@Override
@@ -79,6 +84,10 @@ public class StoryLocusScreen extends Screen {
 		colorField = TextField.ofColor()
 			.value(color)
 			.build();
+		intensityField = TextField.ofInteger()
+			.value(intensity)
+			.validationPredicate(s -> Ints.tryParse(s) instanceof Integer i && i >= 0 && i <= MAX_INTENSITY)
+			.build();
 		errorMessage = Paragraph.builder().build();
 		errorMessage.setFitToContentHeight(true);
 		errorMessage.setAutoWidth(true);
@@ -107,6 +116,7 @@ public class StoryLocusScreen extends Screen {
 		sidePanel.addChild(addLabel(actField, "gui.renmi.act_id"));
 		sidePanel.addChild(addLabel(diameterField, "gui.renmi.diameter"));
 		sidePanel.addChild(addLabel(colorField, "gui.renmi.color"));
+		sidePanel.addChild(addLabel(intensityField, "gui.renmi.intensity"));
 		sidePanel.addChild(saveButton);
 		sidePanel.addChild(doneButton);
 		sidePanel.addChild(errorMessage);
@@ -131,8 +141,8 @@ public class StoryLocusScreen extends Screen {
 		return panel;
 	}
 
-	public void setErrorMessage(String message){
-		if(errorMessage != null) {
+	public void setErrorMessage(String message) {
+		if (errorMessage != null) {
 			errorMessage.setText(Component.literal(message));
 		}
 	}
@@ -153,8 +163,11 @@ public class StoryLocusScreen extends Screen {
 		if (colorField.isValidText()) {
 			color = colorField.getValue();
 		}
+		if (intensityField.isValidText()) {
+			intensity = intensityField.getValue();
+		}
 
-		if(errorMessage != null) {
+		if (errorMessage != null) {
 			errorMessage.setText(Component.empty());
 		}
 
@@ -164,7 +177,7 @@ public class StoryLocusScreen extends Screen {
 
 		if (locusPos != null) {
 			ClientPlayNetworking.send(new C2SEditStoryLocusPacket(
-				locusPos, seriesId, actId, diameter, color.rgb()
+				locusPos, seriesId, actId, diameter, color.rgb(), intensity
 			));
 		}
 	}

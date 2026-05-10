@@ -18,10 +18,12 @@ import symbolics.division.renmi.RenmiBlocks;
 
 public class StoryLocusBlockEntity extends BlockEntity {
 	public static final int DEFAULT_COLOR = 0xFFFFFF;
+	public static final int DEFAULT_INTENSITY = 5;
 	public Identifier act = Renmi.id("null");
 	public Identifier series = Renmi.id("null");
 	public float diameter = 3;
 	public int color = DEFAULT_COLOR;
+	public int intensity = DEFAULT_INTENSITY;
 
 
 	public StoryLocusBlockEntity(BlockPos pos, BlockState state) {
@@ -36,6 +38,7 @@ public class StoryLocusBlockEntity extends BlockEntity {
 		output.putString("series", series.toString());
 		output.putFloat("diameter", diameter);
 		output.putInt("color", color);
+		output.putInt("intensity", intensity);
 	}
 
 	@Override
@@ -52,6 +55,7 @@ public class StoryLocusBlockEntity extends BlockEntity {
 		}
 		diameter = input.getFloatOr("diameter", 3);
 		color = input.getIntOr("color", DEFAULT_COLOR);
+		intensity = input.getIntOr("intensity", DEFAULT_INTENSITY);
 	}
 
 	@Override
@@ -73,11 +77,12 @@ public class StoryLocusBlockEntity extends BlockEntity {
 		return ClientboundBlockEntityDataPacket.create(this);
 	}
 
-	public void setValues(Identifier series, Identifier act, float diameter, int color) {
+	public void setValues(Identifier series, Identifier act, float diameter, int color, int intensity) {
 		this.series = series;
 		this.act = act;
 		this.diameter = diameter;
 		this.color = color;
+		this.intensity = intensity;
 		this.setChanged();
 	}
 }

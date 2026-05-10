@@ -69,7 +69,7 @@ public class StoryLocusBlock extends BaseEntityBlock {
 				}
 				ServerPlayNetworking.send(
 					(ServerPlayer) player,
-					new S2CActEditingPacket(be.series, be.act, source, be.color, Optional.of(be.getBlockPos()))
+					new S2CActEditingPacket(be.series, be.act, source, be.color, be.intensity, Optional.of(be.getBlockPos()))
 				);
 			}
 			return InteractionResult.SUCCESS;
@@ -102,17 +102,20 @@ public class StoryLocusBlock extends BaseEntityBlock {
 
 			Vec3 c = blockPos.getCenter();
 			var opts = new RenmiParticles.StoryNodeParticleOptions(be.diameter, be.color);
-			int n = level.getRandom().nextInt(5);
-			for (ServerPlayer player : ((ServerLevel) level).getPlayers(
-				player -> !player.hasAttached(RenmiAttachments.READING_STATE)
-					&& player.distanceToSqr(c) < 250
-					&& act.startConditionsMet(player, manager.createOrLoad(player, series)))
-			) {
-				for (int i = 0; i < n; i++) {
-					sv.sendParticles(player, opts, true, true, c.x, c.y, c.z, n, 0.1, 0.1, 0.1, 0);
-				}
-				if (player.distanceToSqr(c) <= be.diameter * be.diameter && !player.isHolding(RenmiBlocks.STORY_LOCUS.asItem())) {
-					declareThisBlockNear(player, blockPos);
+
+			if (be.intensity > 0) {
+				int n = level.getRandom().nextInt(be.intensity);
+				for (ServerPlayer player : ((ServerLevel) level).getPlayers(
+					player -> !player.hasAttached(RenmiAttachments.READING_STATE)
+						&& player.distanceToSqr(c) < 250
+						&& act.startConditionsMet(player, manager.createOrLoad(player, series)))
+				) {
+					for (int i = 0; i < n; i++) {
+						sv.sendParticles(player, opts, true, true, c.x, c.y, c.z, n, 0.1, 0.1, 0.1, 0);
+					}
+					if (player.distanceToSqr(c) <= be.diameter * be.diameter && !player.isHolding(RenmiBlocks.STORY_LOCUS.asItem())) {
+						declareThisBlockNear(player, blockPos);
+					}
 				}
 			}
 		}

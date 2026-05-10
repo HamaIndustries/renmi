@@ -9,7 +9,7 @@ import net.minecraft.resources.Identifier;
 import symbolics.division.renmi.RenmiBlocks;
 
 public record C2SEditStoryLocusPacket(BlockPos pos, Identifier series, Identifier act,
-									  float diameter, int color) implements CustomPacketPayload {
+									  float diameter, int color, int intensity) implements CustomPacketPayload {
 	// we send the story edit packet vs locus edit packet separately since we sometimes want
 	// to edit the story without a specific locus associated with it.
 
@@ -17,9 +17,9 @@ public record C2SEditStoryLocusPacket(BlockPos pos, Identifier series, Identifie
 
 	public static final StreamCodec<FriendlyByteBuf, C2SEditStoryLocusPacket> STREAM_CODEC = CustomPacketPayload.codec(
 		(p, b) -> {
-			b.writeBlockPos(p.pos).writeIdentifier(p.series).writeIdentifier(p.act).writeFloat(p.diameter).writeInt(p.color);
+			b.writeBlockPos(p.pos).writeIdentifier(p.series).writeIdentifier(p.act).writeFloat(p.diameter).writeInt(p.color).writeInt(p.intensity);
 		},
-		(b) -> new C2SEditStoryLocusPacket(b.readBlockPos(), b.readIdentifier(), b.readIdentifier(), b.readFloat(), b.readInt())
+		(b) -> new C2SEditStoryLocusPacket(b.readBlockPos(), b.readIdentifier(), b.readIdentifier(), b.readFloat(), b.readInt(), b.readInt())
 	);
 
 	public static void HANDLER(C2SEditStoryLocusPacket payload, ServerPlayNetworking.Context context) {
@@ -32,7 +32,7 @@ public record C2SEditStoryLocusPacket(BlockPos pos, Identifier series, Identifie
 		var maybeBe = player.level().getBlockEntity(payload.pos, RenmiBlocks.STORY_LOCUS_ENTITY);
 		if (maybeBe.isPresent()) {
 			var be = maybeBe.get();
-			be.setValues(payload.series, payload.act, payload.diameter, payload.color);
+			be.setValues(payload.series, payload.act, payload.diameter, payload.color, payload.intensity);
 		}
 	}
 

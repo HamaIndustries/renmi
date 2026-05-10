@@ -47,7 +47,8 @@ public class RenmiClient implements ClientModInitializer {
 					payload.act(),
 					payload.inkSource(),
 					payload.locus().orElse(null),
-					payload.rgb()
+					payload.rgb(),
+					payload.intensity()
 				));
 			}
 		);
@@ -83,10 +84,14 @@ public class RenmiClient implements ClientModInitializer {
 
 		Minecraft mc = Minecraft.getInstance();
 		LocalPlayer player = mc.player;
-		if (player == null) { return; }
+		if (player == null) {
+			return;
+		}
 
 		LoadingState state = player.getAttached(RenmiAttachments.LOADING_STATE);
-		if (state == null || state.cancelled()) { return; }
+		if (state == null || state.cancelled()) {
+			return;
+		}
 
 		int screenWidth = mc.getWindow().getGuiScaledWidth();
 		int screenHeight = mc.getWindow().getGuiScaledHeight();
