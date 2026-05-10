@@ -5,6 +5,7 @@ import com.bladecoder.ink.runtime.Story;
 import com.bladecoder.ink.runtime.StoryException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import org.apache.commons.lang3.NotImplementedException;
 import symbolics.division.renmi.Renmi;
@@ -22,21 +23,28 @@ public class ActReading implements ExternalListener {
 		instance.group(
 			Codec.STRING.fieldOf("story").forGetter(ActReading::storyJson),
 			Codec.STRING.fieldOf("text").forGetter(ActReading::text),
-			Codec.STRING.fieldOf("state").forGetter(ActReading::stateJson)
+			Codec.STRING.fieldOf("state").forGetter(ActReading::stateJson),
+			ActLine.CODEC.fieldOf("currentLine").forGetter(ActReading::currentLine),
+			Identifier.CODEC.fieldOf("seriesId").forGetter(ActReading::seriesId),
+			Identifier.CODEC.fieldOf("actId").forGetter(ActReading::actId)
 		).apply(instance, ActReading::ofLoaded)
 	);
 
 	protected final Story story;
 	protected ActLine currentLine;
 	protected String text = "";
+	protected final Identifier actId;
+	protected final Identifier seriesId;
 
 	private StoryListener storyListener = null;
 
 	private List<String> globalTags = new ArrayList<>();
 
-	private ActReading(Story story, String text) {
+	private ActReading(Story story, String text, Identifier series, Identifier act) {
 		try {
 			this.story = story;
+			this.actId = act;
+			this.seriesId = series;
 			this.globalTags = this.story.getGlobalTags();
 			if (this.globalTags == null) this.globalTags = List.of();
 			this.text = text;
@@ -46,9 +54,9 @@ public class ActReading implements ExternalListener {
 		}
 	}
 
-	public static ActReading ofNew(Act act, ServerPlayer player) {
+	public static ActReading ofNew(Act act, ServerPlayer player, Identifier seriesId, Identifier actId) {
 		try {
-			ActReading reading = new ActReading(act.getStory(), "");
+			ActReading reading = new ActReading(act.getStory(), "", seriesId, actId);
 			reading.proceed(player); // needs to see first line
 			return reading;
 		} catch (Exception e) {
@@ -56,11 +64,13 @@ public class ActReading implements ExternalListener {
 		}
 	}
 
-	public static ActReading ofLoaded(String storyJson, String prevText, String state) {
+	public static ActReading ofLoaded(String storyJson, String prevText, String state, ActLine currentLine, Identifier series, Identifier act) {
 		try {
 			Story story = new Story(storyJson);
 			story.getState().loadJson(state);
-			return new ActReading(story, prevText);
+			ActReading reading = new ActReading(story, prevText, series, act);
+			reading.currentLine = currentLine;
+			return reading;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -125,7 +135,7 @@ public class ActReading implements ExternalListener {
 				throw new NotImplementedException();
 			}
 		} else {
-			Renmi.LOGGER.info(
+			Renmi.LOGGER.debug(
 				"player {} attempted to make invalid choice {} when the number of choices was {}",
 				player.nameAndId(),
 				choice,
@@ -170,5 +180,13 @@ public class ActReading implements ExternalListener {
 			return storyListener.runCommand(command);
 		}
 		return 0;
+	}
+
+	public Identifier seriesId() {
+		return this.seriesId;
+	}
+
+	public Identifier actId() {
+		return this.actId;
 	}
 }

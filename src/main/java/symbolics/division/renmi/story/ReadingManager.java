@@ -45,12 +45,15 @@ public class ReadingManager {
 
 	public ReadingManager(Map<UUID, Map<Identifier, SeriesReading>> allSeriesReadings, Map<UUID, ActReading> activeReadings) {
 		this.activeReadings.putAll(activeReadings);
-		this.allSeriesReadings.replaceAll((k, v) -> new HashMap<>(v));
+		for (var reading : allSeriesReadings.entrySet()) {
+			this.allSeriesReadings.put(reading.getKey(), new HashMap<>(reading.getValue()));
+		}
 	}
 
 	public ActReading createOrLoad(ServerPlayer player, Series series, Act act) {
 		SeriesReading seriesReading = createOrLoad(player, series);
-		ActReading reading = seriesReading.getActReadings().computeIfAbsent(act.id, id -> act.createReading(player));
+		ActReading reading = seriesReading.getActReadings().computeIfAbsent(act.id, id ->
+			ActReading.ofNew(act, player, series.id, act.id));
 		return reading;
 	}
 
@@ -99,18 +102,11 @@ public class ReadingManager {
 		ActReading reading = getActiveReading(player);
 		if (reading == null) {
 			Renmi.LOGGER.info("Player attempted to proceed with no act running.");
-//			((ReadingPlayer) (player)).setReading(false);
 			return;
 		}
 
-		if (reading.isDone()) {
-			activeReadings.remove(player.getUUID());
-			updateReadingState(player, null);
-//			((ReadingPlayer) (player)).setReading(false);
-		} else {
-			reading.proceed(player);
-			updateReadingState(player, reading);
-		}
+		reading.proceed(player);
+		updateReadingState(player, reading);
 	}
 
 	public void readingChoice(ServerPlayer player, int choice) {
@@ -134,6 +130,22 @@ public class ReadingManager {
 			RenmiAttachments.READING_STATE,
 			new ReadingState(line == null ? ActLine.INACTIVE : line, choices, line == null ? true : line.end())
 		);
+
+		// cleanup
+		if (reading.isDone()) {
+			Act act = RenmiLibrary.get(player.level().getServer()).getAct(reading.seriesId, reading.actId);
+			if (act != null && act.repeatable()) {
+				removeReading(player, reading);
+			}
+		}
+	}
+
+	private void removeReading(ServerPlayer player, ActReading reading) {
+		var readings = allSeriesReadings.get(player.getUUID());
+		if (readings == null) return;
+		readings.forEach((id, series) -> {
+			series.removeReading(reading);
+		});
 	}
 
 	public void stopReading(ServerPlayer player) {

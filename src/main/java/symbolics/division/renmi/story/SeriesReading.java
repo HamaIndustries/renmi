@@ -20,7 +20,7 @@ public class SeriesReading implements StoryListener {
 	public static Codec<SeriesReading> CODEC = RecordCodecBuilder.create(i -> i.group(
 			Codec.unboundedMap(Identifier.CODEC, ActReading.CODEC).fieldOf("actReadings").forGetter(ser -> ser.actReadings),
 			Codec.unboundedMap(Codec.STRING, Codec.INT).fieldOf("globalVars").forGetter(ser -> ser.globalVars),
-			ActReading.CODEC
+			ActReading.CODEC // TODO this really should not exist
 				.optionalFieldOf("currentActReading")
 				.forGetter(reading -> Optional.ofNullable(reading.currentActReading))
 		).apply(i, SeriesReading::new)
@@ -49,11 +49,6 @@ public class SeriesReading implements StoryListener {
 
 	public void setCurrentActReading(ActReading actReading) {
 		this.currentActReading = actReading;
-	}
-
-	@Nullable
-	public ActReading getCurrentActReading() {
-		return currentActReading;
 	}
 
 	public boolean isActFinished(Identifier id) {
@@ -108,5 +103,17 @@ public class SeriesReading implements StoryListener {
 
 	public Map<Identifier, ActReading> getActReadings() {
 		return this.actReadings;
+	}
+
+	public void removeReading(ActReading reading) {
+		Identifier id = null;
+		for (var entry : actReadings.entrySet()) {
+			if (entry.getValue() == reading) {
+				id = entry.getKey();
+			}
+		}
+		if (id != null) {
+			actReadings.remove(id);
+		}
 	}
 }

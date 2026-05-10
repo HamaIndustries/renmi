@@ -35,6 +35,7 @@ public class Act {
 	protected String json;
 	protected List<BiPredicate<ServerPlayer, SeriesReading>> conditions = new ArrayList<>();
 	protected String title = "";
+	protected final boolean repeatable;
 
 	public Act(Identifier id, String source, String json) {
 		this.id = id;
@@ -68,7 +69,13 @@ public class Act {
 				}
 			}
 			if (runOnce) {
+				// if its not repeatable, then the condition to start is that it has not been completed.
+				// its bad design the completion should be tracked separately like a tag etc etc
 				conditions.add((player, seriesReading) -> !seriesReading.isActFinished(this.id));
+				repeatable = false;
+			} else {
+				// we expect a repeatable act to be deleted as soon as it is completed.
+				repeatable = true;
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -86,10 +93,6 @@ public class Act {
 		return true;
 	}
 
-	public ActReading createReading(ServerPlayer player) {
-		return ActReading.ofNew(this, player);
-	}
-
 	public String source() {
 		return this.source;
 	}
@@ -100,5 +103,9 @@ public class Act {
 		} catch (Exception e) {
 			throw new RuntimeException();
 		}
+	}
+
+	public boolean repeatable() {
+		return this.repeatable;
 	}
 }

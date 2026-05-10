@@ -1,5 +1,7 @@
 package symbolics.division.renmi.story;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -21,7 +23,14 @@ public record ActLine(String text, boolean end, List<String> globalTags, List<St
 		ActLine::new
 	);
 
-	public static ActLine INACTIVE = new ActLine(null, true, List.of(), List.of());
+	public static Codec<ActLine> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+		Codec.STRING.fieldOf("text").forGetter(ActLine::text),
+		Codec.BOOL.fieldOf("end").forGetter(ActLine::end),
+		Codec.STRING.listOf().fieldOf("globalTags").forGetter(ActLine::globalTags),
+		Codec.STRING.listOf().fieldOf("tags").forGetter(ActLine::tags)
+	).apply(instance, ActLine::new));
+
+	public static ActLine INACTIVE = new ActLine("ERROR", true, List.of(), List.of());
 
 	public static ActLine of(String line, boolean end, List<String> globalTags, List<String> tags) {
 		return new ActLine(line, end, globalTags, tags);
