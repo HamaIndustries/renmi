@@ -81,6 +81,12 @@ public class ReadingManager {
 //		readingPlayer.setReading(true);
 	}
 
+	public void resetSeries(ServerPlayer player, Series series) {
+		for (Act act : series.allActs().values()) {
+			resetReading(player, series, act);
+		}
+	}
+
 	public void resetReading(ServerPlayer player, Series series, Act act) {
 		activeReadings.remove(player.getUUID());
 

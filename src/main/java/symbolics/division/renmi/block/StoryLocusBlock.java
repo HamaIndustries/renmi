@@ -92,9 +92,13 @@ public class StoryLocusBlock extends BaseEntityBlock {
 			ReadingManager manager = ReadingManager.getManager(level.getServer());
 			RenmiLibrary library = RenmiLibrary.get(level.getServer());
 			Series series = library.getSeries(locus.series);
-			if (series == null) { return; }
+			if (series == null) {
+				return;
+			}
 			Act act = series.getAct(locus.act);
-			if (act == null) { return; }
+			if (act == null) {
+				return;
+			}
 
 			Vec3 c = blockPos.getCenter();
 			var opts = new RenmiParticles.StoryNodeParticleOptions(be.diameter, be.color);
@@ -110,35 +114,6 @@ public class StoryLocusBlock extends BaseEntityBlock {
 				if (player.distanceToSqr(c) <= be.diameter * be.diameter && !player.isHolding(RenmiBlocks.STORY_LOCUS.asItem())) {
 					declareThisBlockNear(player, blockPos);
 				}
-
-//				if (player.distanceToSqr(c) <= be.diameter && !player.isCrouching() && !player.isHolding(RenmiBlocks.STORY_LOCUS.asItem())) {
-//					var loadingState = player.getAttachedOrCreate(RenmiAttachments.LOADING_STATE);
-//					if (loadingState.blockEntityId() == 0) {
-//						setLoadingStateBlockEntityId(player, loadingState, id);
-//						loadingState = player.getAttachedOrCreate(RenmiAttachments.LOADING_STATE);
-//					}
-//					var readingPlayer = (ReadingPlayer) (player);
-//					if (!readingPlayer.isReading()) {
-//						if (loadingState.ticks() > 100) {
-//							try {
-//								startReading(manager, player, act, series);
-//							} catch (Exception e) {
-//								Renmi.LOGGER.error("StoryLocusBlock failed to start act at " + blockPos + "with exception: " + e);
-//							}
-//						} else if (loadingState.blockEntityId() == id) {
-//							incrementLoadingStateTicks(player, loadingState);
-//						} else {
-//							clearLoadingStateTicks(player);
-//						}
-//					}
-//				} else if (player.hasAttached(RenmiAttachments.LOADING_STATE)) {
-//					var state = player.getAttachedOrCreate(RenmiAttachments.LOADING_STATE);
-//					if (state.ticks() > 0) {
-//						clearLoadingStateTicks(player);
-//					}
-//				}
-
-
 			}
 		}
 	}
@@ -168,7 +143,9 @@ public class StoryLocusBlock extends BaseEntityBlock {
 		long ticks = player.level().getGameTime();
 
 		// if currently reading, don't update
-		if (player.hasAttached(RenmiAttachments.READING_STATE) || ticks % 2 != 0) { return; }
+		if (player.hasAttached(RenmiAttachments.READING_STATE) || ticks % 2 != 0) {
+			return;
+		}
 
 		// Get loading state, if any
 		if (player.getAttached(RenmiAttachments.LOADING_STATE) instanceof LoadingState state) {
@@ -190,9 +167,13 @@ public class StoryLocusBlock extends BaseEntityBlock {
 					ReadingManager manager = ReadingManager.getManager(level.getServer());
 					RenmiLibrary library = RenmiLibrary.get(level.getServer());
 					Series series = library.getSeries(locus.series);
-					if (series == null) { return; }
+					if (series == null) {
+						return;
+					}
 					Act act = series.getAct(locus.act);
-					if (act == null) { return; }
+					if (act == null) {
+						return;
+					}
 					try {
 						manager.startReading(player, act, series, false);
 						ServerPlayNetworking.send(player, new S2CDisplayStoryScreenPacket());

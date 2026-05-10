@@ -18,6 +18,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
+import org.jetbrains.annotations.Nullable;
 import symbolics.division.renmi.net.S2CDisplayStoryScreenPacket;
 import symbolics.division.renmi.story.Act;
 import symbolics.division.renmi.story.RenmiLibrary;
@@ -68,7 +69,15 @@ public class RenmiCommands {
 					.executes(RenmiCommands::readingChoice)
 				)
 			).then(Commands.literal("show")
-				.executes(RenmiCommands::showScreen));
+				.executes(RenmiCommands::showScreen))
+			.then(Commands.literal("reset")
+				.then(Commands.argument("series_id", IdentifierArgument.id())
+					.executes(ctx -> reset(ctx, series(ctx), null))
+					.then(
+						Commands.argument("act_id", IdentifierArgument.id())
+							.executes(ctx -> reset(ctx, series(ctx), act(ctx)))
+					)
+				));
 
 		LiteralArgumentBuilder<CommandSourceStack> listCommand = Commands.literal("list")
 			.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
@@ -105,6 +114,34 @@ public class RenmiCommands {
 			return 0;
 		}
 		context.getSource().sendSystemMessage(Component.literal("Created act " + act(context) + " for series " + series(context)));
+		return 1;
+	}
+
+	private static int reset(CommandContext<CommandSourceStack> context, Identifier seriesId, @Nullable Identifier actId) {
+		// lazy bad copy paste please fix
+		ServerPlayer player = context.getSource().getPlayer();
+		if (player == null) {
+			return 0;
+		}
+		var manager = context.getSource().getServer().globalAttachments().getAttachedOrCreate(RenmiAttachments.READING_MANAGER);
+		var library = context.getSource().getServer().globalAttachments().getAttachedOrCreate(RenmiAttachments.LIBRARY);
+		Series series = library.getSeries(seriesId);
+		if (series == null) {
+			context.getSource().sendFailure(Component.literal("No such series exists."));
+			return 0;
+		}
+
+		if (actId == null) {
+			manager.resetSeries(player, series);
+			return 1;
+		}
+
+		Act act = series.getAct(actId);
+		if (act == null) {
+			context.getSource().sendFailure(Component.literal("No such act exists."));
+			return 0;
+		}
+		manager.resetReading(player, series, act);
 		return 1;
 	}
 
