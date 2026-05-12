@@ -243,17 +243,18 @@ public class StoryScreen extends Screen {
 			};
 			portrait.show(dir, faceRight);
 
-			int guiScale = window.getGuiScale();
+			int width = window.getGuiScaledWidth();
+			int height = window.getGuiScaledHeight();
 			float heightRatio = actor.heightCm() / 222f;
-			float scale = (float) 125 * guiScale / actor.heightPx() * heightRatio;
+			float scale = 1.116f * height / actor.heightPx() * heightRatio;
 
 			portrait.getImage().setWidth((int) (portrait.getImage().getTextureWidth() * scale));
 
-			float x = window.getGuiScaledWidth() / 2f
-				+ 30f * guiScale * (slot - 3)
+			float x = width / 2f
+				+ width / 8f * (slot - 2.5f)
 				- actor.origin().x * scale;
-			float y = window.getGuiScaledHeight()
-				+ 25f * guiScale * heightRatio
+			float y = height
+				+ height / 4.48f * heightRatio
 				- actor.origin().y * scale;
 
 			portrait.getImage().setPosition((int) x, (int) y);
