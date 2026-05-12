@@ -2,10 +2,7 @@ package symbolics.division.renmi.client.gui;
 
 import com.mojang.blaze3d.platform.Window;
 import dev.chailotl.bento_gui.client.FlowAxis;
-import dev.chailotl.bento_gui.client.elements.Button;
-import dev.chailotl.bento_gui.client.elements.Label;
-import dev.chailotl.bento_gui.client.elements.Panel;
-import dev.chailotl.bento_gui.client.elements.Paragraph;
+import dev.chailotl.bento_gui.client.elements.*;
 import dev.chailotl.bento_gui.client.util.DrawUtils;
 import dev.chailotl.bento_gui.client.util.RenderOperations;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -32,6 +29,7 @@ import symbolics.division.renmi.client.gui.stage.*;
 import symbolics.division.renmi.net.C2SPlayerInputPacket;
 import symbolics.division.renmi.net.C2SPlayerReadingPacket;
 import symbolics.division.renmi.net.C2SRequestStoryLogPacket;
+import symbolics.division.renmi.story.ActChoice;
 import symbolics.division.renmi.story.Actor;
 import symbolics.division.renmi.story.ActorManager;
 import symbolics.division.renmi.story.ReadingState;
@@ -341,6 +339,13 @@ public class StoryScreen extends Screen {
 		}
 	}
 
+	private Button createChoiceButton(ActChoice choice) {
+		return choiceButton
+			.text(Component.literal(choice.text())) // FIXME buttons might have component visiblity? placeholder api?
+			.onPress(_ -> makeChoice(choice.index()))
+			.build();
+	}
+
 	private void showChoices() {
 		LocalPlayer player = Minecraft.getInstance().player;
 		var state = player.getAttached(RenmiAttachments.READING_STATE);
@@ -360,12 +365,29 @@ public class StoryScreen extends Screen {
 			choiceButton.width(width);
 
 			// Add choices
-			for (var choice : state.choices()) {
-				choices.addChild(choiceButton
-					.text(Component.literal(choice.text())) // FIXME buttons might have component visiblity? placeholder api?
-					.onPress(_ -> makeChoice(choice.index()))
-					.build()
-				);
+			boolean dualColumn = state.choices().size() > 4;
+			var it = state.choices().iterator();
+
+			while (it.hasNext()) {
+				BentoElement element;
+				var choice = it.next();
+
+				if (dualColumn && it.hasNext()) {
+					var panel = Panel.builder()
+						.width(true)
+						.alignCenter()
+						.flowAxis(FlowAxis.HORIZONTAL)
+						.build();
+
+					panel.addChild(createChoiceButton(choice));
+					panel.addChild(createChoiceButton(it.next()));
+
+					element = panel;
+				} else {
+					element = createChoiceButton(choice);
+				}
+
+				choices.addChild(element);
 			}
 		}
 	}
