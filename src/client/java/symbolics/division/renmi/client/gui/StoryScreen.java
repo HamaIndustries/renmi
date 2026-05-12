@@ -283,7 +283,13 @@ public class StoryScreen extends Screen {
 
 	@Override
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-		return (event.button() == GLFW.GLFW_MOUSE_BUTTON_1 && proceed()) || super.mouseClicked(event, doubleClick);
+		super.mouseClicked(event, doubleClick);
+		
+		var focused = getFocused();
+		while (focused instanceof Panel panel) {
+			focused = panel.getFocused();
+		}
+		return focused instanceof Button || (event.button() == GLFW.GLFW_MOUSE_BUTTON_1 && proceed());
 	}
 
 	private boolean proceed() {
