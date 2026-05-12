@@ -166,26 +166,25 @@ public class StoryScreen extends Screen {
 			)
 			.build();
 
-		Button logButton = Button.builder()
-			.onPress(_ -> ClientPlayNetworking.send(new C2SRequestStoryLogPacket()))
-			.text(Component.literal("log"))
-			.alignLeft()
-			.alignTop()
-			.build();
-
 		root.addChild(actTitle);
-		root.addChild(logButton);
 		root.addChild(choices);
 		root.addChild(textBox);
 		textBox.addChild(textBoxText);
 
 		root.reflowNow();
-
 		namePlate.setPosition(textBox.getX() + 20, textBox.getY() - 8);
+
+		Button logButton = Button.builder()
+			.text(Component.literal("Log"))
+			.dimensions(20, 20)
+			.position(width - 30, 10)
+			.onPress(_ -> ClientPlayNetworking.send(new C2SRequestStoryLogPacket()))
+			.build();
 
 		for (Portrait slot : slots) {
 			addRenderableOnly(slot.getImage());
 		}
+		addRenderableWidget(logButton);
 		addRenderableWidget(root);
 		addRenderableOnly(namePlate);
 	}
@@ -284,7 +283,7 @@ public class StoryScreen extends Screen {
 	@Override
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
 		super.mouseClicked(event, doubleClick);
-		
+
 		var focused = getFocused();
 		while (focused instanceof Panel panel) {
 			focused = panel.getFocused();
