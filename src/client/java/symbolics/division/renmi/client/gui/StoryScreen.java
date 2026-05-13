@@ -346,6 +346,7 @@ public class StoryScreen extends Screen {
 			this.setDirections(StageDirection.parse(state.line()));
 
 			// Clear choices
+			choices.setFocused(null);
 			choices.getChildren().forEach(child -> choices.removeChild(child));
 		}
 	}
