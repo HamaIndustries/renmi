@@ -1,5 +1,8 @@
 {
 	"height_cm": 152,
-	"height_px": 2950,
-	"origin": [ 1980, 3690 ]
+	"height_px": 1080,
+	"origin": [
+		496,
+		970
+	]
 }
