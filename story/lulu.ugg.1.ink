@@ -15,7 +15,7 @@ Ready?
     
 *   Nuclear physics waits for [no one] apparently these two. Shame, you were starting looking forward to it. Did you get that lore ready?
 
-    Lulu's supposed to be the club secretary, and someone told you she has a ton of CPU cores. You'd think at least one would be spared for a calendar, or at least a pocketwatch.
+    Lulu's supposed to be the club secretary, and someone told you she has a ton of CPU cores. You'd think one would be spared for a calendar, or at least a pocketwatch.
 
 *   Nuclear physics can wait for lunch[]. It's hardly fair that Lulu got hers, but asks you to wait until after the study session for yours. 
 
@@ -47,9 +47,9 @@ Ready?
     
     l: \[ovo\] Some even say their mods are cursed!
     
-    l: \[-_-\] I do not enjoy those mods.
+    l: \[¬_¬ꐦ\] I do not enjoy those mods.
     
-    l: \[ouo\] Ugg should be here any moment. I am a little concerned that he would become even more confused if we were gone upon his return.
+    l: \[ouo\] Ugg should be here any moment. I am a little concerned that he would become more confused if we were gone upon his return.
     
     l: \[¬_¬ꐦ\] Or use it as an excuse to skip out on studying.
     
