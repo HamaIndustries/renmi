@@ -48,6 +48,8 @@ public class StoryScreen extends Screen {
 
 	private static Runnable updateCallback; // the hama special
 
+	private boolean previousHideGui;
+
 	private Panel choices;
 	private Label namePlate;
 	private Paragraph textBoxText;
@@ -65,6 +67,9 @@ public class StoryScreen extends Screen {
 
 	public StoryScreen() {
 		super(Component.empty());
+
+		previousHideGui = minecraft.options.hideGui;
+		minecraft.options.hideGui = true;
 
 		choices = Panel.builder()
 			.dimensions(true, true)
@@ -323,6 +328,7 @@ public class StoryScreen extends Screen {
 
 	public void onClose() {
 		super.onClose();
+		minecraft.options.hideGui = previousHideGui;
 		ClientPlayNetworking.send(new C2SPlayerReadingPacket(false));
 	}
 
@@ -490,6 +496,7 @@ public class StoryScreen extends Screen {
 
 	}
 
+	@Override
 	public boolean isPauseScreen() {
 		return false;
 	}
