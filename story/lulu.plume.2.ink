@@ -6,6 +6,9 @@ Ready?
 == lulu_plume_2 ==
 // **ACT 2**: (requires Lulu ACT 2 and Plume ACT 2. By this point, Plume has been mean to Lulu several times.) Plume and Lulu are helping out in Delta's garden. Plume struggles to lift a heavy bag of fertilizer and Lulu offers to help, but Plume yells no, gets angry and kicks Lulu's hull. They realize what they've done and go scared and dead silent. Lulu's lights are off. "Plume..." Plume is terrified, but surprisingly apologizes. "[ovo] Ok! You've convinced me, I think you got this!" The player is tasked with finding some gold tool that plume can use to get a better grip on the fertilizer. Plume completes the task and grumbles "...thanks."
 
+#alias actor p plume
+#alias actor l lulu
+
     d: Catch!
 
 *   You [catch] attempt to catch
@@ -29,21 +32,21 @@ Ready?
     
     Plume plants their shovel in the ground and leans on it smugly. You didn't expect sympathy, but they're laying it on thick today.
     
-    p: Nice reflexes, hummingbird.
+    p pout 1: Nice reflexes, hummingbird.
     
     It wasn't <i>that</i> bad.
     
     d: Sorry, my hands are full. Plume, can you help?
     
-    p: And ruin an opportunity for < PLAYER_NAME > to build some muscle?
+    p pout_side: And ruin an opportunity for < PLAYER_NAME > to build some muscle?
     
-    p: You call yourself a professor?
+    p pissed: You call yourself a professor?
     
     d: Huh. I guess you're right?
     
     d: Come on, < PLAYER_NAME >! We believe in you!
     
-    p: Come on, < PLAYER_NAME >. Don't you hear they believe in you?
+    p pout: Come on, < PLAYER_NAME >. Don't you hear they believe in you?
     
 *   You can do it[]! Just put some oomf into it!
 
@@ -51,7 +54,7 @@ Ready?
 
     With no small effort, you narrowly escape with your life. You looked good doing so, as always.
     
-    l: \[^o^\] Good job, <PLAYER_NAME>! I also believed in you!
+    l neutral 5: \[^o^\] Good job, <PLAYER_NAME>! I also believed in you!
     
     You weren't even aware she was watching, but it never hurts to impress new friends.
 
@@ -63,9 +66,9 @@ Ready?
     
     Your world fades to black.
     
-    l: \[O_O\] Goodness, <PLAYER_NAME>! What happened?
+    l neutral 5: \[O_O\] Goodness, <PLAYER_NAME>! What happened?
     
-    l: \[omo\] Allow me to unburden you.
+    l neutral 5: \[omo\] Allow me to unburden you.
 
     Lulu gently nudges the ponderous fertilizer bag over like a hacky sack. 
     
@@ -77,7 +80,7 @@ Ready?
 -
     She steps back from the greenhouse entrance and settles on her haunches.
 
-    l: \[^_^\] I hope I have not come too late! You and Professor Delta look exhausted.
+    l neutral 5: \[^_^\] I hope I have not come too late! You and Professor Delta look exhausted.
 
     Noticeably, she says nothing about Plume.
     
@@ -88,7 +91,7 @@ Ready?
 
 = plume_catch
     
-    p: You freakn' moss eating
+    p pissed: You freakn' moss eating
     
     A bit of fertilizer gets into their mouth.
     
@@ -96,13 +99,13 @@ Ready?
     
     {not you_catch: -> lulu_arrives -> }
     
-    l: \[o_o\] I could--
+    l neutral 5: \[o_o\] I could--
     
-    p: Not you.
+    p pout_side: Not you.
     
     d: Maybe I--
     
-    p: Absolutely not you either. <i>Especially</i> not you.
+    p pissed: Absolutely not you either. <i>Especially</i> not you.
     
     That's what it sounds like they're saying, anyway. You can't tell for sure.
     
@@ -111,14 +114,14 @@ Ready?
 *   You'll help, if they insist.
 *   You'll wait for them to ask nicely.
 -
-    p: ...
+    p pout: ...
     
-    p: I'm not asking for help. 
+    p embarrassed_blush: I'm not asking for help.
 
 -   (help) {!|||->helpful->}
 +   [You wait.]
 
-    p: ...
+    p pout_side: ...
     {help > 3: -> greenhouse | -> help}
     -> help
     
@@ -130,9 +133,9 @@ Ready?
     
     Dead silence.
     
-    l: \[o_o\] I am sensing reduced energy consumption. This is bad.
+    l neutral 5: \[o_o\] I am sensing reduced energy consumption. This is bad.
 
-    l: \[-n-\] It was my wish to avoid this outcome. My apologies, Plume.
+    l neutral 5: \[-n-\] It was my wish to avoid this outcome. My apologies, Plume.
     
     Reluctantly, she tips the bag off the poor bird, then sits back on her haunches pensively.
     
@@ -146,15 +149,15 @@ Ready?
     
     You hope he's at least mentally engaged with the subject he does teach. You are afraid to ask.
     
-    l: \[^_^\] My diagnostic cores want me to reassure you that they are stable.
+    l neutral 5: \[^_^\] My diagnostic cores want me to reassure you that they are stable.
     
-    l: \[ovo\] Plume is small, so I expect that bag will put them out of commission for some time.
+    l neutral 5: \[ovo\] Plume is small, so I expect that bag will put them out of commission for some time.
     
-    l: \[-v-\] I hope they do not mind if we complete the work without them.
+    l neutral 5: \[-v-\] I hope they do not mind if we complete the work without them.
     
     A sharp breath. How long were they awake? Plume gets up, slowly and without comment.
     
-    p: I'll be fine. I'll put this away.
+    p pout_side: I'll be fine. I'll put this away.
     
     They turn to the subject of their consternation. The bag subject, not the girl subject.
     
@@ -164,13 +167,13 @@ Ready?
     
     Why do this in front of everyone? What are they trying to prove?
     
-    l: \[>.>\] ...
+    l neutral 5: \[>.>\] ...
     
 *   Don't do it, Lulu[.], you think. This never goes well.
 -
-    l: \[>_>\] Plume, may I...?
+    l neutral 5: \[>_>\] Plume, may I...?
     
-    p: NO! 
+    p pissed: NO!
     
     They kick one of Lulu's legs, hard. But this time is different.
     
@@ -184,9 +187,9 @@ Ready?
 -
     While you are all left reeling, Lulu is silent. Her lights are off. This went horribly before. 
     
-    l: \[ \]
+    l lulu_off 5: \[ \]
 
-    l: \[ \] Plume...
+    l lulu_off 5: \[ \] Plume...
     
     p: Sorry.
     
@@ -196,33 +199,33 @@ Ready?
     
     Plume turns their face away from all of you.
     
-    p: I shouldn't have done that. Bird brained.
+    p pout_side: I shouldn't have done that. Bird brained.
     
     Professor Delta shifts nervously, missing the characteristic :o3 he bears carries in the darkest of times.
     
     Ever so slightly, Plume is trembling. Are they scared? Sad?
     
-    l: \[...\]
+    l lulu_off 5: \[...\]
     
-    l: \[^o^\] Okay!
+    l neutral 5: \[^o^\] Okay!
     
-    p: Wh--
+    p pissed: Wh--
     
-    p: What?
+    p embarrassed: What?
     
-    l: \[ovo\] You have convinced me! I think you have this in the bag!
+    l neutral 5: \[ovo\] You have convinced me! I think you have this in the bag!
     
     d: :o3
     
     Nature is healing.
     
-    l: \[>v>\] Uwah, sorry. I could not resist that joke.
+    l neutral 5: \[>v>\] Uwah, sorry. I could not resist that joke.
     
-    p: I, um. Okay.
+    p embarrassed_blush: I, um. Okay.
     
-    p: I left my gloves at my dorm, though. I need to go back and get them.
+    p pout_side: I left my gloves at my dorm, though. I need to go back and get them.
     
-    l: \[^_^\] No need. Inventory analysis suggests several suitable tools are in stock.
+    l neutral 5: \[^_^\] No need. Inventory analysis suggests several suitable tools are in stock.
     
     d: You know what that means, <PLAYER_NAME>! Fetch quest!
         
@@ -230,7 +233,7 @@ Ready?
 -
     FETCH QUEST
     
-    p: ...Thanks.
+    p pout_blush: ...Thanks.
     
     That's all, but it's plenty. No insults or anything.
     
@@ -266,7 +269,7 @@ Ready?
 = helpful
     d: I have a handtruck, I could--
     
-    u: Shut.
+    p pissed: Shut.
     
     d: ...
     
@@ -276,9 +279,9 @@ Ready?
 = lulu_arrives
     Lulu lumbers from around the greenhouse, oblivous to the unfolding catastrophe. 
     
-    l: \[^_^\] Hello! Here is the second batch of fertilizer.
+    l neutral 5: \[^_^\] Hello! Here is the second batch of fertilizer.
     
     She emits a scary sound, as if her systems had just detected an adversary entering firing range.
 
-    l: \[O_O\] Goodness! I think I have arrived in the nick of time.
+    l  neutral 5: \[O_O\] Goodness! I think I have arrived in the nick of time.
 ->->
