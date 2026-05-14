@@ -9,7 +9,7 @@ Ready?
 
 // ACT 2 (requires barebones + plume ACT 1): "If it isn't my esteemed colleague." You're here to get your wallet. What wallet? Tell you what. he's got a deal coming up, needs your help to sell a fake id to someone. He'll help look for your wallet if you deliver the goods for him. You look at the id. its yours. whoopsie.
 
-    b: "Well, well. If it isn't my esteemed colleague.
+    b: Well, well. If it isn't my esteemed colleague.
     
 *   Ever so esteemed[] is he, that you came straight over to him as soon as you could spare the time.
 
@@ -35,7 +35,7 @@ Ready?
     
 *   You [can do him one better] could call Lulu over and set up a picnic together, if Barebones wants.
 
-    A xylophone softly plays somewhere nearby. He's shaking in this little old boots.
+    What sounds like a xylophone softly plays from somewhere in the vicinity.
     
     b: That, that won't be necessary.
     
@@ -49,13 +49,13 @@ Ready?
 -    
     b: Yous hear about those "real IDs" the big guys're flashing around, yeah?
     
-    b: Let's just say I got a *very* real ID right here I need brought over to a friend.
+    b: Let's just say I got a <i>very</> real ID right here I need brought over to a friend.
     
 *   He wants you to mule[?] over a fake ID?
 
     b: No, not mule, wouldn't ask yous so low a thing.
     
-    b: We's gonna *sell* a fake, I mean real ID.
+    b: We's gonna <i>sell</> a fake, I mean real ID.
     
 *   What will you get[] out of it?
 
@@ -68,9 +68,9 @@ Ready?
 
     TODO FETCH QUEST puzzle hijinks trying to get to the buyer and set back. buyer is a meme character (craig david?)
 
-    What exactly *is* this ID, anyway? It's not local.
+    What exactly <i?is</> this ID, anyway? It's not local.
     
-    In fact, you're so familiar with this design, it hadn't registered that this is an ID from where *you're* from.
+    In fact, you're so familiar with this design, it hadn't registered that this is an ID from where <i>you're</> from.
     
 *   The photo[?] comes off easily. It's exactly who you thought it was. 
 -
@@ -86,7 +86,7 @@ Ready?
     
     b: Hey, I don't appreciate that look. I'm sticking my neckbone out for you, calling in all sorts of favors. 
     
-    b: Your wallet must be out of the country by now. Shame about your ID, too. Least you can get a new one from the school. 
+    b: Yous wallet must be out of the country by now. Shame about yous ID, too. Least yous cans get a new one from the school. 
     
 -   (this_one)
 *   You let him continue.[]
@@ -95,7 +95,7 @@ Ready?
     
     * *     "Go on["]."
     
-    b: I know a guy, though. I'll set you up with a professional. I'll even give you a discount for my arranging it.
+    b: I know a guy, though. I'll set yous up with a professional. I'll even offer a discount for my arranging it.
     
     b: But I'll keep an ear to the ground for your old one anyways.
     -> this_one
@@ -116,7 +116,7 @@ Ready?
     
     b: I'll give 'em an earful when I see them.
     
-*   PLAYER_NAME will remember this.
+*   [You will remember this] * PLAYER_NAME will remember this.
 -
     b: Hey hey don't do that its scary.
     
