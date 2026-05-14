@@ -54,9 +54,10 @@ public class ActReading implements ExternalListener {
 		}
 	}
 
-	public static ActReading ofNew(Act act, ServerPlayer player, Identifier seriesId, Identifier actId) {
+	public static ActReading ofNew(Act act, ServerPlayer player, Identifier seriesId, Identifier actId, StoryListener listener) {
 		try {
 			ActReading reading = new ActReading(act.getStory(), "", seriesId, actId);
+			reading.setStoryListener(listener);
 			reading.proceed(player); // needs to see first line
 			return reading;
 		} catch (Exception e) {

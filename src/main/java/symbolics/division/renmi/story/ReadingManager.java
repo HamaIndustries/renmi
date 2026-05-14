@@ -50,10 +50,10 @@ public class ReadingManager {
 		}
 	}
 
-	public ActReading createOrLoad(ServerPlayer player, Series series, Act act) {
+	public ActReading createOrLoad(ServerPlayer player, Series series, Act act, StoryListener listener) {
 		SeriesReading seriesReading = createOrLoad(player, series);
 		ActReading reading = seriesReading.getActReadings().computeIfAbsent(act.id, id ->
-			ActReading.ofNew(act, player, series.id, act.id));
+			ActReading.ofNew(act, player, series.id, act.id, listener));
 		return reading;
 	}
 
@@ -64,8 +64,8 @@ public class ReadingManager {
 	}
 
 	public void startReading(ServerPlayer player, Act act, Series series, boolean force) throws RenmiExceptions.ReadingConditionsUnmet {
-		ActReading newReading = createOrLoad(player, series, act);
 		SeriesReading seriesReading = createOrLoad(player, series);
+		ActReading newReading = createOrLoad(player, series, act, seriesReading);
 		if (!force && !act.startConditionsMet(player, seriesReading)) {
 			throw new RenmiExceptions.ReadingConditionsUnmet();
 		}
@@ -73,12 +73,7 @@ public class ReadingManager {
 		seriesReading.setCurrentActReading(newReading);
 		seriesReading.setServerPlayer(player);
 
-		//FIXME: the initial proceed in a new story will likely crash if a command is run without a listener.
-		// we need a good way to avoid calling proceed in the ActReading#ofNew constructor
-		newReading.setStoryListener(seriesReading);
 		updateReadingState(player, newReading);
-//		ReadingPlayer readingPlayer = (ReadingPlayer) (player);
-//		readingPlayer.setReading(true);
 	}
 
 	public void resetSeries(ServerPlayer player, Series series) {
