@@ -14,9 +14,9 @@ Ready?
 
 // ACT 3: (requires barebones + plume ACT 2) Tries to con the player into something again. 
 
-#alias actor c shrimple
-#alias actor d ugg
-#alias actor x plume
+#alias actor c chai
+#alias actor d delta
+#alias actor x proxy
 #alias actor b barebones
 
 
@@ -92,7 +92,7 @@ Ready?
     
     d: I just remembered I had something extremely important I should have taken care of earlier sosorryIdidn'tbye--
     
-    Professor Delta scampers off as fast as his little legs can carry him. The ability to switch to all fours for speed is an enviable skill. #hide delta
+    Professor Delta scampers off as fast as his little legs can carry him. #hide delta
     
     It's no wonder he used to coach the track team. That is, until he snapped and tried to fetch the baton during the semifinals.
     
