@@ -228,11 +228,13 @@ public class StoryScreen extends Screen {
 		if (ActorManager.get(dir.id()) instanceof Actor actor) {
 			Window window = minecraft.getWindow();
 
+			int oldSlot = -1;
 			// Hide existing actor
 			for (int i = 0; i < slots.length; ++i) {
 				if (dir.id().equals(slots[i].getActorId())) {
 					slots[i].hide();
 					lastUsedSlots.remove((Integer) i);
+					oldSlot = i;
 					break;
 				}
 			}
@@ -240,7 +242,7 @@ public class StoryScreen extends Screen {
 			// Pick a slot
 			int slot = dir.slotPos();
 			if (slot == -1) {
-				slot = getNextFreeSlot();
+				slot = oldSlot == -1 ? getNextFreeSlot() : oldSlot;
 			}
 			lastUsedSlots.remove((Integer) slot);
 			lastUsedSlots.add(slot);
@@ -450,7 +452,9 @@ public class StoryScreen extends Screen {
 			}
 		}
 
-		if (!hasActor) { hideNameplate(); }
+		if (!hasActor) {
+			hideNameplate();
+		}
 		this.state = new DisplayState(displayedText);
 	}
 
