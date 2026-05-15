@@ -15,6 +15,10 @@ repositories {
 		url "https://maven.nucleoid.xyz/"
 		name "Nucleoid"
 	}
+	maven {
+		name = "Terraformers"
+		url = "https://maven.terraformersmc.com/"
+	}
 }
 
 loom {
@@ -38,6 +42,8 @@ dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	implementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+	implementation include("dev.chailotl:bento-config:${project.bento_config_version}")
 	implementation include("dev.chailotl:bento-gui:${project.bento_gui_version}")
 	implementation "com.bladecoder.ink:blade-ink:${blade_ink_version}"
 	implementation "com.bladecoder.ink:blade-ink-compiler:${blade_ink_version}"

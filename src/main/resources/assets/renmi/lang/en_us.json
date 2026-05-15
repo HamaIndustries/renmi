@@ -16,5 +16,8 @@
 	"actor.renmi.chai": "Professor Chai",
 	"actor.renmi.proxy": "Headmaster",
 	"actor.renmi.ananas": "Ananas",
-	"error.renmi.conditions_unmet": "Conditions unmet to read story."
+	"error.renmi.conditions_unmet": "Conditions unmet to read story.",
+	"config.renmi.title": "Ren'mi Config",
+	"config.renmi.option.textSpeed": "Text Speed",
+	"config.renmi.description.textSpeed": "Controls how fast dialogue text should scroll."
 }

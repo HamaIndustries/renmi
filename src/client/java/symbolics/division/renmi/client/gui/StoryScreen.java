@@ -439,30 +439,28 @@ public class StoryScreen extends Screen {
 		}
 
 		if (!hasActor) { hideNameplate(); }
-		this.state = new DisplayState(displayedText, 2);
+		this.state = new DisplayState(displayedText);
 	}
 
 	private class DisplayState {
 		private final Component text;
 		private SubStringSource splitText;
 		private int textLength;
-		private int textRate;
 		private int textProgress = 0;
 		private String tempStr;
 
 		// textRate: characters per tick
-		public DisplayState(Component text, int textRate) {
+		public DisplayState(Component text) {
 			this.text = text;
 			this.tempStr = text.getString();
 			this.splitText = SubStringSource.create(text);
 			this.textLength = tempStr.length();
-			this.textRate = textRate;
 
 			StoryScreen.this.textBoxText.setText(Component.empty());
 		}
 
 		public void tick() {
-			textProgress = Math.min(textProgress + textRate, textLength);
+			textProgress = Math.min(textProgress + Renmi.CONFIG.textSpeed, textLength);
 //			var substr = FormattedCharSequence.composite(splitText.substring(0, textProgress, false));
 			List<FormattedCharSequence> formattedCharSequenceList = splitText.substring(0, textProgress, false);
 

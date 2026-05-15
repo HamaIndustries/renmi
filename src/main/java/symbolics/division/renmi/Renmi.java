@@ -15,6 +15,7 @@ import symbolics.division.renmi.story.ActorManager;
 public class Renmi implements ModInitializer {
 	public static final String MOD_ID = "renmi";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	public static final RenmiConfig CONFIG = new RenmiConfig().register(MOD_ID);
 
 	public static Identifier id(String id) {
 		return Identifier.fromNamespaceAndPath(MOD_ID, id);
@@ -34,7 +35,9 @@ public class Renmi implements ModInitializer {
 
 		ServerTickEvents.START_LEVEL_TICK.register(level -> {
 			for (ServerPlayer player : level.players()) {
-				if (player == null) continue; // trust me it can happen its bitten me in the ass before
+				if (player == null) {
+					continue; // trust me it can happen its bitten me in the ass before
+				}
 				StoryLocusBlock.tickPlayer(player);
 			}
 		});
