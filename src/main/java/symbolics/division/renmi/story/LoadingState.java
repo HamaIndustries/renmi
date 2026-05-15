@@ -17,7 +17,7 @@ public record LoadingState(long ticks, BlockPos target, boolean cancelled) {
 		this(ticks, target, false);
 	}
 
-	public static int MAX_TICKS = 60; // probably replace with a config value later?
+	public static int MAX_TICKS = 40; // probably replace with a config value later?
 
 	public long getElapsed(long ticks) {
 		return ticks - this.ticks;
