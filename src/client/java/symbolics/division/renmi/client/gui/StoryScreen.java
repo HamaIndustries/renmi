@@ -7,6 +7,7 @@ import dev.chailotl.bento_gui.client.util.DrawUtils;
 import dev.chailotl.bento_gui.client.util.RenderOperations;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.KeyEvent;
@@ -41,9 +42,13 @@ import java.util.concurrent.atomic.AtomicReference;
 public class StoryScreen extends Screen {
 	public static final Identifier NEXT_ARROW = Renmi.id("next_arrow");
 	public static final Identifier NAME_PLATE = Renmi.id("name_plate");
-	public static final WidgetSprites BUTTONS = new WidgetSprites(
+	public static final WidgetSprites CHOICE_BUTTON = new WidgetSprites(
 		Renmi.id("choice_button"),
 		Renmi.id("choice_button_highlighted")
+	);
+	public static final WidgetSprites LOG_BUTTON = new WidgetSprites(
+		Renmi.id("log_button"),
+		Renmi.id("log_button_highlighted")
 	);
 
 	private static Runnable updateCallback; // the hama special
@@ -110,7 +115,7 @@ public class StoryScreen extends Screen {
 					}
 
 					render.context().blitSprite(
-						RenderPipelines.GUI_TEXTURED, BUTTONS.get(self.isEnabled(), self.isSelected()),
+						RenderPipelines.GUI_TEXTURED, CHOICE_BUTTON.get(self.isEnabled(), self.isSelected()),
 						self.getX(), self.getY(), self.getWidth(), self.getHeight()
 					);
 					RenderOperations.TEXT_RENDER.render(self, render);
@@ -181,9 +186,16 @@ public class StoryScreen extends Screen {
 
 		Button logButton = Button.builder()
 			.text(Component.literal("Log"))
-			.dimensions(20, 20)
-			.position(width - 30, 10)
+			.dimensions(22, 22)
+			.position(width - 32, height - 32)
 			.onPress(_ -> ClientPlayNetworking.send(new C2SRequestStoryLogPacket()))
+			.renderOperations((self, render) -> {
+				render.context().blitSprite(
+					RenderPipelines.GUI_TEXTURED, LOG_BUTTON.get(self.isEnabled(), self.isSelected()),
+					self.getX(), self.getY(), self.getWidth(), self.getHeight()
+				);
+			})
+			.tooltip(Tooltip.create(Component.translatable("tooltip.renmi.log")))
 			.build();
 
 		for (Portrait slot : slots) {
