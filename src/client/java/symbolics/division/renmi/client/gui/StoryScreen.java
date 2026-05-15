@@ -7,6 +7,7 @@ import dev.chailotl.bento_gui.client.util.DrawUtils;
 import dev.chailotl.bento_gui.client.util.RenderOperations;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.Screen;
@@ -69,6 +70,7 @@ public class StoryScreen extends Screen {
 
 	private DisplayState state;
 	private long choicesAnimTimer;
+	private boolean blur = true;
 
 	public StoryScreen() {
 		super(Component.empty());
@@ -449,6 +451,7 @@ public class StoryScreen extends Screen {
 				}
 				case TextDirection text -> displayedText.append(text.text());
 				case HideDirection hideDirection -> hideActor(hideDirection.id());
+				case BlurDirection blur -> this.blur = blur.blur();
 			}
 		}
 
@@ -456,6 +459,11 @@ public class StoryScreen extends Screen {
 			hideNameplate();
 		}
 		this.state = new DisplayState(displayedText);
+	}
+
+	@Override
+	protected void extractBlurredBackground(GuiGraphicsExtractor graphics) {
+		if (blur) super.extractBlurredBackground(graphics);
 	}
 
 	private class DisplayState {

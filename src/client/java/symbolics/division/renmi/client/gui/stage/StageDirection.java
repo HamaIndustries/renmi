@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public sealed interface StageDirection permits ActorDirection, HideDirection, SoundDirection, TextDirection {
+public sealed interface StageDirection permits ActorDirection, BlurDirection, HideDirection, SoundDirection, TextDirection {
 	Pattern LINE = Pattern.compile(
 		"(?<instr>(?<name>[a-z0-9/._-]+)\\s*(?<expr>[^\\s:]+)?\\s*(?<pos>[-0-9]+)?\\s*(?<dir>[a-z]+)?\\s*:)?\\s*(?<text>.+)?\\s*"
 	);
@@ -82,6 +82,8 @@ public sealed interface StageDirection permits ActorDirection, HideDirection, So
 					} catch (IdentifierException e) {
 						Renmi.LOGGER.error("failed to parse actor to hide with id {}", tagArgs[1]);
 					}
+				} else if (tagArgs[0].equals("blur") && tagArgs.length >= 2) {
+					directions.add(new BlurDirection(!tagArgs[1].equals("false")));
 				}
 			}
 		}
