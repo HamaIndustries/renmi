@@ -117,7 +117,7 @@ Ready?
     
     b: 'Atta way. Takes after their old man, y'see.
     
-    chai: Hello, Barebones. Where's the license?
+    chai: Hello Barebones. Where is your license?
     
     b: Professor Chailotl! What a coincidence! We was just lookin' for yous.
     
@@ -154,7 +154,7 @@ Ready?
     
 *   {overlook} [No (lying)]"No." (lying)
 
-    chai: Mhm? And what's that in your hand there?
+    chai: Uh huh, and what is that in your hand there?
     
     * *     Aurora Borealis?
     - - 
@@ -205,7 +205,7 @@ Ready?
     
     **   You leap into Professor Chai's waiting arms[].
     
-        chai: Ah? <PLAYER_NAME>? You're a little... Actually not that heavy. Are you eating enough?
+        chai: Oh! <PLAYER_NAME>? You're a little... Actually not that heavy. Are you eating enough?
         
         She sets you down gingerly. Depending on your physiology, you may have just induced massive implications about this creature's muscular density.
     
@@ -221,13 +221,13 @@ Ready?
 // Barebones again runs interference while plume runs off to steal another stall's license. 
 
 // The teacher reveals they know whats going on and just wanted to barebones alone. They're being a bad influence on plume. 
-    chai: Plume has been following you around like a baby duck.
+    chai: Plume has been following you around like a lost duckling.
     
     b: I can't help that I'm the motherly type.
     
-    chai: Can you get serious for a minute?
+    chai: Can you be serious for a minute?
     
-    chai: Do you even know how their grades were before they joined your little gang?
+    chai: Do you even know what their grades were before they joined your little gang?
     
     b: ...
     
@@ -239,17 +239,17 @@ Ready?
     
     b: Look, I... I ain't their pop. They can do what they want.
     
-    chai: They <i>are</i> doing what they want, Barebones. They want to self sabotage because you self sabotage.
+    chai: That's the problem, Barebones, they <i>are</i> doing what they want. They want to self sabotage because they see you self sabotage.
     
-    chai: What? Are you saying you're okay with that?
+    chai: Are you saying you're okay with that?
     
     b: Why wouldn't I?
     
-    chai: Do you realize that they're here because they can't be anywhere else? That they've been kicked out of every school they've been to?
+    chai: Do you realize that they're here because they can't be anyplace else? That they've been kicked out of every school they've been to?
     
     chai: I know you get your buddies to do your homework for you, but Plume's too prideful for that.
     
-    chai: Plume's here because this is a place they could finally fit in. And if they fail out? Where do you think they can go?
+    chai: Plume's here because this is a place they could finally fit in. But if they fail out? Where do you think they can go?
     
     chai: Can you think of any other school that has people like us?
     
@@ -257,7 +257,7 @@ Ready?
     
     Realizing how worked up she is, the Professor draws a deep breath and lets it out slowly.
     
-    chai: Think about it, Barebones. The term's over in two months. You could be the one who saves them.
+    chai: Please think about it, Barebones. The term is ending in two months. You could be the one who saves them.
     
     She walks away without another word, leaving you and Barebones deep in your thoughts.
     

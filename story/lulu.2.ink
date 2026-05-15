@@ -35,7 +35,7 @@ Ready?
     
     There's only one left before Lulu is completely blind. You consider excusing yourself before she starts stumbling around again.
     
-    chai: Alright, I think that's everything we need to finish the swim club stall. Thanks for the help.
+    chai: Alright, I think that's everything we need to finish the swim club stall. Thank you for the help.
     
     chai: Goodness, Lulu. What happened?
     
@@ -59,7 +59,7 @@ Ready?
     
     l: \[>.>\] I just joined the paper mache club today.
 
-    chai: That seems unlikely.
+    chai: Is that so? That seems unlikely.
     
     * *     "Why?"
     
@@ -75,11 +75,11 @@ Ready?
     
 *   "I'm with you["]."
     
-    chai: Hold on, < PLAYER_NAME >. 
+    chai: Hold on a sec, < PLAYER_NAME >. 
     
     The unusually-featured teacher creature tugs you aside.
     
-    chai: Can we speak with Lulu for a moment? I'm concerned about her. She needs a peer.
+    chai: Can we speak with Lulu for a moment? I'm concerned for her, she needs a peer.
 
 *   "Just a minute["]."
     
@@ -105,7 +105,7 @@ Ready?
     
     Lulu makes no comment. This must be a frequent occurrence.
     
-    chai: Lulu, why did you let Plume treat you like that, again? I thought we talked about this?
+    chai: Lulu, why did you let Plume treat you like that again? We've talked about this before.
     
     l: \[>_>\] Treat me like what? It was just an accident.
     
@@ -130,7 +130,7 @@ Ready?
 
     The professor shakes her head sadly.
     
-    chai: It's kind of you to play along like this, but you're not doing her any favors.
+    chai: I know you mean well for her, but you're not doing her any favors.
     
 -   chai: Lulu's always letting Plume push her around. It's not fair to her, even if she doesn't see eye to eye with me on that.
     
@@ -138,11 +138,11 @@ Ready?
     
     l: \[*-*\] I am right here, you know...
     
-    chai: You can see her in there if you look close enough. Sitting right there behind all the glass and the metal.
+    chai: You can see her in there if you look close enough. Sitting right there behind all that glass and metal.
     
     l: \[\/\/_\/\/\] This is beginning to be a little embarassing for me.
     
-    chai: I'm only kidding with you, Lulu. 
+    chai: I'm only teasing you, Lulu. 
     
     chai: You always forget that you're not just a passive observer. We all see what you're doing.
     
