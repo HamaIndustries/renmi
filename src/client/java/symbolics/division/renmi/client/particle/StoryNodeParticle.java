@@ -13,18 +13,28 @@ import symbolics.division.renmi.RenmiParticles;
 
 public class StoryNodeParticle extends SingleQuadParticle {
 	private float angle;
-	private double diameter;
+	private double radius;
 	private boolean start = false;
 	private float ya;
 	private float ys = 0.01f;
 	private float rollspeed;
 
 
-	protected StoryNodeParticle(ClientLevel level, double x, double y, double z, double xa, double ya, double za, TextureAtlasSprite sprite, RenmiParticles.StoryNodeParticleOptions options) {
+	protected StoryNodeParticle(
+		ClientLevel level,
+		double x,
+		double y,
+		double z,
+		double xa,
+		double ya,
+		double za,
+		TextureAtlasSprite sprite,
+		RenmiParticles.StoryNodeParticleOptions options
+	) {
 		super(level, x, y, z, xa, ya, za, sprite);
 		angle = this.random.nextFloat() * Mth.TWO_PI;
-		this.diameter = options.diameter();
-		this.rollspeed = (float) (0.05 * diameter);
+		this.radius = options.diameter() / 2;
+		this.rollspeed = (float) (0.05 * radius);
 		this.hasPhysics = false;
 		this.friction = 0;
 		this.gravity = 0;
@@ -50,7 +60,7 @@ public class StoryNodeParticle extends SingleQuadParticle {
 			// so here we are
 			// sorry lol
 			start = true;
-			this.setPos(x + Mth.cos(angle) * diameter, y, z + Mth.sin(angle) * diameter);
+			this.setPos(x + Mth.cos(angle) * radius, y, z + Mth.sin(angle) * radius);
 			this.alpha = 1;
 			angle += Mth.HALF_PI;
 		}

@@ -8,6 +8,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
@@ -24,7 +25,6 @@ public class StoryLocusBlockEntity extends BlockEntity {
 	public float diameter = 3;
 	public int color = DEFAULT_COLOR;
 	public int intensity = DEFAULT_INTENSITY;
-
 
 	public StoryLocusBlockEntity(BlockPos pos, BlockState state) {
 		super(RenmiBlocks.STORY_LOCUS_ENTITY, pos, state);
@@ -84,5 +84,9 @@ public class StoryLocusBlockEntity extends BlockEntity {
 		this.color = color;
 		this.intensity = intensity;
 		this.setChanged();
+	}
+
+	public boolean isInRange(Player player) {
+		return player.distanceToSqr(getBlockPos().getBottomCenter()) <= (diameter / 2) * (diameter / 2);
 	}
 }

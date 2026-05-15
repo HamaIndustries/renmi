@@ -69,7 +69,14 @@ public class StoryLocusBlock extends BaseEntityBlock {
 				}
 				ServerPlayNetworking.send(
 					(ServerPlayer) player,
-					new S2CActEditingPacket(be.series, be.act, source, be.color, be.intensity, Optional.of(be.getBlockPos()))
+					new S2CActEditingPacket(
+						be.series,
+						be.act,
+						source,
+						be.color,
+						be.intensity,
+						Optional.of(be.getBlockPos())
+					)
 				);
 			}
 			return InteractionResult.SUCCESS;
@@ -113,7 +120,7 @@ public class StoryLocusBlock extends BaseEntityBlock {
 					for (int i = 0; i < n; i++) {
 						sv.sendParticles(player, opts, true, true, c.x, c.y, c.z, n, 0.1, 0.1, 0.1, 0);
 					}
-					if (player.distanceToSqr(c) <= be.diameter * be.diameter && !player.isHolding(RenmiBlocks.STORY_LOCUS.asItem())) {
+					if (be.isInRange(player) && !player.isHolding(RenmiBlocks.STORY_LOCUS.asItem())) {
 						declareThisBlockNear(player, blockPos);
 					}
 				}
@@ -160,7 +167,7 @@ public class StoryLocusBlock extends BaseEntityBlock {
 
 			// If there is no block entity or player leaves the radius, remove attachment
 			if (player.level().getBlockEntity(state.target()) instanceof StoryLocusBlockEntity locus
-				&& player.distanceToSqr(state.target().getCenter()) <= locus.diameter * locus.diameter
+				&& locus.isInRange(player)
 			) {
 				// Activate act if loaded and not cancelled
 				if (!state.cancelled() && state.isLoaded(ticks)) {
