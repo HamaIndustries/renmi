@@ -6,6 +6,7 @@
 	"gui.renmi.color": "Color",
 	"gui.renmi.intensity": "Intensity",
 	"gui.renmi.save": "Save",
+	"gui.renmi.press_crouch_to_canel": "Press [Crouch] to cancel",
 	"actor.renmi.barebones": "Barebones",
 	"actor.renmi.lulu": "Lulu",
 	"actor.renmi.plume": "Plume",

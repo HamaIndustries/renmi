@@ -1,5 +1,6 @@
 package symbolics.division.renmi.client;
 
+import dev.chailotl.bento_util.Color;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientEntityEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -11,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiAttachments;
@@ -78,9 +80,8 @@ public class RenmiClient implements ClientModInitializer {
 	}
 
 	private static void renderProgressBar(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker) {
-		final int BAR_WIDTH = 100;
-		final int BAR_HEIGHT = 8;
-		final String CANCEL_TEXT = "Press [Crouch] to Cancel";
+		final int BAR_WIDTH = 48;
+		final int BAR_HEIGHT = 2;
 
 		Minecraft mc = Minecraft.getInstance();
 		LocalPlayer player = mc.player;
@@ -93,23 +94,24 @@ public class RenmiClient implements ClientModInitializer {
 			return;
 		}
 
+		String text = Component.translatable("gui.renmi.press_crouch_to_canel").getString();
 		int screenWidth = mc.getWindow().getGuiScaledWidth();
 		int screenHeight = mc.getWindow().getGuiScaledHeight();
 
 		int x = (screenWidth - BAR_WIDTH) / 2;
-		int y = (screenHeight - BAR_HEIGHT) / 2;
+		int y = (screenHeight - BAR_HEIGHT) / 2 + 12;
 
 		float ticks = state.getElapsed(mc.level.getGameTime()) + deltaTracker.getGameTimeDeltaPartialTick(false);
 		float progress = Math.min(ticks / LoadingState.MAX_TICKS, 1.0f);
 		int filledWidth = (int) (BAR_WIDTH * progress);
 
-		graphics.fill(x, y, x + BAR_WIDTH, y + BAR_HEIGHT, 0xFFFFFFFF);
-		graphics.fill(x, y, x + filledWidth, y + BAR_HEIGHT, 0xFFFF0000);
+		graphics.fill(x, y, x + BAR_WIDTH, y + BAR_HEIGHT, Color.BLACK.argb());
+		graphics.fill(x, y, x + filledWidth, y + BAR_HEIGHT, Color.GREEN.argb());
 
 		Font font = mc.font;
-		int textWidth = font.width(CANCEL_TEXT);
+		int textWidth = font.width(text);
 		int textX = (screenWidth - textWidth) / 2;
 		int textY = y + BAR_HEIGHT + 4;
-		graphics.text(font, CANCEL_TEXT, textX, textY, 0xFFFFFFFF);
+		graphics.text(font, text, textX, textY, 0xFFFFFFFF);
 	}
 }
