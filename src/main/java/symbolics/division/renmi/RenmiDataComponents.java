@@ -1,6 +1,5 @@
 package symbolics.division.renmi;
 
-import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -23,19 +22,26 @@ import symbolics.division.renmi.story.RenmiLibrary;
 import symbolics.division.renmi.story.Series;
 import symbolics.division.renmi.util.RenmiExceptions;
 
+import java.util.Optional;
+
 public class RenmiDataComponents {
 	public static void init() {
 	}
 
-	private static final Codec<Pair<Identifier, Identifier>> STORY_CODEC = RecordCodecBuilder.create(pair -> pair.group(
-		Identifier.CODEC.fieldOf("series").forGetter(Pair::getFirst),
-		Identifier.CODEC.fieldOf("act").forGetter(Pair::getSecond)
-	).apply(pair, Pair::of));
+	public record StoryData(Identifier series, Identifier act, Optional<Boolean> force) {
 
-	public static final DataComponentType<Pair<Identifier, Identifier>> STORY = Registry.register(
+	}
+
+	private static final Codec<StoryData> STORY_CODEC = RecordCodecBuilder.create(pair -> pair.group(
+		Identifier.CODEC.fieldOf("series").forGetter(StoryData::series),
+		Identifier.CODEC.fieldOf("act").forGetter(StoryData::act),
+		Codec.BOOL.optionalFieldOf("force").forGetter(StoryData::force)
+	).apply(pair, StoryData::new));
+
+	public static final DataComponentType<StoryData> STORY = Registry.register(
 		BuiltInRegistries.DATA_COMPONENT_TYPE,
 		Renmi.id("story"),
-		DataComponentType.<Pair<Identifier, Identifier>>builder()
+		DataComponentType.<StoryData>builder()
 			.persistent(STORY_CODEC)
 			.build()
 	);
@@ -47,12 +53,12 @@ public class RenmiDataComponents {
 		if (story != null && player instanceof ServerPlayer p) {
 			ReadingManager manager = ReadingManager.getManager(p.level().getServer());
 			RenmiLibrary library = RenmiLibrary.get(p.level().getServer());
-			Series series = library.getSeries(story.getFirst());
+			Series series = library.getSeries(story.series);
 			if (series == null) return null;
-			Act act = series.getAct(story.getSecond());
+			Act act = series.getAct(story.act);
 			if (act == null) return null;
 			try {
-				manager.startReading(p, act, series, false);
+				manager.startReading(p, act, series, story.force.orElseGet(() -> false));
 				ServerPlayNetworking.send(p, new S2CDisplayStoryScreenPacket());
 				return InteractionResult.SUCCESS;
 			} catch (RenmiExceptions.ReadingConditionsUnmet unmet) {

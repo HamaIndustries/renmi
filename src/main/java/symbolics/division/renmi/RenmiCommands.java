@@ -56,28 +56,32 @@ public class RenmiCommands {
 					Commands.argument("series_id", IdentifierArgument.id())
 						.then(
 							Commands.argument("act_id", IdentifierArgument.id())
-								.executes(ctx -> readAct(ctx, false))
+								.executes(ctx -> readAct(ctx, false, false))
 								.then(Commands.literal("reset")
-									.executes(ctx -> readAct(ctx, true))
+									.executes(ctx -> readAct(ctx, true, false))
+								)
+								.then(Commands.literal("force").executes(ctx -> readAct(ctx, false, true))
+									.then(
+										Commands.literal("reset")
+											.executes(ctx -> readAct(ctx, true, true))
+									)
 								)
 						)
-				)
-			).then(Commands.literal("proceed")
-				.executes(RenmiCommands::readingProceed)
-			).then(Commands.literal("choose")
-				.then(Commands.argument("index", IntegerArgumentType.integer())
-					.executes(RenmiCommands::readingChoice)
-				)
-			).then(Commands.literal("show")
-				.executes(RenmiCommands::showScreen))
-			.then(Commands.literal("reset")
-				.then(Commands.argument("series_id", IdentifierArgument.id())
-					.executes(ctx -> reset(ctx, series(ctx), null))
-					.then(
-						Commands.argument("act_id", IdentifierArgument.id())
-							.executes(ctx -> reset(ctx, series(ctx), act(ctx)))
+				).then(Commands.literal("proceed")
+					.executes(RenmiCommands::readingProceed)
+				).then(Commands.literal("choose")
+					.then(Commands.argument("index", IntegerArgumentType.integer())
+						.executes(RenmiCommands::readingChoice)
 					)
-				));
+				).then(Commands.literal("show")
+					.executes(RenmiCommands::showScreen))
+				.then(Commands.literal("reset")
+					.then(Commands.argument("series_id", IdentifierArgument.id())
+						.executes(ctx -> reset(ctx, series(ctx), null))
+						.then(Commands.argument("act_id", IdentifierArgument.id())
+							.executes(ctx -> reset(ctx, series(ctx), act(ctx)))
+						)
+					)));
 
 		LiteralArgumentBuilder<CommandSourceStack> listCommand = Commands.literal("list")
 			.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
@@ -145,7 +149,7 @@ public class RenmiCommands {
 		return 1;
 	}
 
-	private static int readAct(CommandContext<CommandSourceStack> context, boolean reset) {
+	private static int readAct(CommandContext<CommandSourceStack> context, boolean reset, boolean force) {
 		ServerPlayer player = context.getSource().getPlayer();
 		if (player == null) {
 			return 0;
@@ -167,7 +171,7 @@ public class RenmiCommands {
 		}
 
 		try {
-			manager.startReading(player, act, series, false);
+			manager.startReading(player, act, series, force);
 		} catch (RenmiExceptions.ReadingConditionsUnmet e) {
 			context.getSource().sendFailure(Component.literal("player did not meet conditions to begin reading"));
 			return 0;
