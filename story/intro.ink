@@ -11,6 +11,16 @@ VAR VOTE_KEY = "VOTE_KEY"
 // intro. something vaguely sentimental.
 
 === intro ===
+
+#alias actor a ananas
+#alias actor b barebones
+#alias actor p plume
+#alias actor l lulu
+#alias actor u ugg
+#alias actor s shrimple
+
+
+
 How do people know each other?
 
 I ask myself that question a lot. It takes a long time, even years, to form real connections with people.
@@ -33,9 +43,9 @@ But if I can find something in common with them, it doesn't really matter who th
 
 All we really need is the here and now. I want to find a here and now to share with someone I don't know yet.
 
-\=== MODFEST: Animation, Affection, Academia ===
+\<gold>=== MODFEST: Animation, Affection, Academia ===
 
-*   --  Sakura Academy Secondary High --
+*   --  <aqua>Sakura Academy Secondary High</> --
 
 -   Here we are. Your new life.
 
@@ -68,30 +78,30 @@ All we really need is the here and now. I want to find a here and now to share w
 
     ...
     
-    a: Yeeouch! Watch where you're waving that thing!
+    ananas embarrassed: Yeeouch! Watch where you're waving that thing!
     
 *   ["Mind if I do"] "Pineapples? Gross." you mutter. Really? Pineapples? You glance around to be sure nobody is about to make annoying pizza jokes.
 
-    a: Yeah, awful stuff. I made sure to not order any.
+    a sad: Yeah, awful stuff. I made sure to not order any.
   
 - 
 *   "A talking[ pineapple?"]--" you start, then think better of it. The orientation materials mentioned there would be students from all over. Time to make a good first impression.
 
--    a: Nice uniform. You the new kid?
+-    a neutral: Nice uniform. You the new kid?
     
 *   "Who's asking?["] You a cop?"
 *   "Yeah.["] Wait, where's your uniform?"
 *   "I just dress like this."[] You aren't even lying. It looks great on you, by the way.
 
--   a: Haha, a funny one too. I think we'll get along.
+-   a neutral: Haha, a funny one too. I think we'll get along.
     
-    a: I'm Ananas. I call the shots on the festival committee.
+    a neutral 3: I'm Ananas. I call the shots on the festival committee.
     
     a: Looks like you haven't customized your name tag. Here's a marker, you can use it with /nick to let everyone know what you go by.
     
     ...
     
-    a: Say, you didn't get a chance to help with any of the booths, did you? Tell you what. We still have a bunch of prep to do. Fires to put out. How about you help us out on the committee?
+    a neutral 2: Say, you didn't get a chance to help with any of the booths, did you? Tell you what. We still have a bunch of prep to do. Fires to put out. How about you help us out on the committee?
     
 *   "Sure!"
 *   "I'm a little busy."
@@ -103,21 +113,21 @@ All we really need is the here and now. I want to find a here and now to share w
     
 // Shrimple: "Do me a favor and hold this?" Hands you an enormous pot of an unknown fluid, then samples it. "That'll do it. Hits the spot. Thanks partner."
 
-*   -- Shrimple -- // map
-    
+*   -- Shrimple -- #hide ananas
+    // map
 -    A chef-shaped girl sprints down the path. She carries a large pot of a pleasant smelling something.
     
-    s: Hi! Hold this please! Be right back!
+    s frown_blush 1: Hi! Hold this please! Be right back!
     
-    She is gone as quickly as she arrived. You peer down at your new possession. You can't remember the last time you saw such a large bowl of chili.
+    She is gone as quickly as she arrived. You peer down at your new possession. You can't remember the last time you saw such a large bowl of chili. #hide shrimple
     
-    s: Th-
+    s frown_side: Th-
     
     She takes a big puff of her inhaler.
     
     ...you see a few bubbles float out?
     
-    s: Thanks, bud. I'm wearing an awful lot of hats today. Food safety's no joke!
+    s smile: Thanks, bud. I'm wearing an awful lot of hats today. Food safety's no joke!
     
     The distinctive shock of pink hair spilling out from under her hat begs to differ.
     
@@ -128,21 +138,21 @@ All we really need is the here and now. I want to find a here and now to share w
 
 -   <>, actually," you reply.
 
-    s: By rights you are, ain't you? Ananas just told me about the new member. Welcome to the committee! I'm Shrimple, by the way. Don't ask why. Vice President.
+    s smile: By rights you are, ain't you? Ananas just told me about the new member. Welcome to the committee! I'm Shrimple, by the way. Don't ask why. Vice President.
     
-    s: Let's see, what's a good first task? 
+    s embarrassed_side: Let's see, what's a good first task? 
     
     She snaps her fingers and you jump. It sounds like a pistol going off.
     
-    s: Got it. We had another member of the committee sketch out the map, but they're not the most, uh, reliable.
+    s angry: Got it. We had another member of the committee sketch out the map, but they're not the most, uh, reliable.
     
     She hands you a neatly folded (but slightly crumpled) piece of paper.
     
-    s: Think you can go and double check this? You can press < {MAP_KEY} > to use it.
+    s smile: Think you can go and double check this? You can press < MAP_KEY > to use it.
     
     She steps back and sighs, taking another hit of her inhaler.
     
-    s: Long day ahead of us, bud. I'll see you around.
+    s neutral_side: Long day ahead of us, bud. I'll see you around. #hide shrimple
     
 *   Those are definitely bubbles[]. Is the hair not just for show?
 *   [I'm from the ocean and this looks normal to me]
@@ -162,17 +172,19 @@ All we really need is the here and now. I want to find a here and now to share w
 
 -   Seeming to have made up their mind on their course of action, they proceed to sulk near the door and mess despondently with their skates.
 
+    p pout_side 3: ...
+
 *   You try the door[.]
 
 *   "Are you on the committee[?"]? Ananas said to check in with everyone."
     
     A flash of recognition in their eyes. Mumbling.
     
-    p: "c... .et i...."
+    p neutral: "c... .et i...."
     
     * *     "Beg your pardon?"
 
-    - -     p: "I can't get in! Open it up!"
+    - -     p pissed: "I can't get in! Open it up!"
     
             They stomp their foot. Curiously, no sound is produced. Better give them what they want.
     
@@ -181,13 +193,13 @@ All we really need is the here and now. I want to find a here and now to share w
     The student rushes in under your arm before you can even step aside. Not a word of thanks.
     
 *   "What gives?"[] What a rude, edgy person.
-*   "Can I ask your name?["] I'm {PLAYER_NAME}."
+*   "Can I ask your name?["] I'm <PLAYER_NAME>."
 
 -   The student extends their arm from the darkness of the shed to share with you a rude gesture. They aren't interested in introductions right now.
 
     ...
 
-    You hope there wasn't anything important they were supposed to tell you.
+    You hope there wasn't anything important they were supposed to tell you. #hide plume
 
 // Barebones: Didja see that kid around here by any chance? Needed their help with a lil somethin'. Oh, yous on the committee now? Welcome to the big leagues, hotshot. See ya around.
 
@@ -197,31 +209,31 @@ All we really need is the here and now. I want to find a here and now to share w
     
     No, wait, that's a student. Everything's a student at this school. And he's writing something on paper after paper and stuffing them into one of the boxes.
     
-    b: Help me out here, will ya? Just tick this spot on each of these and put 'em in the box.
+    b neutral 5: Help me out here, will ya? Just tick this spot on each of these and put 'em in the box.
     
 *   (committee) You [tell him about the committee] inform him of your new position on the committee.
     
-    b: Yous the one the boss was telling us about! I was just, uh,
+    b neutral 3: Yous the one the boss was telling us about! I was just, uh,
     
     He turns the box over and starts pouring papers into a waste bin.
     
-    b: Testing that the ballot boxes are all working!
+    b sweating: Testing that the ballot boxes are all working!
     
 *   You assist him[] in his painfully obvious racket. Having some blackmail on him will be useful. How Machiavellian of you.
 
-    b: Say, yous a new student or something? I ain't seen you round here.
+    b neutral 3: Say, yous a new student or something? I ain't seen you round here.
     
     * *     "I'm on the committee." -> committee
     * *     (crimes) "Something like that."
     
-        b: Fair enough. Let's just keep this little operation between you and me, yeah? Here's a dabloon for your trouble.
+        b frown: Fair enough. Let's just keep this little operation between you and me, yeah? Here's a dabloon for your trouble.
         
         He offers you a currency you do not believe is accepted in any modern state.
     - -
 
 -   b: By the by, didja see a kid with skates on the way here? Bright hair, tiny. Don't tell them I said that. Goes by the name Plume. Kinda scary but don't tell anyone I said that either.
 
-    b: Needed their help with{crimes:-> does_crimes|-> no_crimes}
+    b frown: Needed their help with{crimes:-> does_crimes|-> no_crimes}
     
 -   (does_crimes)
     <> procuring some more papers, if you know what I mean.
@@ -233,12 +245,12 @@ All we really need is the here and now. I want to find a here and now to share w
     
     he pauses,
     
-    b: something to keep them out of trouble. Little rapscallion always getting into some mischief, yeah?
+    b frown 4: something to keep them out of trouble. Little rapscallion always getting into some mischief, yeah?
 
 -   (barebones_continues)
 *   "Yes."[]
 
-    b: Yeah? Where?
+    b neutral 4: Yeah? Where?
     
     * *     You point towards the shack[].
     * *     You point away from the shack[].
@@ -253,24 +265,24 @@ All we really need is the here and now. I want to find a here and now to share w
     
 -   He offers you a handshake. It seems... safe.
 
-   b: Thanks for keeping it real with me, buddy. {crimes:I owe you one.} The name's Barebones. Treasurer, esquire.
+   b aura 2: Thanks for keeping it real with me, buddy. {crimes:I owe you one.} The name's Barebones. Treasurer, esquire.
    
     {not committee:b: You're a real help, y'know? I'll go see if I can get Boss to put you on the committee. We could use another {crimes: of us on the inside.|gulli- er, trustful member.} He mentioned someone else was about to join, too...}
    
-   b: Lemme finish these and I'll catch up with yous and the crew later.
+   b aura 3: Lemme finish these and I'll catch up with yous and the crew later.
    
    You glance around. There are a number of boxes with names like "most innovative" and "funniest mod." Mod? What's that?
    
    Barebones catches your gaze.
    
-   b: Boss didn't tell you how this works?
+   b frown_sweating 2: Boss didn't tell you how this works?
    
-   b: You use /vote or press \< {VOTE_KEY} \> to vote. You get to pick your favorite project (we call 'em "mods"), plus some other silly awards.
+   b frown: You use /vote or press \< VOTE_KEY \> to vote. You get to pick your favorite project (we call 'em "mods"), plus some other silly awards.
 
 -   (barebones_questions)
 *   "What about the papers?"
    
-   b: The paper's for people who take it traditional style. I like 'em for other reasons. -> barebones_questions
+   b aura: The paper's for people who take it traditional style. I like 'em for other reasons. -> barebones_questions
    
 *   "What if I like multiple mods?"
 
@@ -286,23 +298,23 @@ All we really need is the here and now. I want to find a here and now to share w
 
 *   -- Ugg --
    
--   b: Advice: Don't bother with voting on any other booths. I hear it's all rigged. Just vote for mine, it's the one--
+-   b frown: Advice: Don't bother with voting on any other booths. I hear it's all rigged. Just vote for mine, it's the one--
 
-    Barebones is interrupted by a large boulder. On top of him. It lands with a sickening crunch.
+    Barebones is interrupted by a large boulder. On top of him. It lands with a sickening crunch. #hide barebones
     
     From behind the boulder steps one of the largest men you have ever seen. It's hard to get a grasp on his size. If he's responsible for the boulder, you pray that this, too, is another student.
     
-    u: Ugg is sorry. Ugg almost drop rock on you because you are small! Ugg eyes not so good.
+    u worried_blush 3: Ugg is sorry. Ugg almost drop rock on you because you are small! Ugg eyes not so good.
     
     He's a student, alright.
 
 *   You tell him [about Barebones] that he killed Barebones. 
 
-    u: Aaaaugh! Ugg in trouble! Ugg in big trouble!
+    u worried_blush 3: Aaaaugh! Ugg in trouble! Ugg in big trouble!
     
     He peeks under the boulder, lifting it effortlessly with one arm. There's nothing there but dirt. He laughs.
     
-    u: Ugg see. You play prank on Ugg! Ugg think  you are funny! <>
+    u grin 2: Ugg see. You play prank on Ugg! Ugg think  you are funny! <>
 
 *   You whisper a thanks to whatever it is you just prayed to.[] 
 
@@ -313,13 +325,13 @@ All we really need is the here and now. I want to find a here and now to share w
 *   [You tell him about yourself.]
 *   You [don't tell him about yourself.] strike a sort of brooding, mysterious pose. 
 
-    u: So you are student! Many student stand like that at Ugg.
+    u grin: So you are student! Many student stand like that at Ugg.
     
     No points for creativity. <>
     
 -   You explain the situation with the committee. He nods understandingly.
 
-    u: Ugg not really understand, but Ugg welcome new friend to committee. Ugg happy to work with new friend!
+    u smile: Ugg not really understand, but Ugg welcome new friend to committee. Ugg happy to work with new friend!
     
     Ugg heaves the boulder over his head. Faster than you can comprehend, he catapults it over the hill. 
     
@@ -331,44 +343,63 @@ All we really need is the here and now. I want to find a here and now to share w
     
     The large man turns away and gives a friendly wave with hands that could crush a mountain.
     
-    u: Ugg see new friend at festival. Look out for big rock!
+    u smile: Ugg see new friend at festival. Look out for big rock!
    
 
 // Lulu: Almost steps on you. "[O.O] Oh my goodness, are you okay?? Welcome to the committee!" Gentle giant, in training.
 
-*   -- Lulu --
+*   -- Lulu -- #hide ugg
+
+~ run_command("playsound renmi_springfest:lulu.step ambient @s ~ ~ ~ 0.2")
     
 -   With Ugg gone, you are left with a distant metallic thumping sound you can't place. Drums from the opening ceremony? They crowd out the otherwise peaceful stillness. You listen closely...
 
     A rattling, creaking sort of noise emanates from the boulder's former position. With relief, you see that Barebones was only pressed deep into the mud.
     
     The bones, while spread out, are pulling back together by some unknown force. Barebones will be okay.
+    
+    ~ run_command("playsound renmi_springfest:lulu.step ambient @s ~ ~ ~ 0.4")
 
     With everything you've seen by now, you have to ask...
 
 *   Does this school have any normal people?
 
--   b: Whuhhhhh
+-   b googly 4: Whuhhhhh
+
+    ~ run_command("stopstound @s")
     
-    b: Whuh, what hapefnd. What happened? I in hell? Again?
+    b googly: Whuh, what hapefnd. What happened? I in hell? Again?
     
-    b: Oh yous is still here. Help a pal out, would ya?
+    ~ run_command("playsound renmi_springfest:lulu.step ambient @s ~ ~ ~ 0.6")
+    
+    b frown_sweating: Oh yous is still here. Help a pal out, would ya?
+    
+    ~ run_command("playsound renmi_springfest:lulu.step ambient @s ~ ~ ~ 0.8")
     
     He extends a bony appendage that is possibly an arm to you.
     
-    b: That's right. We'll be out of here in no ti--
+    ~ run_command("playsound renmi_springfest:lulu.step ambient @s ~ ~ ~")
     
-    The world goes dark. Another sickening crunch, drowned out by a massive hollow peal from everywhere at once.
+    b frown: That's right. We'll be out of here in no ti--
+    
+    ~ run_command("playsound renmi_springfest:lulu.steam")
+    
+    The world goes dark. Another sickening crunch, drowned out by a massive hollow peal from everywhere at once. #hide barebones
+    
+    ~ run_command("playsound renmi_springfest:lulu.cockpit ambient @s ~ ~ ~ 0.2")
     
     In front of you is a wall of darkness. Your world is draped in shadow. You look up.
     
-    The only thing you can see is your imminent your death. This is it. This is the end.
+    The only thing you can see is your imminent death. This is it. This is the end.
     
-    l: \[O.O\] Oh my goodness, are you okay??
+    ~ run_command("stopsound @s")
+    ~ run_command("playsound renmi_springfest:lulu.boot")
+    
+    l lulu_on_less_stickers 4: \[O.O\] Oh my goodness, are you okay??
     
 *   ...
     
--    l: \[;-;\] Did I damage your hearing? I am so so sorry, let me go find a nurse!!
+-    l lulu_on_less_stickers: \[;-;\] Did I damage your hearing? I am so so sorry, let me go find a nurse!!
     
     You have never heard a girl's voice carry so much empathy in your entire life.  You have, for that matter, never seen a machine larger than most buildings speak with such a voice. Wait.
     
@@ -381,29 +412,31 @@ All we really need is the here and now. I want to find a here and now to share w
 
 *   You tell her [she crushed Barebones] about Barebones, couched in the least accusing terms possible.
 
-    l: \[O.O\] What! Not again!
+    ~ run_command("playsound renmi_springfest:lulu.step ambient @s ~ ~ ~")
+
+    l lulu_on_less_stickers: \[O.O\] What! Not again!
     
     It is becoming clear that Barebones is not one of god's favorite boys.
     
-    l: \[u_u\] Uwah, he is going to be so mad at me...
+    l lulu_on_less_stickers: \[u_u\] Uwah, he is going to be so mad at me...
     
     There is a metallic chirping that is for some reason evocative of an anxious girl wringing her hands with worry.
     
-   l: \[>.>\] May I ask you a favor? Do you mind not telling him about this when he wakes up?
+   l lulu_on_less_stickers: \[>.>\] May I ask you a favor? Do you mind not telling him about this when he wakes up?
     
     * *     "Sure["]," you reply. First impressions and all. No other reason.
     
     * *     "I don't know about that."
     
-            l: \[>_<\] I understand. I am sorry for asking that of you. It counts as lying, now that I am thinking about it.
+            l lulu_on_less_stickers 5: \[>_<\] I understand. I am sorry for asking that of you. It counts as lying, now that I am thinking about it.
             
-            l: \[¬_¬ꐦ\] I freaking hate when Barebones lies to me about the budget...
+            l lulu_on_less_stickers 4: \[¬_¬ꐦ\] I freaking hate when Barebones lies to me about the budget...
             
             You make a vow to yourself right here and now to never ever lie to this girl.
     
     - -     She notices the expression you are making. You, too, notice the expression you are making.
     
-            l: \[>.<\] Nononono I do not mean it in a bad way! This is my fault, do not worry about it.
+            l lulu_on_less_stickers: \[>.<\] Nononono I do not mean it in a bad way! This is my fault, do not worry about it.
             
             Once again, that lovely voice helps you forget you are standing under a superweapon that likely surpasses most other kinds of superweapons. 
             
@@ -414,16 +447,24 @@ All we really need is the here and now. I want to find a here and now to share w
 *   ->
     
 -   She lowers herself gently to look at you. The whirs and moans of impossibly huge pistons and motors demand a rigidity contradicting the girl's impossibly graceful movement.
+
+    ~ run_command("playsound renmi_springfest:lulu.step ambient @s ~ ~ ~")
     
-    l: \[ovo\] You are the new transfer student, right? I came right over when Ananas told me about you. I am happy to begin working with you!
+    l lulu_on_less_stickers 3: \[ovo\] You are the new transfer student, right? I came right over when Ananas told me about you. I am happy to begin working with you!
     
 *   "Charmed["]," the only thing you can think to say. 
 
--    l: \[^_^\] So polite! I am Lulu, secretary of the committee.
+-    l lulu_on_less_stickers: \[^_^\] So polite! I am Lulu, secretary of the committee.
+
+    ~ run_command("playsound renmi_springfest:lulu.step ambient @s ~ ~ ~")
+    
+    ~ run_command("schedule command 5t playsound renmi_springfest:lulu.step ambient")
+    
+    ~ run_command("schedule command 10t playsound renmi_springfest:lulu.step ambient")
     
     She does a little tippy tap dance, shaking the very earth. Barebones must consume insane amounts of calcium if this is a regular occurrence.
     
-    l: \[-v-\] If you ever have any questions, I am always just a few steps away.
+    l lulu_on_less_stickers 4: \[-v-\] If you ever have any questions, I am always just a few steps away.
     
 *   You think you'll get along[] swimmingly. And who knows... maybe you'll get to know each other better as time goes on? 
     What a strange and fascinating world we live in.
@@ -432,40 +473,39 @@ All we really need is the here and now. I want to find a here and now to share w
 
     Don't worry, honey. You'll get to know each other very well, soon enough.
     
--   l: \[ovo\] Before you go, do you mind helping me with something?
+-   l lulu_on_less_stickers: \[ovo\] Before you go, do you mind helping me with something?
 
     A slot on her chassis slides open with a violent thunk. A cute red backpack falls out.
     
-    l: \[o_o\] Some students have been losing their belongings since our festival is so big. Could I ask you to grab them for the lost and found if you find any?
+    l lulu_on_less_stickers: \[o_o\] Some students have been losing their belongings since our festival is so big. Could I ask you to grab them for the lost and found if you find any?
     
-    l: \[-n-\] I would, but...
-    
+    l lulu_on_less_stickers: \[-n-\] I would, but...
     
 *   "You can't reach?"
     
-    l: \[>.>\] ...
+    l lulu_on_less_stickers: \[>.>\] ...
     
-    l: \[¬_¬ꐦ\] Yes. I am sorry.
+    l lulu_on_less_stickers: \[¬_¬ꐦ\] Yes. I am sorry.
     
 *   "You're too busy?"
 
-    l: \[>.>\] I, um. Yes. I am really, really busy.
+    l lulu_on_less_stickers: \[>.>\] I, um. Yes. I am really, really busy.
     
-    l: \[^_^\] Thank you so much for understanding!
+    l lulu_on_less_stickers: \[^_^\] Thank you so much for understanding!
 
 -   You can't possibly say no to such a sweet girl. To say otherwise would be an illusion of choice.
 
-    l: \[-v-\] Thank you! A few notes: This is a special backpack that tracks what items everyone is missing. You can use it or just run < /shards > to check your progress.
+    l lulu_on_less_stickers: \[-v-\] Thank you! A few notes: This is a special backpack that tracks what items everyone is missing. You can use it or just run < /shards > to check your progress.
     
-    l: \[^v^\] I am not sure why the items are called shards! Probably some technical reason! They are not even items, really...
+    l lulu_on_less_stickers: \[^v^\] I am not sure why the items are called shards! Probably some technical reason! They are not even items, really...
 
-    l: \[ovo\] I will see you later! Have fun at the festival!!!
+    l lulu_on_less_stickers 5: \[ovo\] I will see you later! Have fun at the festival!!!
     
-    She saunters off. You quickly follow, not wanting to disclose to Barebones the circumstances of his misadventure.
+    She saunters off. You quickly follow, not wanting to disclose to Barebones the circumstances of his misadventure. #hide lulu
     
 *   -- Get ready!!! --
 
--   a: There you are, I was looking for ya. Did you meet the gang? All set for the festival? -> ananas_qs
+-   a neutral 2: There you are, I was looking for ya. Did you meet the gang? All set for the festival? -> ananas_qs
 
 -   (ananas_else)
 
@@ -497,7 +537,7 @@ All we really need is the here and now. I want to find a here and now to share w
     
 +   About /map
 
-    a: < /map > or pressing < {MAP_KEY} > will show you where you've been. Let me know if you spot any errors. 
+    a: < /map > or pressing < MAP_KAY > will show you where you've been. Let me know if you spot any errors. 
     
     a: I'll even get ya something special once you check all the booths, how does that sound? 
     -> ananas_else
