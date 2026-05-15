@@ -95,7 +95,9 @@ def add_ext(name):
         extents = get_extents(im)
         im = im.crop(extents)
         im = im.resize((im.size[0] * 1080 // im.size[1], 1080))
-        with open(Path("assets/preprocess") / name / strip_name(sprite,1), "wb+") as f:
+        if sprite.startswith(name):
+            sprite = strip_name(sprite,1)
+        with open(Path("assets/preprocess") / name / sprite, "wb+") as f:
             im.save(f)
         # shutil.copy(oldpath / sprite, Path("assets/preprocess") / name / sprite)
         
@@ -123,5 +125,5 @@ def process_all(name):
     postprocess(name)
 
 if __name__ == "__main__":
-
-    process_all("plume")
+    ...
+#     process_all("plume")

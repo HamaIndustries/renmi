@@ -13,5 +13,7 @@
 	"actor.renmi.ugg": "Ugg",
 	"actor.renmi.delta": "Professor Delta",
 	"actor.renmi.chai": "Professor Chai",
+	"actor.renmi.proxy": "Headmaster",
+	"actor.renmi.ananas": "Ananas",
 	"error.renmi.conditions_unmet": "Conditions unmet to read story."
 }
