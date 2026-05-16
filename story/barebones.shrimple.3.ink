@@ -14,7 +14,7 @@ Ready?
 
 
 
-    s: Look, 'bones, I've had it up to here with you.
+    s angry: Look, 'bones, I've had it up to here with you.
     
     s: Oh, hey <PLAYER_NAME>. You mind talking sense into this fella?
     
@@ -24,11 +24,11 @@ Ready?
 *   Drugs?
 *   Rock and Roll?
 -
-    b: What? Yous talking crazy.
+    b frown: What? Yous talking crazy.
     
-    b: The VP here's trying to stiff me.
+    b aura: The VP here's trying to stiff me.
     
-    s: 'bones, you doubled the amount <i>after</i> I paid.
+    s angry: 'bones, you doubled the amount <i>after</i> I paid.
     
     b: We agreed to it, didn't we?
     
