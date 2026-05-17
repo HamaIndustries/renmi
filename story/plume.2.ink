@@ -4,6 +4,10 @@ Ready?
 -> plume_2
 
 == plume_2 ==
+
+#alias actor p plume
+#alias actor s shrimple
+
 // ACT 2: explains how plume can't move anything without gold and HATES it. Hates feeling too weak to move the world but can be moved by the world. Hates relying on others for stupid basic things. they just want to skate as far and fast as they can for somewhere that isn't here. But the horizon remains on the horizon no matter how far you chase it. You can't ever catch the horizon, in the same sense that you can never leave "here." (aside: player can ask about the gold gloves thing in one line of questioningj)
 
 // this is where plume mentions that everyone calls them a kid when they're actually the oldest out of all of them, besides Lulu. Always gotta be shown up by goddamn lulu.
@@ -241,7 +245,7 @@ They can't get a read on you. it's like you always have someone looking just ove
     
 *   That's [a little insulting.] cuts a bit deep. Plume's been a rude little shit, but you wouldn't ever say something like that to them.
 
-    That's the way it goes. You're not planning on telling anyone the real reason you ended up here. 
+    But that's the way it goes. You're not planning on telling anyone the real reason you ended up here. 
     
     Let them think what they want.
 

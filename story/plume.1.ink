@@ -4,6 +4,12 @@ Ready?
 -> plume_1
 
 === plume_1 ===
+
+
+
+#alias actor p plume
+#alias actor a ananas
+
 //Ananas asks you to have plume take the expense reports into tow. Plume first pretends to not hear you, then taunts you to do it yourself. Shenanigans to get there happen. then you reach the end. Out of breath, you hand the report to--plume?? Who it turns out was already there. They gloat, but realize they cannot open the mailbox. You help them open it, to their frustration.
 
 // can trigger PLUME:VALLEY if you mention being from there/visiting carnival, making you past friends.
