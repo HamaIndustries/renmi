@@ -20,14 +20,14 @@ import java.util.List;
  */
 public class ActReading implements ExternalListener {
 	public static Codec<ActReading> CODEC = RecordCodecBuilder.create(instance ->
-		instance.group(
-			Codec.STRING.fieldOf("story").forGetter(ActReading::storyJson),
-			Codec.STRING.fieldOf("text").forGetter(ActReading::text),
-			Codec.STRING.fieldOf("state").forGetter(ActReading::stateJson),
-			ActLine.CODEC.fieldOf("currentLine").forGetter(ActReading::currentLine),
-			Identifier.CODEC.fieldOf("seriesId").forGetter(ActReading::seriesId),
-			Identifier.CODEC.fieldOf("actId").forGetter(ActReading::actId)
-		).apply(instance, ActReading::ofLoaded)
+			instance.group(
+					Codec.STRING.fieldOf("story").forGetter(ActReading::storyJson),
+					Codec.STRING.fieldOf("text").forGetter(ActReading::text),
+					Codec.STRING.fieldOf("state").forGetter(ActReading::stateJson),
+					ActLine.CODEC.fieldOf("currentLine").forGetter(ActReading::currentLine),
+					Identifier.CODEC.fieldOf("seriesId").forGetter(ActReading::seriesId),
+					Identifier.CODEC.fieldOf("actId").forGetter(ActReading::actId)
+			).apply(instance, ActReading::ofLoaded)
 	);
 
 	protected final Story story;
@@ -137,10 +137,10 @@ public class ActReading implements ExternalListener {
 			}
 		} else {
 			Renmi.LOGGER.debug(
-				"player {} attempted to make invalid choice {} when the number of choices was {}",
-				player.nameAndId(),
-				choice,
-				story.getCurrentChoices().size()
+					"player {} attempted to make invalid choice {} when the number of choices was {}",
+					player.nameAndId(),
+					choice,
+					story.getCurrentChoices().size()
 			);
 		}
 	}
@@ -179,6 +179,14 @@ public class ActReading implements ExternalListener {
 	public Integer onRunCommand(String command) {
 		if (storyListener != null) {
 			return storyListener.runCommand(command);
+		}
+		return 0;
+	}
+
+	@Override
+	public Integer onActCompleted(String id) {
+		if (storyListener != null) {
+			return storyListener.actCompleted(id);
 		}
 		return 0;
 	}

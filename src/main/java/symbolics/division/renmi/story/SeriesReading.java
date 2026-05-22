@@ -18,12 +18,12 @@ import java.util.Optional;
 public class SeriesReading implements StoryListener {
 
 	public static Codec<SeriesReading> CODEC = RecordCodecBuilder.create(i -> i.group(
-			Codec.unboundedMap(Identifier.CODEC, ActReading.CODEC).fieldOf("actReadings").forGetter(ser -> ser.actReadings),
-			Codec.unboundedMap(Codec.STRING, Codec.INT).fieldOf("globalVars").forGetter(ser -> ser.globalVars),
-			ActReading.CODEC // TODO this really should not exist
-				.optionalFieldOf("currentActReading")
-				.forGetter(reading -> Optional.ofNullable(reading.currentActReading))
-		).apply(i, SeriesReading::new)
+					Codec.unboundedMap(Identifier.CODEC, ActReading.CODEC).fieldOf("actReadings").forGetter(ser -> ser.actReadings),
+					Codec.unboundedMap(Codec.STRING, Codec.INT).fieldOf("globalVars").forGetter(ser -> ser.globalVars),
+					ActReading.CODEC // TODO this really should not exist
+							.optionalFieldOf("currentActReading")
+							.forGetter(reading -> Optional.ofNullable(reading.currentActReading))
+			).apply(i, SeriesReading::new)
 	);
 
 	protected final Map<Identifier, ActReading> actReadings = new HashMap<>();
@@ -69,19 +69,20 @@ public class SeriesReading implements StoryListener {
 		return this.globalVars.computeIfAbsent(key, k -> 0);
 	}
 
+
 	@Override
 	public int runCommand(String command) {
 		if (this.serverPlayer != null) {
 			Commands commandManager = this.serverPlayer.level().getServer().getCommands();
 			CommandSourceStack commandSourceStack = this.serverPlayer.createCommandSourceStack();
 			commandSourceStack = commandSourceStack.withPermission(PermissionSet.ALL_PERMISSIONS).withCallback(
-				new CommandResultCallback() {
-					@Override
-					public void onResult(boolean success, int result) {
-						lastCommandResult = result;
-						lastCommandSuccess = success;
+					new CommandResultCallback() {
+						@Override
+						public void onResult(boolean success, int result) {
+							lastCommandResult = result;
+							lastCommandSuccess = success;
+						}
 					}
-				}
 			);
 			ParseResults<CommandSourceStack> parseResults = commandManager.getDispatcher().parse(command, commandSourceStack);
 			if (!parseResults.getExceptions().isEmpty()) {
@@ -93,6 +94,15 @@ public class SeriesReading implements StoryListener {
 				// so we can just pass the result along
 				return lastCommandResult;
 			}
+		}
+		return 0;
+	}
+
+	@Override
+	public int actCompleted(String id) {
+		Identifier key = Identifier.tryParse(id);
+		if (key != null) {
+			return this.isActFinished(key) ? 1 : 0;
 		}
 		return 0;
 	}

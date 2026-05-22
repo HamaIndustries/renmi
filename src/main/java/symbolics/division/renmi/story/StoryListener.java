@@ -6,4 +6,6 @@ public interface StoryListener {
 	int onReadGlobal(String key);
 
 	int runCommand(String command);
+
+	int actCompleted(String id);
 }

@@ -17,11 +17,11 @@ import java.util.Map;
  */
 public class RenmiLibrary {
 	public static final Codec<RenmiLibrary> CODEC = RecordCodecBuilder.create(
-		i -> i.group(
-			Codec.compoundList(Identifier.CODEC, Series.CODEC)
-				.fieldOf("acts")
-				.forGetter(p -> p.library.entrySet().stream().map(e -> new Pair<>(e.getKey(), e.getValue())).toList())
-		).apply(i, RenmiLibrary::new)
+			i -> i.group(
+					Codec.compoundList(Identifier.CODEC, Series.CODEC)
+							.fieldOf("acts")
+							.forGetter(p -> p.library.entrySet().stream().map(e -> new Pair<>(e.getKey(), e.getValue())).toList())
+			).apply(i, RenmiLibrary::new)
 	);
 
 	public static RenmiLibrary get(MinecraftServer server) {
@@ -46,11 +46,11 @@ public class RenmiLibrary {
 	public void createActFromSource(Identifier seriesID, Identifier actID, String source) {
 		try {
 			String injectedSource = """
-				EXTERNAL run_command(commandText)
-				EXTERNAL on_knot_visited(knotName)
-				EXTERNAL read_global(keyString)
-				EXTERNAL write_global(keyString)
-				""" + source;
+					EXTERNAL run_command(commandText)
+					EXTERNAL read_global(keyString)
+					EXTERNAL write_global(keyString)
+					EXTERNAL act_completed(id)
+					""" + source;
 			String json = new Compiler(source, null).compile(injectedSource);
 			createAct(seriesID, actID, new Act(actID, source, json));
 		} catch (RuntimeException e) {

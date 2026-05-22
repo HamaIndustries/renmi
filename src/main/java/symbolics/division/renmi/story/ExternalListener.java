@@ -30,6 +30,12 @@ public interface ExternalListener {
 					return listener.onRunCommand(command);
 				}
 			}, false);
+			story.bindExternalFunction("act_completed", new Story.ExternalFunction1<String, Integer>() {
+				@Override
+				protected Integer call(String id) {
+					return listener.onActCompleted(id);
+				}
+			}, false);
 		} catch (Exception e) {
 			throw new RenmiExceptions.ExternalBindFailure(e);
 		}
@@ -40,4 +46,6 @@ public interface ExternalListener {
 	Integer onReadGlobal(String key);
 
 	Integer onRunCommand(String command);
+
+	Integer onActCompleted(String id);
 }

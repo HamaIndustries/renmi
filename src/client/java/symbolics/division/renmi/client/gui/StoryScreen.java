@@ -192,6 +192,12 @@ public class StoryScreen extends Screen {
 		root.reflowNow();
 		namePlate.setPosition(textBox.getX() + 20, textBox.getY() - 8);
 
+		// bandaid, idk why but we get an npe if we don't initialize the button
+		// and we need a reference to it in this object to remove when we reflow
+		// but displaying characters on the first line shows the fake button
+		// for some reason
+		removeWidget(logButton);
+
 		logButton = Button.builder()
 				.text(Component.literal("Log"))
 				.dimensions(22, 22)
@@ -469,7 +475,7 @@ public class StoryScreen extends Screen {
 			}
 		}
 
-		if (!hasActor) {
+		if (!hasActor || namePlate.getText().getString().isEmpty()) {
 			hideNameplate();
 		}
 		this.state = new DisplayState(displayedText);
