@@ -191,7 +191,7 @@ Ready?
 
     l lulu_off 5: \[ \] Plume...
     
-    p: Sorry.
+    p: Shouldn't have done that.
     
     Plume's predictable response falls on-- Sorry, what? 
     
@@ -199,7 +199,9 @@ Ready?
     
     Plume turns their face away from all of you.
     
-    p pout_side: I shouldn't have done that. Bird brained.
+    p pout_side: Stupid. Bird brained.
+
+    It's not quite an apology, but its more humility than you thought you'd ever see out of them.
     
     Professor Delta shifts nervously, missing the characteristic :o3 he bears carries in the darkest of times.
     

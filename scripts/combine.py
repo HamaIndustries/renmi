@@ -89,7 +89,7 @@ def add_ext(name):
         print("no fullbody found, not creating neutral")
 
     for sprite in os.listdir(oldpath):
-        if not sprite.endswith(".png") or "fullbody" in sprite:
+        if not (sprite.endswith(".png") or sprite.endswith(".jpg")) or "fullbody" in sprite:
             continue
         im = Image.open(oldpath / sprite)
         extents = get_extents(im)

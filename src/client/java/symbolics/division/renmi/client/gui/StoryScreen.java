@@ -44,12 +44,12 @@ public class StoryScreen extends Screen {
 	public static final Identifier NEXT_ARROW = Renmi.id("next_arrow");
 	public static final Identifier NAME_PLATE = Renmi.id("name_plate");
 	public static final WidgetSprites CHOICE_BUTTON = new WidgetSprites(
-		Renmi.id("choice_button"),
-		Renmi.id("choice_button_highlighted")
+			Renmi.id("choice_button"),
+			Renmi.id("choice_button_highlighted")
 	);
 	public static final WidgetSprites LOG_BUTTON = new WidgetSprites(
-		Renmi.id("log_button"),
-		Renmi.id("log_button_highlighted")
+			Renmi.id("log_button"),
+			Renmi.id("log_button_highlighted")
 	);
 
 	private static Runnable updateCallback; // the hama special
@@ -60,6 +60,9 @@ public class StoryScreen extends Screen {
 	private Label namePlate;
 	private Paragraph textBoxText;
 	private Button.Builder<?, ?> choiceButton;
+
+	private Button logButton;
+	private Panel root;
 
 	// allow portrait slots 1-6, but also allow absolute positioning.
 	// FIXME: no absolute positioning yet
@@ -79,56 +82,59 @@ public class StoryScreen extends Screen {
 		minecraft.options.hideGui = true;
 
 		choices = Panel.builder()
-			.dimensions(true, true)
-			.alignCenter()
-			.verticalAlignment(0.75f)
-			.spacing(10)
-			.build();
+				.dimensions(true, true)
+				.alignCenter()
+				.verticalAlignment(0.75f)
+				.spacing(10)
+				.build();
 		namePlate = Label.builder()
-			.height(16)
-			.renderOperations(
-				(self, render) -> render.context().blitSprite(
-					RenderPipelines.GUI_TEXTURED, NAME_PLATE,
-					self.getX(), self.getY(), self.getWidth(), self.getHeight()
-				),
-				RenderOperations.TEXT_RENDER
-			)
-			.build();
+				.height(16)
+				.renderOperations(
+						(self, render) -> render.context().blitSprite(
+								RenderPipelines.GUI_TEXTURED, NAME_PLATE,
+								self.getX(), self.getY(), self.getWidth(), self.getHeight()
+						),
+						RenderOperations.TEXT_RENDER
+				)
+				.build();
 		textBoxText = Paragraph.builder()
-			.dimensions(true, 42)
-			.padding(0, 0, 2, 0)
-			.build();
+				.dimensions(true, 42)
+				.padding(0, 0, 2, 0)
+				.build();
 		choiceButton = Button.builder()
-			.renderOperations(
-				(self, render) -> {
-					var matrices = render.context().pose();
-					matrices.pushMatrix();
+				.renderOperations(
+						(self, render) -> {
+							var matrices = render.context().pose();
+							matrices.pushMatrix();
 
-					long timer = Util.getMillis() - choicesAnimTimer;
+							long timer = Util.getMillis() - choicesAnimTimer;
 
-					if (timer < 100) {
-						matrices.translate(self.getX() + self.getWidth() / 2f, self.getY() + self.getHeight() / 2f);
-						if (timer < 50) {
-							matrices.scale(1.2f, 0.8f);
-						} else {
-							matrices.scale(0.95f, 1.05f);
+							if (timer < 100) {
+								matrices.translate(self.getX() + self.getWidth() / 2f, self.getY() + self.getHeight() / 2f);
+								if (timer < 50) {
+									matrices.scale(1.2f, 0.8f);
+								} else {
+									matrices.scale(0.95f, 1.05f);
+								}
+								matrices.translate(-self.getX() - self.getWidth() / 2f, -self.getY() - self.getHeight() / 2f);
+							}
+
+							render.context().blitSprite(
+									RenderPipelines.GUI_TEXTURED, CHOICE_BUTTON.get(self.isEnabled(), self.isSelected()),
+									self.getX(), self.getY(), self.getWidth(), self.getHeight()
+							);
+							RenderOperations.TEXT_RENDER.render(self, render);
+
+							matrices.popMatrix();
 						}
-						matrices.translate(-self.getX() - self.getWidth() / 2f, -self.getY() - self.getHeight() / 2f);
-					}
-
-					render.context().blitSprite(
-						RenderPipelines.GUI_TEXTURED, CHOICE_BUTTON.get(self.isEnabled(), self.isSelected()),
-						self.getX(), self.getY(), self.getWidth(), self.getHeight()
-					);
-					RenderOperations.TEXT_RENDER.render(self, render);
-
-					matrices.popMatrix();
-				}
-			);
+				);
 
 		for (int i = 0; i < slots.length; ++i) {
 			slots[i] = new Portrait();
 		}
+
+		root = Panel.builder().build();
+		logButton = Button.builder().build();
 
 		updateCallback = this::update;
 		update();
@@ -144,39 +150,39 @@ public class StoryScreen extends Screen {
 		int width = window.getGuiScaledWidth();
 		int height = window.getGuiScaledHeight();
 
-		Panel root = Panel.builder()
-			.dimensions(width, height)
-			.padding(10)
-			.alignCenter()
-			.build();
+		root = Panel.builder()
+				.dimensions(width, height)
+				.padding(10)
+				.alignCenter()
+				.build();
 
 		Label actTitle = Label.builder()
-			.dimensions(true, 10)
-			.alignLeft()
-			.build();
+				.dimensions(true, 10)
+				.alignLeft()
+				.build();
 		Panel textBox = Panel.builder()
-			.dimensions(true, 62)
-			.maxWidth(Math.min((width - 34) / 16 * 16 + 14, 318))
-			.padding(10)
-			.alignMiddle()
-			.flowAxis(FlowAxis.HORIZONTAL)
-			.renderOperations(
-				(self, render) -> render.context().blitSprite(
-					RenderPipelines.GUI_TEXTURED, Renmi.id("text_box"),
-					self.getX(), self.getY(), self.getWidth(), self.getHeight()
-				),
-				RenderOperations.CHILD_RENDER,
-				(self, render) -> {
-					// Both tests needed to ensure it doesn't flicker on frames between ticks
-					if (state != null && !state.isScrolling() && choices.getChildren().isEmpty()) {
-						render.context().blitSprite(
-							RenderPipelines.GUI_TEXTURED, NEXT_ARROW,
-							self.getRight() - 16, self.getBottom() - 16, 8, 8
-						);
-					}
-				}
-			)
-			.build();
+				.dimensions(true, 62)
+				.maxWidth(Math.min((width - 34) / 16 * 16 + 14, 318))
+				.padding(10)
+				.alignMiddle()
+				.flowAxis(FlowAxis.HORIZONTAL)
+				.renderOperations(
+						(self, render) -> render.context().blitSprite(
+								RenderPipelines.GUI_TEXTURED, Renmi.id("text_box"),
+								self.getX(), self.getY(), self.getWidth(), self.getHeight()
+						),
+						RenderOperations.CHILD_RENDER,
+						(self, render) -> {
+							// Both tests needed to ensure it doesn't flicker on frames between ticks
+							if (state != null && !state.isScrolling() && choices.getChildren().isEmpty()) {
+								render.context().blitSprite(
+										RenderPipelines.GUI_TEXTURED, NEXT_ARROW,
+										self.getRight() - 16, self.getBottom() - 16, 8, 8
+								);
+							}
+						}
+				)
+				.build();
 
 		root.addChild(actTitle);
 		root.addChild(choices);
@@ -186,22 +192,34 @@ public class StoryScreen extends Screen {
 		root.reflowNow();
 		namePlate.setPosition(textBox.getX() + 20, textBox.getY() - 8);
 
-		Button logButton = Button.builder()
-			.text(Component.literal("Log"))
-			.dimensions(22, 22)
-			.position(width - 32, height - 32)
-			.onPress(_ -> ClientPlayNetworking.send(new C2SRequestStoryLogPacket()))
-			.renderOperations((self, render) -> {
-				render.context().blitSprite(
-					RenderPipelines.GUI_TEXTURED, LOG_BUTTON.get(self.isEnabled(), self.isSelected()),
-					self.getX(), self.getY(), self.getWidth(), self.getHeight()
-				);
-			})
-			.tooltip(Tooltip.create(Component.translatable("tooltip.renmi.log")))
-			.build();
+		logButton = Button.builder()
+				.text(Component.literal("Log"))
+				.dimensions(22, 22)
+				.position(width - 32, height - 32)
+				.onPress(_ -> ClientPlayNetworking.send(new C2SRequestStoryLogPacket()))
+				.renderOperations((self, render) -> {
+					render.context().blitSprite(
+							RenderPipelines.GUI_TEXTURED, LOG_BUTTON.get(self.isEnabled(), self.isSelected()),
+							self.getX(), self.getY(), self.getWidth(), self.getHeight()
+					);
+				})
+				.tooltip(Tooltip.create(Component.translatable("tooltip.renmi.log")))
+				.build();
 
+		reflow();
+	}
+
+	private void reflow() {
+		removeWidget(logButton);
+		removeWidget(root);
+		removeWidget(namePlate);
 		for (Portrait slot : slots) {
-			addRenderableOnly(slot.getImage());
+			removeWidget(slot.getImage());
+		}
+
+		for (int i : lastUsedSlots) {
+			if (i == -1) continue;
+			addRenderableOnly(slots[i].getImage());
 		}
 		addRenderableWidget(logButton);
 		addRenderableWidget(root);
@@ -269,13 +287,16 @@ public class StoryScreen extends Screen {
 			portrait.getImage().setWidth((int) (portrait.getImage().getTextureWidth() * scale));
 
 			float x = width / 2f
-				+ width / 8f * (slot - 2.5f)
-				- actor.origin().x * scale;
+					+ width / 8f * (slot - 2.5f)
+					- actor.origin().x * scale;
 			float y = height
-				+ height / 4.48f * heightRatio
-				- actor.origin().y * scale;
+					+ height / 4.48f * heightRatio
+					- actor.origin().y * scale;
 
 			portrait.getImage().setPosition((int) x, (int) y);
+
+			// lets us display newest actors on top
+			reflow();
 		}
 	}
 
@@ -369,9 +390,9 @@ public class StoryScreen extends Screen {
 
 	private Button createChoiceButton(ActChoice choice) {
 		return choiceButton
-			.text(Component.literal(choice.text())) // FIXME buttons might have component visiblity? placeholder api?
-			.onPress(_ -> makeChoice(choice.index()))
-			.build();
+				.text(Component.literal(choice.text())) // FIXME buttons might have component visiblity? placeholder api?
+				.onPress(_ -> makeChoice(choice.index()))
+				.build();
 	}
 
 	private void showChoices() {
@@ -402,10 +423,10 @@ public class StoryScreen extends Screen {
 
 				if (dualColumn && it.hasNext()) {
 					var panel = Panel.builder()
-						.width(true)
-						.alignCenter()
-						.flowAxis(FlowAxis.HORIZONTAL)
-						.build();
+							.width(true)
+							.alignCenter()
+							.flowAxis(FlowAxis.HORIZONTAL)
+							.build();
 
 					panel.addChild(createChoiceButton(choice));
 					panel.addChild(createChoiceButton(it.next()));
@@ -438,13 +459,6 @@ public class StoryScreen extends Screen {
 				case ActorDirection actor -> {
 					setPortrait(actor);
 					hasActor = true;
-
-					for (Portrait p : slots) {
-						if (p == null) {
-							continue;
-						}
-						allPortraits.add(p);
-					}
 				}
 				case SoundDirection soundDirection -> {
 					soundDirection.playSound();
