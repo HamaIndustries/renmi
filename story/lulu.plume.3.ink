@@ -252,7 +252,7 @@ Ready?
     
     They have??
     
-    a: Heh, you lead a bunch of people long enough, you get a seventh sense for this stuff.
+    a: Heh, you lead a gaggle of funky characters long enough, you get a seventh or eighth sense for this stuff.
     
     a: Why don't you go have a chat with them?
     
