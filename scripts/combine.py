@@ -35,7 +35,7 @@ def get_extents(im):
     max_y = max(ey)
     return (min_x, min_y, max_x, max_y)
 
-def merge(name: str):
+def merge(name: str, res = 1080):
     fullpath = Path("assets/character_sprites") / name / (name +"_fullbody.png")
     emotedir = Path("assets/cropped_sprites") / name
     tempdir  = Path("assets/preprocess") / name
@@ -62,7 +62,7 @@ def merge(name: str):
             updated = im.copy()
             updated.paste(eim)
             updated = updated.crop(extents)
-            updated = updated.resize((updated.size[0] * 1080//updated.size[1], 1080))
+            updated = updated.resize((updated.size[0] * res//updated.size[1], res))
 
             newpath = tempdir / strip_name(emote, 2)
             print(f"{emote} -> {newpath}", flush=True)
@@ -76,7 +76,7 @@ def merge(name: str):
     # pngquant - > output < input
     # oxipng --stdout fname
 
-def add_ext(name):
+def add_ext(name, res=1080):
     oldpath = Path("assets/character_sprites") / name
     try:
         os.mkdir(Path("assets/preprocess") / name)
@@ -94,7 +94,7 @@ def add_ext(name):
         im = Image.open(oldpath / sprite)
         extents = get_extents(im)
         im = im.crop(extents)
-        im = im.resize((im.size[0] * 1080 // im.size[1], 1080))
+        im = im.resize((im.size[0] * res // im.size[1], res))
         if sprite.startswith(name):
             sprite = strip_name(sprite,1)
         with open(Path("assets/preprocess") / name / sprite, "wb+") as f:
