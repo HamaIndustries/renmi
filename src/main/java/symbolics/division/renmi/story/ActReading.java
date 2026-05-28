@@ -9,6 +9,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import org.apache.commons.lang3.NotImplementedException;
 import symbolics.division.renmi.Renmi;
+import symbolics.division.renmi.RenmiCommands;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,7 +113,17 @@ public class ActReading implements ExternalListener {
 	public void proceed(ServerPlayer player, int depth) {
 		if (story.canContinue()) {
 			try {
-				String text = story.Continue();
+				story.continueAsync(player.level().getGameRules().get(RenmiCommands.STORY_TIME_RULE).floatValue());
+				if (!story.asyncContinueComplete()) {
+					Renmi.LOGGER.error("Story for player {} exceeded time budget! series: {}, act: {}", player.nameAndId(), seriesId, actId);
+					currentLine = ActLine.of("TIME BUDGET EXCEEDED", true, List.of(), List.of());
+					story.getState().forceEnd();
+					return;
+				}
+				String text = story.getCurrentText();
+
+
+//				String text = story.continueAsync(500f);
 				// not 100% sure this is needed
 				if (text.isEmpty() && story.canContinue() && depth < 10) {
 					proceed(player, depth + 1);

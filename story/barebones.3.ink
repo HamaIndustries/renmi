@@ -20,7 +20,7 @@ Ready?
 #alias actor b barebones
 
 
-    c focus_frown 2: Whew, last one.
+    c focus_frown 1: Whew, last one.
     
     c happy: Thanks again, <PLAYER_NAME>. You've been a huge help all day.
     
@@ -53,8 +53,8 @@ Ready?
     
     d confident_smile: Well, I am proud to report that our newest, most responsible committee officer comes with no strings attacked.
     
-    ~ run_command("/stopsound @s")
-    x reading_intrigued 3: Speaking of reports, Professor Delta. Have we completed ours?
+    ~ run_command("stopsound @s")
+    x reading_intrigued 2: Speaking of reports, Professor Delta. Have we completed ours?
     
     d zoomies_sweat: YIP!
     
@@ -111,7 +111,7 @@ Ready?
 
 *   [Nothing unusual.]
     
-    xmreading_intrigued:: You must have had quite the eventful life if you find all this to be nothing out of the ordinary.
+    x reading_intrigued:: You must have had quite the eventful life if you find all this to be nothing out of the ordinary.
     
     * *     [You meant unusual for this school.]
     
@@ -185,13 +185,13 @@ Ready?
     
     ...
     
-*   "You're disingenuous["].
+*   "You're disingenuous["]."
 -
     b frown: Wadda hell's gotten into yous?
     
     b aura: 'course I'm a genius.
     
-*   He heard you[]. Can't he say anything with a straight face?
+*   He [heard you] knows what you meant. Can't he say anything with a straight face?
 -
     Can he be real with it for one minute out of his elaborate little gangster roleplay? 
 

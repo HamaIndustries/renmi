@@ -321,7 +321,7 @@ Ready?
 
     ...
     
-    l: \[-v-\] Between you and me, sometimes I forget what I am. I get too comfortable and spend too much time in the flower petals, so to speak.
+    l: \[-v-\] Between you and me, sometimes I forget about all my troubles. I get too comfortable and spend too much time in the flower petals, so to speak.
     
     l: \[-_-\] Like a normal girl.
     
@@ -332,7 +332,7 @@ Ready?
 *   What even is a normal girl?[] What is normal? You look around at every single student at the school, and think she's anything out of the ordinary?
 -
 
-    l: \[\/\/_\/\/\] Uwah, I guess you have a point.
+    l: \[\/\/_\/\/\] Uwah, I guess that is true.
     
     l: \[^_^\] That is why I love my friends so much! 
     
@@ -354,7 +354,7 @@ Ready?
     
     l: \[\/\/_\/\/\] Oh, my. Thank you so much. I did not even realize it was like that.
     
-    l: \[-v-\] Haha, that is funny.
+    //l: \[-v-\] Haha, that is funny.
     
     l: \[^_^\] I have sensors out the wazoo and I did not even notice it was coming off!
     

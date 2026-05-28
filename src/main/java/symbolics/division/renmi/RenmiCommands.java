@@ -8,6 +8,7 @@ import com.mojang.brigadier.context.CommandContext;
 import eu.pb4.placeholders.api.parsers.NodeParser;
 import eu.pb4.placeholders.api.parsers.TagParser;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleBuilder;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
@@ -18,6 +19,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.gamerules.GameRule;
+import net.minecraft.world.level.gamerules.GameRuleCategory;
 import org.jetbrains.annotations.Nullable;
 import symbolics.division.renmi.net.S2CDisplayStoryScreenPacket;
 import symbolics.division.renmi.story.Act;
@@ -29,70 +32,75 @@ import symbolics.division.renmi.util.RenmiExceptions;
 public class RenmiCommands {
 	public static final NodeParser PARSER = TagParser.DEFAULT;
 
+	public static final GameRule<Double> STORY_TIME_RULE = GameRuleBuilder
+			.forDouble(500f) //default value declaration
+			.category(GameRuleCategory.MISC)
+			.buildAndRegister(Renmi.id("max_story_time_ms"));
+
 	public static void init() {
 		CommandRegistrationCallback.EVENT.register(RenmiCommands::register);
 	}
 
 	public static void register(
-		CommandDispatcher<CommandSourceStack> dispatcher,
-		CommandBuildContext context,
-		Commands.CommandSelection var3
+			CommandDispatcher<CommandSourceStack> dispatcher,
+			CommandBuildContext context,
+			Commands.CommandSelection var3
 	) {
 		LiteralArgumentBuilder<CommandSourceStack> createCommand = Commands.literal("create")
-			.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
-			.then(
-				Commands.argument("series_id", IdentifierArgument.id())
-					.then(
-						Commands.argument("act_id", IdentifierArgument.id())
-							.then(
-								Commands.argument("script", StringArgumentType.string())
-									.executes(RenmiCommands::createAct)
-							)
-					)
-			);
+				.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
+				.then(
+						Commands.argument("series_id", IdentifierArgument.id())
+								.then(
+										Commands.argument("act_id", IdentifierArgument.id())
+												.then(
+														Commands.argument("script", StringArgumentType.string())
+																.executes(RenmiCommands::createAct)
+												)
+								)
+				);
 
 		LiteralArgumentBuilder<CommandSourceStack> storyCommand = Commands.literal("story")
-			.then(Commands.literal("read").then(
-					Commands.argument("series_id", IdentifierArgument.id())
-						.then(
-							Commands.argument("act_id", IdentifierArgument.id())
-								.executes(ctx -> readAct(ctx, false, false))
-								.then(Commands.literal("reset")
-									.executes(ctx -> readAct(ctx, true, false))
-								)
-								.then(Commands.literal("force").executes(ctx -> readAct(ctx, false, true))
-									.then(
-										Commands.literal("reset")
-											.executes(ctx -> readAct(ctx, true, true))
-									)
-								)
+				.then(Commands.literal("read").then(
+								Commands.argument("series_id", IdentifierArgument.id())
+										.then(
+												Commands.argument("act_id", IdentifierArgument.id())
+														.executes(ctx -> readAct(ctx, false, false))
+														.then(Commands.literal("reset")
+																.executes(ctx -> readAct(ctx, true, false))
+														)
+														.then(Commands.literal("force").executes(ctx -> readAct(ctx, false, true))
+																.then(
+																		Commands.literal("reset")
+																				.executes(ctx -> readAct(ctx, true, true))
+																)
+														)
+										)
 						)
+				).then(Commands.literal("proceed")
+						.executes(RenmiCommands::readingProceed)
+				).then(Commands.literal("choose")
+						.then(Commands.argument("index", IntegerArgumentType.integer())
+								.executes(RenmiCommands::readingChoice)
+						)
+				).then(Commands.literal("show")
+						.executes(RenmiCommands::showScreen)
 				)
-			).then(Commands.literal("proceed")
-				.executes(RenmiCommands::readingProceed)
-			).then(Commands.literal("choose")
-				.then(Commands.argument("index", IntegerArgumentType.integer())
-					.executes(RenmiCommands::readingChoice)
-				)
-			).then(Commands.literal("show")
-				.executes(RenmiCommands::showScreen)
-			)
-			.then(Commands.literal("reset")
-				.then(Commands.argument("series_id", IdentifierArgument.id())
-					.executes(ctx -> reset(ctx, series(ctx), null))
-					.then(Commands.argument("act_id", IdentifierArgument.id())
-						.executes(ctx -> reset(ctx, series(ctx), act(ctx)))
-					)
-				));
+				.then(Commands.literal("reset")
+						.then(Commands.argument("series_id", IdentifierArgument.id())
+								.executes(ctx -> reset(ctx, series(ctx), null))
+								.then(Commands.argument("act_id", IdentifierArgument.id())
+										.executes(ctx -> reset(ctx, series(ctx), act(ctx)))
+								)
+						));
 
 		LiteralArgumentBuilder<CommandSourceStack> listCommand = Commands.literal("list")
-			.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
-			.executes(RenmiCommands::listActs);
+				.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
+				.executes(RenmiCommands::listActs);
 
 		LiteralArgumentBuilder<CommandSourceStack> base = Commands.literal("renmi")
-			.then(createCommand)
-			.then(storyCommand)
-			.then(listCommand);
+				.then(createCommand)
+				.then(storyCommand)
+				.then(listCommand);
 		dispatcher.register(base);
 	}
 
@@ -112,9 +120,9 @@ public class RenmiCommands {
 
 		} catch (RenmiLibrary.RenmiCompilationFailed e) {
 			Renmi.LOGGER.info(
-				"Failed to create act {}, series {}, from source script!",
-				context.getArgument("series_id", Identifier.class),
-				context.getArgument("act_id", Identifier.class)
+					"Failed to create act {}, series {}, from source script!",
+					context.getArgument("series_id", Identifier.class),
+					context.getArgument("act_id", Identifier.class)
 			);
 			e.printStackTrace();
 			return 0;
@@ -178,7 +186,8 @@ public class RenmiCommands {
 			context.getSource().sendFailure(Component.literal("player did not meet conditions to begin reading"));
 			return 0;
 		}
-		printState(context);
+		ServerPlayNetworking.send(player, new S2CDisplayStoryScreenPacket());
+//		printState(context);
 		return 1;
 	}
 
@@ -227,15 +236,15 @@ public class RenmiCommands {
 			for (var choice : state.choices()) {
 				Renmi.LOGGER.info(Integer.toString(choice.index()) + ": " + choice.text());
 				Component choiceText = Component.literal(
-					Integer.toString(choice.index()) + ": "
+						Integer.toString(choice.index()) + ": "
 				).append(Component.literal(choice.text()).withStyle(Style.EMPTY.withClickEvent(
-					new ClickEvent.RunCommand("/renmi story choose " + choice.index())
+						new ClickEvent.RunCommand("/renmi story choose " + choice.index())
 				).withColor(0xFFFF00).withUnderlined(true)));
 				context.getSource().sendSystemMessage(choiceText);
 			}
 		} else {
 			Component proceedText = Component.literal("[proceed]").withStyle(Style.EMPTY.withClickEvent(
-				new ClickEvent.RunCommand("/renmi story proceed")
+					new ClickEvent.RunCommand("/renmi story proceed")
 			).withColor(0x00ff00).withUnderlined(true));
 			context.getSource().sendSystemMessage(proceedText);
 		}
