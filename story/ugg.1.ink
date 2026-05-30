@@ -4,6 +4,9 @@ Ready?
 -> ugg_1
 
 == ugg_1 ==
+
+#require act modfest:intro_7
+#alias actor u ugg
 // ugg struggles in school. You find him deep in a book-literally. How is he supposed to learn like that? Ugg insists it works... okay I guess
 // You find ugg in the library, mistaking him for a book. What? No, he's just wearing it on his face. Is he asleep? He picks up the book, turns the page.
     
@@ -39,7 +42,7 @@ Ready?
             
     * *     Spirits?[] You could go for a drink, now that you mention it.
     
-            But you will not, because you are in high school and you cannot drink. 
+            But you will not, because you are a student and you cannot drink. 
             
             Shame!
         
@@ -69,11 +72,11 @@ Ready?
 
     Merely opening this book causes your mind to spiral.
     
-    It's like turning your head sideways while walking into a < house > of mirrors. 
+    It's like turning your head sideways while walking into a <blue>house</> of mirrors. 
     
     The book sings of cerulean skies filled with pastel stars, of stellar machines you could only dream to understand.
     
-    Of mirrors in < house >s when the night crawls in through the window and chases you in somewhere deeper,
+    Of mirrors in <blue>house</>s when the night crawls in through the window and chases you in somewhere deeper,
     
     deeper to a place where photographs are your ears and emails are your eyes and you can taste the information carried in signals saturating the air.
     
@@ -101,7 +104,7 @@ Ready?
     
     The book reads as one of poetry, but its really a more analytic publication. The only way to speak technically about curses is by way of metaphor.
     
-    Apologies, spoilers. I'm proud of it, you understand. One of my better works.
+    Apologies, spoilers. I'm quite fond of it, you understand. One of the author's better works.
     
     It won't be here when you set it down and next look away.
     
@@ -118,15 +121,15 @@ Ready?
 
 -   Love it or hate it, AE's a staple in many industries. It's not for everyone, but everyone knows a strong background in AE will bring you the big bucks.
 
-    This one's not coming off the shelf, though. It's also stuck in place, a large volume sticking out at a significant offset from the others.
+    This one's not coming off the shelf, though. It's stuck in place, a large volume sticking out at a significant offset from the others.
     
 *   You tug at it[], but nothing gives.
 -
 *   Another tug[], and the book yanks back, nearly throwing you off your feet.
 
--   u: Wuhh, huh?
+-   u worried: Wuhh, huh?
 
-    u: Oh, it friend. Ugg do last minute study before festival.
+    u smile: Oh, it friend. Ugg do last minute study before festival.
     
     You can hardly be blamed. The man is as wide as the space between shelves, filling this narrow alcove from side to side. 
     
@@ -138,15 +141,15 @@ Ready?
     
     u: Why Ugg sleep if sun out?
     
-    u: Sun go down, Ugg sleep. Sun go up, Ugg go up.
+    u grin: Sun go down, Ugg sleep. Sun go up, Ugg go up.
     
     It should once again be emphasized that the man before you is in peak physical condition. Consider this a lesson in the worth of bedtimes and simple diets.
     
-    u: Between friend and Ugg, Ugg think some teacher set bad example for student bed time.
+    u worried: Between friend and Ugg, Ugg think some teacher set bad example for student bed time.
     
     He looks over his shoulder warily.
     
-    u: Some night even Headmaster send teachers to beds.
+    u worried: Some night even Headmaster send teachers to beds.
     
     u: Then Headmaster pretend to sleep but play video game instead.
     
@@ -156,7 +159,7 @@ Ready?
 
     u: Friend ask good question. Ugg like book smell.
     
-    u: Remind Ugg of papyrus drying after flood.
+    u smile: Remind Ugg of papyrus drying after flood.
     
     The Nile isn't so far from the fertile crescent, after all. It comes as no surprise that Ugg is fond of paper.
 
@@ -174,22 +177,22 @@ Ready?
 
 *   You ask him about the report[].
 
--   u: Report?
+-   u worried: Report?
 
     u: Oooooooh, Report.
 
 *   "The report for Ananas."
 
--   u: Report Ugg made specifically for Ananas.
+-   u grin: Report Ugg made specifically for Ananas.
 
 *   "That report."
 
--   u: ...
+-   u worried: ...
     
     // :3
--   u: Ugg have it here.
+-   u smile: Ugg have it here.
     
-    u: Ugg ask friend to tell Ananas festival is ok.
+    u grin: Ugg ask friend tell Ananas festival is ok.
     
     He expresses his fangs, smiles, animalistically. You half expect him to stick out his tongue and start panting.
     
@@ -212,7 +215,7 @@ Ready?
     
 *   What has him so troubled?
 
--   u: Ugg little bit behind on school.
+-   u worried: Ugg little bit behind on school.
     
     u: It okay, Ugg study more later.
     
@@ -243,7 +246,7 @@ Ready?
     
     Ugg returns your bottle with characteristic gentleness. 
     
-    u: Library air dry. Ugg dry easy in library.
+    u grin 3: Library air dry. Ugg dry easy in library.
     
     Your prehistoric friend, now adequately hydrated, looks forlornly back to the object of his torment.
     
@@ -261,13 +264,13 @@ Ready?
     
     This library is creeping you out anyway. As you exit, Ugg smacks his head into the door right behind you.
     
-    u: Grrr. Ugg so clumsy and can't read book!
+    u worried: Grrr. Ugg so clumsy and can't read book!
     
 *   Is it because [of how he reads?] he wears the books on his face?
 
--   u: No, teacher show Ugg trick. Trick help Ugg with book. 
+-   u grin: No, teacher show Ugg trick. Trick help Ugg with book. 
     
-    u: Sometimes.
+    u worried: Sometimes.
     
 *   That sounds unlikely[]. But you're not a caveman education specialist.
     
@@ -281,16 +284,16 @@ Ready?
     
    He finally squeezes out through the small door. You still aren't sure exactly how large he is, but at this moment in time his size is at least "library door."
 
-    u: Ugg check on chickensaurs. Ugg worry chickensaurs are hungry.
+    u worried: Ugg check on chickensaurs. Ugg worry chickensaurs are hungry.
     
-    u: Ugg see friend later.
+    u smile: Ugg see friend later.
     
     You bid him farewell.
     
 *   What's a chickensaur?
 *   Chickensaurs, here?
 
--   You'll see soon enough.
+-   Fascinating things. Creatures, from a land beyond time...
 
     -> END
 

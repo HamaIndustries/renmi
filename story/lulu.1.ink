@@ -1,6 +1,5 @@
 -> act_1
 
-VAR PLAYER_NAME = "PLAYER_NAME"
 
 
 === act_1 ===
@@ -18,7 +17,7 @@ VAR PLAYER_NAME = "PLAYER_NAME"
     
     You aren't sure yet how to adequately put your feelings about the festival into words. It certainly has exposed you to many new experiences, for better or worse.
     
-    A visitor's children run by, playing with that toy from that one booth. The one that explicitly does not look like it should be allowed anywhere near kids.
+    A visitor's children run by, playing with some swords from the metallurgy booth. The ones that explicitly do not look like they should be allowed anywhere near kids.
 
 ...
 

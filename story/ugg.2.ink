@@ -4,23 +4,38 @@ Ready?
 -> ugg_2
 
 == ugg_2 ==
+
+
+#alias actor a ananas
+#alias actor b barebones
+#alias actor p plume
+#alias actor l lulu
+#alias actor u ugg
+#alias actor s shrimple
+#require act modfest:ananas_1
+#require act modfest:barebones_1
+#require act modfest:plume_1
+#require act modfest:lulue_1
+#require act modfest:ugg_1
+#require act modfest:shrimple_1
+
 //ACT 2: Ugg buys a treat for Plume, who Shrimple mentions really should not have any more sugar. Ugg says its fine, you've all been working hard, and gets treats for everyone else. It turns out that Ugg comes from money, but he doesn't want to rely on it--he might have trouble, but he loves learning even if its difficult. But he'll never miss an opportunity to take care of his friends, including you now.
 
-    u: There go, little boy. Girl? Ugg is not sure.
+    u: There go, little boy. Girl? Ugg not sure.
     
     Fortunately for Ugg's large, easily punchable face, Plume is too engrossed in their little treat to get indignant.
     
-    s: Ugg! Thought I said not to feed the the kid sugar?
+    s angry: Ugg! Thought I said not to feed the the kid sugar?
     
-    u: And here one for shrimp girl.
+    u smile: And here one for shrimp girl.
     
-    s: Grrr. You get a pass, just this once.
+    s embarrassed_side: Grrr. You get a pass, just this once.
     
     a: Thanks for hooking us up, Ugg!
     
-    b: Yeah, what the boss says. Yous a real one, big man.
+    b aura: Yeah, what the boss says. Yous a real one, big man.
     
-    u: What flavor PLAYER_NAME like?
+    u grin: What flavor PLAYER_NAME like?
 -   (flavors)
 *   (choco) Chocolate[] always has your back. If it wasn't the best, it wouldn't be the most popular candy.
 
@@ -28,19 +43,19 @@ Ready?
     
     a: Oh yeah? What do you call a little treat full of sugar and wrapped in foil?
     
-    p: What do you call your face with a dent in it?
+    p pissed: What do you call your face with a dent in it?
     
-    a: Whatcha think, big guy?
+    a embarrassed: Whatcha think, big guy?
     
-    u: Ugg not have chocolate before today. Ugg think chocolate yummy.
+    u smile_blush: Ugg not have chocolate before today. Ugg think chocolate yummy.
     
     What counts as a treat in the paleolithic? Chalk?
     
-    p: But that doesn't make it candy!
+    p pout_side: But that doesn't make it candy!
     
     b: 'course it's candy. Take it from the expert. Tell 'em, miss expert.
     
-    s: I'm sitting out of this one.
+    s neutral_side: I'm sitting out of this one.
     
     What do you think?
     
@@ -51,29 +66,29 @@ Ready?
 
 *   Vanilla[] is underappreciated. It's not the absence of flavor. In fact, it's derived from the vanilla plant. Why, then, do we think it plain?
 
-    s: 'cause it's so tasty.
+    s smile: 'cause it's so tasty.
     
-    u: Ugg love vanilla.
+    u grin_blush: Ugg love vanilla.
     
-    p: yjsr tsdfe is sgit
+    p pout_side: yjsr tsdfe is sgit
     
-    u: \[^o^\] You should chew your food, Plume! I hope I do not need to deploy my medical suite.
+    l neutral 5: \[^o^\] You should chew your food, Plume! I hope I do not need to deploy my medical suite.
     
     Plume tries say something snarky, but catches some treat down the wrong pipe.
     
-    b: That plain jane run a' the mill stuff?
+    b frown: That plain jane run a' the mill stuff?
     
-    s: Hardly. The flavor's so complex, we put it in everything.
+    s embarrassed: Hardly. The flavor's so complex, we put it in everything.
     
-    s: It's when they started adding chocolate chips and all that its name got tarnished.
+    s embarrassed_side: It's when they started adding chocolate chips and all that its name got tarnished.
     
-    s: It's in lots of that bland junk they make to cover up the taste. Actually, that's vanillin more often than not. Shameful ingredient, I say.
+    s frown: It's in lots of that bland junk they make to cover up the taste. Actually, that's vanillin more often than not. Shameful ingredient, in my purview.
     
     a: If it's so flavorful, you could say *you're* a bit vanilla, eh Shrimple?
     
     s: ...
     
-    a: Sorry. I guess it's not the best flavor for *everything*.
+    a embarrassed_blush: Sorry. I guess it's not the best flavor for *everything*.
 
 *   (strawb) Strawberry[], our neapolitan sweetheart.
 
@@ -83,19 +98,19 @@ Ready?
     
     {choco: Not again.}
     
-    {choco: p: You guys are the worst.}
+    {choco: p pissed: You guys are the worst.}
     
-    b: The air getting to your head, lady?
+    b frown_sweating: The air getting to your head, lady?
     
-    s: Can it, 'bones. 
+    s angry: You hush, 'bones. 
     
-    s: The meaty part is just an accessory. What you folks think are the seeds are the real fruit.
+    s smile: The meaty part is just an accessory. What you folks think are the seeds are the real fruit.
     
-    b: That's. That's weird.
+    b frown: That's. That's weird.
     
-    b: I'm gonna try and forget that.
+    b frown: I'm gonna try and forget that.
     
-    a: Forget the bestberry? How could you, BB?
+    a sad: Forget the bestberry? How could you, BB?
     
     b: Don't call me that.
 
@@ -107,15 +122,15 @@ Ready?
     
     He takes a heaping bite of radioactive green treat. It falls straight through his jaw to the floor. He doesn't seem to notice.
     
-    s: You dropped something there, 'bones.
+    s frown: You dropped something there, 'bones.
     
-    b: Eh, where?
+    b frown_sweating: Eh, where?
     
     he says, bits of poison spraying about. A few hit the floor, then dissolve straight through it. 
     
     a: Don't worry about it. You think you could stand over there while you eat, though?
     
-    a: The, uh, smell's a little strong for me.
+    a embarrassed: The, uh, smell's a little strong for me.
     
 *   {flavors == 2} Unknown[]... It's hardly even there. You'll have one of those, please.
 
@@ -123,7 +138,7 @@ Ready?
     
     It's gone.
     
-    a: You okay, buddy? It looks like you saw a ghost.
+    a sad: You okay, buddy? It looks like you saw a ghost.
     -> flavors
 -   
     {flavors < 5: Are you happy with your flavor?}
@@ -131,17 +146,17 @@ Ready?
 +   {flavors < 5} [Try something else] -> flavors
 *   Let's dig in[].
 -
-    u: Does Lulu want one?
+    u worried 2: Does Lulu want one? #hide ananas #hide plume #hide shrimple #hide barebones
     
-    l: \[^-^\] I am afraid I must pass. 
+    l neutral 5: \[^-^\] I am afraid I must pass. 
     
-    u: Ugg will find treat for big girl.
+    u: Ugg find thing for Lulu.
     
     l: \[ovo\] You are such a sweetheart as ever, Ugg.
     
     l: \[-v-\] But I do not think you will be able to find a treat for someone like me.
     
-    u: Ugg see about that. < PLAYER_NAME > come with Ugg. Ugg need help.
+    u grin: Ugg see about that. < PLAYER_NAME > come with Ugg. Ugg need help.
 
 -   (questions)
 *   [What about the others?] There's still quite a bit of tension in the air. {poison: And holes in the floor.} 
@@ -167,27 +182,27 @@ Ready?
     
     It wasn't even a concern until she said that.
     
-    u: Ugg not see what Lulu eat. Lulu have efficient dietary composition.
+    u neutral 3: Ugg not see what Lulu eat. Lulu have efficient dietary composition.
     
     Apparently, all his skill points for grammar were shunted into vocabulary. Your exposure to Ugg thus far has offered a deep glimpse into the mind of early man.
     
-    l: \[-v-\] My fusion core can sustain me almost indefinitely, although it needs to be topped up from time to time.
+    l: \[-v-\] My fusion core can sustain me almost indefinitely, although it likes to be topped up from time to time.
     
-    l: \[^-^\] It *has* been a while. I suppose I could go for a little deuterium right now!
+    l: \[^-^\] It <i>has</> been a while. I suppose I could go for a little deuterium right now!
     
     * *     Where do[ we get that?]es one procure deuterium at a school festival?
     - -     
-    u: Nuclear physics lab.
+    u smile: Nuclear physics lab.
     
     l: \[^-^\] Nuclear physics lab.
     
     * *     Nuclear physics lab??
     - -     
-    u: Ugg take favorite class there. Only, Ugg grades not so good...
+    u worried: Ugg take favorite class there. Only, Ugg grades not so good...
     
     l: \[o_o\] I am sorry that I have been too busy to tutor you lately, Ugg.
     
-    u: Lulu not need to apologize. Lulu busy committee secretary. Ugg need be better student. 
+    u worried: Lulu not need to apologize. Lulu busy committee secretary. Ugg need be better student. 
     
     l: \[-v-\] I will not hear a word of it. I expect you to meet me around lunch time for us to begin!
     
@@ -219,14 +234,14 @@ Ready?
     -> questions
 *   ->
 -
-    Let's go find some Deuterium.
+    Let's go find some Deuterium. #hide lulu #hide ugg
     
-    TODO: Deuterium fetch quest? involve the baking soda volcano?
+    //TODO: Deuterium fetch quest? involve the baking soda volcano?
     ...
     
     That should not have been so easy.
     
-    u: Ugg happy science easy for student at academy.
+    u grin: Ugg happy science easy for student at academy.
     
 *   Where are the others?
 -
@@ -258,11 +273,11 @@ Ready?
 
     He squirms sheepishly.
     
-    u: Every uniform Ugg wear look good until Ugg leave store.
+    u worried: Every uniform Ugg wear look good until Ugg leave store.
     
     u: Then uniform explode.
     
-    u: Ugg buy hundred uniform then give up.
+    u worried_blush: Ugg buy hundred uniform then give up.
     
     With his dialect, there's no way to distinguish whether he means "a hundred uniforms" or "*hundreds* of uniforms."
     
@@ -270,7 +285,7 @@ Ready?
     
 *   With a student salary?[] Really? Of course, you've seen what he can lift. Maybe he hires himself out as construction equipment in his free time.
 
-    u: Ugg spend too much time study to work. Ugg know Ugg privileged. 
+    u worried: Ugg spend too much time study to work. Ugg know Ugg privileged. 
     
     u: Ugg parents own biggest rock in country.
     
@@ -282,23 +297,23 @@ Ready?
 -
     As robust as the art program is, SASH is a thoroughly vocational school. With the assets his family has, he could likely do anything he wanted to, every day, forever.
     
-    u: Ugg like learn. Ugg want stand on Ugg two feet.
+    u smile: Ugg like learn. Ugg want stand on Ugg two feet.
     
-    u: Learn hard. Money Easy. Ugg do hard thing. Give life meaning.
+    u grin: Learn hard. Money Easy. Ugg do hard thing. Give life meaning.
     
-    u: But Ugg friend not all have easy life. Ugg not want privilege wasted.
+    u worried: But Ugg friend not all have easy life. Ugg not want privilege wasted.
     
     That's a hard balance to keep: Trying to live as yourself, without taking what you have for granted. It's a good thing that Ugg has a good handle on the nuance of his position. 
     
     Funny, a caveman with nuance.
     
-    u: Ugg see Lulu! Lulu doing nervous step. Also smoke there.
+    u grin: Ugg see Lulu! Lulu doing nervous step. Also smoke there.
     
     He takes your hand in his and pulls you along with surprising gentleness. 
     
     The hand is rough with calluses along the bases of his fingers and palm, but warm and soft everywhere else.
 
-    u: Lulu light off. Very bad. Treat talk out of hand.
+    u worried: Lulu light off. Very bad. Treat talk out of hand.
     
     It takes a gentle giant to save an even bigger, gentler giant.
     

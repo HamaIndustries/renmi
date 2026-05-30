@@ -69,8 +69,7 @@ Ready?
             
             Lucky you.
 -
-
-    You catch Lulu gazing off into the distance wordlessly. {joke: She'd been shaken from her stupor for that joke, but quickly returned to her reverie.}
+    Lulu stares off into the distance aimlessly. {joke: She'd shaken from her stupor for that one joke, but quickly returned to her reverie.}
     
 *   "Did you notice something?"
 -
@@ -90,9 +89,9 @@ Ready?
 -
     l: \[>.>\] Um, I do not think it is very important.
     
-    A flock of beautifully colored boids suddenly erupts from a tree, no doubt from another overly fluffy exposition-filled dramatic battle between mod enjoyers.
+    A flock of beautifully colored boids suddenly erupts from a tree, no doubt from another obnoxiously fluffy dramatic battle between mod enjoyers.
     
-    Not everything must be so high-key, honey. Let's stick around for this.
+    Not everything must be so high-key, honey. Let's stick around here for this.
     
     With mechanical perfection, her hull slowly rotates to track the centroid of the vibrant cloud.
     
@@ -134,7 +133,7 @@ Ready?
     
     - - (time) l: \[-v-\] I do not want to rock the boat, so to speak. It is like how you must hold out a hand and go pspspspsps to get a cat to come to you.
     
-    The sound she made was more like a steam boiler turning off and on again, but the point is made. The steam quickly dissipates in the afternoon air.
+    The sound she made was more of a steam boiler turning off and on again, but the point is made. The steam quickly dissipates in the afternoon air.
     
     l: \[>.>\] On second thought, please do not share that I used that analogy.
     
@@ -172,7 +171,7 @@ Ready?
     
     a: This should be an opportunity for everyone to make some friends. Working towards a common goal is bread and butter for that.
     
-    He doesn't know how to use any idiom appropriately, does he?
+    You haven't heard Ananas use an idiom correctly in the whole time you've known him.
     
     {group: -> followup}
     
@@ -227,8 +226,10 @@ Ready?
     -> time
 
 -   (followup)
+
+    l: \[u_u\] I just feel bad for them because--
     
-    There is a loud crack from an inauspiciously placed twig behind a nearby tree. You all tense up, even the ever unruffleable Lulu.
+    There is a loud crack from an inauspiciously placed twig behind a nearby tree. You all tense up, even the unruffleable Lulu.
     
     The telltale pitter patter of magical skates soaring away evidence your mystery audience.
     
@@ -236,15 +237,41 @@ Ready?
     
     l: \[<.<\] ...
     
-    Lulu produces a sound from within her chassis like great mechanical thumbs anxiously twiddling. You can never tell whether she makes these sounds consciously.
+    Lulu produces sounds from within her chassis like great mechanical thumbs anxiously twiddling. You never know whether she makes them consciously.
     
     a: Hey, girlie, don't worry about it. There's nothing wrong.
     
     l: \[._.\] I am going to get an earful later, I predict.
     
-*   Not if you have anything to do with it[].
+*   They don't like being pitied[].
+-
+    l: \[u_u\] You are correct.
+    
+    l: \[-v-\] And I was worried that it would sound selfish to make it all about myself.
+    
+*   [Herself?] She pities herself?
+-
+    l: \[ovo\] Maybe the better word is empathize with.
+    
+    l: \[>.>\] If you think about it, I can't interact with all of the same things they can't, other than really really heavy stuff.
+    
+    l: \[^_^\] Have you ever seen me try to open a door, <PLAYER_NAME>?
+    
+    a: Haha, I remember.
+    
+    a: Still haven't gotten around to buying a new one.
+    
+    l: \[._.\] ...
+    
+    a: Ah... Sorry, Lu. Party foul.
+    
+    ...
+    
+*   They should know [that] about her. You could try and slip it into a conversation, maybe. 
 
-    You've seen progress made today. This is an opportunity to seize the diem and take it for a run. 
+    You've seen progress made today. If they talk to each other rarely, then this might be the last opportunity for a long while to chip at their conflict.
+    
+    This is an opportunity to seize the diem and take it for a run. 
     
     l: \[o_o\] Uwah, is that such a good idea?
     
@@ -258,7 +285,11 @@ Ready?
     
     You have the green light, honey.
     
-    Let's go related to our public relations.
+    It's not your job, but if you want to be their friend in the long run it's a conversation to be had sooner or layer.
+
+    You decide whether it's worth it.
+
+-> END 
     
     
 //but Plume hears this and runs away angry because they hate being pitied.
@@ -271,6 +302,3 @@ Ready?
 
 // plume HATES being pitied. Shrimple catches them stealing snacks to distract them from the things Lulu said about them. The player tries to explain the rest of what lulu said but Plume isn't hearing it. If the player insists on explaining this Plume will physically beat them up--you're actively setting aside their autonomy because you think you can "fix" them.
 
-
-
--> END 

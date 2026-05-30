@@ -5,6 +5,11 @@ Ready?
 -> barebones_1
 
 === barebones_1 ===
+
+#require act modfest:intro_7
+#alias actor b barebones
+#alias actor p plume
+
 // Barebones is just a normal guy. He's ~~extremely suspicious~~ just a lil fella. Hey, yous got a dollar? just kidding. Okay but if I did need a dollar you'd spot me, right? what are friends for? just kidding, again. Hey, for real though. You got that dabloon I gave you?
     
 //  lost: fear. He accidentally gave you his grandfather's dabloon. How will you make it up to him?
@@ -13,7 +18,7 @@ Ready?
 
 //  What a strange guy. Just as you're about to get sick of his antics, plume appears and causes havoc. (bullying lulu maybe? or ugg?) Chaos ensues. When you turn back to barebones he is gone. wait, where's your wallet?
 
-    b: Heya, mind giving your old pal Barebones a hand?
+    b neutral 3: Heya, mind giving your old pal Barebones a hand?
     
     A cold, bony hand pressed to the back of your neck. 
     
@@ -25,7 +30,7 @@ Ready?
     
     This crude caricature of cameraderie carries forward obliviously, nonetheless.
     
-    b: Yous in there, pal?
+    b frown 2: Yous in there, pal?
     
 *   You awaken from your reverie[]. This guy was a chaotic mess last time. You just can't get a read on him.
 
@@ -51,22 +56,22 @@ Ready?
     
 -   <> You still haven't gotten used to this. He's a complete blank. Maybe--
 
-    b: Just kiddin'. I'm rolling in it. How's the festival treating yous?
+    b aura: Just kiddin'. I'm rolling in it. How's the festival treating yous?
     
 *   "It's fun! I've seen so many new things[."]
-*   "It's exhausting. Why are there so many maid dresses[."]
+*   "It's exhausting. Why is there so much slime[?"]
     
 -   <>," you might have said, had Barebones not again interjected.
 
-    b: Okay but if I did need a dollar, I could count on yous to spot me, yeah? 
+    b frown 3: Okay but if I did need a dollar, I could count on yous to spot me, yeah? 
     
-    b: We're tight? Blood oath and all?
+    b frown_sweating: We're tight? Blood oath and all?
     
 *   You have sworn no such oath[].
 *   He can count on yous as far as yous can throw him[].
 *   This guy needs to pick a fake accent and stick with it[].
 
--   b: Just kiddin' again.
+-   b aura: Just kiddin' again.
 
     He playfully slaps your arm with joints so sharp it feels like he could draw blood with a little extra force.
     
@@ -86,17 +91,17 @@ Ready?
     
     Barebones unwraps the dabloon (???) and takes a big, delicious bite out of it. 
     
-    b: Didn't want it to melt while I was, eh, reading over the books.
+    b sweating: Didn't want it to melt while I was, eh, reading over the books.
     
     He looks over his shoulder while he says the last part. You take this time to verify the dabloon didn't leave any crumbs in your Inventory.
     
-    b: Yous got any more in there, by any chance?
+    b frown: Yous got any more in there, by any chance?
     
     You jump. This guy has no manners, does he? 
     
     It's so embarassing to be seen rifling through your Inventory. Most people would wait and politely look away until you were finished.
 
-    b: Just kiddin'. We'll be here all night, folks.
+    b aura: Just kiddin'. We'll be here all night, folks.
     
     He yanks off his cap and tosses it to the ground a few meters away. Folks?
     
@@ -117,11 +122,11 @@ Ready?
     * *     You pick it up for him.
     - -
     
-        b: Egads! My poor old Gran-pappy's last dabloon!
+        b frown_blushing_sweating 3: Egads! My poor old Gran-pappy's last dabloon!
         
-        b: I was concerned, see, that I'd mislay in in the course of my festivalry duties. 
+        b frown: I was concerned, see, that I'd mislay in in the course of my festivalry duties. 
         
-        b: Ah, woe is me, woe on poor old Barebones!
+        b frown_sweating 2: Ah, woe is me, woe on poor old Barebones!
         
         This new, miraculously eloquent Barebones wilts directly into your arms like a little Victorian flower.
         
@@ -131,9 +136,9 @@ Ready?
     * *     (acting) You [follow through with the bit] throw back your head and let the sky know your sorrow.
     - - 
     
-        b: Aye, he was just a lad when he crossed the sea to this beautiful nation.
+        b frown: Aye, he was just a lad when he crossed the sea to this beautiful nation.
         
-        b: And now... the last bit of his soul, gone to follow his ashes.
+        b frown_sweating: And now... the last bit of his soul, gone to follow his ashes.
         
         The light fades from his eyes, and he perishes. 
         
@@ -151,12 +156,12 @@ Ready?
     
 *   {dropped} You gather the bones back together[], covertly leaving out a few just to spite him.
 
-    b: Can't thank you enough, pal. Let's cut the pot--how's 30-70 sound?
+    b aura: Can't thank you enough, pal. Let's cut the pot--how's 30-70 sound?
     
     * *     That's hardly fair.
     - -     
     
-    b: Hm, yous got a point. 
+    b frown: Hm, yous got a point. 
     
     b: 10-90, then. Yous drive a hard bargain, but fair is fair. I'll even let you take your 10, first.
     
@@ -164,13 +169,13 @@ Ready?
     
 *   {acting} You take a bow[] with Barebones. He ribs you with a friendly but painfully sharp elbow cap.
     
-    b: Keke, yous catch on quick. Let's do business more often.
+    b 3: Keke, yous catch on quick. Let's do business more often.
     
 *   {inventory} You shyly tuck away your inventory[]. This travesty must be turned around before the memory hits your hippocampus.
 
     Barebones, suddenly socially conscious, pats you on the back again.
     
-    b: Don't sweat it, pal. It's nothing. They got a short morning behind 'em and a long festival ahead.
+    b 3: Don't sweat it, pal. It's nothing. They got a short morning behind 'em and a long festival ahead.
     
     b: Hate to be yous right about now, though. Yeesh. Poor thing.
     
@@ -180,7 +185,7 @@ Ready?
     
     \-- he coughs dryly --
     
-    b: a good time.
+    b aura: a good time.
     
 *   The crowd[] is packed like sardines. Blessedly, this early in the day, the same cannot be said of their smell.
 *   [The bird] The word that threads its way through the murmuring weave is "thief".
@@ -194,7 +199,7 @@ Ready?
 *   That must be Plume[].
 *   (ananas) That must be Ananas but he dyed his hair[] blue. Sure? Let's go with that. But please note that we still don't know whether Ananas has hair or leaves.
     
--   p: "Sorry fellas! Festival public relations! Just gotta inspect these for security!"
+-   p smug: "Sorry fellas! Festival public relations! Just gotta inspect these for security!"
 
     {ananas: That is definitely Plume.} There's something yellow, no, gold, on their hands. Gloves, by the look of them. 
     

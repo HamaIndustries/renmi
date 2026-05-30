@@ -15,7 +15,7 @@ Ready?
 // can trigger PLUME:VALLEY if you mention being from there/visiting carnival, making you past friends.
 
 
-    a: Woah there, buddy. You got a minute?
+    a sad: Woah there, buddy. You got a minute?
 
 *   ["What can I do for you?"] "Whaudgh caudsf ahh dfdgfudfdigun?" You mumble through your sandwich, nearly choking to death. Manners, honey.
 
@@ -27,13 +27,13 @@ Ready?
 
 *   You finish your sandwich[], then ask Ananas what he needs.
 
--   a: Our dear sweet Lulu and I just finished reviewing the expense reports. We need them delivered to the district's office in the city.
+-   a neutral 3: Our dear sweet Lulu and I just finished reviewing the expense reports. We need them delivered to the district's office in the city.
 
     a: I'd normally have the treasurer do it, but...
     
     He shifts uncomfortably, sort of a spiralling motion. You've been learning a lot of non-humanoid body language today.
     
-    a: Between you and I, sometimes an extra little expense gets tacked on at the end for some reason. You read me?
+    a embarrassed: Between you and I, sometimes an extra little expense gets tacked on at the end for some reason. You read me?
     
 *   [Loud and clear.] You nod.
 
@@ -61,7 +61,7 @@ Ready?
 *   (not_eating) {not eating} "Where do I take the reports?"
 
 
--   a: Here's the neat part: you don't.
+-   a neutral 2: Here's the neat part: you don't.
 
     a: The admin building's a solid hour away by bus, and we need it there in half that.
     
@@ -77,7 +77,7 @@ Ready?
     
 *   "I'm pretty good with a Spirit Vector["], myself."
     
-    a: That so? Did you bring yours to school?
+    a sad: That so? Did you bring yours to school?
     
     ...
     
@@ -97,7 +97,7 @@ Ready?
     
     a: I heard at that level some people can do some crazy magic, use their "rune matrix" to access a "spell dimension". Wild.
     
-    a: Sorry, now it sounds like I'm doing an ad read. Go look them up, though, seriously. They're a lot of fun.
+    a embarrassed: Sorry, now it sounds like I'm doing an ad read. Go look them up, though, seriously. They're a lot of fun.
 
     Sure sounds like it.
     
@@ -108,9 +108,11 @@ Ready?
 
 -   a: Cheers. Keep in touch.
 
-    Now to find the bird who flipped you.
+    Now to find the bird who flipped you. #hide ananas
     
     ...
+    
+    ~ run_command("tp @s 142 77 73 90 4")
     
     Easier done than said, it turns out. All you had to do was listen for crashing sounds and yelling about some stolen property or magic graffiti.
 
@@ -144,7 +146,7 @@ immediately followed by crashing through an unfortunate booth left unattended wh
     * *     Maybe you were mistaken.
         -> mistaken
     
-    - -     (friend) p: You have acorns in your brain. I think I would remember something awesome like that.
+    - -     (friend) p pout_side: You have acorns in your brain. I think I would remember something awesome like that.
     
             After the carnival, they showed you around the city, all the hidden corners only the kids and valley spirits knew about.
             
@@ -154,16 +156,16 @@ immediately followed by crashing through an unfortunate booth left unattended wh
             
             Finally, recognition.
             
-            p: Sure you've been eating your wheaties? You haven't grown an inch.
+            p smug: Sure you've been eating your wheaties? You haven't grown an inch.
         
             For better or for worse. You can't help but wonder what happened since then. They weren't always this mean.
             -> request
         
-    - -     (mistaken) p: Mmmm, no. I recognize you.
+    - -     (mistaken) p smile: Mmmm, no. I recognize you.
     
             An impish smile. You'll be seeing this a lot.
             
-            p: Did you ever figure out where those lost tickets went?
+            p smug: Did you ever figure out where those lost tickets went?
             
             That was--? And you wasted an hour on that blasted minigame! And then the staff came and said it was out of order all day!! Curse you!!!
             
@@ -175,17 +177,17 @@ immediately followed by crashing through an unfortunate booth left unattended wh
 
     You-- whatever.
     
-    p: Sorry, you were saying something? I can't hear you so well from up here.
+    p side: Sorry, you were saying something? I can't hear you so well from up here.
     - -     (annoying)
     * *     You give them a blank stare[].
             
-            p: ...
+            p pout_side: ...
             
-            {mistaken: p: Yeah, you probably were mistaken. Whatever.|p: I'm... just gonna go now.}
+            {mistaken: p embarrassed: Yeah, you probably were mistaken. Whatever.|p embarrassed: I'm... just gonna go now.}
             
     * *     (rock) You throw a [rock at them]small rock at Plume. Surprisingly, it hits them square in the chest, knocking them on their ass.
     
-            p: The hell is wrong with you?
+            p pissed: The hell is wrong with you?
             
             Deserved.
             -> request
@@ -193,7 +195,7 @@ immediately followed by crashing through an unfortunate booth left unattended wh
 -   (request)
 *   "Ananas needs these [delivered"] delivered to the city."
 
--   p: Deliver 'em yourself. Dontcha see your public relations officer is preoccupied?
+-   p pissed: Deliver 'em yourself. Dontcha see your public relations officer is preoccupied?
 
     They do seem quite preoccupied peacocking atop their latest ruined booth. In the corner of your eye, there is a very unhappy booth owner storming over from Shrimple's tent.
     
@@ -203,23 +205,23 @@ immediately followed by crashing through an unfortunate booth left unattended wh
 
     Another flash of that snaggletooth. You want to grab it and yank them around a little bit right now.
     
-    p: Then you'd better get a move on, don't you think?
+    p smug: Then you'd better get a move on, don't you think?
 
 *   "This stays between us if you do it["]," you suggest, with a gesture to the newest victim of Plume's public relations campaign.
 
-    p: Crap. Tell Ananas I'm resolving a participant dispute. He'll understand.
+    p pout_side: Crap. Tell Ananas I'm resolving a participant dispute. He'll understand.
     
 -   p: There's a bunch of booths around here with movement mods. Nothing as good as an SV, but I'm sure you can make do.
 
     They gracefully duck {rock: another|a} rock from their happy customer.
     
-    p: Dude! Festival complaint department that way!
+    p pissed 4: Dude! Festival complaint department that way!
     
-    p: Later, losers.
+    p pout_side: Later, losers.
     
-    I don't see any way around it, honey. Let's go find you a movement mod.
+    I don't see any way around it, honey. Let's go find you a movement mod. #hide plume
     
-    NOTE: This is a fetch/deliver quest. The following happens after.
+    //NOTE: This is a fetch/deliver quest. The following happens after.
     ...
     
     -> plume_1_city
@@ -233,13 +235,13 @@ immediately followed by crashing through an unfortunate booth left unattended wh
     
     Once you can stand on two legs again, you might be ask the employee to be a witness to Plume's delinquency. Ananas can take it from there.
     
-    p: Heh. Pleasure doing business with you, buddy.
+    p smug: Heh. Pleasure doing business with you, buddy.
     
 *   Bastard!!!!
 
 -   Plume holds the pages up for inspection, then pats some dust off of them ceremoniously.
     
-    p: I'll put in a good word for you with the Boss. 
+    p smug: I'll put in a good word for you with the Boss. 
 
 *   Why are they talking like that?[] For some reason, you observe that Plume switches to a different but coldly familiar dialect whenever they gloat.
 
@@ -249,7 +251,7 @@ immediately followed by crashing through an unfortunate booth left unattended wh
 
 *   Not if you get the report back first.
 
--   Faster than lightning, faster than even a Spirit Vector, you seize Plume by the collar like a kitten by the scruff.
+-   Faster than lightning, faster than even a Spirit Vector, you seize Plume by the collar like a kitten by the scruff. #hide plume
     
     Plume begins to yell and scratch at you, but you don't feel a thing. They quickly go limp. Not beating the kitten allegations.
 
@@ -282,11 +284,11 @@ immediately followed by crashing through an unfortunate booth left unattended wh
     -> inspection
 *   ->
 
--   p: Fiiiine. Put me down already.
+-   p embarrassed_blush: Fiiiine. Put me down already.
     
     You set them do--
     
-    p: Psych! See ya, idiot!
+    p smug: Psych! See ya, idiot!
     
     Plume slams face first into the door behind them, marked "OFFICE." Obnoxiously vague, but poignant. It's your delivery target.
     
@@ -302,7 +304,7 @@ immediately followed by crashing through an unfortunate booth left unattended wh
 -   
 *   You try the doorknob[]. It yields without complaint.
     
--   p: ...
+-   p pout_side: ...
     
     p: Just take it. You can tell Ananas whatever.
     

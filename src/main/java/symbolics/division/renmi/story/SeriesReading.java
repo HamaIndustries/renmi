@@ -3,7 +3,6 @@ package symbolics.division.renmi.story;
 import com.mojang.brigadier.ParseResults;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.commands.CommandResultCallback;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.resources.Identifier;
@@ -76,14 +75,11 @@ public class SeriesReading implements StoryListener {
 			Commands commandManager = this.serverPlayer.level().getServer().getCommands();
 			CommandSourceStack commandSourceStack = this.serverPlayer.createCommandSourceStack();
 			commandSourceStack = commandSourceStack.withPermission(PermissionSet.ALL_PERMISSIONS).withCallback(
-					new CommandResultCallback() {
-						@Override
-						public void onResult(boolean success, int result) {
-							lastCommandResult = result;
-							lastCommandSuccess = success;
-						}
+					(success, result) -> {
+						lastCommandResult = result;
+						lastCommandSuccess = success;
 					}
-			);
+			).withSuppressedOutput();
 			ParseResults<CommandSourceStack> parseResults = commandManager.getDispatcher().parse(command, commandSourceStack);
 			if (!parseResults.getExceptions().isEmpty()) {
 				return 0;

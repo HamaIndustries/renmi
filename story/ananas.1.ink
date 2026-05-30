@@ -6,6 +6,12 @@ Ready?
 
 
 == ananas_1 ==
+
+#require act modfest:intro_7
+#require act modfest:shrimple_1
+#require act modfest:plume_1
+#require act modfest:ugg_1
+#alias actor a ananas
 // welcome to the committee. Make some friends, make memories. Goes a little into the player's personal background, come up with a story for themselves. Ananas thinks you're pretty chill.
 
 //  As the modfest mascot, Ananas embodies the open encouragement of everyone and everything, even if sometimes there's some friction.
@@ -46,7 +52,7 @@ Ready?
     
     {nails: Does he not know how to use it?}
     
-    a: What I meant to ask was whether you could grab a few of these and pass them out.
+    a embarrassed: What I meant to ask was whether you could grab a few of these and pass them out.
     
     a: Do you mind?
     
@@ -56,7 +62,7 @@ Ready?
 
     But you aren't. Why?
     
-    a: Much appreciated. How's the morning treating you? Meet anyone new yet?
+    a neutral 3: Much appreciated. How's the morning treating you? Meet anyone new yet?
     
 *   (many_people) Too many to count[]. The faces wash by in a blur. 
 
@@ -139,7 +145,7 @@ Ready?
     
     You dropped your flyers from your hand which you now find to be trembling.
     
-    a: Hey, bud...
+    a sad: Hey, bud...
     
 *   ["I need a minute"]
 *   ["I'm okay."]
@@ -160,7 +166,7 @@ Ready?
     
     Those shades aren't just for show. He really is that cool.
     
-    a: Did anyone tell you why I ended up at SASH?
+    a embarrassed: Did anyone tell you why I ended up at SASH?
     
 *   Why?
 
@@ -168,26 +174,26 @@ Ready?
 
     a: I got in a-- haha, no, I couldn't win a fight if my life depended on it. I'm a master of the school of running away really fast.
     
-    a: That's a big part of it, if I had to guess.
+    a sad: That's a big part of it, if I had to guess.
     
-*   He was just too cool[], man. Anyone could tell from looking at him. Everyone was too dazzled to interact.
+*   (cool)He was just too cool[], man. Anyone could tell from looking at him. Everyone was too dazzled to interact.
 
     He blushes, ever so slightly. It's nearly imperceptible, but you have a good eye for these things.
     
     It is a talent that will serve you well today.
     
--   a: The truth is, I felt like coming here from the big island. There just wasn't really anything there for me. 
-    a: Everyone was always trying to make money off of tourists or preen themselves or whatever.
+-   a{cool: embarrassed_blush}: The truth is, I felt like coming here from the big island. There just wasn't really anything there for me. 
+    a embarrassed: Everyone was always trying to make money off of tourists or preen themselves or whatever.
     
-    a: How are you supposed to keep it real in that crowd? So I bounced.
+    a neutral 3: How are you supposed to keep it real in that crowd? So I bounced.
     
     It looks like you've reached the end of your journey... exactly where you started.
     
-    a: The real prize is the friends you made along the way, right?
+    a neutral 2: The real prize is the friends you made along the way, right?
     
 *   He could be a little more creative than that.
     
--   a: Eh, the point is that we end up where we do because of gravity. We get pulled to wherever we need to be, and that means you need to be on the committee.
+-   a embarrassed: Eh, the point is that we end up where we do because of gravity. We get pulled to wherever we need to be, and that means you need to be on the committee.
     
     a: If I'm here and you're here, then that means we met and that counts for something. We're friends for life, you and me.
     
@@ -229,12 +235,12 @@ Ready?
 
 -   a: That's what I like to hear! Let's get out there and make a buttload of people make an assload of memories!
 
-    a: Race you back!
+    a neutral 5: Race you back!
     
 *   Hey! Wait!
 *   You're already there[] before he finishes that sentence.
 
--    (backstory) a: Say, how'd you end up here, anyway?
+-    (backstory) a neutral 2: Say, how'd you end up here, anyway?
 
     It's a funny story, really.
     

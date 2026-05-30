@@ -7,37 +7,43 @@ Ready?
 
 === lulu_1 ===
 
+#alias actor l lulu
+#alias actor p plume
+#alias actor s shrimple
+#require act modfest:lulu_1
+#require act modfest:plume_1
+
 // ACT 2: (requires plume ACT 1) Plume is so mean to her :( They're taking the last class of the day before they can return to the festival, and Plume keeps blowing spitballs that cover up her eyes. The teacher is trying to find out who's doing that, but Lulu pretends she doesn't know in order to cover for Plume. She comments on her past history where she was considered the "trouble student," noting that the punishments rarely correspond to the underlying problem.
 
-    l: \[>w<\] Hey! Hey!
+    l neutral 5: \[>w<\] Hey! Hey!
     
     l: \[._.\] I said stop...
     
-    p: Hm? Did you say something?
+    p pout_side 2: Hm? Did you say something?
     
-    p: < PLAYER_NAME >, did you hear someone say something?
+    p pout: < PLAYER_NAME >, did you hear someone say something?
     
-    s: Come on folks, meeting's almost over.
+    s embarrassed 3: Come on folks, meeting's almost over.
     
-    s: Save whatever this is for when I'm not here.
+    s embarrassed_side: Save whatever this is for when I'm not here.
     
-    p: It's not much of a check-in if only half the committee is here.
+    p pout_side: It's not much of a check-in if only half the committee is here.
     
     l: \[^-^\] There is more than half the committee here, with < PLAYER_NAME >!
     
-    p: Can it, dirt brain.
+    p pissed: Can it, dirt brain.
     
     l: \[T^T\] It's silt...
     
-    p: Don't care!
+    p smug: Don't care!
     
     Another spitball straight to the eyeport.
     
     There's only one left before Lulu is completely blind. You consider excusing yourself before she starts stumbling around again.
     
-    chai: Alright, I think that's everything we need to finish the swim club stall. Thank you for the help.
+    chai neutral 0: Alright, I think that's everything we need to finish the swim club stall. Thank you for the help.
     
-    chai: Goodness, Lulu. What happened?
+    chai frown: Goodness, Lulu. What happened?
     
     l: \[*u*\] Do not worry, nothing is wrong.
     
@@ -45,7 +51,7 @@ Ready?
     
 *   You [blame plume]decide to rat out Plume.  The blue bastard had it coming, being so cruel to poor sweet Lulu.
 
-    chai: Plume did what?
+    chai angry: Plume did what?
     
     l: \[*v*\] Plume was helping me with my paper mache! And then they slipped. And I slipped. Directly into the paper mache.
     
@@ -59,41 +65,41 @@ Ready?
     
     l: \[>.>\] I just joined the paper mache club today.
 
-    chai: Is that so? That seems unlikely.
+    chai focus_frown: Is that so? That seems unlikely.
     
     * *     "Why?"
     
-    - - chai: Because I'm also the advisor for the paper mache club, silly.
+    - - chai confident: Because I'm also the advisor for the paper mache club, silly.
     
     l: \[<.<\] I, um. You know I. 
     
--   p: Shut upppppppppp
+-   p pissed: Shut upppppppppp
     
     p: Are we done here or what?
     
-    s: I know I am. You coming?
+    s embarrassed: I know I am. You coming?
     
 *   "I'm with you["]."
     
-    chai: Hold on a sec, < PLAYER_NAME >. 
+    chai smirk: Hold on a sec, < PLAYER_NAME >. 
     
     The unusually-featured teacher creature tugs you aside.
     
-    chai: Can we speak with Lulu for a moment? I'm concerned for her, she needs a peer.
+    chai focus_frown: Can we speak with Lulu for a moment? I'm concerned for her, she needs a peer.
 
 *   "Just a minute["]."
     
     s: Okay, but scurry back quick. There's a might more stock we've got to offload.
     
--   s: Let's go, Plume.
+-   s neutral_side: Let's go, Plume.
 
     p: Don't tell me what to do.
     
-    s: Please?
+    s angry: Please?
     
-    p: I'll consider it.
+    p smug: I'll consider it.
     
-    They're gone, and the chaos with them.
+    They're gone, and the chaos with them. #hide plume #hide shrimple
     
     With the haphazard style in which the festival was organized, the swim club's booth ended up on the opposite side of the campus from the pool itself. 
     
@@ -105,7 +111,7 @@ Ready?
     
     Lulu makes no comment. This must be a frequent occurrence.
     
-    chai: Lulu, why did you let Plume treat you like that again? We've talked about this before.
+    chai smirk 2: Lulu, why did you let Plume treat you like that again? We've talked about this before.
     
     l: \[>_>\] Treat me like what? It was just an accident.
     
@@ -132,17 +138,17 @@ Ready?
     
     chai: I know you mean well for her, but you're not doing her any favors.
     
--   chai: Lulu's always letting Plume push her around. It's not fair to her, even if she doesn't see eye to eye with me on that.
+-   chai focus_frown: Lulu's always letting Plume push her around. It's not fair to her, even if she doesn't see eye to eye with me on that.
     
     She polishes off a big, shiny eyeport, and stares deep into it. 
     
     l: \[*-*\] I am right here, you know...
     
-    chai: You can see her in there if you look close enough. Sitting right there behind all that glass and metal.
+    chai smirk_smile: You can see her in there if you look close enough. Sitting right there behind all that glass and metal.
     
     l: \[\/\/_\/\/\] This is beginning to be a little embarassing for me.
     
-    chai: I'm only teasing you, Lulu. 
+    chai happy: I'm only teasing you, Lulu. 
     
     chai: You always forget that you're not just a passive observer. We all see what you're doing.
     
@@ -164,7 +170,7 @@ Ready?
 
     Guilty and embarrassed are the last two emotions you'd expect of Plume, but the point stands.
     
-    chai: This isn't that kind of school, Lulu.
+    chai frown: This isn't that kind of school, Lulu.
     
     l: \[-v-\] Yes, but even so. None of you are therapists. You do not know what goes inside of Plume's head.
     
@@ -176,9 +182,9 @@ Ready?
     
 *   So, Plume has good intent[?] in spitting at Lulu and blinding her? In calling her mean names?
 
-    chai: That's what I'm wondering. 
+    chai focus: That's what I'm wondering. 
     
-    chai: Lulu, you can't honestly believe that Plume operates in good faith like you do, right?
+    chai smirk: Lulu, you can't honestly believe that Plume operates in good faith like you do, right?
     
     * *     Did Plume convince her of that?
     * *     Does she have that much faith in others?
@@ -196,7 +202,7 @@ Ready?
             
     * *     She was joking? Ohhhhhhhh[].
     
-            chai: Hehe, you got there in the end.
+            chai smirk_smile: Hehe, you got there in the end.
     
 -   l: \[-v-\] I only believe that whatever punishment Plume would get would not be commensurate with their programming. I would know.
 
@@ -204,7 +210,7 @@ Ready?
     
     That many???
     
-    chai: That many???
+    chai frown: That many???
     
     l: \[._.\] Look, I have upgraded my sensors since then.
     
@@ -223,9 +229,9 @@ Ready?
 
     l: \[>.>\] Uh oh. My sensors are registering a frequency that Spirit Vectors resonate on.
     
-    chai: You'd better hurry along before I have to clean you off again.
+    chai smirk: You'd better hurry along before I have to clean you off again.
     
-    chai: Take care.
+    chai smirk_smile: Take care.
     
     l: \[ovo\] Shall we?
     
