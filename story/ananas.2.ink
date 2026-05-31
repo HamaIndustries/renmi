@@ -148,7 +148,7 @@ Ready?
 
     \--woah, look at that.
 
-    We are once again as dazzled Ananas performs a backflip, handstand, and hangs ten. Simultaneously.
+    We are once again dazzled as Ananas performs a backflip, handstand, and hangs ten. Simultaneously.
     
     s: God, Prez is the coolest.
     
