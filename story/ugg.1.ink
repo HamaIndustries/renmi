@@ -1,12 +1,6 @@
-Ready?
-
-*   Let's dance.
--> ugg_1
-
-== ugg_1 ==
-
 #require act modfest:intro_7
 #alias actor u ugg
+
 // ugg struggles in school. You find him deep in a book-literally. How is he supposed to learn like that? Ugg insists it works... okay I guess
 // You find ugg in the library, mistaking him for a book. What? No, he's just wearing it on his face. Is he asleep? He picks up the book, turns the page.
     
@@ -129,6 +123,10 @@ Ready?
 
 -   u worried: Wuhh, huh?
 
+
+    ~ run_command("stopsound @s")
+    ~ run_command("playsound modfest:music.stereo.basil music @s ~ ~ ~ 1 1")
+
     u smile: Oh, it friend. Ugg do last minute study before festival.
     
     You can hardly be blamed. The man is as wide as the space between shelves, filling this narrow alcove from side to side. 
@@ -190,7 +188,7 @@ Ready?
 -   u worried: ...
     
     // :3
--   u smile: Ugg have it here.
+-   u smile: Ugg have here.
     
     u grin: Ugg ask friend tell Ananas festival is ok.
     
@@ -280,7 +278,7 @@ Ready?
     
 -   The Academy's admission standards are far from low. Ugg didn't get in by chance.
     
-    Could there be some hidden potential, here?
+    There could be some hidden potential here.
     
    He finally squeezes out through the small door. You still aren't sure exactly how large he is, but at this moment in time his size is at least "library door."
 
