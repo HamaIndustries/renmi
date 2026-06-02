@@ -1,12 +1,3 @@
-Ready?
-
-*   Let's dance.
-
--> lulu_1
-
-
-=== lulu_1 ===
-
 #alias actor l lulu
 #alias actor p plume
 #alias actor s shrimple
@@ -100,6 +91,9 @@ Ready?
     p smug: I'll consider it.
     
     They're gone, and the chaos with them. #hide plume #hide shrimple
+
+    ~run_command("stopsound @s")
+    ~run_command("playsound modfest:music.stereo.heliograce music @s ~ ~ ~ 1 2")
     
     With the haphazard style in which the festival was organized, the swim club's booth ended up on the opposite side of the campus from the pool itself. 
     

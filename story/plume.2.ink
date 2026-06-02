@@ -1,18 +1,10 @@
-Ready?
-
-*   Let's dance.
--> plume_2
-
-== plume_2 ==
-
+#require act modfest:ananas_plume_1
 #alias actor p plume
 #alias actor s shrimple
 
 // ACT 2: explains how plume can't move anything without gold and HATES it. Hates feeling too weak to move the world but can be moved by the world. Hates relying on others for stupid basic things. they just want to skate as far and fast as they can for somewhere that isn't here. But the horizon remains on the horizon no matter how far you chase it. You can't ever catch the horizon, in the same sense that you can never leave "here." (aside: player can ask about the gold gloves thing in one line of questioningj)
 
 // this is where plume mentions that everyone calls them a kid when they're actually the oldest out of all of them, besides Lulu. Always gotta be shown up by goddamn lulu.
-
-
 
 
 // outline: You get a chance to sit down and talk with them for a bit.
@@ -34,7 +26,7 @@ They can't get a read on you. it's like you always have someone looking just ove
 
     It's a nice little quiet spot. Running a festival carries the same joys and obligations as caring for a large, oblivious animal. More, even.
     
-    It took a little effort getting in here, complicated by need to slip unseen into a clearly restricted area.
+    It took a little effort getting in here, complicated by the need to slip unseen into a clearly restricted area.
     
 *   You always look for [places like this] those quiet, out of the way nooks where it would take days to find you if you went missing.
 
@@ -52,7 +44,7 @@ They can't get a read on you. it's like you always have someone looking just ove
 -
     You are the bird, and these are the pipes. Speaking of:
 
-    p: Here for a smoke?
+    p pout_side: Here for a smoke?
     
     They sit there, haphazardly framed by the graffiti, skates tossed to the side. They stare at infinity. 
     
@@ -76,13 +68,15 @@ They can't get a read on you. it's like you always have someone looking just ove
     
     * *     They'd feel the same way[], in your position.
     - - 
-    p:  Yeah? And which position are you in, would you say?
+    p smug:  Yeah? And which position are you in, would you say?
     
     * *     Not directly under [that vent] the vent to the infirmary. Both of you were around when a few unlucky visitors took baking soda volcano cloud straight to the lungs.
     - - 
     You're sure it would be a great look for the committee if Plume went and finished them off for us. Save everyone some hassle.
+
+    Assuming the meowing doesn't get to them first.
     
-    p: Shit.
+    p embarrassed 3: Shit.
     
     They quickly stomp it out, then try and fan off the smoke with some old newspapers.
     
@@ -104,7 +98,7 @@ They can't get a read on you. it's like you always have someone looking just ove
 -
     Plume tries to light another, but there's only sparks.
     
-    p: Damn it. I'm headed to the store. Later.
+    p pout_side: Damn it. I'm headed to the store. Later.
     
     Now's your chance. Take it.
     
@@ -118,7 +112,7 @@ They can't get a read on you. it's like you always have someone looking just ove
     
     p: Dunno what I expected. Of course there's no gold in it.
 
-*   (spell) You [offer a spell] cast a familar spell. Nothing fancy, but their cigarette lights up with little investment on your part.
+*   (spell) You [offer a spell] cast a familiar spell. Nothing fancy, but their cigarette lights up with little investment on your part.
 
     p: Neat. Did you pick that up at your last school?
     
@@ -130,9 +124,9 @@ They can't get a read on you. it's like you always have someone looking just ove
 
     Plume's hand slams straight into the ground like their cigarette's suddenly made of bricks.
     
-    p: The hell? Your stupid trick eats gold?
+    p pissed: The hell? Your stupid trick eats gold?
 -
-    p: Crumbs. Whatever.
+    p pout_side: Crumbs. Whatever.
     
     They sit back in resignation. Loud sigh.
     
@@ -156,28 +150,28 @@ They can't get a read on you. it's like you always have someone looking just ove
     
     p: Ananas usually puts a little sticker or something on things he wants me to hold.
     
-    p: Cigs are made of everything, so they pass.
+    p pout_side: Cigs are made of everything, so they pass.
     
 *   That sucks[.]. 
 *   What about[ clothes?]--
 
-    p: Can you stop with the stupid questions?
+    p pissed 2: Can you stop with the stupid questions?
     
     Either way, that's awful.
 -
     <> You can't imagine relying on others just to interact with the world.
     
-    p: If I wanted input from the peanut gallery, you'd know. Mind your business.
+    p pissed: If I wanted input from the peanut gallery, you'd know. Mind your business.
     
     p: ...
     //different expression here?
-    p: ...
+    p pout_side: ...
     
     p: You're not wrong, though.
     
     p: Too much of a spirit to open a door, not enough of one to walk through walls.
     
-    p: What dipshit god came up with that?
+    p pout_side: What dipshit god came up with that?
     
     Plume's voice wavers in that last sentence. They try to pass it off as a chuckle, but the smoke gets to them and they start coughing loudly instead.
     
@@ -189,26 +183,26 @@ They can't get a read on you. it's like you always have someone looking just ove
     
 - (questions)
 *   (from) "Where are you from?"
-    TODO include carnival callback from first act
+    //TODO include carnival callback from first act
     p: Lemniscate Valley. It's a backwoods middle of nowhere ditch up in the mountains.
     ~ temp callback = 1
-    {callback: p: Did you already forget?}
+    //{callback: p: Did you already forget?}
     
     p: All I did up there was fart around for a few hundred years until they got sick of me.
     
-    p: I guess I'd get sick of me too, if I was them.
+    p pout_side: I guess I'd get sick of me too, if I was them.
     
     -> questions
     
 *   {from} "Hundreds of years?"
 
-    p: It's funny, right?
+    p embarrassed: It's funny, right?
     
     p: Everyone calls me a kid since they think it's cute.
     
     p: I'm older than all of them, minus Lulu.
     
-    p: It's always goddamn Lulu. Don't you ever notice how nobody calls her a kid even when she pretends she's an idiot?
+    p pissed: It's always goddamn Lulu. Don't you ever notice how nobody calls her a kid even when she pretends she's an idiot?
     
     * *     You have noticed.[] Whether she is pretending is up for debate, but on the surface she comes across as far less perceptive than Plume.
     
@@ -217,7 +211,7 @@ They can't get a read on you. it's like you always have someone looking just ove
             p: Hell if I know what's banging around in that piece of shit death trap.
     - - 
     
-    p: Everyone loves big and strong and impressive.
+    p pout_side: Everyone loves big and strong and impressive.
     
     p: She's gonna kill someone some day and we'll all be stunned, absolutely stunned I tell you, that it happened.
     
@@ -227,13 +221,13 @@ They can't get a read on you. it's like you always have someone looking just ove
 
     They look up at the mural, remaining silent for a few seconds.
     
-    p: It's a place that doesn't exist.
+    p embarrassed: It's a place that doesn't exist.
     
     p: The horizon stays the horizon no matter how far you run. You can't catch it.
     
     p: It just turns into "here" by the time you reach it.
     
-    p: You can't ever leave "here."
+    p pout_side: You can't ever leave "here."
     -> questions
 
 *   {somewhere} You shouldn't bother them with more questions[].
@@ -253,7 +247,7 @@ They can't get a read on you. it's like you always have someone looking just ove
 
     This academy, especially, is full of strange people. You're not nearly an outlier.
     
-    p: You look around like there's someone talking to you sometimes, it's creepy. 
+    p pissed: You look around like there's someone talking to you sometimes, it's creepy.
     
     ...
     
@@ -264,13 +258,13 @@ They can't get a read on you. it's like you always have someone looking just ove
 -
     p: ...
 
-    p: Forget it, I'm just complaining to complain.
+    p pout_side: Forget it, I'm just complaining to complain.
     
     p: I guess we have that in common, don't we? We both only have one foot in the real world.
     
 *   "And the door's jammed?"
 -
-    p: Heh. You get it.
+    p smile: Heh. You get it.
     
     They stand up for some warmup stretches.
     
@@ -280,11 +274,11 @@ They can't get a read on you. it's like you always have someone looking just ove
     
 *   [They'll be the first to know] Plume will be the first to know.
     
-    p: Don't say it straight, if you do. Make it a riddle so I feel like I solved it myself.
+    p smug: Don't say it straight, if you do. Make it a riddle so I feel like I solved it myself.
 
 *   [That's for them to figure out] That's for Plume to figure out.
 
-    p: Fair enough. It wouldn't count if you found it for me.
+    p smug: Fair enough. It wouldn't count if you found it for me.
 -   
     s: Hey, kid! I know you're in there!
     

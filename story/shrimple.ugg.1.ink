@@ -1,31 +1,3 @@
--> start
-
-=== start ===
-Shall we?
-* [Let's dance.] 
--> shrimple_ugg_1
--> DONE
-
-
-// & cycle
-// ! once
-// ~ shuffle
-// alternatives can have blanks
-// sequences (blank)
-
-// you MAY NOT borrow plumes skates
-// narrator is friendly and a little teasing. always positive
-// and encouraging of others.
-
-LIST characters = Ugg, Shrimple, Ananas, Barebones, Plume, Lulu
-
-
-//   VAR shr_name = "Shrimple"
-    // ~ temp ugg_name = "Ugg"
-    // ~ temp ugg_anchor = ""
-    // ~ temp friend_desc = ""
-    // ~ temp Friend_desc = ""
-
 === shrimple_ugg_1 ===
 // Ugg and Shrimple are chasing after a chickensaur to eat. That was the plan. De facto, Ugg is chasing the chickensaur to eat and the chickensaur is chasing shrimple to eat. They give up and decide to find easier prey.
 // setting: petting zoo, stables.

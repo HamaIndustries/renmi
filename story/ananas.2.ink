@@ -1,12 +1,16 @@
-Ready?
+#require act modfest:ugg_1
+#require act modfest:ananas_plume_1
+#alias actor a ananas
+#alias actor u ugg
+#alias actor s shrimple
+#alias actor p plume
 
-*   Let's dance.
--> ananas_2
-
-== ananas_2 ==
 //ACT 2: coolest guy ever. surfs on huge waves despite there being no ocean?? Makes a mean virgin margarita. Everyone watches in awe. Makes ugg swoon a little. 
 
-    \*Splash*
+    <i>Splash</>
+
+	~ run_command("stopsound @s")
+	~run_command("playsound modfest:music.stereo.i_wannanana music")
     
     You're completely soaked.
     
@@ -18,9 +22,9 @@ Ready?
 
     100% of people who drink water also die. Bet you haven't heard that one before.
 -
-    s: Woof, bad luck < PLAYER_NAME >. Here's a towel.
+    s embarrassed 1: Woof, bad luck < PLAYER_NAME >. Here's a towel.
     
-    u: Water keep skin soft! Ugg take two bath every day.
+    u smile 3: Water keep skin soft! Ugg take two bath every day.
     
     And you thank heaven and earth for it.
     
@@ -28,21 +32,23 @@ Ready?
     
     An argument may be put forward that you could have easily dodged the splash zone, but that argument is voided by the sheer majesty unfolding before you.
     
-    a: Check it out! 
+    a neutral 5: Check it out!
     
     a: This is how we do it back on V.I.!
     
-    u: Ananas amazing. Ananas do anything.
+    u grin: Ananas amazing. Ananas do anything.
     
-    s: Except cook a meal. *Safely*.
+    s: Except cook a meal.
+
+    s angry: <i>Safely</>.
     
-    p: It's not a big deal. It's like longboarding. Easiest skating possible.
+    p pout_side 0: It's not a big deal. It's like longboarding. Easiest skating possible.
     
-    s: That why you never switch your s.v. to the cruising mode?
+    s neutral_side: That why you never switch your s.v. to the cruising mode?
     
     p: ...
     
-    p: Can't afford a helmet. Not safe.
+    p embarrassed_blush: Can't afford a helmet. Not safe.
 
 *   [Safety?]When did safety ever stop Plume?
 
@@ -50,19 +56,19 @@ Ready?
     
     * *     The band aids are from[...?] where, exactly?
     
-            p:  All the fights I won.
+            p smile:  All the fights I won.
             
-            p:  Are you interested in a demonstration?
+            p smug:  Are you interested in a demonstration?
             
             That <>
     
     * *     [Ohhhh they're perfect] Of course Plume is perfect. It was never up for debate.
     
-            s: I can think of a few times that weren't the case. A lot of few times, even.
+            s embarrassed_side: I can think of a few times that weren't the case. A lot of few times, even.
             
             Plume rolls up their sleeves.
             
-            p: Oh? Do tell.
+            p pissed: Oh? Do tell.
             
             In the interest of preserving the committee's fragile armistice, that <>
     
@@ -70,76 +76,76 @@ Ready?
     
 *   Is Ananas safe?
 
-    u: Ananas grow up on board. He know what do.
+    u neutral 4: Ananas grow up on board. He know what do. #hide ananas
     
-    s: And what not do ain't much. Prez can do anything, feels like.
+    s smile: And what not do ain't much. Prez can do anything, feels like.
     
     p: With no arms? Isn't that why he makes Lulu do all the paperwork?
     
-    s: Plume, *you* make Lulu do your paperwork. 
+    s angry 2: Plume, <i>you</> make Lulu do your paperwork.
     
-    u: Ugg confused.
+    u worried: Ugg confused.
     
-    u: Plume also tell Ugg ask Lulu do paperwork?
+    u: Why Plume also tell Ugg ask Lulu do paperwork?
     
-    Off-screen, it's entirely possible that they told you to do the same. Make up some lore, spice it up. The ball's in your court.
+    Off-screen, it's entirely possible that they told you to do the same. Make up some lore, spice it up.
     
-    s: ...
+    s angry: ...
     
-    p: ...
+    p embarrassed_blush: ...
     
-    p: Lulu likes it! She always offers. I'm doing her a favor.
+    p pissed: Lulu likes it! She always offers. I'm doing her a favor.
     
     * *     You could do the paperwork[], if they asked. It's not a bad way to pass the time. Relaxing.
     
-            p: Wonderful. I have a whole stack of participant complaints with your name on them. 
+            p smile: Wonderful. I have a whole stack of participant complaints with your name on them.
             
-            s: What a dear! There's a few restock forms needing a looky loo, if you don't mind?
+            s smile: What a dear! I've also got a few restock forms needing a looky loo, if you don't mind?
             
-            u: Ugg need--
+            u smile: Ugg need--
             
-            Not him, too. Is anyone in your corner?
+            Him too? Is anyone in your corner?
     
-            u: Funny, Ugg thought heard thing. Ugg think wind.
+            u worried: Funny, Ugg thought Ugg hear thing. Ugg think wind.
             
-            u: Ugg need < PLAYER_NAME > write booth feedback. 
+            u grin: Ugg need < PLAYER_NAME > write booth feedback.
     
             I tried, honey. I'm afraid to say I can't help you with the paperwork. Let me know when you're done.
     
     * *     She does like to help[]. Maybe paperwork is to a machine what exercise is to most people?
     
-            s: < PLAYER_NAME >! No! Don't encourage them!
+            s angry: < PLAYER_NAME >! No! Don't encourage them!
             
-            s: Shame on you.
+            s angry: Shame on you.
             
-            p: Am I wrong?
+            p smug: Am I wrong?
             
-            s: ...
+            s neutral_side: ...
             
             s: I don't appreciate her doing your job. Listen to your VP.
             
-            p: Sure, Mom. Do you have any other commands I can obey?
+            p pout_side: Sure, Mom. Do you have any other commands you'd like me to obey?
             
             Shrimple nearly turns the color of her hair, but a hit of her inhaler calms the storm. This must be what they call Ocean Wisdom.
     
     * *     Is Plume admitting [defeat?] they can't handle a little paperwork?
     
-            p: Nnn. No. I didn't say that.
+            p embarrassed_blush: Nnn. No. I didn't say that.
             
             * * * "Are you sure?"[] You have a whole mountain of booth feedback to send out, if they're interested.
             - - - 
             
-            p: Do your own homework, lazy ass.
+            p pissed: Do your own homework, lazy ass.
             
-            s: Aw, don't torture the kid.
+            s frown: Aw, don't torture the kid.
             
-            s: Hard to fill all those forms out with just their crayons.
+            s smile_side: Hard to fill all those forms out with just their crayons.
             
-            p: You wanna get fried, lobster head?
+            p pissed: You wanna get fried, lobster head?
             
-            u: Ugg like crayon for paperwork.
+            u smile: Ugg like crayon for paperwork.
             
-            p: Well obviously *you'd* like crayons. You even get a little snack when you're done!
+            p pout_side: Well obviously <i>you'd</> like crayons. You even get a little snack when you're done!
             
             u: Plume mean. Ugg like crayon because Ugg given less paperwork after Ugg use crayon.
             
@@ -150,19 +156,19 @@ Ready?
 
     We are once again dazzled as Ananas performs a backflip, handstand, and hangs ten. Simultaneously.
     
-    s: God, Prez is the coolest.
+    s smile: God, Prez is the coolest.
     
-    u: Ananas down to earth. Ananas not let cool go to head.
+    u grin: Ananas down to earth. Ananas not let cool go to head.
     
 *   Do they hang out [much?] outside of school? With all the skills Ananas has in his back pocket, he must go on some wild adventures.
 -
     Shrimple and Ugg share an awkward look.
     
-    s: Well... Wouldn't want to trouble him. Reckon he likes to keep it professional.
+    s frown_side: Well... Wouldn't want to trouble him. Reckon he likes to keep it professional.
     
-    u: Ugg not have talent. Ananas have many talent. Ugg hold Ananas back.
+    u worried_blush: Ugg not have talent. Ananas have many talent. Ugg hold Ananas back.
     
-    p: Ananas never asks anyone to hang out. Not unless it's for a meeting, so he can boss us around.
+    p pout_side: Ananas never asks anyone to hang out. Not unless it's for a meeting, so he can boss us around.
     
     s: It's on account of him being so popular. Everyone and their dog's doll's bug at SASH knows Ananas. I reckon he's swimming in buddies.
     
@@ -170,33 +176,33 @@ Ready?
     
     p: People always hype him up like he's load bearing for the 'fest.
     
-    s: He is! I can't imagine being in Prez's shoes.
+    s embarrassed_side: He is! I can't imagine being in Prez's shoes.
     
-    p: Literally all I've ever seen him do is boss people around.
+    p pissed: Literally all I've ever seen him do is boss people around.
     
     u: Bossing hard work. Say many word. Ugg not do that.
     
-    p: Heh, no kidding.
+    p smug: Heh, no kidding.
     
-    p: I'm gonna be 100 with you dude. Nobody knows what the shit you're saying half the time.
+    p pout_side: I'm gonna be 100 with you dude. Nobody knows what the shit you're saying half the time.
     
-    p: How did you pass the entrance exam? Your family's rich, right?
+    p pout_side: How did you pass the entrance exam? Your family's rich, right?
     
-    u: ...
+    u worried: ...
     
     s: Heya, Plume.
     
     p: Eh?
     
-    s: You know Ugg's just talking his local dialect, right?
+    s smile: You know Ugg's just talking his local dialect, right?
     
-    p: ?
+    p pout_side: ?
     
-    u: My apologies, I understand now that you have labored under a misapprehension for all our time as collaborators.
+    u smile: My apologies, I understand now that you have labored under a misapprehension for all our time as collaborators.
     
-    p: ??????
+    p pout_side: ??????
     
-    u: I am perfectly capable of and, indeed, well versed in your vernacular of the Lemniscate Valley.
+    u grin: I am perfectly capable of and, indeed, well versed in your vernacular of the Lemniscate Valley.
     
     p: < PLAYER_NAME >, hit me. Hard. I'm having a nightmare.
     
@@ -205,7 +211,7 @@ Ready?
 
     It's exactly as satisfying as you'd imagine.
 
-    p: Th... Thanks...
+    p embarrassed_blush: Th... Thanks...
 -   
     u: Quite so. 
     
@@ -213,15 +219,15 @@ Ready?
     
     u: You see, it is out of a certain sense of comraderie, of kinship, even, that I accept the inevitable friction that arises between dissimilar cultures. That is to say,
     
-    u: Ugg have local pride!
+    u smile: Ugg have local pride!
     
     Plume is shell shocked. They will not speak for some time.
     
-    s: Serves you right, ya little bugger.
+    s smile: Serves you right, ya little bugger.
     
-    s: Ugg, let's mop up the rest of this stuff and get back to work, 'kay?
+    s neutral_side: Ugg, let's mop up the rest of this stuff and get back to work, 'kay?
     
-    u: Indubitably. Er, Ugg mean ok.
+    u grin: Indubitably. Er, Ugg mean ok.
     
     Left alone with your thoughts (and the despondent Plume, who has been reduced to mere scenery), your mind drifts.
     

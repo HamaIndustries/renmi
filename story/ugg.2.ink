@@ -35,7 +35,7 @@ Ready?
     
     b aura: Yeah, what the boss says. Yous a real one, big man.
     
-    u grin: What flavor PLAYER_NAME like?
+    u grin: What flavor <PLAYER_NAME> like?
 -   (flavors)
 *   (choco) Chocolate[] always has your back. If it wasn't the best, it wouldn't be the most popular candy.
 

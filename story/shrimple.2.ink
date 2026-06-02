@@ -1,10 +1,6 @@
-Ready?
+#require act modfest:ananas_shrimple_1
+#alias actor s shrimple
 
-* Let's dance.
-
--> shrimple_2
-
-== shrimple_2 ==
 
 // (Requires Ananas + Shrimple ACT 1)
 
@@ -17,82 +13,83 @@ Ready?
 // finds player
 // asks them to help
 // hides from thing
+	...*rustle, rustle*...
 
 *   "Shrimple?"
 -
-    s: Gimme a min.
+    s embarrassed: Gimme a min.
     
 *   "Shrimple."
 -   
-    s: Bud, I'm sorry, I gotta do this real quick.
+    s embarrassed_side: Bud, I'm sorry, I gotta do this real quick.
     
-*   "Why are you digging around in the garbage?"
+*   ["What are you digging around for?"]"Why are you digging around in the garbage?"
 -
     s: I'm looking for an ingredi--
     
-    s: Er, I'm looking for a fork. People keep tossing 'em. Real silver, you know?
+    s embarrassed_side_blush: Er, I'm looking for a fork. People keep tossing 'em. Real silver, you know?
     
 *   Really? A fork?
 
-    s: They're expensive! 
+    s angry_blush: They're expensive!
     
-    s: SASH got 'em as a gift from a dragon a few years back. Big boy, too. 
+    s frown_blush: SASH got 'em as a gift from a dragon a few years back. Big boy.
     
-    s: Ech-something, I think. That was right around when Ugg enrolled.
+    s neutral_side: Ech-something, I think. That was right around when Ugg enrolled.
     
     * *     Doesn't Ugg have history with Ananas?
     - - 
     Deductively, either Ananas has a history with a dragon, or a dragon has a relationship with Ananas' island. Fascinating implications.
     
-    s: Could be, dunno. Sometimes the big fella's like he's in two places at once. We can't even measure his height accurately, when we're fixing to make costumes.
+    s embarrassed: Could be, dunno. Sometimes the big fella's like he's in two places at once. We can't even measure his height accurately, when we're fixing to make costumes.
     
     Which would make him, in a sense, a Quantum Caveman.
     
 
 *   Really? An ingredient[?], and from the metal and glass recycling bin.
 
-    s: Naw, there's a pile of forks right at the bottom. Don't worry about me, my chitin's rock solid.
+    s embarrassed_side_blush: Naw, there's a pile of forks right at the bottom. Don't worry about me, my chitin's rock solid.
     
     * *     You don't buy it.[] Shrimp chitin is tough, but there's no way it's up there on the Mohs scale. You're calling her bluff.
     
     * *     You buy it.[] Shrimp chitin is tough, so it must be high up on the Mohs scale. Higher than glass and metal, even.
     
-        Right?
+        Isn't that right?
     - - 
-    s: I, uh, ahem. Excuse me for one moment.
+    s frown_blush: I, uh, ahem. Excuse me for one moment.
     
-    She ducks behind a dumpster. Extremely loud but trivial crashing sfx that can't justify an entire .ogg. She returns, but not without a fanfare of magical sparks and a suspicious amount of smoke.
+    She ducks into the Astraglossa booth. Extremely loud but otherwise trivial crashing sfx that can't justify an entire .ogg. She returns, but not without a fanfare of magical sparks and a suspicious amount of smoke.
     
-    s: 'Twas a right old fashioned good time. I'm ready to hit the hay.
+    s smile: 'Twas a right old fashioned good time. I'm ready to hit the hay.
     
     Yes, you should be--
     
     * *   Good lordt what is happening in there?
     - - 
-    s: Mod Garden?
+    s frown: Mod Garden?
     
-    * *     Mod Garden,
-    * *     in this part of the ModFest,
-    * *     at this time of year,
-    * *     localized entirely behind that dumpster?
-    - - 
-    s: Y-yes.
+    * *     [Mod Garden,]
+    * *     [in this part of the ModFest,]
+    * *     [at this time of year,]
+    * *     [localized entirely behind that dumpster?]
+    - - <> ...
+    s embarrassed: Y-yes.
     
     * *     "May I see it?"
     - - 
-    s: Gladly. Some time after the festival, 'course.
+    s smile: Gladly. Some time after the festival, 'course.
     
 *   Really? Silver[?] sounds expensive, but you're more worried about allergic reactions.
     
     s: I know, I know, expensive stuff, but me 'n Ananas figured it was worth impressing the visitors.
 
-    You've seen a fairy or two get really sick. Like, dogs and grapes sick.
+    You've seen a fairy or two get really sick before. Like, dogs and grapes sick.
     
-    s: That happens with fairies?
+    s frown: That happens with fairies?
     
     There are quite a few of them at this event, too. Some are even participants.
     
-    s: ...Chumsticks. I gotta go fix something. Pardon me.
+    s frown_side: ...Chumsticks. I gotta go fix something. Pardon me.
 -
     This is all a distraction. Time to state your purpose.
 -   
@@ -100,15 +97,17 @@ Ready?
 -
     s: Tell him I'll be right there, just have some
     
-    s: ...forks, to return.
+    s embarrassed_side_blush: ...forks, to return.
     
 *   "The meeting started 30 minutes ago."
 -
-    s: WHAT
+    s frown: WHAT
     
-    s: Crap crap crap. Okay we gotta go. Where do we--where do we go?
+    s frown_side: Crap crap crap. Okay we gotta go. Where do we--where do we go?
     
-    You'll show her the way.
+    image black 1: You'll show her the way. #hide shrimple
+
+    ~ run_command("tp @s 161 77 158 0 0")
     
     Ananas wanted to meet by the librateria, ever so conveniently located at the opposite side of the swarming festival grounds.
     
@@ -116,57 +115,60 @@ Ready?
     
     ...
     
-    Predictable hijinks ensue, you know the routine. Mostly juvenile slapstick and obscure mod references you're better off experiencing yourself.
+    Predictable hijinks ensue, you know the routine. Mostly juvenile slapstick and obscure mod references you're better off experiencing yourself. #hide image
     
 *   "You scheduled the meeting, right?["] Why did you miss it?"
 
-    s: <i>I,</i>
+    s frown_blush: <i>I</i>--
     
     She hits her inhaler, bubbles streaming behind the two of you like a jetstream.
     
-    s: was occupied with something important.
+    s frown_side: --was preoccupied with and important lil' something..
     
     * *     (reliable) "Being reliable is important.["] Ananas is always busy, but he took the time to meet with you."
     
-        s: I'm sure he can find a job to occupy himself with.
+        s: I'm sure he can find a job to keep himself busy.
         
         * * * "He's been waiting for you["] this entire time."
         - - -
         
-        s: R-Really?
+        s embarrassed_side_blush: R-Really?
         
-        s: I mean, I'm the VP, he's the P. We're always drownin' in it. Well, metaphorically. He knows which way the currents flow.
+        s embarrassed: I mean, I'm the VP, he's the P. We're always drownin' in it. Well, metaphorically. He knows which way the currents flow.
         
-*   (others) You remind her [of other responsibilities] that she promised Ugg that she'd find better feed, and Plume to find better snacks for "public relations" purposes.
+*   (others) You remind her [of other responsibilities] that she promised Ugg that she'd find better chickensaur feed, and Plume to find better snacks for "public relations" purposes.
 
     s: They can hold their horses, can't they?
     
     * *     "You said you'd bring them to the meeting["] too."
     - - 
-    s: WHAT
+    s frown: WHAT
     
-    s: Clams clams clams oysters anemones--
+    s frown_side: Clams clams clams oysters anemones--
     
-    s: Hell, why not the whole tide pool?
+    s angry: Hell, why not the whole tide pool?
     
     You both vault over a bench cradling two lovers like dolphins over a rainbow. The world, if Shrimple were not distracted by food adventures.
     
     s: I gotta ask you a favor, bud. D'you mind grabbing me a few of those things?
     
-    Lovely, it's been a minute since the last fetch quest.
+    Lovely. It's been a minute since the last fetch quest.
     
     * *     [You note down the items she wants]...
     
     She notices the expression you're making.
     
-    s: No, no. I should do it myself. I won't look any better, five minutes less late and without the stuff I owe 'em.
+    s embarrassed: No, no. I should do it myself. I won't look any better, five minutes less late and without the stuff I owe 'em.
 
-    s: ...
+    s frown_side: ...
     
     s: Hey, Bud. D'you think Ananas feels like I'm unreliable?
     
     You think for a moment.
 -
+	~run_command("stopsound @s")
+	~run_command("playsound modfest:music.stereo.shrimp_music music @s ~ ~ ~ 0.6 0.5")
+	...
 
 *   She isn't respecting his time[], not the way he respects hers.
         
@@ -183,16 +185,16 @@ Ready?
 *   (yourself) [But you keep it to yourself] But that would be better for her to learn on her own, rather than you preaching at her.
 *   [And you tell her so]
 - 
-    s: ...
+    s neutral_side: ...
             
-    {reliable and yourself: s: I'm sure he agrees.}
+    {reliable and yourself: s neutral_side: I'm sure he agrees.}
     
 *   "Sorry["]."
 *   (nothing) You say nothing[]{yourself:, again}.
 -
-    s: No, {nothing:no,} {nothing and others: I know I am.|you're right. I like when you give it to me straight.}
+    s embarrassed_side: No, {nothing:no,} {nothing and others: I know I am.|you're right. I like when you give it to me straight.}
     
-    s: I'm gonna go give him a--
+    s embarrassed: I'm gonna go give him a--
     
     She skids to a stop, and takes a long drag of her inhaler. Then one more time for good measure. The bubbles float away on the breeze.
     
@@ -204,15 +206,13 @@ Ready?
     
 *   You can help[].
 
-    s: Naw, I gotta do it myself. Shouldn't take two shakes of the tail.
+    s smile: Naw, I gotta do it myself. Shouldn't take two shakes of the tail.
     
-    s: Dunno why I didn't get around to it sooner. No excuses.
+    s angry_blush: Dunno why I didn't get around to it sooner. No excuses.
 
-*   You wish her luck[].
+*   You wish her luck[] on her journey.
 -
-    s: Thanks for slapping some sense into me, bud.
-    
-    s: Take care.
+    s smile_blush: Thanks for slapping some sense into me, bud.
     
     She nearly walks into a lamp as she turns, but her thoughts are at least not so occupied that she can't avoid injury.
     
@@ -220,7 +220,7 @@ Ready?
     
     After all, honey, we still have a lot of commitments to fulfill ourselves, don't we?
     
-    So to speak, you have bigger fish to fry.
+    You have bigger fish to fry.
 
 -> END
 

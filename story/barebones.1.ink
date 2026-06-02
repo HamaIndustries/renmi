@@ -1,11 +1,3 @@
-Ready?
-
-* Let's dance.
-
--> barebones_1
-
-=== barebones_1 ===
-
 #require act modfest:intro_7
 #alias actor b barebones
 #alias actor p plume
@@ -36,10 +28,9 @@ Ready?
 
 
 *   (silent) You remain morose and silent[]. Wordless seconds grow between the two of you and wither on the vine. 
-
-    ...
     
 -
+...
 *   "What do you need?"
 
     {silent: Barebones immediately launches into his next line, as if you hadn't just been staring at each other dumbly for half a minute.}
@@ -55,6 +46,10 @@ Ready?
     No he doesn't.
     
 -   <> You still haven't gotten used to this. He's a complete blank. Maybe--
+
+
+~run_command("stopsound @s")
+~ run_command("playsound modfest:music.stereo.pollen_bazooka music @s ~ ~ ~ 1 0.5")
 
     b aura: Just kiddin'. I'm rolling in it. How's the festival treating yous?
     
@@ -132,7 +127,7 @@ Ready?
         
         While this ridiculous display is already pushing your buttons, to your dismay a crowd is now gathering.
     
-    * *     (dropped) You drop him[] onto the soft grass like so much discarded carrion. He'll be fine. 
+    * *     (dropped) You drop him[] onto the cold, hard tiles like so much discarded carrion. He'll be fine.
     * *     (acting) You [follow through with the bit] throw back your head and let the sky know your sorrow.
     - - 
     
@@ -142,7 +137,7 @@ Ready?
         
         The light fades from his eyes, and he perishes. 
         
-        The bones collapse in a rough pile, with a few of them rolling down the incline concerningly close to a few visitors who look too much like dogs for your own comfort.
+        The bones collapse in a rough pile, with a few of them rolling down the hall concerningly close to a few visitors who look too much like dogs for your own comfort.
         
         Barebones' skull, in particular, rolls to a stop against something on the ground... 
         

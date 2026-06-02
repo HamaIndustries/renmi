@@ -20,7 +20,7 @@ Ready?
 
     It's like every centimeter of travel becomes an exponential distance. It's like falling into a black hole. The universe will not permit you to truly grasp his size.
     
-    u: Is <PLAYER_NAME> okay? Does Ugg need get Nurse?
+    u: Is <PLAYER_NAME> okay? Do Ugg need get Nurse?
     
     You'll be fine, as soon as your head stops spinning.
 
@@ -39,7 +39,7 @@ Ready?
     
     It's far from the strangest thing you've encountered at this school, but nonetheless a "Librateria" from the name alone sounds like it was designed to fail.
     
-    You havent come across a single unsmudged book. A librarian would have a heart attack in here, but this Library--sorry, Librateria--is absent of one.
+    You havent come across a single unsmudged book. A librarian would have a heart attack in here, but this Library--sorry, Librateria--is absent one.
 - (questions)
 *   Should we give up?[] They've been working towards this day for weeks. Ugg shouldn't waste it on cramming.
 
@@ -56,13 +56,13 @@ Ready?
     
             It's endearing that she is so insistent about his studying--this is the first time you've seen her even the slightest bit aggressive--but her attitude puts a lot of pressure on Ugg.
             
-    * *     There's something else [he's missing] we're missing here. 
+    * *     There's something else [he's missing] we haven't considered.
     
             {questions > 1: -> continue}
             
             <>
     - - 
-    He shakes his head solemnly. Dim light filters at just the right angle to highlight his face, like some antediluvian religious figure.
+    He shakes his head solemnly. Dim light filters at just the right angle to highlight his face, like some neolithic religious figure.
     
     It's just past lunch, by the way. Did you remember to eat, honey? I'm afraid I wasn't paying attention there for a bit. Why don't you go grab something for yourself, even just a snack?
     
@@ -74,7 +74,7 @@ Ready?
     -> questions
 *   ->
 
-    You've run out of ideas. Still, something keeps bothing you.
+    You've run out of ideas. Still, you've noticed something.
     
 -   (continue)
 
@@ -82,7 +82,9 @@ Ready?
     
     His almost eidetic memory for things he <i>does</> understand. Ugg isn't stupid.
     
-*   He needs glasses[.], of course. Why didn't we see it sooner? Perhaps we need glasses?
+*   He needs glasses[.], of course.
+
+	Why didn't you see it sooner? Perhaps you're the one who need glasses?
 -
     Sorry honey, I couldn't help it.
     
@@ -124,4 +126,77 @@ Ready?
     
     Try not to get caught. Do mind the thetiscope, though.
     
+-> END
+
+== found_glasses ==
+
+    ...
+
+    u: Is < PLAYER_NAME > sure? Ugg never have glasses before.
+
+    u: Glass just rock. Rock not help Ugg read.
+
+    l: \[ovo\] It does not hurt to try!
+
+    l: \[uvu\] Just this once, big guy? For me?
+
+    u: Ugg not sure. Ugg must be strong and learn thing like man.
+
+    l: \[-_-\] ...
+
+    He flinches. He knows what he did.
+
+    l: \[-_-\] Ugg, please look at me.
+
+    l: \[-v-\] Strong men listen to women, do they not?
+
+    u: ...
+
+    u: Lulu make good point. Lulu is strong woman who make good point.
+
+*   You hand them over.
+-
+    u: < PLAYER_NAME >? Lulu, where is < PLAYER NAME >?
+
+    u: Has pretty visitor seen < PLAYER_NAME >?
+
+    He's talking about you, hot stuff.
+
+*   You tell him.
+
+*   You leave him in the dark.
+
+    u: Why visitor have < PLAYER_NAME > same shape and color--
+
+    Realization dawns like the weight of a new age.
+-
+    u: Aaah! Aaaaah! Ugg just joke! Ugg make funny haha Joke.
+
+    l: \[\/\/w\/\/\] Uwah. Are you all recording this, girls?
+
+    u: Is this book? Letters so big now. Why rock so strong?
+
+    l: \[ovo\] This must be what they call the power of technology!
+
+    u: Hm. Ugg not thank Lulu and < PLAYER_NAME > enough. Ugg have lot think about.
+
+    u: And study.
+
+    l: \[ovo\] I am always here if you would like a tutor!
+
+    u: Ugg like one now, please.
+
+    u: Ugg have big idea.
+
+    l: \[ovo\] So exciting! Do tell?
+
+    u: Secret. But Ugg need study for happen.
+
+    This might take a while. Go get your lunch.
+
+    I'm proud of you, honey. You changed someone's life today.
+
+    Even if you're  still on the fence about whether coming to SASH will work out, we know one thing.
+
+    There's at least two people now who don't regret one bit that you did.
 -> END
