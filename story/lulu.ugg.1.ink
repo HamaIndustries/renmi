@@ -40,7 +40,7 @@
 
     Which one of her cores inhabits this slate, you wonder. The pettiness core? No wonder she ejected it into this dusty corner of SASH. As if she could ever possess such a core in the first place.
 
-    For now, you can sit back and enjoy the presence of a good friend, and then leave before the slate wakes up to continue with the mean names it was calling you earlier.
+    For now, you can sit back to enjoy the presence of a good friend, and then leave before the slate wakes up to continue with the mean names it was calling you earlier.
     
 -   (waiting) {!|l: \[>w<\] Uwah, where is he? I was hoping I could get a little review in, myself...}
 *   [Let's look for him] You should go look for him. He might have gone off and waddled into trouble.
@@ -71,7 +71,7 @@
     
     Did you say that? I don't remember you saying that out loud. Weird.
     
-    * *     Naturally[]. She's such a popular girl, it's a rare delight to have her full attention.
+    * *     Naturally[]. She's such a popular girl, it's a rare delight to have her full attention. Hell, she even has her own fan club upstairs.
     
             l: \[ovo\] Perhaps not my <i>full</> attention. That is a good thing.
             
@@ -184,7 +184,7 @@
     
     u smile: Ugg good with tool!
     
-    One might say the best, given where we are now.
+    One might say the best, given where we are today.
     
     u grin: Ugg help find puzzle.
 
@@ -204,7 +204,9 @@
 
     l: \[^_^\] That is one of the many reasons why I like you so much!
 
-    u: Ugg, er. Yeah.
+    u: Ugg, er.
+
+    u worried_blush: Yeah.
     
     Shall we?
 -> END
