@@ -218,11 +218,17 @@
 
 *   Prof. Delta[], about the handtruck. You could go for some hijinks right about now.
 
+    s embarrassed: Professor... Delta? Yeah, I'm sure <bold>he'd</> like to let you play with <bold>his</> handtruck later if he manages to fix it.
+    
+    Whoops. You thought she hadn't heard too well.
+    
+    s frown: Although, that, err... crash by the hill over yonder didn't sound too good at all, I tell you what. 
+
 *   Plume[], about joining the skate club.
 
     s angry: Er, Plume's nonbinary.
 
-    a embarrassed: Not great, PLAYER_NAME.
+    a embarrassed: Not great, < PLAYER_NAME >.
 
     Whoops. You thought she hadn't heard too well.
 
