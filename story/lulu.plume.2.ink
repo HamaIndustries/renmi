@@ -1,15 +1,22 @@
-Ready?
+#require act modfest:lulu_2
+#require act modfest:plume_2
+#require act modfest:barebones_plume_1
+#alias actor d delta
+#alias actor l lulu
+#alias actor p plume
 
-*   Let's dance.
--> lulu_plume_2
 
-== lulu_plume_2 ==
 // **ACT 2**: (requires Lulu ACT 2 and Plume ACT 2. By this point, Plume has been mean to Lulu several times.) Plume and Lulu are helping out in Delta's garden. Plume struggles to lift a heavy bag of fertilizer and Lulu offers to help, but Plume yells no, gets angry and kicks Lulu's hull. They realize what they've done and go scared and dead silent. Lulu's lights are off. "Plume..." Plume is terrified, but surprisingly apologizes. "[ovo] Ok! You've convinced me, I think you got this!" The player is tasked with finding some gold tool that plume can use to get a better grip on the fertilizer. Plume completes the task and grumbles "...thanks."
 
 #alias actor p plume
 #alias actor l lulu
 
-    d: Catch!
+    d zoomies 3: Catch!
+
+    ~ run_command("stopsound @s music")
+    ~ run_command("playsound modfest:music.stereo.trotting_fox music")
+
+    ???
 
 *   You [catch] attempt to catch
 
@@ -17,18 +24,19 @@ Ready?
 
 *   (pcatch) You step aside[] to allow Plume the honor of catching
 -   
-    <> the fertilizer bag as large as you{fetch: in your mouth}. It goes as you might expect.
+    <> the fertilizer bag as large as you are{fetch: in your mouth}. It goes as you might expect.
+
+	~ run_command("playsound minecraft:entity.slime.attack ambient @s ~ ~ ~ 1 0.5")
     
     {pcatch: -> plume_catch | -> you_catch}
-    
     
 =   you_catch
 
     Professor Delta shrugs. What a silly.
     
-    d: Hehe, oops.
+    d frown_sweat: Hehe, oops.
     
-    If he was even a little less silly, though, you'd have some uncomfortable thoughts about those big sharp fox teeth.
+    If he was even a little less silly, though, you'd have some uncomfortable thoughts about those big sharp fox teeth of his.
     
     Plume plants their shovel in the ground and leans on it smugly. You didn't expect sympathy, but they're laying it on thick today.
     
@@ -36,13 +44,13 @@ Ready?
     
     It wasn't <i>that</i> bad.
     
-    d: Sorry, my hands are full. Plume, can you help?
+    d confident: Sorry, my hands are full. Plume, can you help?
     
     p pout_side: And ruin an opportunity for < PLAYER_NAME > to build some muscle?
     
     p pissed: You call yourself a professor?
     
-    d: Huh. I guess you're right?
+    d shocked_sweat: Huh. I guess you're right?
     
     d: Come on, < PLAYER_NAME >! We believe in you!
     
@@ -62,13 +70,13 @@ Ready?
 
     You had a good run. SASH was a weird school, but it helped you take your mind off of your previous circumstances.
     
-    You hope you'll have a shot at making friends with such characters again, in the next life.
+    You hope you'll have a shot at making friends with such wacky characters again, in the next life.
     
     Your world fades to black.
     
-    l neutral 5: \[O_O\] Goodness, <PLAYER_NAME>! What happened?
+    l neutral 5: \[O_O\] Uwah, <PLAYER_NAME>! What happened?
     
-    l neutral 5: \[omo\] Allow me to unburden you.
+    l neutral 5: \[>_<\] Allow me to unburden you.
 
     Lulu gently nudges the ponderous fertilizer bag over like a hacky sack. 
     
@@ -84,9 +92,14 @@ Ready?
 
     Noticeably, she says nothing about Plume.
     
-    d: You're just in time, Lulu! Let me just move this out of the way before anyone else gets hurt.
+    d confident_smile: You're just in time, Lulu! Let me just move this out of the way before anyone else gets hurt.
     
-    He heaves the fertilizer over his shoulder. He overshoots slightly. The bag flips over him and splats Plume like a bug.
+    Professor Delta heaves the fertilizer over his shoulder. He overshoots slightly.
+
+    ~ run_command("playsound minecraft:entity.slime.attack ambient @s ~ ~ ~ 1 0.5")
+
+    The bag flips over him and splats Plume like a bug.
+
     -> plume_catch
 
 = plume_catch
@@ -99,11 +112,13 @@ Ready?
     
     {not you_catch: -> lulu_arrives -> }
     
+	~ run_command("playsound renmi_springfest:lulu.step ambient")
+
     l neutral 5: \[o_o\] I could--
     
     p pout_side: Not you.
     
-    d: Maybe I--
+    d smirk_smile_sweat: Maybe I--
     
     p pissed: Absolutely not you either. <i>Especially</i> not you.
     
@@ -129,7 +144,7 @@ Ready?
 
 = greenhouse
 
-    d: Plume?
+    d adrenaline_sweat: Plume?
     
     Dead silence.
     
@@ -139,13 +154,13 @@ Ready?
     
     Reluctantly, she tips the bag off the poor bird, then sits back on her haunches pensively.
     
-    Lucky for her, Plume is knocked out cold. Still breathing, you confirm, though you cannot confirm the passage of actual air. 
+    Lucky for her, Plume is knocked out cold. Still breathing, you confirm, though you cannot confirm the passage of <i>air</>.
     
-    d: That's spirits for you. Weirdest physiology I've ever seen.
+    d confident: That's spirits for you. Weirdest physiology I've ever seen.
     
-*   Professor Delta studies physiology?
+*   [He studies that?]Professor Delta studies physiology?
 -
-    d: Nope!
+    d happy: Nope!
     
     You hope he's at least mentally engaged with the subject he does teach. You are afraid to ask.
     
@@ -176,6 +191,8 @@ Ready?
     p pissed: NO!
     
     They kick one of Lulu's legs, hard. But this time is different.
+
+    ~ run_command("playsound minecraft:block.bell.use ambient @s ~ ~ ~ 10 0.5")
     
     Unlike the time with the eyeport, and all other incidences of Plume-object violence, this produces an extremely loud sound that reverberates for meters.
     
@@ -208,16 +225,21 @@ Ready?
     Ever so slightly, Plume is trembling. Are they scared? Sad?
     
     l lulu_off 5: \[...\]
+
+	~ run_command("stopsound @s music")
+    ~ run_command("playsound renmi_springfest:lulu.boot")
     
     l neutral 5: \[^o^\] Okay!
     
     p pissed: Wh--
     
     p embarrassed: What?
+
+    ~ run_command("playsound modfest:music.stereo.momentum music @s ~ ~ ~ 1 2")
     
     l neutral 5: \[ovo\] You have convinced me! I think you have this in the bag!
     
-    d: :o3
+    d smirk_smile_sweat: :o3
     
     Nature is healing.
     
@@ -229,13 +251,17 @@ Ready?
     
     l neutral 5: \[^_^\] No need. Inventory analysis suggests several suitable tools are in stock.
     
-    d: You know what that means, <PLAYER_NAME>! Fetch quest!
+    d zoomies: You know what that means, <PLAYER_NAME>! Fetch quest!
         
-*   [Why you specifically?] Let's not look this gift horse in the mouth. 
+*   [Why you specifically?] image black 1: Let's not look this gift horse in the mouth. #hide plume #hide lulu #hide delta
 -
-    FETCH QUEST
+	...
+
+	Sure is weird how after that first fetch quest with Plume, all the others went by in a flash.
+
+	In retrospect they wouldn't have been in the time budget anyway, so you aren't complaining.
     
-    p pout_blush: ...Thanks.
+    p pout_blush: ...Thanks. #hide image
     
     That's all, but it's plenty. No insults or anything.
     
@@ -245,19 +271,19 @@ Ready?
     
 *   You check up on Plume[], who is occupied with lacing their skates back up. They make eye contact with you, then return to their task wordlessly.
 
-*   You check up on Professor Delta[], who is occupying himself with frisbee he procured from who knows where.
+*   You check up on Professor Delta[], who is occupying himself with a frisbee he procured from who knows where.
 
-    You decide to leave before he can rope you into anything else.
+    You play fetch for a few minutes, then decide to leave before he can rope you into anything else.
 -
-    Something stirs in you. Something changed. What, exactly, is anyone's guess. 
+    Something stirs in you. Something might have changed. What, exactly, is anyone's guess.
     
     This probably won't be resolved by the end of the festival.
     
-    The committee's been around for a while, it's not like one day can change everything. 
+    The committee's been around for a while, it's not like one day can change everything....
     
-*   But you're here now[], that changes things.
+*   But you're here now[], and that changes things.
     
-*   You're not that special[].
+*   You're not [that special] any more special than any one of the colorful cast of the committee.
     
     Oh? <>
 -
@@ -269,13 +295,13 @@ Ready?
     -> END
 
 = helpful
-    d: I have a handtruck, I could--
+    d confident: I have a handtruck, I could--
     
     p pissed: Shut.
     
-    d: ...
+    d adrenaline_sweat: ...
     
-    d: :o3
+    d neutral_sweat: :o3
 ->->
 
 = lulu_arrives

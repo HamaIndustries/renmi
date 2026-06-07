@@ -1,12 +1,9 @@
-Ready?
-*   Let's dance.
--> barebones_3
+#require act modfest:barebones_plume_2
+#alias actor c chai
+#alias actor d delta
+#alias actor x proxy
+#alias actor b barebones
 
-//placeholder
-== function run_command(cmd) ==
-    ~ return true
-
-== barebones_3 ==
 //ACT 3: (requires barebones + plume ACT 2) Tries to con the player into something again. Can't you say anything with a straight face? ah, you got me. turns to leave, but you say he's disingenuous. heh, what do you know about real? You see these fantasy animals and think any of this is real? Next you'll say you can talk to the dead.
 
 // most act 3's won't be very long, they bridge the first and second parts of the narrative.
@@ -14,14 +11,11 @@ Ready?
 
 // ACT 3: (requires barebones + plume ACT 2) Tries to con the player into something again. 
 
-#alias actor c chai
-#alias actor d delta
-#alias actor x proxy
-#alias actor b barebones
-
-
     c focus_frown 1: Whew, last one.
-    
+
+    ~ run_command("stopsound @s music")
+    ~ run_command("playsound modfest:music.stereo.pasuka music @s ~ ~ ~ 1 1")
+
     c happy: Thanks again, <PLAYER_NAME>. You've been a huge help all day.
     
 *   "No problem["]." This has always been one of your specialties, so helping out really was nothing.
@@ -51,7 +45,7 @@ Ready?
     
     d shocked_sweat: Whoops :o3
     
-    d confident_smile: Well, I am proud to report that our newest, most responsible committee officer comes with no strings attacked.
+    d confident_smile: Well, I am proud to report that our newest, most responsible committee officer comes with no strings attacked. I mean attached.
     
     ~ run_command("stopsound @s")
     x reading_intrigued 2: Speaking of reports, Professor Delta. Have we completed ours?
@@ -95,6 +89,8 @@ Ready?
     Professor Delta scampers off as fast as his little legs can carry him. #hide delta
     
     It's no wonder he used to coach the track team. That is, until he snapped and tried to fetch the baton during semifinals.
+
+    ~ run_command("stopsound @s music")
     
     You are once again left alone with your thoughts.
     
@@ -107,6 +103,8 @@ Ready?
     * *     [Physically?]
     * *     [Emotionally?]
     - - 
+
+    ~ run_command("stopsound @s music")
     x reading_intrigued: Your question is an answer, I should think. So terse. Well done.
 
 *   [Nothing unusual.]
@@ -120,20 +118,23 @@ Ready?
             x side: The festival concentrates all of our oddities into one place and one day.
             
             x: But those oddities had to originally be present for this to be true.
-            
+            ~ run_command("stopsound @s music")
             x: You are an observant one, aren't you?
             
     * *     [This school barely registers to you.]
     
             x: Shame. It's a unique place, I hope you will come to find.
 -
+    ~ run_command("stopsound @s music")
     x staring: Someone of your background could fill a niche this school has been waiting for.
 
 *   [What background?]
 -
     x reading: Quite so.
     
-    x staring: In fact, I had a proposition for you, if you would hear it. 
+    x staring: In fact, I've'a proposition for you, if you would hear it. 
+
+    ~ run_command("playsound modfest:music.stereo.pasuka music @s ~ ~ ~ 1 0.8")
 
     b: Oi, <PLAYER_NAME>! I gots something for yous! #hide proxy
     
@@ -221,7 +222,7 @@ Ready?
 
 //Next you'll say you can talk to the dead.
 -   
-    b frown: Look, pal. Nobody cares. I can rock up tomorrow and yank something outta a pocket and nobody'll bat an eye.
+    b frown: Look, pal. Nobody cares. I could rock up tomorrow and yank a pocket and nobody'll bat an eye.
     
     b: They expect it of me, y'see. It's why I'm here, same as yous I bet. Gotta look out for number one, and they all knows I knows that.
     

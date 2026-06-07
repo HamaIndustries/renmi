@@ -1,9 +1,11 @@
-Ready?
+#require act modfest:lulu_plume_2
+#require act modfest:barebones_plume_2
+#require act modfest:ananas_plume_2
+#alias actor l lulu
+#alias actor a ananas
+#alias actor p plume
 
-*   Let's dance.
--> lulu_plume_3
-
-== lulu_plume_3 == // ALSO PLUME ACT 3
+// in game we're calling this act 2 becuase of merging
 
 //Lulu admits to the player that she knows plume is mean to her and she understands that they're upset at feeling powerless. but Plume hears this and runs away angry because they hate being pitied. Lulu follows up by saying she understands because she's the same way, she can't do anything she wants to without utter destruction, so she feels just as powerless. But she also explains how she copes with this, which the player will relay to Plume in Plume's ACT 4.
 
@@ -15,7 +17,9 @@ Ready?
 
 //Lulu admits to the player that she knows plume is mean to her and she understands that they're upset at feeling powerless.
 
-    l: \[^_^\] Aaaand I think that is the last of it!
+    l neutral 5: \[^_^\] Aaaand I think that is the last of it!
+
+    ~ run_command("playsound modfest:music.stereo.athletics music @s ~ ~ ~ 1 0.7")
     
     a: Gotta hand it to you, lady. You know how to straw a berry.
     
@@ -29,7 +33,7 @@ Ready?
     
 *   But [you catch him] in the nick of time you catch him, you suave thing.
 
-    a: Oh, wow. Wow. <PLAYER_NAME>, where'd you get those moves?
+    a embarrassed_blush: Oh, wow. Wow. <PLAYER_NAME>, where'd you get those moves?
     
     * *     You[ were born with it]r natural talent is hardly a footnote in the epic that is your life. 
     
@@ -37,7 +41,7 @@ Ready?
     
     * *     (joke) [You trained for it] For years, you studied catching things suavely. While others were engaging with their homework, you cultivated inner time wasting.
     
-            a: Is that supposed to be a reference?
+            a sad: Is that supposed to be a reference?
             
             l: \[^_^\] It is an older joke, but it checks out!
             
@@ -49,13 +53,13 @@ Ready?
     
     * *     (ick) Your undefeatable five senses[]. Mostly smell, unfortunately. That box must have been set aside for a reason.
     
-            a: Wha-- Oh! Yuck! Ick!
+            a sad: Wha-- Oh! Yuck! Ick!
             
-            a: I'm out, that's gross as heck.
+            a sad: I'm out, that's gross as heck.
     
     * *     Your immaculate sixth sense[].
     
-            a: Terrifying, honestly.
+            a embarrassed: Terrifying, honestly.
             
             a: I'm glad you're on our side!
             
@@ -63,9 +67,9 @@ Ready?
     
     * *     You didn't[], apparently. You are not doing yourself any favors.
     
-            a: ...
+            a sad: ...
             
-            a: Oh! You're joshing with me, haha. Got me concerned for a minute there.
+            a: Oh! You're joshing me, haha. Got me concerned for a minute there.
             
             Lucky you.
 -
@@ -89,19 +93,19 @@ Ready?
 -
     l: \[>.>\] Um, I do not think it is very important.
     
-    A flock of beautifully colored boids suddenly erupts from a tree, no doubt from another obnoxiously fluffy dramatic battle between mod enjoyers.
+    A flock of beautifully colored birds suddenly erupts from a tree, no doubt from another obnoxiously fluffy dramatic battle between mod enjoyers.
     
-    Not everything must be so high-key, honey. Let's stick around here for this.
+    Not everything must be so high-key, honey. Let's stick around for this.
     
-    With mechanical perfection, her hull slowly rotates to track the centroid of the vibrant cloud.
+    With the mechanical perfection you have come to expect from Lulu, her hull slowly rotates to track the centroid of the vibrant cloud.
     
 *   Is [it Plume?] she thinking about Plume again? It must be exhausting to deal with these outbursts every day.
 -
-    a: Nah, they usually keep to themselves.
+    a sad: Nah, they usually keep to themselves.
     
     l: \[-v-\] I like to stay out of the way to give Plume space to do their own thing. Their role as public relations and mine as secretary allow for our dynamic.
     
-     a: But that's something I've been trying to resolve for a while. Sparks shouldn't fly between committee members if we ever wanna get anything done.
+     a embarrassed: But that's something I've been trying to resolve for a while. Sparks shouldn't fly between committee members if we ever wanna get anything done.
     
     {berries: He wipes the {ick: ick | berry} juice off as best as he can with a damp rag. The air is filled with the sweet scents of a fruit smoothie.|He reclines in the cool shade of a huge tree nearby. Oh, nevermind, that's one of Lulu's legs.}
     
@@ -113,9 +117,9 @@ Ready?
 
     l: \[o_o\] But I would hate to be an inconvenience to them. It is not difficult for me to go far away at short notice.
     
-    a: You shouldn't have to, is the thing. You're as much of a committee member as is Plume.
+    a sad: You shouldn't have to, is the thing. You're as much of a committee member as is Plume.
     
-    a: Actually, you're as much of a <i>person</> as Plume.
+    a embarrassed: Actually, you're as much of a <i>person</> as Plume.
     
     l: \[\/\/_\/\/\] Uwah, do you really think so?
     
@@ -133,13 +137,15 @@ Ready?
     
     - - (time) l: \[-v-\] I do not want to rock the boat, so to speak. It is like how you must hold out a hand and go pspspspsps to get a cat to come to you.
     
+    ~ run_command("playsound renmi_springfest:lulu.steam ambient")
+
     The sound she made was more of a steam boiler turning off and on again, but the point is made. The steam quickly dissipates in the afternoon air.
     
     l: \[>.>\] On second thought, please do not share that I used that analogy.
     
     a: Wouldn't dream of it, sister.
     
-    a: But that's still not fair to you, having to wait so long for something that might never happen. 
+    a sad: But that's still not fair to you, having to wait so long for something that might never happen.
     
     l: \[^_^\] Believe me, I am the best at waiting. I have waited many, many, many, many--
     
@@ -167,27 +173,27 @@ Ready?
             
             You'll just have to get creative with it.
     - - 
-    a: Look, I didn't put together the committee for things to be like this.
+    a sad: Look, I didn't put together the committee for things to be like this.
     
     a: This should be an opportunity for everyone to make some friends. Working towards a common goal is bread and butter for that.
     
-    You haven't heard Ananas use an idiom correctly in the whole time you've known him.
+    You haven't heard Ananas use an idiom correctly at any point in time since your first meeting.
     
     {group: -> followup}
     
-    a: The only problem is the approach. There's no chance they'd be receptive.
+    a embarrassed: The only problem is the approach. There's no chance they'd be receptive.
     
     * *     Why not?
     
-    a: -> control
+    a embarrassed: -> control
 
 *   (group) The committee should resolve it [together] as a group effort.
 
-    a: Dunno, that would put Plume on the spot. 
+    a sad: Dunno, that would put Plume on the spot.
     
     - - (control) <> They only like attention when they feel in control of the situation.
     
-    - - a: You ever had to go to group therapy?
+    - - a embarrassed: You ever had to go to group therapy?
     
     * *     (therapy) Yes[].
     * *     No[].
@@ -219,9 +225,9 @@ Ready?
     
     {time: -> followup}
     
-    l: \[-v-\] I have turned the situation around over and over in my head.
+    l: \[-v-\] I have turned the chessboard around over and over in my head.
     
-    l: \[._.\] There is no easy answer here.
+    l: \[._.\] I cannot find an easy answer.
     
     -> time
 
@@ -233,7 +239,7 @@ Ready?
     
     The telltale pitter patter of magical skates soaring away evidence your mystery audience.
     
-    a: Oof, bad luck.
+	a sad: Oof, bad luck.
     
     l: \[<.<\] ...
     
@@ -259,11 +265,11 @@ Ready?
     
     a: Haha, I remember.
     
-    a: Still haven't gotten around to buying a new one.
+    a embarrassed: Still haven't gotten around to buying a new one.
     
     l: \[._.\] ...
     
-    a: Ah... Sorry, Lu. Party foul.
+    a sad: Ah... Sorry, Lu. Party foul.
     
     ...
     
@@ -271,11 +277,11 @@ Ready?
 
     You've seen progress made today. If they talk to each other rarely, then this might be the last opportunity for a long while to chip at their conflict.
     
-    This is an opportunity to seize the diem and take it for a run. 
+    This is an opportunity to seize that diem and ride it straight over the horizon.
     
     l: \[o_o\] Uwah, is that such a good idea?
     
-    a: I'm on board. The kid's warmed up to <PLAYER_NAME>.
+    a embarrassed: I'm on board. The kid's warmed up to <PLAYER_NAME>.
     
     They have??
     
@@ -285,9 +291,9 @@ Ready?
     
     You have the green light, honey.
     
-    It's not your job, but if you want to be their friend in the long run it's a conversation to be had sooner or layer.
+    It's not your job, but if you want to be their friend in the long run it's a conversation to be had sooner or later.
 
-    You decide whether it's worth it.
+    You're the one who decides whether it's worth it.
 
 -> END 
     

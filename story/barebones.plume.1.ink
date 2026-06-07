@@ -1,12 +1,3 @@
-Ready?
-
-*   Let's dance. 
--> barebones_plume_1
-
--> END
-
-=== barebones_plume_1 ===
-
 #require act modfest:lulu_2
 #require act modfest:barebones_1
 #alias actor p plume

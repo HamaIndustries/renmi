@@ -1,10 +1,3 @@
-Ready?
-
-*   Let's dance.
-- -> shrimple1
-
-=== shrimple1 ===
-
 #require act modfest:intro_7
 #alias actor s shrimple
 //She seems engrossed in something, barely notices you come in. Comedic scene of her moving around dangerously with a knife and boiling fluid (cleaning up after herself of course). Haha my bad, didn't see you there. Can I cook something to make it up to you?
@@ -44,7 +37,7 @@ Ready?
         
         You exit into her kitchen as fast as physics will allow.
     
-*   You wave at her[]. Shrimple's almost lifeless eyes refuse to focus. It is as if she her mind lives in infinity, and her body operates in its natural state.
+*   You wave at her[]. Shrimple's almost lifeless eyes refuse to focus. It is as if her mind lives in infinity, and her body operates in its natural state.
 
         You quietly slip between a gap in the folding tables on the opposite side.
     
@@ -67,6 +60,8 @@ Ready?
 *   You channel your inner strength[]. One is always armed when one's body is a living weapon.
 
         You ready your fists. Your boss bar begins to fill.
+
+        ~ run_command("playsound minecraft:item.mace.smash_ground_heavy ambient @s ~ ~ ~ 1 0.5")
     
 -   The dull boom that resonates from your parry sends lids and children flying. The danger is postponed, and you have a moment's peace to deliver your message.
 
@@ -96,7 +91,7 @@ Ready?
 
 *   You catch it like a normal person[], if normal people were graceless and had bad frame data. The cookie bounces off your face and into some stew.
 
-    Apparently, your energy reserves were spent on that parry. The cookies will save you just in time.
+    Apparently, your energy reserves were spent on that parry. The remaining cookies will save you just in time.
     
 -   Shrimple chuckles and hands the rest of the bag to you.
 

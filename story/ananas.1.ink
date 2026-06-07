@@ -1,12 +1,3 @@
-Ready?
-
-*   Let's dance.
--> ananas_1
-
-
-
-== ananas_1 ==
-
 #require act modfest:intro_7
 #require act modfest:shrimple_1
 #require act modfest:plume_1
@@ -116,7 +107,9 @@ Ready?
 
     {no_people and experienced:-> sad}
     
-    But you've made friends {not experienced:before,|already today,{many_people: many friends,}} and you're sure there are more on the way.
+    image black 1: But you've made friends {not experienced:before,|already today,{many_people: many friends,}} and you're sure there are more on the way.
+
+    ~ run_command("stopsound @s music")
     
     Probably.
     
@@ -127,8 +120,10 @@ Ready?
     -> favor
     
     
--   (sad) Things have, to be honest, panned out exactly how you feared.
+-   (sad) image black 1: Things have, to be honest, panned out exactly how you feared.
     
+    ~ run_command("stopsound @s music")
+
     There's too much light and noise. There are too many people and things, and all of them are preoccupied with themselves and each other.
     
     You don't get the context. 
@@ -140,6 +135,8 @@ Ready?
     You want to go home.
 
     The sound of a small object dropping is magnified by the emptiness of the hall.
+
+    ~ run_command("stopsound @s music")
     
     Someone dropped their flyers. Your flyers.
     
@@ -162,15 +159,18 @@ Ready?
 
 -   Ananas drags you out to a quiet little path that follows the canal.
 
+	~ run_command("stopsound @s music")
+	~ run_command("playsound modfest:music.stereo.i_wannanana music @s ~ ~ ~ 1 0.4")
+
     He balances precariously but with absolute confidence on the fence as you move along to destination unknown.
     
     Those shades aren't just for show. He really is that cool.
     
     a embarrassed: Did anyone tell you why I ended up at SASH?
     
-*   Why?
+*   Why[?], pray tell?
 
-*   He got in a fight[].
+*   He got in a fight[], obviously. And he won it singlehandedly.
 
     a: I got in a-- haha, no, I couldn't win a fight if my life depended on it. I'm a master of the school of running away really fast.
     
@@ -191,7 +191,7 @@ Ready?
     
     a neutral 2: The real prize is the friends you made along the way, right?
     
-*   He could be a little more creative than that.
+*   [Really?] He could be a little more creative than that.
     
 -   a embarrassed: Eh, the point is that we end up where we do because of gravity. We get pulled to wherever we need to be, and that means you need to be on the committee.
     
@@ -205,7 +205,7 @@ Ready?
 -   (promise) a: Promise me you'll teach me how to do that?
     
 *   You promise[].
-*   {sad} No pr[omises]-- Nope, I'm stopping you there.
+*   {sad} No pr[omises]-- Nope, I'm stopping you there. #hide ananas
 
     Ananas is showing you he's on your side. You can't keep running away from people and then feel bad about it.
     
@@ -240,7 +240,7 @@ Ready?
 *   Hey! Wait!
 *   You're already there[] before he finishes that sentence.
 
--    (backstory) a neutral 2: Say, how'd you end up here, anyway?
+-    (backstory) a neutral 2: Say, how'd you end up here, anyway? #hide image
 
     It's a funny story, really.
     

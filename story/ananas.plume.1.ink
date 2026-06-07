@@ -1,11 +1,3 @@
-// note: * is never repeated, but + is.
-
-// sprite: s plume h
--> start
-
-=== start ===
-
-
 #alias actor s shrimple
 #alias actor a ananas
 #alias actor p plume
@@ -66,7 +58,7 @@
         
         - With a flourish, Ananas flips his bowl and spins it on the spatula in the manner of some kind of Italian pastry you can't remember the name of. -> kitchen
     }
-        * * "What are we making, anyway?{recipe:  Shrimp cake, without shrimp?}"
+        * * "What are we making[]?, anyway?{recipe: Shrimp cake, without shrimp?}"
         
             s smile: Its a shortcake!
             
