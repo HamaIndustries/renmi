@@ -166,7 +166,7 @@
     
     chai frown: This isn't that kind of school, Lulu.
     
-    l: \[-v-\] Yes, but even so. None of you are therapists. You do not know what goes inside of Plume's head.
+    l: \[-v-\] Yes, but even so. None of you are therapists. You do not know what goes on inside of Plume's head.
     
     l: \[u-u\] I ended up here because everyone read ill intent where there was none. 
     
@@ -184,7 +184,7 @@
     * *     Does she have that much faith in others?
     * *     Is she that bad at reading people?
     
-    - -     \[-v-\] Of course not. 
+    - -     l: \[-v-\] Of course not.
 
 *   So, Plume fell in the water fountain[?] a few too many times?
 

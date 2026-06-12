@@ -5,6 +5,7 @@
 
     In what you thought to be an empty room, a conversation. A rare moment of vulnerability.
 
+    ~ run_command("stopsound @s")
     image black 1: <\#FFAAAA> Let me brush it.
     
     image black 1: <\#44D6D6> Do you happen to have a gold hairbrush lying around?
@@ -15,6 +16,7 @@
     
     image black 1: <\#FFAAAA> Then its downright fortunate that I ain't a human, I reckon.
     
+    ~ run_command("stopsound @s")
     ...
     
     image black 1: <\#44D6D6> Lady.
@@ -23,6 +25,7 @@
     
     image black 1: <\#44D6D6> Do you think I'm an asshole.
     
+    ~ run_command("stopsound @s")
     image black 1: <\#FFAAAA> That a question, bud?
     
     image black 1: <\#44D6D6> What, not 'kid'?
@@ -31,6 +34,7 @@
     
     image black 1: <\#FFAAAA> I heard about your spat with the big girl.
     
+    ~ run_command("stopsound @s")
     image black 1: <\#44D6D6> What spat? We're fine. The festival's going to plan.
     
     image black 1: <\#44D6D6> And then once we're all done here we can all sit around for two months then piss off for the summer.
@@ -122,7 +126,7 @@
     
     image black 1: <\#FFAAAA> It really happened, cross my heart and swear to the big clam herself. I ain't spinning you a yarn.
     
-    image black 1: <\#FFAAAA> And I'm sure as hell not talking 'bout her right now.
+    image black 1: <\#FFAAAA> And I'm sure as hell not talking 'bout <i>her</> right now.
     
     image black 1: <\#FFAAAA> Thing is, I've always wondered something.
     

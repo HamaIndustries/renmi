@@ -146,7 +146,7 @@
     
     a: On it. Ugg, hold down the fort.
     
-    Ugg throws a meaty salute.
+    Ugg throws a meaty salute. #hide ananas #hide shrimple
     
     u grin: < PLAYER_NAME > take water. Ugg think < PLAYER_NAME > work too hard.
     
