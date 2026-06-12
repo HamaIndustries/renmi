@@ -259,7 +259,7 @@
 -
     l: \[ovo\] Maybe the better word is empathize with.
     
-    l: \[>.>\] If you think about it, I can't interact with all of the same things they can't, other than really really heavy stuff.
+    l: \[>.>\] If you think about it, I cannot interact with all of the same things they cannott, other than really really heavy stuff.
     
     l: \[^_^\] Have you ever seen me try to open a door, <PLAYER_NAME>?
     
