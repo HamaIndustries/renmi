@@ -238,7 +238,12 @@
     <> They slide right past you, skimming off all of the labels from the planters in one precise strike.
     
     ~ run_command("stopsound @s music")
-    ~ run_command("playsound minecraft:block.big_dripleaf.break ambient @s ~ ~ ~ 1 0.5")
+    ~ run_command("schedule command 4t playsound minecraft:item.axe.strip ambient")
+    ~ run_command("schedule command 8t playsound minecraft:item.axe.strip ambient")
+    ~ run_command("schedule command 12t playsound minecraft:item.axe.strip ambient")
+    ~ run_command("schedule command 16t playsound minecraft:item.axe.strip ambient")
+    ~ run_command("schedule command 20t playsound minecraft:item.axe.strip ambient")
+    ~ run_command("schedule command 28t playsound minecraft:block.big_dripleaf.break ambient @s ~ ~ ~ 1 0.5")
     
     ...then slam face-first into a bush, making another cartoonish impression. #hide plume
     
@@ -250,7 +255,7 @@
     
     p neutral 3: Can you actually physically go away forever?
     
-    
+    ~ run_command("stopsound @s music")
     ~ run_command("playsound modfest:music.stereo.smoking_club music @s ~ ~ ~ 1 0.6")
     p pissed 2: This is my garden. You are not a therapist. You are a FREAK.
     

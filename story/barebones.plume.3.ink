@@ -1,4 +1,3 @@
-#require act awa:awa
 #require act modfest:barebones_3
 #alias actor p plume
 #alias actor b barebones

@@ -167,7 +167,7 @@
 
     Not even a complaint about Barebone's various misdemeanors that have somehow not landed him in any legal trouble whatsoever. 
     
-    {bb_nice_flag: Although the radio silence could also be attributed the Headmasters's tea party with him earlier. You shudder, thinking about it.} 
+    {bb_nice_flag: Although the radio silence could also be attributed to the Headmasters's tea party with him earlier. You shudder, thinking about it.} 
     
     l: \[-v-\] ...
     
@@ -281,7 +281,7 @@
     
     y: \[-v-\] Hehe, you are doing that staring thing again. Who are you talking to, I wonder?
     
-    You hardor no such illusions now.
+    You harbor no such illusions now.
     
     y smile: \[ovo\] Keep your secrets, mysterious one...
     
@@ -315,7 +315,7 @@
     
     So, the <click open_url value \'https:\/\/en.wikipedia.org\/wiki\/Glymphatic_system\'>glymphatic system</> wakes up when you pass out and wipes that thing clean.
     
-    Sleep also helps us catalogue and understand our memories. It meshes old and new things together and imagines what would happens and what we would do.
+    Sleep also helps us catalogue and understand our memories. It meshes old and new things together and imagines what would happen and what we would do.
     
     Even nightmares like running away from something scary or embarassing yourself in front of everyone you know play an important role in preparing you for the future.
     
