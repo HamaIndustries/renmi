@@ -1,10 +1,8 @@
 package symbolics.division.renmi.util;
 
-import com.unascribed.drogtor.DrogtorPlayer;
 import eu.pb4.placeholders.api.node.TextNode;
 import eu.pb4.placeholders.api.parsers.NodeParser;
 import eu.pb4.placeholders.api.parsers.TagParser;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
@@ -12,7 +10,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,33 +37,12 @@ public class ParseUtil {
 	}
 
 	public static String parsePlayerName(String lineText, Player player) {
-		return lineText.replaceAll("<\\s*PLAYER_NAME\\s*>", getNickname(player));
+		return lineText.replaceAll("<\\s*PLAYER_NAME\\s*>", player.getPlainTextName());
 	}
 
 	public static Component parseLine(String lineText, @Nullable Player player) {
-//		lineText = parsePlayerName(lineText, player);
+		lineText = parsePlayerName(lineText, player);
 		TextNode textNode = PARSER.parseNode("> " + lineText.strip());
 		return textNode.toComponent();
 	}
-
-	private static final class DrogNicknameGetter {
-		public static Function<Player, String> getter = p -> ((DrogtorPlayer) p).drogtor$getNickname();
-	}
-
-	private static boolean checkedNameCompat = false;
-	private static Function<Player, String> nicknameGetter;
-
-	public static String getNickname(Player player) {
-		if (!checkedNameCompat) {
-			checkedNameCompat = true;
-			if (FabricLoader.getInstance().isModLoaded("drogstyle")) {
-				nicknameGetter = DrogNicknameGetter.getter;
-			} else {
-				nicknameGetter = Player::getPlainTextName;
-			}
-		}
-		var name = nicknameGetter.apply(player);
-		return name == null ? player.getPlainTextName() : name;
-	}
-
 }

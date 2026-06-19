@@ -2,7 +2,7 @@
 #require act modfest:barebones_shrimple_1
 #alias actor b barebones
 #alias actor p plume
-
+#alias actor c chai
 
 // **ACT 2**: Barebones is selling Lemonade, and Plume is helping. The stand is unlicensed. A teacher comes by and asks Barebones where the license is. Barebones again runs interference while plume runs off to steal another stall's license. The teacher reveals they know whats going on and just wanted to barebones alone. They're being a bad influence on plume. "its the kids fault..." you might be able to do some damage to his ego. Reveals this messed up Plume's grades.
 
@@ -314,7 +314,8 @@ When the petals cleared and their eyes refocused, the two were already huddled t
     
     In some cultures, those can be the same thing.
     
-    **  No[]. -> wont
+    **  No[].
+    -> wont
 -
     Will anything get through that dense skull?
     

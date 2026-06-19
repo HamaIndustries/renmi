@@ -1,6 +1,5 @@
 #require act modfest:ananas_ugg_1
 #require act modfest:barebones_shrimple_3
-#require act modfest:barebones_plume_3
 #alias actor d delta
 #alias actor a ananas
 #alias actor b barebones
@@ -122,7 +121,7 @@
 
     s neutral_side: So why'd the Headmaster call us specifically?
 
-    s frown: We ain't afficionados, not in the finer things.
+    s frown: We ain't afficionados, not in the finer stuff.
 
     d: She has a surprising taste in this kind of art, believe it or not.
 
@@ -475,7 +474,7 @@
 
     So. What about...
 
-*   [This key?] If it belongs to her, you can't think of anywhere else your strange artifactory prize belongs
+*   [This key?] If it belongs to her, you can't think of anywhere else your strange artifactory prize belongs.
 
     b googly: The hell'd yous get that?
 
@@ -529,7 +528,7 @@
 
     * *     What do they say[?] about love and winning in pride month, you wonder?
 
-        s frown: Iunno. 's what I asked yous for.
+        b frown: Iunno. 's what I asked yous for.
 
     - -
 

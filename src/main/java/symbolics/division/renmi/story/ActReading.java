@@ -10,7 +10,6 @@ import net.minecraft.server.level.ServerPlayer;
 import org.apache.commons.lang3.NotImplementedException;
 import symbolics.division.renmi.Renmi;
 import symbolics.division.renmi.RenmiCommands;
-import symbolics.division.renmi.util.ParseUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,7 +120,7 @@ public class ActReading implements ExternalListener {
 					story.getState().forceEnd();
 					return;
 				}
-				String text = ParseUtil.parsePlayerName(story.getCurrentText(), player);
+				String text = story.getCurrentText();
 
 
 //				String text = story.continueAsync(500f);

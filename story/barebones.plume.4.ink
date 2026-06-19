@@ -17,6 +17,8 @@
 ~ 	run_command("stopsound @s music")
 
     I'll spare you the rising action, honey. You caught them again.
+    
+    ~ run_command("tag @s remove bb_nice_flag")
 
     ~ run_command("playsound modfest:music.stereo.smoking_club music @s ~ ~ ~ 1 0.5")
     
@@ -230,6 +232,7 @@
     
     d angry_sweat: I... don't want them working near anything valuable. At least not near the greenhouse please.
     
+    ~ run_command("tag @s add bb_nice_flag")
     ...
     
 *   You might have an idea.
