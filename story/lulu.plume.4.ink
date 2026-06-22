@@ -1,9 +1,8 @@
-Ready?
-
-*   One last dance. -> lulu_plume_4
-
-== lulu_plume_4 ==
-
+#require act modfest:plume_4
+#require act modfest:lulu_4
+#alias actor p plume
+#alias actor l lulu
+#alias actor y lily
 
 // (2) [ ] **ACT 5**: (requires Lulu + Ugg ACT 3) Lulu has a plan. She wants to show Plume something special, but they've been avoiding her. You give her an idea: Write an anonymous letter sharing how she feels, and to meet at a designated location. If you know Plume's favorite flower, you can tell her that, and she'll choose to include it in the letter (she wants to be besties?).
 
@@ -13,11 +12,13 @@ Ready?
 
     l neutral 5: \[-v-\] Thank you for coming on such short notice, <PLAYER_NAME>!
     
-    l: I had an idea.
+    ~ run_command("stopsound @s music")
+    ~ run_command("playsound modfest:music.stereo.lily_of_the_valley music")
+    l lulu_off: \[ovo\] I had an idea I wanted to run by you.
     
-    y smile 3: \[ovo\] I was thinking, maybe, if I should show this to Plume?
+    y smile 2: \[ovo\] I was wondering... what do you think would happen if I showed this little old thing off to Plume?  
     
-    y: I think they would not feel so jealous if they saw me stumbling around trying to pick things up!
+    y content: \[^_^\] I think they would not feel so jealous if they saw me stumbling around trying to pick things up!
     
 *   [They don't owe her anything] After the way Plume has treated Lulu, it should be them trying to cheer her up.
 
@@ -25,25 +26,23 @@ Ready?
 
 *   That would be kind of her[]. Maybe too kind.
 
-    y: \[-v-\]
-
+    y: \[-v-\] <>
 -
     I mean, they did apologize to me at the greenhouse, did they not?
     
-    y: \[._.\] Sort of.
+    y stare: \[._.\] Sort of.
     
+    y flustered: \[\>_\>\] I do not see any harm in it.
     
-    y: \[\>_\>\] I do not see any harm in it.
-    
-    Holo-Lulu kneels down next to where you sit on the picnic blanket, but then flops onto her back to watch the clouds.
+    Holo-Lulu kneels down next to your place on the picnic blanket, but then flops onto her back to watch the clouds.
     
     y: \[u_u\] We were not exactly friends, but when they first came here, we got along quite amicably.
     
-    y: \[ovo\] We even share a lot of taste in the same games.
+    y smile: \[ovo\] We even share a taste in a lot of the same games.
     
 *   [Mario?] I'm not sure if it's even safe to mention him. Let me run ahead and take some precautions.
 
-    y: \[ovo\] I set up a little emulator for the one where your friend can be \[NAME_EXPUNGED\] and then you can be the star that shoots the little chunks that make everyone dizzy.
+    y smile: \[ovo\] I set up a little emulator for the one where your friend can be \[NAME_EXPUNGED\] and then you can be the star that shoots the little chunks that make everyone dizzy.
     
     y: \[-v-\] You can probably guess who played who...
     
@@ -53,39 +52,45 @@ Ready?
 
 *   Ultrakill?[] You are joking, right?
 
-    y: \[._.\] You are joking, right?
+    y stare: \[._.\] You are joking, right?
     
     Told you so.
 
 *   Minecraft?
     
-    y: \[._.\] Not Minecraft. They did not like that I play on Peaceful mode.
+    y stare: \[._.\] Not Minecraft. They did not like that I play on Peaceful mode.
+    
+    y content: \[^_^\] They tried to show me these things "mods" but it all went over my head!
+    
+    y: \[-v-\] I wonder if those "mods" have the same etymology as the projects we are showcasing here at the festival?
 -
-    y: \[ovo\] Uwah, that brings back some memories.
+    y smile: \[ovo\] Uwah, that brings back some memories.
     
-    y: \[o_o\] I have no idea when it started, but things just got worse and worse over time. 
+    y stare: \[o_o\] I have no idea when it started, but things just got worse and worse over time. 
     
-    y: \[-_-\] Could it have been their past finally catching up with them...?
+    y: \[-_-\] Could it have been their dark past finally catching up with them...?
     
     Sigh.
     
-    y: \[^_^\] I must admit, I even liked them a little bit!
+    ~ run_command("stopsound @s music")
+    y content: \[^_^\] I must admit, I even liked them a little bit!
+    
+    ~ run_command("playsound modfest:music.stereo.lily_of_the_valley music @s ~ ~ ~ 1 0.8")
+    What. Wow.
     
 *   Does she still like them?
 
-    y: \[\>.\>\] Uwah, well.
+    y flustered: \[\>.\>\] Uwah, well.
     
-    y: \[-v-\] We have spoken enough for you to know the forecast my romantic prospects.
-    
-    Who knows. She might be speaking too soon.
+    y: \[-v-\] We have spoken enough for you to know the forecast on my romantic prospects.
 
 *   [Girl. Let's talk.] You give her the what's for on having self respect.
 
-    And, for that matter, remind her how much everyone loves a tall girl.  
+    And, for that matter, remind her how much everyone loves a tall girl. She can do so much better it's not even funny.
     
     y: \[-v-\] Yes, you are right. 
     
-    y: \[^_^\] I am a hot honcho with a sick bod!!
+    y content: \[^_^\] I am a hot honcho with a sick bod!!
     
     And the world damn well better know it.
     
@@ -93,23 +98,23 @@ Ready?
     
     * *     [To each her own] You never would have pegged her as one with an eye for twinkbutches. Butchtwinks?
     
-            y: \[._.\] That is... one way to describe them.
+            y stare: \[._.\] That is... one way to describe them.
             
     * *     [Yeah...] They say that true beauty is on the inside. Whoever said that would likely revise their opinion after meeting Plume. 
     - - 
-    y: \[^_^\] I kind of just want to run my fingers through their hair. It looks so soft!
+    y content: \[^_^\] I kind of just want to run my fingers through their hair. It looks so soft!
 -
     y: \[-v-\] I do not know why I brought that up. Silly me.
     
-    y: \[ovo\] Anyway, it would be a good idea to show them this body before the closing ceremony just so they are not distracted
+    y smile: \[ovo\] Anyway, it would be a good idea to show them this body before the closing ceremony just so they are not distracted
     
-    y: \[-vo\] ...by these big guns! Uwah!
+    y smile: \[-vo\] ...by these big guns! Uwah!
     
     She flexes at you. Makes the motion of flexing at you.
     
-    Whether this image is shaped by Ugg's or her own perception of herself, Lulu's idealized form is a terminal stringbean.
+    Whether this image is shaped by Ugg's or her own perception of herself, Lulu's idealized form is a record-setting stringbean.
     
-    y: \[ovo\] I do have one problem. Do you know where they might have scooted off to?
+    y smile: \[ovo\] I do have one problem. Do you know where they might have scooted off to?
     
     y: \[-v-\] I have checked every slate on campus, and they are nowhere near any of the booths.
     
@@ -117,69 +122,67 @@ Ready?
     
     It's her life, honey.
     
-*   [You let her go] Against your better judgement, you tell her about Plume's rooftop garden.
+*   [Fiiiiine] Against your better judgement, you tell her about Plume's rooftop garden.
 -
-    y: \[ovo\] I have been wondering about that place.
+    y smile: \[ovo\] I had been wondering about that place.
     
-    y: \[¬_¬ꐦ\] And why people have been dodgy when I ask about it.
+    y angry: \[¬_¬ꐦ\] And why people were dodgy when I asked about it.
     
-    y: \[._.\] I should not walk over there with my body with all the visitors getting ready to leave.
+    y stare: \[._.\] I should not walk over there with my real body with all the visitors getting ready to leave.
     
-    y: \[._.\] Uwah, and my little cube will take some time to get there on its own without any help...
+    y stare: \[._.\] Uwah, and my little cube will take some time to get there on its own without any help...
     
     She looks at you with sparkles in her eyes. Emotionally.
     
-    y: \[ovo\] Well, you know what that means!
+    y smile: \[ovo\] Well, you know what that means!
     
 *   [Fetch quest!]y: \[-v-\] No...? I meant that I will start walking that way now. 
 
 -
 
-    y: \[-vo\] Thank you so much for the offer! But you have so much on your plate already.
+    y smile: \[-vo\] Thank you so much for the offer! But you have so much on your plate already.
 
-    y: \[._.\] Actually, do you mind watching my body for a bit? 
+    y stare: \[._.\] Actually, do you mind keeping an eye on my body for a bit? 
     
-    y: \[ovo\] I have all my cores off, so if anyone comes by with a question they will be posing it to a hunk of junk!
+    y smile: \[ovo\] I have all my cores off, so if anyone comes by with a question they will be posing it to a hunk of junk!
     
 *   [It's her life] If Lulu insists, there is nothing stopping her. Presumably she has a map from A to B uploaded in that cube somewhere.
 
-    Out of an abundance of precaution, you still go over the route several times with her. 
+    Out of an abundance of precaution you still go over the route several times with her. 
     
     Even if she isn't so worried, you spied the cost of materials on Ugg's cragtop before he cleaned up. 
     
     If that cube gets lost, there's no making another, even with Ugg's funding.
-    
-    l: \[^_^\] Uwah, I know what you are doing! Hehe.
 
-*   [How's your Lulu impression?] You ask her for a few pointers on being her.
+*   [How's your Lulu impression?] You ask Lulu for a few pointers on being Lulu.
 
-    y: \[ovo\] Well for one thing you should probably answer people immediately instead of staring at them.
+    y smile: \[ovo\] Well for one thing you should probably answer people immediately instead of staring at them.
     
     y: \[-v-\] And maybe try to act like they are the only one you are having a conversation with.
     
-    y: \[ovo\] You are such an interesting person. I should be getting lessons on how to be like you, not the other way around.
+    y smile: \[ovo\] You are such an interesting person. I should be getting lessons on how to be like you, not the other way around.
     
-    y: \[^_^\] I would love to pick your brain some time!
+    y content: \[^_^\] I would love to pick your brain some time!
     
     Please don't.
     
-    y: \[ovo\] Hehe. Tell whoever that is hi for me. I think we would make for great friends.
+    y smile: \[ovo\] Hehe. Tell whoever that is hi for me. I think we would make for great friends.
     
     ...
 -
     y: \[-v-\] I should get going now. These little cube legs were made for walking, you know!
 
-    y: \[ovo\] I will be fine. I pinky promise.
+    y smile: \[ovo\] I will be fine. I pinky promise.
     
     You accept, or at least tolerate that promise, not mentioning that the pinkies are supposed to touch for it to count.
     
-    ...
+    ... #hide lily
     
     You breath a sigh of relief as the cube finally turns the corner. 
     
     At least she got that far without incident, barring a few particularly troublesome clumps of flowers to traverse.
     
-    She loves new challenges. With her favorite flowers, at that! I'm sure she's having the time of her life.
+    It should be fine. She loves new challenges, and with her favorite flowers at that! I'm sure she's having the time of her life.
     
     The trail down from makeout peak leads across the bridge, past the beach and then winds back to campus.
     
@@ -189,67 +192,73 @@ Ready?
 
 // Plume shows up shortly later, carrying some flowers. they want to talk to lulu, but she's off. probably napping or remoting into something. They say it as stupid, and drop the flowers. but they change their mind and pick it up. just gonna go put them back at the garden.
 
-    
+    ~ run_command("stopsound @s music")
     p: What are you doing here?
 
+    ~ run_command("rotate @s 73 0")
     What is Plume doing here?
     
-    p: I was gonna, um. 
+    p pout_side: I was gonna, um. 
     
-    p: I was going to talk to Lulu. Alone.
+    ~ run_command("playsound modfest:music.stereo.smoking_club music @s ~ ~ ~ 1 0.9")
     
-*   [You tell her she's gone] p: She's gone? Where?
+    p pout_side: I was going to talk to Lulu. Alone.
+    
+*   [You tell Plume she's gone] p: She's gone? Where?
 
     * *     We just don't know.[] We simply have no way to know. We likely will never find out, either.
     - - 
     p:  Huh? Why wouldn't we?
     
-    p: ...whatever. This was a stupid idea anyways.
+    p embarrassed_blush: ...whatever. This was a stupid idea anyways.
 
 *   [By all means] You walk off to a nearby stand of trees to give Plume and Lulu's hollow shell some privacy.
 
     Not enough privacy for you not to hear and see what's happening, obviously.
     
-    p: Okay, so. 
+    p pout_side: Okay, so. 
     
-    p: Let me finish before you say anything.
+    p pout_side: Let me finish before you say anything.
     
     p: I've been a shithead. I know.
     
     p: I'm dropping out next week, so I'll give you some space.
     
-    p: And I know it doesn't fix anything.
+    p embarrassed: And I know it doesn't fix anything.
     
-    p: But since it's the Spring Festival and all, I dunno. Just take this--
+    p embarrassed_blush: But since it's the Spring Festival and all, I dunno. Just take this--
     
-    p: Shit. You're probably off talking to Ananas or something.
+    p pout_blush: Shit. You're probably off talking to Ananas or something.
     
     Their voice wavers. There are no tears, yet.
     
-    p: Being an actual contributor to the team.
+    p pout_side: Being an actual contributor to the team.
     
-    p: ...
+    p pout_side: ...
     
     p: Thanks for not letting me waste your time.
 -
-    image black 1: Plume drops the pot of lovingly kept Lilies of the Valley, larger and more beautiful than any in this whole field, so hard that you fears its shattering.
+    image black 1: Plume drops the pot of lovingly kept Peace Lilies, larger and more beautiful than any in this whole field, so hard that you fears its shattering.
     
     Mercifully, it lands in a patch of mud, which in turn dirties their skates in retribution.
     
-    p: Shit.
+    p pissed: Shit.
     
     They quickly regret the decision, collecting the pot and inspecting it and the lilies for signs of damage.
     
-    Then, they simply stare into the sky for a while. You can't imagine what they're thinking right now.
+    ~ run_command("tp @s 66.281 122.5 -14.599 -131.5 15.4")
     
-    They leave without another word, sliding down the hill and skippng straight across the river back onto campus.
-    // teleport thing
+    Then... they simply stare into the sky for a while. You can't imagine what they're thinking right now.
+    
+    Plume leaves without another word, sliding down the hill and skipping like a stone straight across the river back to campus. #hide plume
+    
     ...
     
-    I think we're thinking the same thing here, honey.
+    I think we're thinking the same thing here, honey. #hide lulu
     
     Let's go see what happens.
     
+    ~ run_command("stopsound @s music")
     ...
     
 
@@ -267,57 +276,59 @@ Ready?
 
     You don't need to leverage much of it at all, however. 
     
-    Plume is so occupied with their thoughts, they struggle to weave in and out of the crowd with remotely the ease you know them to be capable of.
+    ~ run_command("playsound modfest:music.stereo.assc_midnight music @s ~ ~ ~ 1 0.5")
+    
+    Plume is so occupied with their thoughts, they struggle to weave in and out of the crowd with remotely the ease you know them to be disposed of.
     
     You can't help but feel something when you watch them give up at the rear entrance to the Donut, untie their skates and walk the rest of the way up.
     
-    Taking some shortcuts of your own, you reach the rooftop to find a secure lookout position just before Plume arrives.
+    Taking some shortcuts of your own, you reach the rooftop to find a secure lookout position just before Plume arrives. #hide image
     
     You aren't the first, however. You take care to stay out of her sight too.
     
-    y: \[-v-\] ...
+    y neutral 5: \[-v-\] ...
     
-    y: \[ovo\] Where are they...?
+    y smile: \[ovo\] Where are they...?
     
-    p: Who the hell are you?
+    p pissed 1: Who the hell are you?
     
-    y: \[^_^\] I am j--
+    y content 3: \[^_^\] I am j--
     
-    y: *Cough, cough*.
+    y flustered: *Cough, cough*.
     
-    y: I am just a student here!
+    y content 4: I am just another student!
     
     p: You can't just say cough.
     
-    y: Oh. Is that not allowed here? I am so sorry...
+    y stare: Oh. Is that not allowed here? I am so sorry...
     
     p: Are you trying to piss me off on purpose?
     
-    y: I am not!
+    y content: I am not!
     
-    p: ...
+    p embarrassed: ...
     
     p: Sorry.
     
-    y: Do not worry. I forgive you.
+    y smile: Do not worry. I forgive you.
     
     p: You--okay.
     
-    p: ...
+    p pout_side: ...
     
-    p: Look, I'm gonna do my thing. Please just stay out of my way.
+    p neutral 0: Look, I'm gonna do my thing. Please just stay out of my way.
     
     y: It would be my pleasure!
     
     ...
     
-    p: Are you a new student?
+    p pout_side: Are you a new student?
     
-    y: I guess you could say so, in a way!
+    y content: I guess you could say so, in a way!
     
-    p: Is that a yes or a no.
+    p pissed: Is that a yes or a no.
     
-    y: No! I am not a new student. Hehe.
+    y smile: No! I am not a new student. Hehe.
     
     p: Weird. Never seen you before.
     
@@ -349,11 +360,11 @@ Ready?
     
     ...
     
-    y: Those are beautiful!
+    y content: Those are beautiful!
     
-    p: I sure as hell hope so. I work my ass off for these bastards every goddamn day.
+    p pout_side: I sure as hell hope so. I work my ass off for these bastards every goddamn day.
     
-    y: Do you resent them?
+    y stare: Do you resent them?
     
     p: No, it's worth it.
     
@@ -363,9 +374,9 @@ Ready?
     
     p: Didn't ask.
     
-    y: ...
+    y blank: ...
     
-    p: Sorry. Thank you.
+    p pout_blush: Sorry. Thank you.
     
     ...
     
@@ -375,49 +386,51 @@ Ready?
     
     p: Here? Why?
     
-    y: I do not know! 
+    y content: I do not know! 
     
-    p: You and me both, lady.
+    p pout_side: You and me both, lady.
     
     ...
     
     p: Are you guys close?
     
-    y: Not as much as I we used to be...
+    y stare: Not as much as I we used to be...
     
     y: I am hoping when we meet we can get to talking and become super close again.
     
-    p: Before the festival ends? That's nuts. The sun's setting in an hour or two.
+    p pissed: Before the festival ends? That's nuts. The sun's setting in an hour or two.
     
-    y: I want to more than anything else in the whole world. They say that at Sakura Academy Secondary High, "anything can happen!"
+    y smile: I want it more than anything else in the whole world. They say that at Sakura Academy Secondary High, "anything can happen!"
     
-    p: Yeah, I wouldn't count on that buddy. I know the guy who made that up. Real piece of work.
+    p smug: Yeah, I wouldn't count on that buddy. I know the guy who made that up. Real piece of work.
     
-    p: So you're like, not close? But you still want to put in that much effort for someone?
+    y hide_the_pain: Miracles are real. It could hadpen.
     
-    y: They're not just anyone.
+    p pout_side: So you're like, not close? But you still want to put in that much effort for someone?
     
-    y: They're the only person in the world who has never been afraid of me even once!
+    y smile: They're not just anyone.
+    
+    y content: They're the only person in the world who has never been afraid of me even once!
     
     Plume shoots a side-eye at her.
     
-    p: Afraid of you, squirt?
+    p pout_side: Afraid of you, squirt?
     
     They're precisely the same height, down to the millimeter.
     
-    y: It is more likely than you think!
+    y content: It is more likely than you think!
     
-    y: They are not very kind to me, but they are the bravest, strongest person in my entire world.
+    y smile: They are not very kind to me, but they are the bravest, strongest person in my entire world.
     
-    p: They sound like an asshole. 
+    p pissed: They sound like an asshole. 
     
     y: I think they have just been through a lot. They had to become strong to deal with everything they were never allowed to do.
     
-    y: But they never gave up ever. They do not back down from any challenge. 
+    y content: But they never gave up ever. They do not back down from any challenge. 
     
-    y: And they are the only person in my entire world who can look at me in the eyes without fear.
+    y smile: And they are the only person in my entire world who can look at me in the eyes without fear.
     
-    p: That doesn't excuse them being a shitbag.
+    p embarrassed: That doesn't excuse them being a shitbag.
     
     p: It sounds like they don't respect you at all and you're just idolizing them for it.
     
@@ -425,9 +438,9 @@ Ready?
     
     y: We have had some rocky times, but the two of us finally started talking again today. We are making progress!
     
-    p: How is that fair to you?
+    p pout_side: How is that fair to you?
     
-    y: It is not! 
+    y smile: It is not! 
     
     y: But I will make sure after we make up that they will feel soooooo sad and apologize to me over and over.
     
@@ -435,259 +448,274 @@ Ready?
     
     p: I think both of you need therapy.
     
-    y: Hehe.
+    y smile: Hehe.
     
     y: Probably.
     
     ...
     
-    y: Are those for anyone?
+    y smile: Are those for anyone?
     
-    p: Yeah. No. Kind of.
+    p pout_side: Yeah. No. Kind of.
     
     y: Three people?
     
-    p: Girl.
+    p pissed: Girl.
     
-    y: Sorry...
+    y stare: Sorry...
     
-    p: No, I'm sorry. God. Why can't I just be normal?
+    p embarrassed_blush: No, I'm sorry. God. Why can't I just be normal?
     
-    y: Why would you ever want to be normal? That sounds so boring.
+    y stare: Why would you ever want to be normal? That sounds so boring.
     
-    p: Not normal. Just. Not shit.
+    p pout_side: Not normal. Just. Not shit.
     
     p: I dunno. I was going to give these to someone, but honestly just talking to you I can see why it wasn't gonna work.
     
-    p: I'm so stupid. Ugh.
+    p pissed: I'm so stupid. Ugh.
     
-    y: Really? Those flowers are huuuuuge. Peace lilies are so hard to care for, so you must care about that person a lot!
+    y stare: Really? Those flowers are huuuuuge. Peace lilies are so hard to care for, so you must care about that person a lot!
     
     p: You know about these?
     
-    y: They are my absolute favorite!
+    y content: They are my absolute favorite!
     
-    p: Huh. Funny.
+    p pout_side: Huh. Funny.
     
     y: So, you were going to follow the Spring Festival tradition and tell them you wanted to be best friends?
     
-    y: Uwa--um. That's super duper sweet of you.
+    y blush: Uwa--um. That's super duper sweet of you.
     
-    p: Heh. It's dumber than that.
+    p smug: Heh. It's dumber than that.
     
+    ~ run_command("stopsound @s music")
     p: I was gonna ask them out.
+    ~ run_command("playsound minecraft:entity.villager.work_mason ambient @s ~ ~ ~ 1 1.5")
     
-    p: WOAH HOLD UP
+    // crash sound.
+    p neutral 1: WOAH HOLD UP #hide lily
     
-    p: Are you, like okay? Why'd you just collapse right that?
+    p embarrassed: Are you, like okay? Why'd you just collapse like that?
     
-    y: Snif--I...
+    y misery 4: Sniff--I...
     
-    y: Huh? How are you able to touch me?
+    ~ run_command("playsound modfest:music.stereo.lily_of_the_valley music @s ~ ~ ~ 1 0.6")
     
-    p: I'm a valley spirit, I can only move around gold and nature shit.
+    y stare: Huh? How are you able to touch me?
     
-    p: You're like, made of light, right? That's like super pure and natural.
+    p: I'm a valley spirit. I can only move around gold and nature shit.
     
-    y: ...
+    p: You're like, made of light, right? That's super pure and natural.
     
-    y: *SOB*
+    y stare: ...
     
-    p: Hey hey it's okay. You're not dying.
+    y misery: *SOB*
     
-    y: Why does it feel like I'm dying?
+    p pout_side: Hey hey it's okay. You're not dying.
+    
+    y tearful: Why does it feel like I'm dying?
     
     p: That's just what feeling things feels like.
     
-    p: Were you born yesterday?
+    p pissed: Were you born yesterday?
     
-    y: Today, kind of.
+    y tearful: Today, kind of.
     
     p: You're a weird girl.
     
-    y: Hic--hehe. Thank you.
+    y tearful: Hic--hehe. Thank you.
     
-    y: Well... If you don't want to give the peace lilies to that person, I would be honored to take care of them for you.
+    y stare: Well... If you don't want to give the peace lilies to that person, I would be honored to take care of them for you.
     
-    p: Little too friendly there, aren't you buddy?
+    p smug: Little too friendly there, aren't you buddy?
     
-    p: Look, you're my type, but it's first come first served.
+    p smug: Look, you're my type, but it's first come first served.
     
-    y: \[O.O\] I am your type???
+    y stare: \[O.O\] I am your type???
     
-    y: \[^_^\] You are my type too, Plume!
+    y content: \[^_^\] You are my type too, Plume!
     
     p: I never told you my...
     
-    p: Oh my god. You're fucking joking.
+    // new song
+    ~ run_command("stopsound @s music")
+    p pout_blush: Oh my god. You're fucking joking.
     
-    y: \[^_^\] Hehe. Thaaaaats checkmate!!
+    ~ run_command("playsound modfest:music.stereo.reset music @s ~ ~ ~ 1 0.7")
+    y content: \[^_^\] Hehe. Thaaaaats checkmate!!
     
-    y: \[u_u\] Hic--uwah. Sorry. Did I get snot on you somehow?
+    y tearful: \[u_u\] Hic--uwah. Sorry. Did I get snot on you somehow?
     
-    y: \[\>_\<\] Ugg's hologram is just too good!
+    y flustered: \[\>_\<\] Ugg's hologram is just too good!
     
     p: Hologram? Ugg? Like, Fred Flintstone's Grand Dad Ugg? 
     
-    p: The hell kind of side quest were you on today?
+    p pissed: The hell kind of side quest were you on today?
     
-    y: \[ovo\] Hehe. It is a loooooong story.
+    y smile: \[ovo\] Hehe. It is a loooooong story.
     
     y: \[-v-\] It seems like you have been through quite the side quest as well.
     
-    y: \[\/\/v\/\/\] Uwah, A little birdie told me you were going to admit your feelings to someone...
+    y blush: \[\/\/v\/\/\] Uwah, A little birdie told me you were going to admit your feelings to someone...
     
-    p: She goes to another school. You wouldn't know her.
+    p embarrassed_blush: She goes to another school. You wouldn't know her.
     
-    y: \[ovo\] It is such a coincidence that she likes the same flower as me!
+    y smile: \[ovo\] It is such a coincidence that she likes the same flower as me!
     
-    p: Heh. It's a good flower.
+    p smug: Heh. It's a good flower.
     
-    y: \[ovo\] Hm... one second... And my girls say someone juuuust like you showed up in front of me with flowers juuuuuust like those...
+    y smile: \[ovo\] Hm... one second... And my girls say someone juuuust like you showed up in front of me with flowers juuuuuust like those...
     
-    p: Shit.
+    p pout_blush: Shit.
     
-    y: \[ovo\] Is there anything we have to say for ourselves?
+    y smile: \[ovo\] Is there anything we have to say for ourselves?
     
-    p: ...
+    p pout_side: ...
     
-    p: Ugh. Fine. I'm sorry.
+    p pout_blush: Ugh. Fine. I'm sorry.
     
     y: \[-v-\] Nuh uh. Wrong answer.
     
-    p: What?
+    p pissed: What?
     
-    p: I... like you?
+    p pout_side: I... like you?
     
-    y: \[ovo\] You are getting warmer.
+    y smile: \[ovo\] You are getting warmer.
     
-    p: I... really like you...
+    p pout_blush: I... really like you...
     
-    y: \[\/\/w\/\/\] Uwah, really??
+    y blush: \[\/\/w\/\/\] Uwah, really??
     
-    y: \[\/\/w\/\/\] You mean it??
+    y blush: \[\/\/w\/\/\] You mean it??
     
-    p: rrmfjgh
+    p embarrassed_blush: rrmfjgh
     
     Plume buries their face in Lulu's chest.
     
-    y: \[ovo\] I will take that as a yes.
+    y smile: \[ovo\] I will take that as a yes.
     
     y: \[-v-\] I was serious earlier, though.
     
-    p: Abou whuh--?
+    p pout_blush: Abou whuh--?
     
-    y: \[^_^\] I am ensuring now that we have made up that you will feel soooooo sad and apologize to me over and over.
+    y content: \[^_^\] I am ensuring now that we have made up that you will feel soooooo sad and apologize to me over and over.
     
-    p: SOB
+    p embarrassed_blush: *SOB*
     
     y: \[-v-\] Hehehe.
     
-    Let's give them some time to sort themselves out, honey. And for Plume to apologize over and over.
+    image black 1: Let's give them some time to sort themselves out, honey. And for Plume to apologize over and over.
     
-    ...
+    ~ run_command("stopsound @s music")
+    image black 1: ...
     
+    ~ run_command("playsound modfest:music.stereo.assc_midnight music")
     gay plulume 3: Still, in your mind's eye, you can't help but see them.
     
-    p: It's so over. Everyone's gonna make fun of me.
+    p: It's so over. Everyone's gonna make fun of me. #hide plume #hide lily
     
-    y: \[ovo\] Not if I can help it. 
+    y: \[ovo\] Not if I can help it. #hide plume #hide lily
     
-    p: What are you gonna do about it? Cry?
+    p: What are you gonna do about it? Cry? #hide plume #hide lily
     
-    y: \[ovo\] I distinctly remind you suggesting earlier today that I was built to "hurt people"
+    y: \[ovo\] I distinctly remember you suggesting earlier today that I was built to "hurt people" #hide plume #hide lily
     
-    y: \[-v-\] You are far from the only person who believes that. Perhaps I should put my reputation to some use.
+    y: \[-v-\] You are far from the only person who believes that. Perhaps I should put my reputation to some use. #hide plume #hide lily
     
-    p: ...Shit. I'm really sorry, Lulu. Fuck that was stupid.
+    p: ...Shit. I'm really sorry, Lulu. Fuck that was stupid. #hide plume #hide lily
     
-    p: I don't believe that. Nobody does.
+    p: I don't believe that. Nobody does. #hide plume #hide lily
     
-    p: I'm such a piece of shit. Sorry again.
+    p: I'm such a piece of shit. Sorry again. #hide plume #hide lily
     
-    y: \[ovo\] Hehe. I know.
+    y: \[ovo\] Hehe. I know. #hide plume #hide lily
     
-    y: \[^_^\] But it feels really good hearing it from you.
+    y: \[^_^\] But it feels really good hearing it from you. #hide plume #hide lily
     
-    y: \[\>_\<\] You big bully!!
+    y: \[\>_\<\] You big bully!! #hide plume #hide lily
     
-    p: Okay well if you hold it over my head like that then maybe I should take it back!
+    p: Okay well if you hold it over my head like that then maybe I should take it back! #hide plume #hide lily
     
-    y: \[ovo\] I am going to fix you.
+    y: \[ovo\] I am going to fix you. #hide plume #hide lily
     
-    p: You can't fix me! I'm a terminal delinquent! They're about to kick me outta here forever!
+    p: You can't fix me! I'm a terminal delinquent! They're about to kick me outta here forever! #hide plume #hide lily
     
-    y: \[-v-\] You are joking but also I am making you study homework with me.
+    y: \[-v-\] You are joking but also I am making you catch up on homework with me. #hide plume #hide lily
     
-    y: \[-v-\] I have seen your grades this semester.
+    y: \[-v-\] I have seen your grades this semester. #hide plume #hide lily
     
-    p: You--!
+    p: You--! #hide plume #hide lily
     
-    p: ...
+    p: ... #hide plume #hide lily
     
-    p: Sigh.
+    p: <gray><i>sigh.</></> #hide plume #hide lily
     
-    p: Yeah.
+    p: Yeah. #hide plume #hide lily
     
-    ...
+    ... #hide plume #hide lily
     
-    p: You doing anything for the summer?
+    p: You doing anything for the summer? #hide plume #hide lily
     
-    y: \[^_^\] I was thinking of going on a cruise!
+    y: \[^_^\] I was thinking of going on a cruise! #hide plume #hide lily
     
-    p: What? How?
+    p: What? How? #hide plume #hide lulu #hide lily
     
-    y: \[-v-\] Of course not.
+    y: \[-v-\] Of course not. #hide plume #hide lulu #hide lily
     
-    p: Dammit.
+    p: Dammit. #hide plume #hide lulu #hide lily
     
-    p: You're really funny. How did I forget that.
+    p: You're really funny. How did I forget that. #hide plume #hide lulu #hide lily
     
-    y: \[ovo\] I have at least one or two redeeming qualities, if you can get past my prickly personality.
+    y: \[ovo\] I have at least one or two redeeming qualities, if you can get past my prickly personality. #hide plume #hide lulu #hide lily
     
-    p: Stop stop oh god my stomach hurts. Stop being so goddamn funny. Oh my god.
+    p: Stop stop oh god my stomach hurts. Stop being so goddamn funny. Oh my god. #hide plume #hide lulu #hide lily
     
-    p: Okay. Whew.
+    p: Okay. Whew. #hide plume #hide lulu #hide lily
     
-    p: No more jokes until I finish, okay?
+    p: No more jokes until I finish, okay? #hide plume #hide lulu #hide lily
     
-    y: \[-v-\] I am holding it in with all of my might.
+    y: \[-v-\] I am holding it in with all of my might. #hide plume #hide lulu #hide lily
     
-    p: Okay okay, so. How about coming back to the Valley with me?
+    p: Okay okay, so. How about coming back to the Valley with me? #hide plume #hide lulu #hide lily
     
-    y: \[o_o\] Uwah, is that okay? Would I even fit?
+    y: \[o_o\] Uwah, is that okay? Would I even fit? #hide plume #hide lulu #hide lily
     
-    p: There's a ton of space.
+    p: There's a ton of space. #hide plume #hide lulu #hide lily
     
-    p: ...and, um. It's got a history. There's been bigger things than you in the Valley before.
+    p: ...and, um. It's got a history. There's been bigger things than you in the Valley before. #hide plume #hide lulu #hide lily
     
-    y: \[\>_\<\] Uwah, so scary...
+    y: \[\>_\<\] Uwah, so scary... #hide plume #hide lulu #hide lily
     
-    p: We could run around Granbury. Meet my folks.
+    p: We could run around Granbury. Meet my folks. #hide plume #hide lulu #hide lily
     
-    y: \[ovo\] That sounds amazing.
+    y: \[ovo\] That sounds amazing. #hide plume #hide lulu #hide lily
     
-    y: \[._.\] But I am concerned for my poor lilies...
+    y: \[._.\] But I am concerned for my poor lilies... #hide plume #hide lulu #hide lily
     
-    p: About that.
+    p: About that. #hide plume #hide lulu #hide lily
     
-    p: I, um. It might have slipped my mind.
+    p: It might have slipped my mind. #hide plume #hide lulu #hide lily
     
-    p: But I mayyybe know a spell that could bring back a lot of those trees.
+    p: But I mayyybe know a spell that could bring back a lot of those trees. #hide plume #hide lulu #hide lily
     
-    y: \[-v-\] ...
+    y: \[-v-\] ... #hide plume #hide lulu #hide lily
     
-    p: I have!! Been through a lot of stress!!!!
+    p: I have!! Been through a lot of stress!!!! #hide plume #hide lulu #hide lily
     
-    y: \[ovo\] Just kidding. Thank you sweetie. Kiss kiss.
+    y: \[ovo\] Just kidding. Thank you sweetie. Kiss kiss. #hide plume #hide lulu #hide lily
     
-    p: You can't just say--smghhgsh
+    p: You can't just say--smghhgsh #hide plume #hide lulu #hide lily
     
-    y: \[-v-\] Come on, you thought I was just the hand holding kind of girl?
+    y: \[-v-\] Come on, you thought I was just the hand holding kind of girl? #hide plume #hide lulu #hide lily
     
-    image black 1: Okay, let's give them some actual space. #hide gay
+    image black 1: Okay, let's give them some actual space. #hide gay 
     
+    ~ run_command("tp @s -19 80 -65")
     Yes I know you were looking there's no way you imagined all that in your head.
+    
+    Of course you didn't.
+    
+    The world is stranger, more fascinating, and far more beautiful than you could have possibly imagined.
     
     
     // "Little too friendly there, aren't you? Look, you're my type, but first come first served." "I am your type?? You are my type too, plume!"

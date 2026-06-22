@@ -1,35 +1,37 @@
-Ready?
+#require act modfest:lulu_plume_4
+#alias actor a ananas
+#alias actor b barebones
+#alias actor p plume
+#alias actor l lulu
+#alias actor y lily
+#alias actor u ugg
+#alias actor s shrimple
+#alias actor x proxy
 
-*   Let's dance.
--> ugg_4
-
-== ugg_4 ==
-
-#require act modfest:ugg_3
-#require act modfest:lulu_ugg_2
-#require act modfest:lulu_4
-
+// counts as both ugg and barebones act 4
 /*
 The goal here is to highlight Ugg's progress in building confidence. Ugg's biggest problem was his insecurity. Even confronted with the things he's done for others, it can be hard for him to accept.
 
     You are helping Ugg out with counting out the ballots. commentary on voting. ugg is just really happy you're around. he's confident, and not just bc of the glasses.
 */
     
-    b: C'mon, big guy! Throw me a bone!
+    b neutral 1: C'mon, big guy! Throw me a bone!
     
-    // ~ run_command("tag @s remove bb_flirt_flag")
+    ~ run_command("tag @s remove bb_flirt_flag")
+    ~ run_command("stopsound @s music")
+    b frown: Yous gonna take all week if it's just the two of yous runnin' the numbers. 
     
-    b: Yous gonna take all week if it's just the two of yous runnin' the numbers. 
+    ~ run_command("playsound modfest:music.stereo.trotting_fox music @s ~ ~ ~ 1 0.7")
 
-    u: Er... Ugg not sure that good idea.
+    u worried 3: Er... Ugg not sure that good idea.
     
     u: Ananas say Barebones not allowed even look at ballots.
     
     b: Yous wounding me, pal! Right here on my soft little heart, yous see those scratches?
     
-    b:  Whatever happened to blood brotherhood? What happened to death and not parting at least a month?
+    b aura:  Whatever happened to blood brotherhood? What happened to death and not parting at least a month?
     
-    b: I made us friendship bracelets, for crying out loud!
+    b frown_blush 2: I made us friendship bracelets, for crying out loud!
     
     More like a friendship belt, if Barebones is referring to the fashion statement barely clinging to life around Ugg's guns.
     
@@ -39,13 +41,13 @@ The goal here is to highlight Ugg's progress in building confidence. Ugg's bigge
     
     Nevermind.
     
-    u: Ugg sorry.
+    u worried: Ugg sorry.
     
     He winces, slowly turning back to Barebones.
     
-    b: Not one fret, cute stuff. 
+    b neutral 1: Not one fret, cute stuff. 
     
-    b: Save those sweet little tears for all the joy yous gonna feel when you see me win in a landslide. Speaking of.
+    b aura: Save those sweet little tears for all the joy yous gonna feel when you see me win in a landslide. Speaking of.
     
     He looks around Ugg to the boxes of uncounted ballots. Greedily so.
     
@@ -55,11 +57,11 @@ The goal here is to highlight Ugg's progress in building confidence. Ugg's bigge
     
 *   You have a few of your own[]. For example, Barebones would love for Lulu to show him the special surprise that Ugg put together for her.
 
-    b: Can't fool me twice, pal. 
+    b frown_sweating: Can't fool me twice, pal. 
     
-    b: I can see her clear over the river from here.
+    b sweating: I can see her clear over the river from here.
     
-    b: The big girl ain't going nowhere til the ceremony's good to go and folks stop running around willy-nilly like.
+    b sweating: The big girl ain't going nowhere til the ceremony's good to go and folks stop running around willy-nilly like.
     
     Ugg <>
 
@@ -69,43 +71,43 @@ The goal here is to highlight Ugg's progress in building confidence. Ugg's bigge
 -
     checks his phone.
     
-    u: Good news for <PLAYER_NAME>! Lulu other body come soon.
+    u smile: Good news for <PLAYER_NAME>! Lulu other body come soon.
     
-    b: Other what.
+    b frown_blushing_sweating: Other what.
     
-    b: Come again, my tremendous friend?
+    b blushing_sweating: Come again, my tremendous friend?
     
-    u: Ugg say too much. Lulu surprise Barebones with other body!
+    u grin: Ugg say too much. Lulu surprise Barebones with other body!
     
-    b: Whyyyyyyy don't we save it for after the ceremony!
+    b sweating: Whyyyyyyy don't we save it for after the ceremony!
     
-    b: It's my mind, y'see. So clouded, brows furrowed, et cetera. 
+    b aura: It's my mind, y'see. So clouded, brows furrowed, et cetera. 
     
-    He is clearly lying, and not just because could visually confirm if his mind were to endure any kind of physical state.
+    He is clearly lying, and not just because you could visually confirm if his mind were to endure any kind of physical state.
     
-    b: Wouldn't wanna spoil whatever the <gray>sam hell that nightmare</>--
+    b sweating: Wouldn't wanna spoil whatever the <gray>sam hell that nightmare</>--
     
     b: I mean, whatever wonderful surprise that sweet little girl has in store for me!
     
-    b: In fact, I just remembered a surprise of my own I gotta go grab! 
+    b frown: In fact, I just remembered a surprise of my own I gotta go grab! 
     
-    b: Tell the poor girl I'm heartbroken I missed her. Destroyed. Hydraulic pressed, even.
+    b aura: Tell the poor girl I'm heartbroken I missed her. Destroyed. Hydraulic pressed, even.
     
     b: Toodles. #hide barebones
     
     Barebones makes a show of scurrying away.
     
-    ...
+    u: ...
     
-    u: What that?
+    u worried: What that?
     
-    u: <PLAYER_NAME>, why Barebones hide behind bush obviously?
+    u worried_glasses: <PLAYER_NAME>, why Barebones hide behind bush obviously?
     
 *   [He's passive aggressive] If the world were a chip then Barebones' shoulder could bear it.
 
     Even if he can't execute his articulate and well-laid vote rigging plans, Barebones can at least settle for acting like a petulant child.
     
-    u: Barebones be sad if he hear you say that.
+    u neutral_glasses: Barebones be sad if he hear you say that.
     
     Oh, he heard. You made sure of it.
     
@@ -125,23 +127,23 @@ The goal here is to highlight Ugg's progress in building confidence. Ugg's bigge
 -
     We can safely ignore Barebones, for now.
     
-    u: He problem for later us.
+    u neutral_glasses: He problem for later us.
     
 *   "Would you like me to [handle him?"] take a crack at him?"
 
-    u: Barebones not cause <i>that</> much trouble...
+    u worried_glasses: Barebones not cause <i>that</> much trouble...
 
     That sounded less violent in your head.
 
 *   ["What about when he comes back?"]u: Ugg have one on one with Barebones.
 -
-    u: Ananas always say Barebones mean well.
+    u neutral_glasses: Ananas always say Barebones mean well.
     
-    u: Ugg remind Barebones later try harder at mean well.
+    u smile_glasses: Ugg remind Barebones later try harder at mean well.
 
     So decisive. For that matter, the way he pushed back against Barebones earlier was not what you would have expected from the Ugg of this morning.
     
-    u: <PLAYER_NAME> think so?
+    u worried_blush_glasses: <PLAYER_NAME> think so?
     
 *   You do[]. You absolutely do. 
 
@@ -149,9 +151,10 @@ The goal here is to highlight Ugg's progress in building confidence. Ugg's bigge
 
     But the glasses aren't the thing that clues you in.
 -
+    ~ run_command("stopsound @s music")
     You may have helped Ugg change Lulu's life today, but it was Ugg who changed that life.
     
-    u: Was hologram really big deal?
+    u grin_blush_glasses: Was hologram really big deal?
     
     ~ temp plulume_flag = 1// act_completed("modfest:lulu_plume_5")
     
@@ -160,15 +163,17 @@ The goal here is to highlight Ugg's progress in building confidence. Ugg's bigge
 =   plulume
     Did he not hear? Lulu and Plume are dating now.
     
-    u: Oh.
+    u neutral_glasses: Oh.
     
-    u: OH!
+    ~ run_command("playsound modfest:music.momentum music @s ~ ~ ~ 1 1")
     
-    u: Ugg not hear about that!
+    u worried_glasses: OH!
     
-    u: ...
+    u smile_blush_glasses: Ugg not hear about that!
     
-    u: Lulu deserve better.
+    u grin_glasses: ...
+    
+    u neutral_glasses: Lulu deserve better.
     
     Ouch. Benefit of the doubt be damned.
     -> then
@@ -189,11 +194,11 @@ The goal here is to highlight Ugg's progress in building confidence. Ugg's bigge
 
 =   then
 
-    u: ...
+    u neutral_glasses: ...
     
     Ugg looks off into the distance. The sun hangs heavy over the horizon, and Lulu sits heavy under it. Tomorrow will be here, any day now.
     
-    u: Ugg only want Lulu happy.
+    u neutral_glasses: Ugg only want Lulu happy.
     
 *   Of course he'd say that[]. It would be a huge deal if anyone else had changed a normal girl's life.
 -
@@ -207,22 +212,25 @@ The goal here is to highlight Ugg's progress in building confidence. Ugg's bigge
     
     He sits up straight. Brows furrowed, but in focus rather than consternation. He is prepared for his personal Neolithic.
     
-    u: <PLAYER_NAME>...
+    u worried_glasses: <PLAYER_NAME>...
     
     The illusion shatters.
     
     Calling it an illusion is uncharitable. Ugg is a man of the earth.  He deserves to be confident, but for the sake of civilization he must also be realistic. 
-    u: Ugg happy Ugg work with <PLAYER_NAME> now.
     
-    u: Ugg not wait to run next festival with <PLAYER_NAME>!
+    u smile_blush_glasses: Ugg happy Ugg work with <PLAYER_NAME> now.
     
-    It's hard to imagine running one without him.
+    u smile_glasses: Ugg not wait to run next festival with <PLAYER_NAME>!
     
-    u: Also, Ugg mean ask. Will <PLAYER_NAME> go next BlanketCon?
+    It's hard to imagine running <i>any</> fest without Ugg.
     
-    u: Committee always make it big trip. We learn lot from the fires.
+    u grin_glasses 4: Also, Ugg mean ask. Will <PLAYER_NAME> go  BlanketCon next year?
+    
+    u grin_glasses: Committee always make it big trip. We learn lot from the fires.
     
     Before you can ask whether he takes interest in fires as an event organizer or as a caveman, you both freeze.
+    
+    ~ run_command("stopsound @s music")
 
     The air carries the glimmering chimes that signal impending theft. You look for Barebones, but he is nowhere to be seen.
     
@@ -240,7 +248,7 @@ The goal here is to highlight Ugg's progress in building confidence. Ugg's bigge
 
     Yes, that pebble there. That will be sufficient.
 -
-    p: Hey so Anan--
+    p pout_side 0: Hey so Anan--
     
     p: Uh, what are you guys doing?
     
@@ -250,45 +258,49 @@ The goal here is to highlight Ugg's progress in building confidence. Ugg's bigge
 
     Not as tight as you could--you clutch just as tightly to your inventory for insurance--but tight enough.
 -
-    p: What? You thought I was going to do something weird with the ballots?
+    p pissed: What? You thought I was going to do something weird with the ballots?
     
     p: What the hell gave you that idea?
     
     Indeed, what might have tipped you off? Barebones is nowhere in sight.
     
-    u: Plume not fool Ugg. Ugg know Plume game.
+    u neutral_glasses: Plume not fool Ugg. Ugg know Plume game.
     
 *   No, they've changed[]. They are now a kind and sweet committee member who is only here to help!
 
-    p: Don't say that it sounds stupid.
+    p embarrassed_blush: Don't say that it sounds stupid.
     
     They kick a rock and blush.
     
-    y: \[^_^\] Uwah! I was just thinking the same thing!
+    ~ run_command("playsound modfest:music.stereo.lily_of_the_valley music @s ~ ~ ~ 0.3")
     
-    y: \[ovo\] ...
+    y content 2: \[^_^\] Uwah! I was just thinking the same thing!
     
-    y: \[;_;\] Does that mean you think I am stupid...?
+    y smile: \[ovo\] ...
     
-    p: No! I'm sorry I was joking I'm sorry--
+    y misery: \[;_;\] Does that mean you think I am stupid...?
+    
+    p embarrassed_blush: No! I'm sorry I was joking I'm sorry--
 
 *   Ugg's right[]. It hasn't even been an hour since Plume's "reformation," if we can call it that.
 
-    y: \[^_^\] How about "reformatting?"
+    ~ run_command("playsound modfest:music.stereo.lily_of_the_valley music @s ~ ~ ~ 0.3")
+
+    y content 2: \[^_^\] How about "reformatting?"
     
-    p: I'm gonna reformat your face.
+    p smug: I'm gonna reformat your face.
     
-    y: \[;_;\]
+    y hide_the_pain: \[;_;\]
     
-    p: ...I'm sorry. That was mean.
+    p embarrassed_blush: ...I'm sorry. That was mean.
 -
-    y: \[ovo\] Hehe. I got your ass.
+    y smile: \[ovo\] Hehe. I got your ass.
     
-    p: HEY
+    p pissed: HEY
 
     Lulu pokes her head over the wings of her newly aquired themfriend.
     
-    The poor little robot that hosts her hologram equipment couldn't possibly keep up with the velocity of such a modern relationship.
+    The poor little robot that hosts her hologram equipment couldn't possibly keep up with the velocity of a modern relationship.
     
     Ugg, in his wisdom, fashioned a suspiciously Plume-sized sling for <i>someone</> to carry it around with ease. 
     
@@ -298,21 +310,21 @@ The goal here is to highlight Ugg's progress in building confidence. Ugg's bigge
     
     The "genius" theory has merit. The LuCube's versatility is unparalleled. Holo-Lulu's virtual skates elegantly complement Plume's.
     
-    She uses them to great effect, too, effortlessly teasing Plume while they chase her around to deliver a virtual noogie.
+    She uses them to great effect, too, effortlessly teasing Plume while they chase her around to deliver a virtual noogie. #hide plume #hide lulu #hide lily
     
     Ugg is doubled over in laughter, setting down the table's worth of boxes to prepare to go save Lulu from her tormentor.
     
-    It's a pleasant scene. You are pleased.
+    It's a pleasant scene. You are pleased. #hide ugg
 
-    b: All's well that ends well, eh pal?
+    b neutral 0: All's well that ends well, eh pal?
     
     He leans casually against several boxes on the desk.
     
 *   (jump) [You jump him] His ass is grass. He knew the risks.
 
-    b: Yikes! Hey pal what's the big idea!
+    b frown_sweating: Yikes! Hey pal what's the big idea!
     
-    b: Yous got the wrong guy! I's was framed, I tells yous!
+    b frown: Yous got the wrong guy! I's was framed, I tells yous!
     
     You are eye to eye socket with him. You aren't even clutching his collar that hard, he's only frozen in fear.
 
@@ -323,17 +335,17 @@ The goal here is to highlight Ugg's progress in building confidence. Ugg's bigge
     
 *     You wink flirtatiously[]. You've had your eye on this charmer for a while. 
     
-        // ~ run_command("tag @s add bb_flirt_flag")
+        ~ run_command("tag @s add bb_flirt_flag")
 
         Has he not realized it yet?
         
         The only vote for him that matters should be yours.
         
-        b: I, uh... Look, I'm charmed. 
+        b blushing: I, uh... Look, I'm charmed. 
         
-        b: And I ain't sayin' no!
+        b blushing_sweating: And I ain't sayin' no!
         
-        b: This is just so sudden... 
+        b blushing: This is just so sudden... 
         
         Besides, the counting is complete.
     
@@ -346,7 +358,7 @@ The goal here is to highlight Ugg's progress in building confidence. Ugg's bigge
     He has absolutely nothing to worry about, in terms of voting security. If someone is cheating, she'll find them.
     
     // skeleton sfx
-    b: ...
+    b sweating: ...
     
     He recoils in horror.
 
@@ -354,45 +366,55 @@ The goal here is to highlight Ugg's progress in building confidence. Ugg's bigge
     
     b: Happy ta see the books are in good hands.
     
-    p: Get back here you freaking nerd! 
+    p pissed 5: Get back here you freaking nerd! 
     
-    y: \[^o^\] Eek! Help me <PLAYER_NAME>! There is a scary creature after me!
+    y content 3: \[^o^\] Eek! Help me <PLAYER_NAME>! There is a scary creature after me!
     
-    u: Ugg protect from Plume! Get behind Ugg!
+    u worried_glasses 4: Ugg protect from Plume! Get behind Ugg!
     
-    p: Back off! One nerd at a time!
+    p pout: Back off! One nerd at a time!
     
     They'll be fine.
     
     // skeleton sounds
-    Barebones sighs.
+    Barebones sighs. #hide plume #hide lily #hide ugg
     
-    b: Happy ta see Plume's in good hands, too.
+    b neutral 3: Happy ta see the kid--Plume's in good hands, too.
     
     b: They's even got 'emselves a pretty new goilfriend?
     
-    b: Talks funny, though. Wonder what's her name? 
+    b frown: Talks funny, though. Wonder what's her name? 
     
-    b: I oughta introduce myself later. Give 'er my maternal blessing.
+    b aura: I oughta introduce myself later. Give 'er my maternal blessing.
     
-    b: ...
+    b frown: ...
     
     b: Yous done good today, pal.
     
-    b: Yous remind me of another chum a'mine. Ain't been the same since that job on the train last fall.
+    b frown_sweating: Yous remind me of another chum a'mine. Ain't been the same since that job on the train last fall.
     
     You look at him.
     
-    b: We ain't steal nothin'! <i>successfully...</>
+    b frown_blushing_sweating: We ain't steal nothin'! <i>successfully...</>
     
-    b: I'll see yous at the closin' party. Get the crew a lil treat for me, would yous?
+    b aura: I'll see yous at the closin' party. Get the crew a lil treat for me, would yous?
     
+    ~ run_command("playsound minecraft:block.amethyst_block.break ambient @s ~ ~ ~ 1 2")
     He flips you another "dabloon." #hide barebones
     
     ...it carries some real heft.  
     
-*   [You bean Plume with it] p: OW
-*   [You toss it to Plume] p: OW
+*   [You bean Plume with it] If you can dodge a girl, you can dodge a coin.
+
+    ~ run_command("playsound minecraft:block.amethyst_block.break ambient @s ~ ~ ~ 1 2")
+
+    p: OW
+    
+*   [You toss it to Plume] Girlfriends don't come cheap.
+
+    ~ run_command("playsound minecraft:block.amethyst_block.break ambient @s ~ ~ ~ 1 2")
+
+    p: OW
 
     Perhaps you should have warned them first. <>
 -
@@ -400,7 +422,7 @@ The goal here is to highlight Ugg's progress in building confidence. Ugg's bigge
     
     You turn to thank Barebones, but he's gone. 
     
-    u: Did <PLAYER_NAME> talk to someone?
+    u neutral_glasses 2: Did <PLAYER_NAME> talk to someone?
     
     It's hard to say. Probably not.
     
