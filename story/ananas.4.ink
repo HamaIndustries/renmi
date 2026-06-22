@@ -1,5 +1,5 @@
 #require act modfest:ananas_3
-#require act modfest:lulu_ugg_2
+#require act modfest:ugg_4
 #alias actor a ananas
 #alias actor b barebones
 #alias actor p plume
@@ -51,7 +51,7 @@
     
     The two of you recline in the shade. 
     
-    The sun will set in an hour or two. The vote-tallying and closing ceremony will play out soon after. 
+    The sun will set in under an hour. The vote-tallying is complete, and closing ceremony will play out as soon as you finish here.
     
     Tomorrow will come, and the Spring Festival will go.
     
@@ -140,7 +140,7 @@
     
             // ~ run_command("tag @s add ananas_date_shrimple_flag")
     
-            a: Heh. There's like an hour and a half left on the clock.
+            a: Heh. There's like an hour left on the clock.
             
             a: You know how many plot beats I'd need to jump through?
             
@@ -291,7 +291,7 @@
     
     a: She's so cute it hurts!
     
-    Lulu blushes. I never thought I'd say that.
+    Lulu blushes. I don't know if I'll ever get used to this either.
     
     a: I think we have the statue taken care of, now. I'll keep an eye out for any more kids.
     
@@ -369,7 +369,9 @@
     
     {book: a: Is that your book you left, there?}
     
-    {book: Hardly.}
+    {book: What book?}
+
+    {book: a: Huh? Did I say something about a book?}
     
     a embarrassed: .
     
@@ -461,7 +463,7 @@
     
     Moreover, the committee would have been too busy and engrossed in their existing dynamics to go out of their way to change anything.
     
-    Simply by virtue of existing and caring for others this impossibly rare form of healing is accessible to you, honey.
+    Simply by virtue of existing and caring for others, this impossibly rare form of healing is accessible to you, honey.
     
     You won.
     
