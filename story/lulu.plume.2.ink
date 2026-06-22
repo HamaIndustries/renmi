@@ -84,7 +84,7 @@
     
     You are not reduced to a thin paste, thankfully. Lulu's perfected motion impresses as always. 
     
-    It does call into question why Barebones in particular is an exception. He doesn't have a blood or heartbeat, but you can hear his clackety clack from across the room.
+    It does call into question why Barebones in particular is an exception. He doesn't have blood or heartbeat, but you can hear his clackety clack from across the room.
 -
     She steps back from the greenhouse entrance and settles on her haunches.
 
@@ -265,7 +265,7 @@
     
     That's all, but it's plenty. No insults or anything.
     
-    Lulu, on her part, remains as charming and opaque as ever for the reset of the scene. 
+    Lulu, on her part, remains as charming and opaque as ever for the rest of the scene. 
     
     She cheerfully performs her duties until the greenhouse is fully stocked, then excuses herself without fanfare.
     
@@ -275,7 +275,7 @@
 
     You play fetch for a few minutes, then decide to leave before he can rope you into anything else.
 -
-    Something stirs in you. Something might have changed. What, exactly, is anyone's guess.
+    Something stirs in you. Something might have changed. What, exactly, is anyone's guess. #hide plume #hide delta
     
     This probably won't be resolved by the end of the festival.
     

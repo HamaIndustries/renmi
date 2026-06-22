@@ -84,7 +84,7 @@
 
     ~ run_command("playsound minecraft:block.anvil.place")
     
-    Plume fastballs a metal ladle at the back of Barebones head with enough force to dent it. The ladle, that is. Barebones doesn't seem to notice. 
+    Plume fastballs a metal ladle at the back of Barebones' head with enough force to dent it. The ladle, that is. Barebones doesn't seem to notice. 
     
     So, they did have something to stir with.
     
@@ -97,7 +97,7 @@
     
         b aura: Yous sure about that? Maybe we could chat about this over a drink?
     
-*   (overlook) You might [overlook this operation] be too distracted to discuss the finer details of his undoubtedly extant, provided you so happened to come across some "smackaroons" laying on the ground.
+*   (overlook) You might [overlook this operation] be too distracted to discuss the finer details of his undoubtedly extant license, provided you so happened to come across some "smackaroons" laying on the ground.
 
     b aura: Yous and I both, pal. That stuff don't grow on trees! Heh heh.
     
