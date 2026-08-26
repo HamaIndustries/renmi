@@ -220,7 +220,7 @@
 
     It's not quite an apology, but its more humility than you thought you'd ever see out of them.
     
-    Professor Delta shifts nervously, missing the characteristic :o3 he bears carries in the darkest of times.
+    Professor Delta shifts nervously, missing the characteristic Σβ:°3 he bears carries in the darkest of times.
     
     Ever so slightly, Plume is trembling. Are they scared? Sad?
     
@@ -239,7 +239,7 @@
     
     l neutral 5: \[ovo\] You have convinced me! I think you have this in the bag!
     
-    d smirk_smile_sweat: :o3
+    d smirk_smile_sweat: Σβ:°3
     
     Nature is healing.
     
@@ -301,7 +301,7 @@
     
     d adrenaline_sweat: ...
     
-    d neutral_sweat: :o3
+    d neutral_sweat: Σβ:°3
 ->->
 
 = lulu_arrives
