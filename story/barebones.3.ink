@@ -43,7 +43,7 @@
     
     c smirk: Delta, Ananas and Shrimple <i>brought them onto the committee</>.
     
-    d shocked_sweat: Whoops :o3
+    d shocked_sweat: Whoops Σβ:°3
     
     d confident_smile: Well, I am proud to report that our newest, most responsible committee officer comes with no strings attacked. I mean attached.
     
@@ -62,7 +62,7 @@
     
     x side: I expect much to read, seeing how it took two full weeks to complete them.
     
-    d smirk: N-naturally... :o3
+    d smirk: N-naturally... Σβ:°3
     
     x reading: Excellent. Perhaps I can convince the board to raise your salary from two berries to three.
     
